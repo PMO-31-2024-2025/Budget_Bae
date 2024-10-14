@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#FFFAF0" Height="50">
+            <Image Source="pack://application:,,,/Pictures/unregistered_user.jpg" Height="45" Width="45" Margin="5,5,5,5" Stretch="Uniform"/>
+            <Button Name="nbExitButton" Content="Вхід" Width="100" Background="#FFFAF0" Style="{StaticResource NavBarButton}"/>
+            <Button Name="nbMainButton" Content="Головна" Width="100"  Background="#50DAB6FC" Style="{StaticResource NavBarButton}"/>
+            <Button Name="nbAnalyticsButton" Content="Аналітика" Width="100" Background="#FFFAF0" 
+                 Style="{StaticResource NavBarButton}"/>
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
