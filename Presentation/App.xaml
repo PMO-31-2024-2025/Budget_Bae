@@ -24,5 +24,40 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#9B70C2"/>
         </Style>
+
+        <Style x:Key="ModalWindowLabel" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+
+        <Style x:Key="ModalWindowTextBox" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ModalWindowButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="0"
+            CornerRadius="7">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="120"/>
+        </Style>
     </Application.Resources>
 </Application>
