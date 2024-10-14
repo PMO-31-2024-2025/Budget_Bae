@@ -20,5 +20,10 @@ namespace Presentation
         {
             InitializeComponent();
         }
+
+        private void nbAnalyticsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Сторінка аналітика!");
+        }
     }
 }

@@ -12,7 +12,7 @@
             <Button Name="nbExitButton" Content="Вхід" Width="100" Background="#FFFAF0" Style="{StaticResource NavBarButton}"/>
             <Button Name="nbMainButton" Content="Головна" Width="100"  Background="#50DAB6FC" Style="{StaticResource NavBarButton}"/>
             <Button Name="nbAnalyticsButton" Content="Аналітика" Width="100" Background="#FFFAF0" 
-                 Style="{StaticResource NavBarButton}"/>
+                 Style="{StaticResource NavBarButton}" Click="nbAnalyticsButton_Click"/>
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
