@@ -6,17 +6,25 @@
              xmlns:local="clr-namespace:Presentation"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#FFFAF0" Height="50">
-            <Image Source="pack://application:,,,/Pictures/unregistered_user.jpg" Height="45" Width="45" Margin="5,5,5,5" Stretch="Uniform"/>
-            <Button Name="nbExitButton" Content="Вхід" Width="100" Background="#FFFAF0"
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#FFFAF0" Height="50">
+                <Image Source="pack://application:,,,/Pictures/unregistered_user.jpg" Height="45" Width="45" Margin="5,5,5,5" Stretch="Uniform"/>
+                <Button Name="nbExitButton" Content="Вхід" Width="100" Background="#FFFAF0"
                     Style="{StaticResource NavBarButton}" Click="nbExitButton_Click"/>
-            <Button Name="nbMainButton" Content="Головна" Width="100"  Background="#50DAB6FC"
+                <Button Name="nbMainButton" Content="Головна" Width="100"  Background="#50DAB6FC"
                 Style="{StaticResource NavBarButton}" Click="nbMainButton_Click"/>
-            <Button Name="nbAnalyticsButton" Content="Аналітика" Width="100" Background="#FFFAF0" 
+                <Button Name="nbAnalyticsButton" Content="Аналітика" Width="100" Background="#FFFAF0" 
              Style="{StaticResource NavBarButton}" Click="nbAnalyticsButton_Click"/>
-        </StackPanel>
-        <Frame x:Name="NavBarFrame" NavigationUIVisibility="Hidden"/>
-    </DockPanel>
-    
+            </StackPanel>
+            <Frame x:Name="NavBarFrame" NavigationUIVisibility="Hidden"/>
+        </DockPanel>
+        <Button Name="nbSettingsButton" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Height="45" Width="45" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Image Source="pack://application:,,,/Pictures/settings.png" Height="35" Width="35"/>
+        </Button>
+    </Grid>
 </UserControl>
