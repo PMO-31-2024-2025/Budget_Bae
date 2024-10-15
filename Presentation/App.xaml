@@ -27,14 +27,16 @@
 
         <Style x:Key="ModalWindowLabel" TargetType="Label">
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="#9B70C2"/>
         </Style>
 
         <Style x:Key="ModalWindowTextBox" TargetType="TextBox">
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="30"/>
         </Style>
@@ -47,15 +49,23 @@
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="0"
             CornerRadius="7">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#9B70C2" 
+                                          ShadowDepth="4" 
+                                          BlurRadius="6"/>
+                            </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center" 
                           VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            
+            <Setter Property="Background" Value="#999B70C2"/>
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="#F4F4F4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="120"/>
         </Style>

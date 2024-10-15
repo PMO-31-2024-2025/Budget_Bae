@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SettingsWindow" Height="350" Width="250">
     <Grid>
-        <TabControl >
+        <TabControl>
             <TabItem Header="Вхід" FontFamily="{StaticResource CustomFont}" FontSize="15">
                 <Grid Background="#FFFAF0">
                     <Grid.ColumnDefinitions>
@@ -16,8 +16,8 @@
                     </Grid.ColumnDefinitions>
                     <Label x:Name="settingsEntryEmailLabel" Content="Електронна пошта:" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="6,30,0,0" Style="{StaticResource ModalWindowLabel}"/>
                     <TextBox HorizontalAlignment="Left" Margin="11,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2" Style="{StaticResource ModalWindowTextBox}"/>
-                    <Label x:Name="settingsWindowPasswordLabel" Content="Пароль:" HorizontalAlignment="Left" Margin="6,126,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}" Grid.ColumnSpan="2"/>
-                    <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}"/>
+                    <Label x:Name="settingsWindowPasswordLabel" Content="Пароль:" HorizontalAlignment="Left" Margin="6,112,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}"/>
                     <Button x:Name="settingsEntryButton" Grid.Column="1" Content="Увійти" HorizontalAlignment="Left" Margin="87,232,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowButton}"/>
                 </Grid>
             </TabItem>
