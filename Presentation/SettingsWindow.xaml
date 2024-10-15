@@ -19,7 +19,6 @@
                     <Label x:Name="settingsEntryPasswordLabel" Content="Пароль:" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}" Grid.ColumnSpan="2"/>
                     <TextBox HorizontalAlignment="Left" Margin="16,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Grid.ColumnSpan="2"/>
                     <Button x:Name="settingsEntryButton" Grid.Column="1" Content="Увійти" HorizontalAlignment="Left" Margin="195,335,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowButton}"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="16,221,0,0" VerticalAlignment="Top"  Style="{StaticResource ModalWindowComboBox}" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Реєстрація" FontFamily="{StaticResource CustomFont}" FontSize="15">
