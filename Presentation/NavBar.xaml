@@ -23,7 +23,7 @@
             </StackPanel>
             <Frame x:Name="NavBarFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
-        <Button Name="nbSettingsButton" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Height="45" Width="45" HorizontalAlignment="Right" Margin="0,0,10,0">
+        <Button Name="nbSettingsButton" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Height="45" Width="45" HorizontalAlignment="Right" Margin="0,0,10,0" Click="nbSettingsButton_Click">
             <Image Source="pack://application:,,,/Pictures/settings.png" Height="35" Width="35"/>
         </Button>
     </Grid>

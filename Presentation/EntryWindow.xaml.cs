@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Presentation
 {
     /// <summary>
-    /// Interaction logic for SettingsWindow.xaml
+    /// Interaction logic for EntryWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class EntryWindow : Window
     {
-        public SettingsWindow()
+        public EntryWindow()
         {
             InitializeComponent();
         }

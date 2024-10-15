@@ -43,9 +43,14 @@ namespace Presentation
 
         private void nbExitButton_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Owner = Window.GetWindow(this);
-            settingsWindow.ShowDialog();
+            EntryWindow entryWindow = new EntryWindow();
+            entryWindow.Owner = Window.GetWindow(this);
+            entryWindow.ShowDialog();
+        }
+
+        private void nbSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

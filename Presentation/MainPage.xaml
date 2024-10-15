@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage">
+      Title="MainPage"
+      Background="#FFFAF0">
 
     <Grid>
         <TextBlock Text="Це головна сторінка" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
