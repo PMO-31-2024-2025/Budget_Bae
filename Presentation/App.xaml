@@ -35,7 +35,7 @@
         <Style x:Key="ModalWindowTextBox" TargetType="TextBox">
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="#CC000000"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Width" Value="300"/>
             <Setter Property="Height" Value="30"/>
@@ -68,6 +68,15 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="Width" Value="150"/>
+        </Style>
+
+        <Style x:Key="ModalWindowComboBox" TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#CC000000"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="30"/>
         </Style>
     </Application.Resources>
 </Application>
