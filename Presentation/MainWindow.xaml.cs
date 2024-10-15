@@ -24,5 +24,6 @@ namespace Presentation
             InitializeComponent();
             MainFrame.Navigate(new MainPage());
         }
+
     }
 }

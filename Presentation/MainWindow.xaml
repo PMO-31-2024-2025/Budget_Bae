@@ -11,5 +11,6 @@
 
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" 
                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
     </DockPanel>
 </Window>

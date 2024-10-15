@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
-        Title="EntryWindow" Height="450" Width="400">
+        Title="EntryWindow" Height="450" Width="400"
+        WindowStyle="None"
+        Background="#FFFAF0">
     <Grid>
-        <TabControl>
+        <TabControl Background="#FFFAF0">
             <TabItem Header="Вхід" FontFamily="{StaticResource CustomFont}" FontSize="15">
                 <Grid Background="#FFFAF0">
                     <Grid.ColumnDefinitions>
@@ -37,5 +39,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <StackPanel>
+            <Button Content="X" Click="CloseButton_Click" HorizontalAlignment="Right" Style="{StaticResource CloseButton}" Margin="0,0,0,425" />
+        </StackPanel>
     </Grid>
 </Window>

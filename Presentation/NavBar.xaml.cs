@@ -48,9 +48,9 @@ namespace Presentation
             entryWindow.ShowDialog();
         }
 
-        private void nbSettingsButton_Click(object sender, RoutedEventArgs e)
+        private void nbSettingsButton_Click(Object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
