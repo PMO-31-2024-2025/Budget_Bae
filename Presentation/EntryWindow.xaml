@@ -40,7 +40,7 @@
             </TabItem>
         </TabControl>
         <StackPanel>
-            <Button Content="X" Click="CloseButton_Click" HorizontalAlignment="Right" Style="{StaticResource CloseButton}" Margin="0,0,0,425" />
+            <Button Content="X" Click="CloseButton_Click" HorizontalAlignment="Right" Style="{StaticResource CloseButton}" Margin="0,0,0,425" Height="25" Width="25"/>
         </StackPanel>
     </Grid>
 </Window>

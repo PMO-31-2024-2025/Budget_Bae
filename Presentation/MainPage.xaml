@@ -11,6 +11,7 @@
 
     <Grid>
         <TextBlock Text="Це головна сторінка" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="107,54,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click"   />
 
         <Grid.ColumnDefinitions>
                 <ColumnDefinition />
