@@ -10,26 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Presentation
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for IncomeWindow.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class IncomeWindow : Window
     {
-        public MainPage()
+        public IncomeWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            AddAccountWindow window = new AddAccountWindow();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            Close();
         }
     }
 }
