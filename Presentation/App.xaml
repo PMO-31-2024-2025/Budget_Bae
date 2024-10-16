@@ -86,7 +86,19 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="Width" Value="35"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
-       
+        <Style TargetType="Expander" x:Key="SettingsExpander">
+            <Setter Property="Background" Value="#FFFAF0"/>
+            <Setter Property="ExpandDirection" Value="Down"/>
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#CC000000"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Width" Value="350"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="IsExpanded" Value="False"/>
+            <Setter Property="Margin" Value="5, 15, 5, 10"/>
+        </Style>
     </Application.Resources>
 </Application>

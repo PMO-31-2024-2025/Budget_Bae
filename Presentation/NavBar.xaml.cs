@@ -50,7 +50,18 @@ namespace Presentation
 
         private void nbSettingsButton_Click(Object sender, RoutedEventArgs e)
         {
-
+            SettingsWindow settingsWindow = new SettingsWindow();
+            var mainWindow = Application.Current.MainWindow;
+            settingsWindow.Height = mainWindow.ActualHeight;
+            settingsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            var screenWidth = SystemParameters.PrimaryScreenWidth;
+            var windowWidth = settingsWindow.Width;
+            settingsWindow.Left = screenWidth - windowWidth;
+            var screenHeight = SystemParameters.PrimaryScreenHeight;
+            var windowHeight = settingsWindow.Height;
+            settingsWindow.Top = (screenHeight - windowHeight) / 2;
+            settingsWindow.ShowDialog();
+            
         }
     }
 }
