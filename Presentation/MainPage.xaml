@@ -14,6 +14,28 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="107,54,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click"   />
 
         
+                    </Border>
+                    <Border Background="#B2A7C7E7"  Grid.Row="2">
+                        <Grid HorizontalAlignment="Stretch" Margin="50, 0">
+                            <Button Content="ЇЖА" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <Button Content="ОДЯГ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
 
        
     </Grid>
