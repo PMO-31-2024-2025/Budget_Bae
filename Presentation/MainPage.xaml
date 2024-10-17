@@ -13,14 +13,7 @@
         <TextBlock Text="Це головна сторінка" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="107,54,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click"   />
 
-        <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        
 
        
     </Grid>
