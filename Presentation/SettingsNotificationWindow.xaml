@@ -7,8 +7,11 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="#FFFAF0"
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing"
         Title="SettingsNotificationWindow" Height="70" Width="400">
     <Grid>
-        <CheckBox Content="Отримувати сповіщення" Style="{StaticResource LargeCheckBoxStyle}" FontFamily="{StaticResource CustomFont}" FontWeight="SemiBold" FontSize="18" Foreground="#CC000000" Margin="10"/>
+        <CheckBox Name="NotificationCheckBox" Content="Отримувати сповіщення" Style="{StaticResource LargeCheckBox}" FontFamily="{StaticResource CustomFont}" FontWeight="SemiBold" FontSize="18" Foreground="#CC000000" 
+                  Margin="10" IsChecked="True"/>
     </Grid>
 </Window>

@@ -23,5 +23,16 @@ namespace Presentation
         {
             InitializeComponent();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.IsCheckedNotification = NotificationCheckBox.IsChecked ?? false;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            NotificationCheckBox.IsChecked = Properties.Settings.Default.IsCheckedNotification;
+        }
     }
 }

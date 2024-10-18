@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Presentation
@@ -18,12 +19,15 @@ namespace Presentation
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
+    ///
     public partial class SettingsWindow : Window
     {
 
         private SettingsCategoriesWindow categoriesWindow;
         private SettingsNotificationWindow notificationWindow;
         private SettingsSupportWindow supportWindow;
+        public ObservableCollection<string> categories = new ObservableCollection<string> { "Категорія 1", "Категорія 2",
+        "Категорія 3", "Категорія 4", "Категорія 5", "Категорія 6", "Категорія 7", "Категорія 8" };
 
         public SettingsWindow()
         {
@@ -34,6 +38,7 @@ namespace Presentation
         {
             Close();
         }
+
         private void SettingsEntryButton_Click(Object sender, RoutedEventArgs e)
         {
 
@@ -41,22 +46,46 @@ namespace Presentation
         
         private void HistoryArrowButton_Click(Object sender, RoutedEventArgs e)
         {
-
-        } 
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (mainWindow.MainFrame != null)
+            {
+                mainWindow.MainFrame.Navigate(new AnalyticsPage());
+            }
+            Close();
+        }
 
         private void PlannedPaymentsButton_Click(Object sender, RoutedEventArgs e)
         {
-
+            Close();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (mainWindow.MainFrame != null)
+            {
+                PlannedPaymentsWindow window = new PlannedPaymentsWindow();
+                window.ShowDialog();
+            }
+            
         }
 
         private void PrivacyPolicyButton_Click(Object sender, RoutedEventArgs e)
         {
-
+            Close();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (mainWindow.MainFrame != null)
+            {
+                PrivacyPolicyWindow window = new PrivacyPolicyWindow();
+                window.ShowDialog();
+            }
         }
 
         private void TermsOfUseButton_Click(Object sender, RoutedEventArgs e)
         {
-
+            Close();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (mainWindow.MainFrame != null)
+            {
+                TermsOfUseWindow window = new TermsOfUseWindow();
+                window.ShowDialog();
+            }
         }
 
         private void CategoryExpanderButton_Click(object sender, RoutedEventArgs e)
@@ -68,7 +97,7 @@ namespace Presentation
                 RotateTransform rotateTransform = new RotateTransform(аngle);
                 CategoryExpanderButton.RenderTransform = rotateTransform;
                 CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                categoriesWindow = new SettingsCategoriesWindow();
+                categoriesWindow = new SettingsCategoriesWindow(categories);
                 categoriesWindow.Owner = this;
                 categoriesWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 var screenWidth = SystemParameters.PrimaryScreenWidth;

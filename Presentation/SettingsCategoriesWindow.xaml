@@ -7,15 +7,20 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="#FFFAF0"
-        Title="SettingsCategoriesWindow" Height="Auto" Width="400">
+        Title="SettingsCategoriesWindow" Height="250" Width="400">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <ScrollBar Grid.Column="2">
-            
-        </ScrollBar>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <Grid x:Name="categoryGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ScrollViewer>
+        
     </Grid>
 </Window>

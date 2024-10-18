@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Presentation
 {
     /// <summary>
-    /// Interaction logic for PlannedPaymentsWindow.xaml
+    /// Interaction logic for PrivacyPolicyWindow.xaml
     /// </summary>
-    public partial class PlannedPaymentsWindow : Window
+    public partial class PrivacyPolicyWindow : Window
     {
-        public PlannedPaymentsWindow()
+        public PrivacyPolicyWindow()
         {
             InitializeComponent();
         }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Presentation.PlannedPaymentsWindow"
+﻿<Window x:Class="Presentation.PrivacyPolicyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="#FFFAF0"
-        Title="PlannedPaymentsWindow" Height="450" Width="800">
+        Title="PrivacyPolicyWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Planned payments"/>
+        <Label Content="Privat policy"/>
         <Button Style="{StaticResource CloseButton}" Click="Button_Click"/>
     </Grid>
 </Window>

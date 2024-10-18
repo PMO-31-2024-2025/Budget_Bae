@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="#FFFAF0"
-        Title="SettingsSupportWindow" Height="Auto" Width="400">
-    <Grid>
-        
-    </Grid>
+        Title="SettingsSupportWindow" Height="110" Width="400">
+    <StackPanel>
+        <Label Content="budgetbae.support@gmail.com" Margin="10"/>
+        <Label Content="@budgetbae_support" Margin="10"/>
+    </StackPanel>
 </Window>
