@@ -45,12 +45,26 @@
         </Style>
 
         <Style x:Key="ModalWindowTextBox" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="#F4F4F4" 
+                                BorderBrush="Gray" 
+                                BorderThickness="1" 
+                                CornerRadius="5" 
+                                Padding="5">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#CC000000"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Width" Value="300"/>
             <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
         <Style TargetType="Button" x:Key="ModalWindowButton">

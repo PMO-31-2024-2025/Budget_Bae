@@ -9,7 +9,31 @@
         Background="#FFFAF0"
         Title="PlannedPaymentsWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Planned payments"/>
-        <Button Style="{StaticResource CloseButton}" Click="Button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Заплановані платежі"  Grid.Row="0"  Grid.Column="0" HorizontalAlignment="Center" FontSize="25"/>
+        <Button Grid.Row="0"  Grid.Column="1" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" Margin="0, 5, 5, 5" Click="Button_Click"/>
+
+
+
+        <Border Grid.Row="1" Grid.Column="1" BorderBrush="#DAB6FC" Background="#4DDAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 30, 20, 30">
+            <TextBlock FontFamily="{StaticResource CustomFont}" FontWeight="SemiBold" FontSize="15" Foreground="#CC000000"
+                       VerticalAlignment="Center" HorizontalAlignment="Center">
+                       <StackPanel>
+                           <Label Content="Створення нового платежа" HorizontalAlignment="Left" FontSize="12" Margin="-30, 0, 0, 0"/>
+                           <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Введіть назву" Width="250" HorizontalAlignment="Center" Margin="10, 30, 10, 0"/>
+                           <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Введіть суму" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0"/>
+                           <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Число внесення" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 80"/>
+                           <Button Style="{StaticResource ModalWindowButton}" Content="Створити" Margin="0, 0, 0, 30"/>
+                       </StackPanel>
+            </TextBlock>
+        </Border>
     </Grid>
 </Window>
