@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Presentation
     /// </summary>
     public partial class SettingsWindow : Window
     {
+
+        private SettingsCategoriesWindow categoriesWindow;
+        private SettingsNotificationWindow notificationWindow;
+        private SettingsSupportWindow supportWindow;
+
         public SettingsWindow()
         {
             InitializeComponent();
@@ -28,5 +34,128 @@ namespace Presentation
         {
             Close();
         }
+        private void SettingsEntryButton_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+        
+        private void HistoryArrowButton_Click(Object sender, RoutedEventArgs e)
+        {
+
+        } 
+
+        private void PlannedPaymentsButton_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrivacyPolicyButton_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TermsOfUseButton_Click(Object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CategoryExpanderButton_Click(object sender, RoutedEventArgs e)
+        {
+            double аngle = -90;
+
+            if (categoriesWindow == null || !categoriesWindow.IsVisible)
+            {
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                CategoryExpanderButton.RenderTransform = rotateTransform;
+                CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                categoriesWindow = new SettingsCategoriesWindow();
+                categoriesWindow.Owner = this;
+                categoriesWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                var screenWidth = SystemParameters.PrimaryScreenWidth;
+                var windowWidth = categoriesWindow.Width;
+                categoriesWindow.Left = screenWidth - windowWidth;
+                var button = sender as Button;
+                var buttonPosition = button.PointToScreen(new Point(0, 0));
+                var buttonHeight = button.ActualHeight;
+                categoriesWindow.Top = buttonPosition.Y;
+                categoriesWindow.Show();
+            }
+            else
+            {
+                аngle = 0;
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                CategoryExpanderButton.RenderTransform = rotateTransform;
+                CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                categoriesWindow.Close();
+            }
+        }
+
+        private void NotificationExpanderButton_Click(object sender, RoutedEventArgs e)
+        {
+            double аngle = -90;
+
+            if (notificationWindow == null || !notificationWindow.IsVisible)
+            {
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                NotificationExpanderButton.RenderTransform = rotateTransform;
+                NotificationExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                notificationWindow = new SettingsNotificationWindow();
+                notificationWindow.Owner = this;
+                notificationWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                var screenWidth = SystemParameters.PrimaryScreenWidth;
+                var windowWidth = notificationWindow.Width;
+                notificationWindow.Left = screenWidth - windowWidth;
+                var button = sender as Button;
+                var buttonPosition = button.PointToScreen(new Point(0, 0));
+                var buttonHeight = button.ActualHeight;
+                notificationWindow.Top = buttonPosition.Y - 40;
+                notificationWindow.Show();
+            }
+            else
+            {
+                аngle = 0;
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                NotificationExpanderButton.RenderTransform = rotateTransform;
+                NotificationExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                notificationWindow.Close();
+            }
+        }
+
+        private void SupportExpanderButton_Click(object sender, RoutedEventArgs e)
+        {
+            double аngle = -90;
+
+            if (supportWindow == null || !supportWindow.IsVisible)
+            {
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                SupportExpanderButton.RenderTransform = rotateTransform;
+                SupportExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                supportWindow = new SettingsSupportWindow();
+                supportWindow.Owner = this;
+                supportWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                var screenWidth = SystemParameters.PrimaryScreenWidth;
+                var windowWidth = supportWindow.Width;
+                supportWindow.Left = screenWidth - windowWidth;
+                var button = sender as Button;
+                var buttonPosition = button.PointToScreen(new Point(0, 0));
+                var buttonHeight = button.ActualHeight;
+                supportWindow.Top = buttonPosition.Y - 80;
+                supportWindow.Show();
+            }
+            else
+            {
+                аngle = 0;
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                SupportExpanderButton.RenderTransform = rotateTransform;
+                SupportExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                supportWindow.Close();
+            }
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
 }

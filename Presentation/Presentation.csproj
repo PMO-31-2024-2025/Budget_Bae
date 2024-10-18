@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pictures\arrow.png" />
+    <None Remove="Pictures\expander.png" />
     <None Remove="Pictures\settings.png" />
     <None Remove="Pictures\unregistered_user.jpg" />
   </ItemGroup>
@@ -19,6 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Pictures\arrow.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Pictures\expander.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Pictures\settings.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
