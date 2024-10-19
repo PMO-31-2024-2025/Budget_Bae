@@ -28,6 +28,8 @@ namespace Presentation
         private SettingsSupportWindow supportWindow;
         public ObservableCollection<string> categories = new ObservableCollection<string> { "Категорія 1", "Категорія 2",
         "Категорія 3", "Категорія 4", "Категорія 5", "Категорія 6", "Категорія 7", "Категорія 8" };
+        public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
+
 
         public SettingsWindow()
         {
@@ -60,7 +62,7 @@ namespace Presentation
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow.MainFrame != null)
             {
-                PlannedPaymentsWindow window = new PlannedPaymentsWindow();
+                PlannedPaymentsWindow window = new PlannedPaymentsWindow(plannedPayments);
                 window.ShowDialog();
             }
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,22 @@ namespace Presentation
     /// </summary>
     public partial class PlannedPaymentsWindow : Window
     {
-        public PlannedPaymentsWindow()
+        public ObservableCollection<string> PlannedPayments { get; set; }
+
+        public PlannedPaymentsWindow(ObservableCollection<string> plannedPayments)
         {
             InitializeComponent();
+            PlannedPayments = plannedPayments;
+            
         }
+
+         
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
+
     }
 }
