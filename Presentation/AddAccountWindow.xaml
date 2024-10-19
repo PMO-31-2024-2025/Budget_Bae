@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="AddAccountWindow" Height="450" Width="400"
         WindowStyle="None"
         Background="#FFFAF0">

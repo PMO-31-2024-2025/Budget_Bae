@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="IncomeWindow" Height="450" Width="400"
         WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         Background="#FFFAF0">
     <Grid>
         <Grid.RowDefinitions>

@@ -35,6 +35,7 @@ namespace Presentation
             replenishmentBorder.Visibility = Visibility.Collapsed;
             adding.Visibility = Visibility.Visible;
             addingBorder.Visibility = Visibility.Visible;
+            AddSavings.Visibility = Visibility.Collapsed;
         }
 
         private void closeAddSavings_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,7 @@ namespace Presentation
             addingBorder.Visibility = Visibility.Collapsed;
             replenishment.Visibility = Visibility.Visible;
             replenishmentBorder.Visibility= Visibility.Visible;
+            AddSavings.Visibility = Visibility.Visible;
         }
     }
 }

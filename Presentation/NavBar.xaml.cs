@@ -44,7 +44,6 @@ namespace Presentation
         private void nbExitButton_Click(object sender, RoutedEventArgs e)
         {
             EntryWindow entryWindow = new EntryWindow();
-            entryWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             entryWindow.ShowDialog();
         }
 

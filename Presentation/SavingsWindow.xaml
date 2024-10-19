@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="#FFFAF0"
+        WindowStartupLocation="CenterScreen"
         Title="SavingsWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,7 +22,7 @@
         <Label Content="Заощадження"  Grid.Row="0"  Grid.Column="0" HorizontalAlignment="Center" FontSize="25"/>
         <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 5, 5, 5" Click="Button_Click"/>
 
-        <Button Name="AddSavings" Grid.Row="0" Grid.Column="0" Style="{StaticResource ModalWindowButton}" Width="250" Content="Створити заощадження" Click="AddSavings_Click"/>
+        <Button x:Name="AddSavings" Grid.Row="0" Grid.Column="0" Style="{StaticResource ModalWindowButton}" Width="250" Content="Створити заощадження" Click="AddSavings_Click"/>
 
         <Border x:Name="replenishmentBorder" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 70, 20, 30" Visibility="Visible">
             <StackPanel x:Name="replenishment" Visibility="Visible">
