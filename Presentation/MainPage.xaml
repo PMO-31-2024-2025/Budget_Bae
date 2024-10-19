@@ -14,7 +14,6 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="1" Grid.Row="0" Click="Button_Click_1"/>
 
         <Grid Grid.Column="0" Margin="0" Width="720">
             <Grid.ColumnDefinitions>
