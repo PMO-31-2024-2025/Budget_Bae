@@ -89,7 +89,7 @@
 
                     <Border Background="#B2A7C7E7"  Grid.Row="1">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 30, 50, 10">
-                            <Button Content="ЇЖА" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left">
+                            <Button Content="ЇЖА" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left" Click="AddExpenseButton_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
@@ -98,7 +98,7 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <Button Content="ОДЯГ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right">
+                            <Button Content="ОДЯГ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right" Click="AddExpenseButton_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
@@ -112,7 +112,7 @@
                     </Border>
                     <Border Background="#B2A7C7E7"  Grid.Row="2">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 10">
-                            <Button Content="ЇЖА" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left">
+                            <Button Content="РОЗВАГИ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left" Click="AddExpenseButton_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
@@ -121,7 +121,7 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <Button Content="ОДЯГ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right">
+                            <Button Content="ТРАНСПОРТ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right" Click="AddExpenseButton_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
@@ -135,7 +135,7 @@
                     </Border>
                     <Border Background="#B2A7C7E7" CornerRadius="0, 0, 40, 40" Grid.Row="3">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 10, 50, 30">
-                            <Button Content="ЇЖА" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left">
+                            <Button Content="ЗДОРОВ'Я" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left" Click="AddExpenseButton_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
@@ -144,7 +144,7 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <Button Content="ОДЯГ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right">
+                            <Button Content="ІНШІ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right" Click="OpenCategories_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">

@@ -31,5 +31,17 @@ namespace Presentation
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.ShowDialog();
         }
+
+        private void AddExpenseButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExpensesWindow window = new ExpensesWindow();
+            window.ShowDialog();
+        }
+
+        private void OpenCategories_Click(object sender, RoutedEventArgs e)
+        {
+            CategoriesWindow window = new CategoriesWindow();
+            window.ShowDialog();
+        }
     }
 }
