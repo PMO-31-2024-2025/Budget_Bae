@@ -12,22 +12,20 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#CC000000"/>
         </Style>
+        
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="#CC000000"/>
         </Style>
+        
         <Style TargetType="Button" x:Key="NavBarButton">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-        BorderBrush="{TemplateBinding BorderBrush}"
-        BorderThickness="0"
-        CornerRadius="15">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                      VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -71,17 +69,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-            BorderBrush="{TemplateBinding BorderBrush}"
-            BorderThickness="0"
-            CornerRadius="7">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="7">
                             <Border.Effect>
                                 <DropShadowEffect Color="#9B70C2" 
                                           ShadowDepth="4" 
                                           BlurRadius="6"/>
                             </Border.Effect>
-                            <ContentPresenter HorizontalAlignment="Center" 
-                          VerticalAlignment="Center"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -100,22 +94,17 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-    BorderBrush="{TemplateBinding BorderBrush}"
-    BorderThickness="0"
-    CornerRadius="7">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="7">
                             <Border.Effect>
                                 <DropShadowEffect Color="#D9A7C7E7" 
                                   ShadowDepth="4" 
                                   BlurRadius="6"/>
                             </Border.Effect>
-                            <ContentPresenter HorizontalAlignment="Center" 
-                  VerticalAlignment="Center"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
             <Setter Property="Background" Value="#996E9BC3"/>
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontSize" Value="15"/>
@@ -133,6 +122,7 @@
             <Setter Property="Width" Value="300"/>
             <Setter Property="Height" Value="30"/>
         </Style>
+        
         <Style TargetType="Button" x:Key="CloseButton">
             <Setter Property="Background" Value="#9B70C2"/>
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
@@ -144,6 +134,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Content" Value="X"/>
         </Style>
+        
         <Style TargetType="Expander" x:Key="SettingsExpander">
             <Setter Property="Background" Value="#FFFAF0"/>
             <Setter Property="ExpandDirection" Value="Down"/>
@@ -156,6 +147,7 @@
             <Setter Property="IsExpanded" Value="False"/>
             <Setter Property="Margin" Value="5, 15, 5, 10"/>
         </Style>
+        
         <Style TargetType="Button" x:Key="ArrowButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -217,7 +209,6 @@
                             </Border>
                             <ContentPresenter VerticalAlignment="Center" />
                         </StackPanel>
-
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="False">
                                 <Setter TargetName="checkMark"
@@ -233,5 +224,42 @@
             </Setter>
         </Style>
         
+        <Style TargetType="Button" x:Key="CategoryButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="260"/>
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#F4F4F4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="#AC6E9BC3"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="AccountsButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="15">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="240"/>
+            <Setter Property="Height" Value="130"/>
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#F4F4F4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="#AC6E9BC3"/>
+        </Style>
     </Application.Resources>
 </Application>
