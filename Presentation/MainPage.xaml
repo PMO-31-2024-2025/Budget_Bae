@@ -21,46 +21,50 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-        <Border Margin="20, 30, 20, 20" Padding="20, 10" CornerRadius="15" Width="650">
-            <Border.Effect>
-                <DropShadowEffect Color="#D9D9E7" ShadowDepth="8" BlurRadius="8" />
-            </Border.Effect>
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#354C9BC3" Offset="0.3" />
-                    <GradientStop Color="#30DAB6FC" Offset="0.8" />
-                </LinearGradientBrush>
-            </Border.Background>
+            <Border Margin="20, 30, 20, 20" Padding="20, 10" CornerRadius="15" Width="650">
+                <Border.Effect>
+                    <DropShadowEffect Color="#D9D9E7" ShadowDepth="8" BlurRadius="8" />
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#80A7C7E7" Offset="0.3"/>
+                        <GradientStop Color="#80DAB6FC" Offset="0.8" />
+                    </LinearGradientBrush>
+                </Border.Background>
 
-            <Grid Margin="7,0,7,0" Height="35" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Витрати" FontSize="25" FontWeight="Bold" Foreground="#695D74" 
-                           VerticalAlignment="Center" Margin="0,0,10,5" HorizontalAlignment="Left" Grid.Column="0"/>
-                <Grid Grid.Column="1">
+                <Grid Margin="7,0,7,0" Height="35" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
-                    <TextBlock Margin="1.5,0,0,0" Text="UAH" FontSize="15" Height="24.5" FontWeight="Bold" Foreground="#695D74" 
-                           VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"/>
-                </Grid>
-            </Grid>
-        </Border>
-        
 
-        <StackPanel Name="Categories" Orientation="Vertical" Grid.Column="0" Grid.Row="1">
-            <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#CC6E9BC3" Height="60" Width="650">
-                <Border>
-                    <TextBlock Text="Категорії" FontFamily="{StaticResource CustomFont}" FontSize="30" FontWeight="SemiBold" Foreground="#F4F4F4" 
-                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
+                    <TextBlock Text="Витрати" FontSize="25" FontWeight="Bold" Foreground="#695D74" 
+                           VerticalAlignment="Center" Margin="0,0,10,5" HorizontalAlignment="Left" Grid.Column="0"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
+                        <TextBlock Margin="1.5,0,0,0" Text="UAH" FontSize="15" Height="24.5" FontWeight="Bold" Foreground="#695D74" 
+                           VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"/>
+                    </Grid>
+                </Grid>
             </Border>
-                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650">
+            <StackPanel Name="Categories" Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+                <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#6E9BC3" Height="60" Width="650">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="310" Color="#6E9BC3" BlurRadius="20" ShadowDepth="8"/>
+                    </Border.Effect>
+                    <Border>
+                        <TextBlock Text="Категорії" FontFamily="{StaticResource CustomFont}" FontSize="35" FontWeight="SemiBold" Foreground="#F4F4F4" 
+                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </Border>
+                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#A7C7E7" Width="650">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="310" Color="#A7C7E7" BlurRadius="20" ShadowDepth="8"/>
+                    </Border.Effect>
                     <StackPanel Orientation="Vertical">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 0">
                             <Button Style="{StaticResource CategoryButton}" Content="ЇЖА" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
@@ -86,180 +90,61 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Name="Accounts" Orientation="Vertical" Grid.Row="0" Margin="20, 30, 20, 20">
-            <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#CC6E9BC3" Height="60" Width="650">
-                <Border>
-                    <TextBlock Text="Рахунки" FontFamily="{StaticResource CustomFont}" FontSize="30" FontWeight="SemiBold" Foreground="#F4F4F4" 
+                <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#CC6E9BC3" Height="60" Width="650">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="310" Color="#6E9BC3" BlurRadius="20" ShadowDepth="8"/>
+                    </Border.Effect>
+                    <Border>
+                        <TextBlock Text="Рахунки" FontFamily="{StaticResource CustomFont}" FontSize="35" FontWeight="SemiBold" Foreground="#F4F4F4" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
                 </Border>
-            </Border>
-            <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650">
+                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#A7C7E7" Width="650">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="310" Color="#A7C7E7" BlurRadius="20" ShadowDepth="8"/>
+                    </Border.Effect>
                     <StackPanel Orientation="Vertical">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 10">
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left">
+                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
+                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                    Готівка
+                                    <LineBreak/>
+                                    10000 UAH
+                                </TextBlock>
                             </Button>
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right"/>
+                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Click="AddIncome_Click">
+                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                    Карта 1
+                                    <LineBreak/>
+                                    20000 UAH
+                                </TextBlock>
+                            </Button>
                         </Grid>
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 20">
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left"/>
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right"/>
+                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
+                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                    Карта 2
+                                    <LineBreak/>
+                                    50000 UAH
+                                </TextBlock>
+                            </Button>
+                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Content="+" FontSize="70" Click="AddAccount_Click"/>
                         </Grid>
                     </StackPanel>
                 </Border>
-            
-
-        </StackPanel>
-    </Grid>
-    </Grid>
-    <!--<Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Column="0" Margin="0" Width="720">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0">
-                    <Border Margin="10" Padding="20, 10" CornerRadius="10">
-                        <Border.Effect>
-                            <DropShadowEffect Color="#D9D9E7" 
-                            ShadowDepth="8" 
-                          BlurRadius="8" />
-                        </Border.Effect>
-                        <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#354C9BC3" Offset="0.3" />
-                                <GradientStop Color="#30DAB6FC" Offset="0.8" />
-                            </LinearGradientBrush>
-                        </Border.Background>
-
-                        <Grid Margin="7,0,7,0" Height="36" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Text="Витрати" FontSize="22" FontWeight="Bold" Foreground="#695D74"
-                        VerticalAlignment="Center" Margin="0,0,10,0" 
-                        HorizontalAlignment="Left" Grid.Column="0"/>
-
-                            <Grid Grid.Column="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" 
-                                    VerticalAlignment="Center" 
-                                    HorizontalAlignment="Right" Grid.Column="0"/>
-                                <TextBlock Margin="1.5,0,0,0" Text="UAH" FontSize="15" Height="24.5" FontWeight="Bold" Foreground="#695D74" 
-                                VerticalAlignment="Bottom" 
-                                HorizontalAlignment="Right" Grid.Column="1"/>
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
-                <Grid Grid.Row="1" Margin="0, 20, 0, 0" Width="660">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="29*"/>
-                        <RowDefinition Height="26*"/>
-                    </Grid.RowDefinitions>
-
-                    <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#AC6E9BC3" Height="60">
-                        <Border >
-                            <TextBlock Text="Категорії" FontFamily="Montserrat" FontSize="27" FontWeight="Bold" Foreground="White" 
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </Border>
-
-                    <Border Background="#B2A7C7E7"  Grid.Row="1">
-                        <Grid HorizontalAlignment="Stretch" Margin="50, 30, 50, 10">
-                            <Button Content="ЇЖА" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left" Click="AddExpenseButton_Click">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                            <Button Content="ОДЯГ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right" Click="AddExpenseButton_Click">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-
-                    </Border>
-                    <Border Background="#B2A7C7E7"  Grid.Row="2">
-                        <Grid HorizontalAlignment="Stretch" Margin="50, 10">
-                            <Button Content="РОЗВАГИ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left" Click="AddExpenseButton_Click">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                            <Button Content="ТРАНСПОРТ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right" Click="AddExpenseButton_Click">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-
-                    </Border>
-                    <Border Background="#B2A7C7E7" CornerRadius="0, 0, 40, 40" Grid.Row="3">
-                        <Grid HorizontalAlignment="Stretch" Margin="50, 10, 50, 30">
-                            <Button Content="ЗДОРОВ'Я" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Left" Click="AddExpenseButton_Click">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                            <Button Content="ІНШІ" Width="260" Height="70" FontSize="22" FontWeight="SemiBold" Foreground="White" Background="#AC6E9BC3" HorizontalAlignment="Right" Click="OpenCategories_Click">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-                    </Border>
-                </Grid>
-                
-            </Grid>
+            </StackPanel>
+            <Border Grid.Row="1" Margin="20, 50, 20, 20">
+                <Border.Effect>
+                    <DropShadowEffect Direction="310" Color="#9B70C2" BlurRadius="15" ShadowDepth="4"/>
+                </Border.Effect>
+                <Button x:Name="SavingsButton" Content="Заощадження" Style="{StaticResource MainPageTwoButtons}" Click="SavingsButton_Click"/>
+            </Border>
+            <Border Grid.Row="2" Margin="20, 20, 20, 20">
+                <Border.Effect>
+                    <DropShadowEffect Direction="310" Color="#9B70C2" BlurRadius="15" ShadowDepth="4"/>
+                </Border.Effect>
+                <Button x:Name="PlannedPaymentsButton" Content="Заплановані платежі" Style="{StaticResource MainPageTwoButtons}" Click="PlannedPaymentsButton_Click"/>
+            </Border>
         </Grid>
-       
-    </Grid>-->
+    </Grid>
 </Page>

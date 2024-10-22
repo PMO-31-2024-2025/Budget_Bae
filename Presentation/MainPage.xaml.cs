@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Presentation
     /// </summary>
     public partial class MainPage : Page
     {
+        public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
+
         public MainPage()
         {
             InitializeComponent();
@@ -41,6 +44,30 @@ namespace Presentation
         private void OpenCategories_Click(object sender, RoutedEventArgs e)
         {
             CategoriesWindow window = new CategoriesWindow();
+            window.ShowDialog();
+        }
+
+        private void AddIncome_Click(object sender, RoutedEventArgs e)
+        { 
+            IncomeWindow window = new IncomeWindow();
+            window.ShowDialog();
+        }
+
+        private void AddAccount_Click(object sender, RoutedEventArgs e)
+        {
+            AddAccountWindow window = new AddAccountWindow();
+            window.ShowDialog();
+        }
+
+        private void SavingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            SavingsWindow window = new SavingsWindow();
+            window.ShowDialog();
+        }
+
+        private void PlannedPaymentsButton_Click(object sender, RoutedEventArgs e)
+        {
+            PlannedPaymentsWindow window = new PlannedPaymentsWindow(plannedPayments);
             window.ShowDialog();
         }
     }
