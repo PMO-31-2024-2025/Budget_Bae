@@ -57,5 +57,27 @@ namespace Presentation
                 }
             }
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (textBox.Text == textBox.Tag.ToString())
+                {
+                    textBox.Text = string.Empty;
+                }
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = textBox.Tag.ToString();
+                }
+            }
+        }
     }
 }

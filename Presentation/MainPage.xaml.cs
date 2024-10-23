@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using DAL.Models;
 
 namespace Presentation
 {
@@ -22,6 +26,7 @@ namespace Presentation
     public partial class MainPage : Page
     {
         public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
+        public ObservableCollection<string> savings = new ObservableCollection<string> { "Кокальока обсешн", "На церкву", "Lip tint Rhode" };
 
         public MainPage()
         {
@@ -61,7 +66,7 @@ namespace Presentation
 
         private void SavingsButton_Click(object sender, RoutedEventArgs e)
         {
-            SavingsWindow window = new SavingsWindow();
+            SavingsWindow window = new SavingsWindow(savings);
             window.ShowDialog();
         }
 
@@ -70,5 +75,12 @@ namespace Presentation
             PlannedPaymentsWindow window = new PlannedPaymentsWindow(plannedPayments);
             window.ShowDialog();
         }
+
+       /*public List<Expense> GetExpenses()
+        {
+
+        }*/
+
+       
     }
 }

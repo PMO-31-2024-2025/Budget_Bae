@@ -17,46 +17,61 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Label Content="Заощадження"  Grid.Row="0"  Grid.Column="0" HorizontalAlignment="Center" FontSize="25"/>
         <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource CloseButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 5, 5, 5" Click="Button_Click"/>
-
-        <Button x:Name="AddSavings" Grid.Row="0" Grid.Column="0" Style="{StaticResource ModalWindowButton}" Width="250" Content="Створити заощадження" Click="AddSavings_Click"/>
-
-        <Border x:Name="replenishmentBorder" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 70, 20, 30" Visibility="Visible">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0" Height="300" Margin="0, 0, 0, 20">
+                <StackPanel x:Name="SavingsStackPannel" Orientation="Vertical" Margin="10"/>
+            </ScrollViewer>
+            <Button x:Name="AddSavings" Grid.Row="1" Grid.Column="0" Style="{StaticResource ModalWindowButton}" Width="250" Content="Створити заощадження" Click="AddSavings_Click"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+        <Border x:Name="replenishmentBorder" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 30, 20, 30" Visibility="Visible">
             <StackPanel x:Name="replenishment" Visibility="Visible">
                 <Label Content="Поповнення заощадження" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
                 <ComboBox Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
-                <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Сума поповнення" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0"/>
+                    <TextBox x:Name="Amount" Style="{StaticResource ModalWindowTextBox}" Tag="Сума поповнення" Text="{Binding ElementName=Amount, Path=Tag}" GotFocus="TextBox_GotFocus" 
+                             LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
                 <Button Style="{StaticResource ModalWindowButton}" Content="Поповнити" Margin="0,120, 0, 30"/>
             </StackPanel>
         </Border>
-
-        <Border x:Name="addingBorder" Grid.Row="1" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 5, 20, 15" Visibility="Collapsed">
-            <StackPanel x:Name="adding" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Створення нового заощадження" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
-                    <Button x:Name="closeAddSavings" Style="{StaticResource CloseButton}" Width="20" Height="20" FontSize="12" Click="closeAddSavings_Click" Margin="105, 5, 5, 0"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border x:Name="addingBorder" Grid.Row="1" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 5, 20, 15" Visibility="Collapsed">
+                <StackPanel x:Name="adding" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Створення нового заощадження" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
+                        <Button x:Name="closeAddSavings" Style="{StaticResource CloseButton}" Width="20" Height="20" FontSize="12" Click="closeAddSavings_Click" Margin="105, 5, 5, 0"/>
+                    </StackPanel>
+                    <TextBox x:Name="Name" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть назву" Text="{Binding ElementName=Name, Path=Tag}" GotFocus="TextBox_GotFocus" 
+                             LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                    <TextBox x:Name="Amount_" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть суму" Text="{Binding ElementName=Amount_, Path=Tag}" GotFocus="TextBox_GotFocus" 
+                             LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                    <TextBox x:Name="Date" Style="{StaticResource ModalWindowTextBox}" Tag="Кінцева дата" Text="{Binding ElementName=Date, Path=Tag}" GotFocus="TextBox_GotFocus" 
+                             LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Щомісячне поповнення на: " Foreground="#9B70C2" HorizontalAlignment="Center" Margin="-20, 20, 10, 0"/>
+                        <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ModalWindowTextBox}" Width="100" HorizontalAlignment="Right" Margin="0, 10, 0, 10"/>
+                        <Label Grid.Column="1" Grid.Row="1" Content="UAH" Margin="5, 10, 0, 10" Foreground="#9B70C2"/>
+                    </Grid>
+                    <Button Style="{StaticResource ModalWindowButton}" Content="Створити" Margin="0,30, 0, 30"/>
                 </StackPanel>
-                <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Введіть назву" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0"/>
-                <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Введіть суму" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0"/>
-                <TextBox Style="{StaticResource ModalWindowTextBox}" Text="Кінцева дата" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0"/>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Щомісячне поповнення на: " Foreground="#9B70C2" HorizontalAlignment="Center" Margin="-20, 20, 10, 0"/>
-                    <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource ModalWindowTextBox}" Width="100" HorizontalAlignment="Right" Margin="0, 10, 0, 10"/>
-                    <Label Grid.Column="1" Grid.Row="1" Content="UAH" Margin="5, 10, 0, 10" Foreground="#9B70C2"/>
-                </Grid>
-                <Button Style="{StaticResource ModalWindowButton}" Content="Створити" Margin="0,30, 0, 30"/>
-            </StackPanel>
-        </Border>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

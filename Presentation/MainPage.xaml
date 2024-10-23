@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Presentation"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="840" d:DesignWidth="1440"
       Title="MainPage"
@@ -21,7 +22,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Margin="20, 30, 20, 20" Padding="20, 10" CornerRadius="15" Width="650">
+            <Border Margin="20, 20, 20, 20" Padding="20, 10" CornerRadius="15" Width="650">
                 <Border.Effect>
                     <DropShadowEffect Color="#D9D9E7" ShadowDepth="8" BlurRadius="8" />
                 </Border.Effect>
@@ -45,7 +46,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
+                        <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" HorizontalAlignment="Center" Margin="0,4,0,4"/>
                         <TextBlock Margin="1.5,0,0,0" Text="UAH" FontSize="15" Height="24.5" FontWeight="Bold" Foreground="#695D74" 
                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"/>
                     </Grid>
@@ -81,6 +82,11 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
+            <Border Grid.Row="2" Background="#FFFAF0" Width="650" Height="260" Margin="20, 30, 20, 20" CornerRadius="40">
+                <Border.Effect>
+                    <DropShadowEffect Direction="310" Color="#D5CBBA" BlurRadius="20" ShadowDepth="8"/>
+                </Border.Effect>
+            </Border>
         </Grid>
 
         <Grid Grid.Column="1">

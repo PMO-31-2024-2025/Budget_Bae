@@ -18,24 +18,26 @@
         </Grid.RowDefinitions>
         
         <Button x:Name="Close" Grid.Row="0" Style="{StaticResource CloseButton}" Click="Close_Click" HorizontalAlignment="Right" Margin="5"/>
-        <TextBox x:Name="SearchTextBox" Grid.Row="0" Style="{StaticResource ModalWindowTextBox}" HorizontalAlignment="Left" Text="Введіть категорію" Width="280" Margin="20, 10, 0, 10"/>
+        <TextBox x:Name="SearchTextBox" Grid.Row="0" Style="{StaticResource ModalWindowTextBox}" HorizontalAlignment="Left" Tag="Введіть категорію" Width="280" Margin="20, 10, 0, 10"
+                 Text="{Binding ElementName=SearchTextBox, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+
         <Button x:Name="SearchButton" Grid.Row="0" HorizontalAlignment="Right" Style="{StaticResource ModalWindowButton}" Width="70" Height="25"  FontSize="12" Content="Пошук" Margin="0, 0, 60, 0" Background="#CC9B70C2" Click="SearchButton_Click"/>
-        <Border Grid.Row="2" Margin="10, 10, 10, 10" BorderBrush="#9B70C2" BorderThickness="2" CornerRadius="15" Background="Transparent">
-            <ScrollViewer Margin="0, 5, 5, 10" Height="150">
+        <Border Grid.Row="2" Margin="10, 10, 10, 10" BorderBrush="#9B70C2" BorderThickness="2" CornerRadius="15" Background="Transparent" Padding="5, 20, 5, 20">
+            <ScrollViewer  Height="150">
                 <StackPanel Orientation="Vertical" x:Name="CategoriesPanel">
-                    <StackPanel Orientation="Horizontal" Margin="25, 10, 35, 0">
+                    <StackPanel Orientation="Horizontal" Margin="25, 5, 30, 0">
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 1" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Left" Margin="0, 0, 30, 0"/>
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 2" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Right"/>
             </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="25, 10, 35, 0">
+                <StackPanel Orientation="Horizontal" Margin="25, 10, 30, 0">
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 3" FontSize="16" Foreground="#CC000000"  Width="150" Height="40" HorizontalAlignment="Left" Margin="0, 0, 30, 0"/>
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 4" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Right"/>
             </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="25, 10, 35, 0">
+                <StackPanel Orientation="Horizontal" Margin="25, 10, 30, 0">
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 5" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Left" Margin="0, 0, 30, 0"/>
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 6" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Right"/>
             </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="25, 10, 35, 0">
+                    <StackPanel Orientation="Horizontal" Margin="25, 10, 30, 0">
                         <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 7" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Left" Margin="0, 0, 30, 0"/>
                         <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 8" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Right"/>
                     </StackPanel>
