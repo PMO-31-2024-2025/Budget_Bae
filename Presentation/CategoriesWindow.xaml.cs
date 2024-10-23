@@ -28,5 +28,34 @@ namespace Presentation
         {
             Close();
         }
+
+        private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddCategoryWindow window = new AddCategoryWindow();
+            this.Close();
+            window.ShowDialog();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.ToLower();
+            foreach (UIElement element in CategoriesPanel.Children)
+            {
+                if (element is StackPanel innerPanel)
+                {
+                    foreach (UIElement innerElement in innerPanel.Children)
+                    {
+                        if (innerElement is Button categoryButton)
+                        {
+                            if (categoryButton.Content.ToString().ToLower().Contains(searchText))
+                            {
+                                categoryButton.BringIntoView();
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
