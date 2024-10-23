@@ -5,10 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Presentation"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="840" d:DesignWidth="1440"
+      Background="#FFFAF0"
       Title="AnalyticsPage">
 
     <Grid>
-        <TextBlock Text="Це сторінка аналітики" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>  
+                <RowDefinition Height="Auto"/>  
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Витрати за цей місяць" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
+            <Border Grid.Row="1" Background="#FFFAF0" Width="650" Height="300" Margin="20, 0, 20, 10" CornerRadius="40">
+                <Border.Effect>
+                    <DropShadowEffect Direction="310" Color="#D5CBBA" BlurRadius="20" ShadowDepth="8"/>
+                </Border.Effect>
+            </Border>
+            <Label Grid.Row="2" Content="Звіт доходів та витрат за останні місяці" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Історія" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
+            <Button x:Name="More" Grid.Row="2" Content="Більше" Style="{StaticResource ModalWindowButton}" Width="250" Height="55" FontSize="25" Click="More_Click"/>
+        </Grid>
     </Grid>
 </Page>

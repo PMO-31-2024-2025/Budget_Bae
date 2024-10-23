@@ -24,5 +24,10 @@ namespace Presentation
         {
             InitializeComponent();
         }
+
+        private void More_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

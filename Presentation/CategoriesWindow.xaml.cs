@@ -58,6 +58,13 @@ namespace Presentation
             }
         }
 
+        private void AddExpense_Click(object sender, RoutedEventArgs e)
+        {
+            ExpensesWindow window = new ExpensesWindow();
+            this.Close();
+            window.ShowDialog();
+        }
+
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (sender is TextBox textBox)

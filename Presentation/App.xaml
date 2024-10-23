@@ -81,7 +81,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
+
             <Setter Property="Background" Value="#999B70C2"/>
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
             <Setter Property="FontSize" Value="15"/>
@@ -123,7 +123,7 @@
             <Setter Property="Width" Value="300"/>
             <Setter Property="Height" Value="30"/>
         </Style>
-        
+
         <Style TargetType="Button" x:Key="CloseButton">
             <Setter Property="Background" Value="#9B70C2"/>
             <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
@@ -242,6 +242,7 @@
             <Setter Property="Foreground" Value="#F4F4F4"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Background" Value="#AC6E9BC3"/>
+            
         </Style>
 
         <Style TargetType="Button" x:Key="AccountsButton">
