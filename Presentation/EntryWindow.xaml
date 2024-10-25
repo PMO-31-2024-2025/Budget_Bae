@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation"
+        xmlns:validators="clr-namespace:Presentation.Validators"
         mc:Ignorable="d"
         Title="EntryWindow" Height="450" Width="400"
         WindowStyle="None"
@@ -14,7 +15,15 @@
             <TabItem Header="Вхід" FontFamily="{StaticResource CustomFont}" FontSize="15">
                 <Grid Background="#FFFAF0">
                     <Label x:Name="settingsEntryEmailLabel" Content="Електронна пошта:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="30,30,0,0" Style="{StaticResource ModalWindowLabel}" Height="28" Width="165"/>
-                    <TextBox x:Name="settingsEntryEmailTextBox" HorizontalAlignment="Left" Margin="35,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300"/>
+                    <TextBox x:Name="settingsEntryEmailTextBox" HorizontalAlignment="Left" Margin="35,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300" LostFocus="settingsEntryEmailTextBox_LostFocus">
+                        <TextBox.Text>
+                            <Binding Path="Email" UpdateSourceTrigger="LostFocus" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <validators:EmailValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Label x:Name="settingsEntryPasswordLabel" Content="Пароль:" HorizontalAlignment="Left" Margin="30,112,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}" Height="28" Width="73"/>
                     <TextBox x:Name="settingsEntryPasswordTextBox" HorizontalAlignment="Left" Margin="35,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300"/>
                     <Button x:Name="settingsEntryButton" Content="Увійти" HorizontalAlignment="Left" Margin="195,335,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowButton}" Height="35" Width="150"/>

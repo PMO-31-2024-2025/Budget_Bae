@@ -28,5 +28,16 @@ namespace Presentation
         {
             Close();
         }
+
+        private void settingsEntryEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if(textBox != null)
+            {
+                var bindingExpression = textBox.GetBindingExpression(TextBox.TextProperty);
+                bindingExpression?.UpdateSource();
+                settingsEntryEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+        }
     }
 }
