@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Services;
-using DAL.Data;
+﻿using DAL.Data;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -128,14 +127,13 @@ namespace Presentation
                     };
                     DbHelper.db.Users.Add(user);
                 }
+                DbHelper.db.SaveChanges();
                 MessageBox.Show("Додано успішно!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.InnerException.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-
         }
     }
 }
