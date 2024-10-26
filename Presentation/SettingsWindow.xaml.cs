@@ -49,9 +49,17 @@ namespace Presentation
         private void HistoryArrowButton_Click(Object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            if (mainWindow.MainFrame != null)
+            if (mainWindow != null)
             {
-                mainWindow.MainFrame.Navigate(new AnalyticsPage());
+                if (mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new AnalyticsPage());
+                }
+                NavBar navBarControl = mainWindow.NavBar; 
+                if (navBarControl != null)
+                {
+                    navBarControl.OpenAnalitics();
+                }
             }
             Close();
         }

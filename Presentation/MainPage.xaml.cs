@@ -76,11 +76,70 @@ namespace Presentation
             window.ShowDialog();
         }
 
-       /*public List<Expense> GetExpenses()
+        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            ContextMenu cm = (ContextMenu)this.Resources["ContextMenu"];
+            if (cm != null)
+            {
+                cm.PlacementTarget = sender as FrameworkElement;
+                cm.IsOpen = true;
+            }
+        }
 
-        }*/
+        private void AddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            AddCategoryWindow addCategoryWindow = new AddCategoryWindow();
+            addCategoryWindow.ShowDialog();
+        }
 
-       
+        private void AddAccount_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddAccountWindow addAccountWindow = new AddAccountWindow();
+            addAccountWindow.ShowDialog();
+        }
+
+        private void AddExpense_Click(object sender, RoutedEventArgs e)
+        {
+            ExpensesWindow expensesWindow = new ExpensesWindow();
+            expensesWindow.ShowDialog();
+        }
+
+        private void AddIncome_Click_1(object sender, RoutedEventArgs e)
+        {
+            IncomeWindow incomeWindow = new IncomeWindow();
+            incomeWindow.ShowDialog();
+        }
+
+        private void Savings_Click(object sender, RoutedEventArgs e)
+        {
+            SavingsWindow savingsWindow = new SavingsWindow(savings);  
+            savingsWindow.ShowDialog();
+        }
+
+        private void Payment_Click(object sender, RoutedEventArgs e)
+        {
+            PlannedPaymentsWindow plannedPaymentsWindow = new PlannedPaymentsWindow(plannedPayments);
+            plannedPaymentsWindow.ShowDialog();
+        }
+
+        private void ViewHistory_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (mainWindow != null)
+            {
+                if (mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new AnalyticsPage());
+                }
+                NavBar navBarControl = mainWindow.NavBar;
+                if (navBarControl != null)
+                {
+                    navBarControl.OpenAnalitics();
+                }
+            }
+        }
+
+        
     }
 }
+
