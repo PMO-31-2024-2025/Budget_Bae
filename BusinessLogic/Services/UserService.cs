@@ -1,4 +1,5 @@
-﻿using DAL.Data;
+﻿using BusinessLogic.Session;
+using DAL.Data;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace BusinessLogic.Services
             _context = context;
         }
 
-        public async Task<bool> RegisterUserAsync(string email, string name, string password)
+        public void RegisterUser(string email, string password, string name)
         {
-            if (await _context.Users.AnyAsync(u => u.Email == email))
+            if (_context.Users.Any(u => u.Email == email))
             {
                 throw new Exception("Користувач з такою електронною поштою вже існує!");
             }
@@ -33,18 +34,20 @@ namespace BusinessLogic.Services
             };
 
             _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return true;
+            _context.SaveChangesAsync();
         }
 
         public async Task<User> AuthenticateUserAsync(string email, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+
             if (user == null)
             {
                 throw new Exception("Неправильна пошта, або пароль");
             }
+
+            SessionManager.SetCurrentUser(user.Id);
 
             return user;
         }
@@ -78,6 +81,13 @@ namespace BusinessLogic.Services
             {
                 throw new Exception("Користувача не знайдено.");
             }
+        }
+
+        public async Task<int?> AuthorizeUserAsync(string email, string password)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            return user?.Id;
         }
     }
 }

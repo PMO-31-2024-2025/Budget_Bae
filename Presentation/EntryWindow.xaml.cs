@@ -1,8 +1,10 @@
 ﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
 using DAL.Data;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,12 +37,15 @@ namespace Presentation
 
         private void settingsEntryEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var textBox = sender as TextBox;
-            if(textBox != null)
+            string emailInput = settingsRegistrationEmailTextBox.Text;
+
+            if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                var bindingExpression = textBox.GetBindingExpression(TextBox.TextProperty);
-                bindingExpression?.UpdateSource();
-                settingsEntryEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
             }
         }
 
@@ -79,36 +84,81 @@ namespace Presentation
             {
                 MessageBox.Show("Паролі мають бути однаковими!");
             }
+            else if (createPasswordInput.Length < 8)
+            {
+                MessageBox.Show("Пароль має складатися з 8 символів щонайменше.");
+            }
             else
             {
                 try
                 {
                     var userService = new UserService(new DAL.Data.BudgetBaeContext());
-                    await userService.RegisterUserAsync(emailInput, nameInput, createPasswordInput);
+                    userService.RegisterUser(emailInput, createPasswordInput, nameInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    SessionManager.SetCurrentUser(DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id);
+                    Close();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
 
-            try
+        private async void settingsEntryButton_Click(object sender, RoutedEventArgs e)
+        {
+            string emailInput = settingsEntryEmailTextBox.Text;
+            string passwordInput = settingsEntryPasswordTextBox.Text;
+
+            if (emailInput == "" && passwordInput == "")
             {
-
-                User user = new User
-                {
-                    Name = name,
-                    Email = email,
-                    Password = password
-                };
-                DbHelper.db.Users.Add(user);
-                DbHelper.db.SaveChanges();
-                MessageBox.Show("Додано успішно!");
+                MessageBox.Show("Усі поля мають бути заповнені");
             }
-            catch (Exception ex)
+            else if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                MessageBox.Show(ex.InnerException.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                settingsEntryEmailTextBox_LostFocus(sender, e);
+            }
+            else if (passwordInput.Length < 8)
+            {
+                MessageBox.Show("Пароль занадто короткий.");
+                settingsEntryPasswordTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                try
+                {
+                    //int userId = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id;
+                    User user = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput);
+                    if (user.Id == -1)
+                    {
+                        //MessageBox.Show("Ая, думав отак влізеш в систему якшо не зареєстрований?");
+                        throw new Exception("Ая, думав отак влізеш в систему якшо не зареєстрований?");
+                    }
+                    if (user.Password != passwordInput)
+                    {
+                        MessageBox.Show("Нє, пароль не той. Сліпаки роззуй і введи всьо правильно.");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Вітаємо, {DbHelper.db.Users.First(x => x.Id == user.Id).Name}!");
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
+                        SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
+                        //settingsEntryEmailTextBox.Text = SessionManager.CurrentUserId.ToString();
+                        Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }
