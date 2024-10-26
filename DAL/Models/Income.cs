@@ -18,11 +18,11 @@ namespace DAL.Models
         [Key]
         public int Id { get; set; }
         [Column("category")]
-        public string Category { get; set; }
+        public string Category { get; set; } = null!;
         [Column("income_date")]
-        public string IncomeDate { get; set; }
+        public string IncomeDate { get; set; } = null!;
         [Column("income_sum")]
-        public double IncomeSum { get; set; }
+        public double IncomeSum { get; set; } 
         [Column("account_id")]
         public int AccountId { get; set; }
         [ForeignKey(nameof(AccountId))]

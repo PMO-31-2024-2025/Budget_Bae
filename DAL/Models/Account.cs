@@ -16,11 +16,11 @@ namespace DAL.Models
         [Key]
         public int Id { get; set; }
         [Column("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = null!;
         [Column("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         [Column("card_number")]
-        public string CardNumber { get; set; }
+        public string CardNumber { get; set; } = null!;
         [Column("balance")]
         public double Balance { get; set; }
         [Column("user_id")]

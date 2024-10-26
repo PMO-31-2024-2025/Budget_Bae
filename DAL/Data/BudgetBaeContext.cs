@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Data
 {
-    public partial class BudgetBaeContext
+    public partial class BudgetBaeContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Expense> Expenses { get; set; }
@@ -19,9 +19,9 @@ namespace DAL.Data
         public DbSet<Saving> Savings { get; set; }
         public DbSet<User> Users { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlite(@"");
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite(@"Data Source=C:\BudgetBae\DAL\DataBase\BudgetBaeDB.db;");
+        }
     }
 }

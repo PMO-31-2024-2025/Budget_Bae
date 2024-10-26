@@ -19,7 +19,7 @@ namespace DAL.Models
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
         [Column("expense_date")]
-        public string ExpenseDate { get; set; }
+        public string ExpenseDate { get; set; } = null!;
         [Column("expense_sum")]
         public double ExpenseSum { get; set; }
         [Column("account_id")]

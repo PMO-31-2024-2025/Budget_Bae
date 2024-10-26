@@ -16,7 +16,7 @@ namespace DAL.Models
         [Key]
         public int Id { get; set; }
         [Column("name")]
-        public string Name { get; set; } = string.Empty!;
+        public string Name { get; set; } = null!;
         [Column("user_id")]
         public int UserId { get; set; }
         [ForeignKey("UserId")]

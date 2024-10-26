@@ -16,13 +16,13 @@ namespace DAL.Models
         [Key]
         public int Id { get; set; }
         [Column("target_name")]
-        public string TargetName { get; set; }
+        public string TargetName { get; set; } = null!;
         [Column("target_sum")]
         public double TargetSum { get; set; }
         [Column("current_sum")]
         public double CurrentSum { get; set; }
         [Column("end_date")]
-        public string EndDate { get; set; }
+        public string EndDate { get; set; } = null!;
         [Column("user_id")]
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
