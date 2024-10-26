@@ -16,11 +16,11 @@ namespace DAL.Models
         [Key]
         public int Id { get; set; }
         [Column("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         [Column("planned_sum")]
         public double PlannedSum { get; set; }
         [Column("notification_date")]
-        public string NotigicationDate { get; set; }
+        public string NotigicationDate { get; set; } = null!;
         [Column("user_id")]
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
