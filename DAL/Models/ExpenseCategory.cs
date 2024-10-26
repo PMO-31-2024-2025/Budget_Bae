@@ -9,33 +9,25 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    [Table("planned_expenses")]
-    public class PlannedExpense
+    [Table("expenses_categories")]
+    public class ExpenseCategory
     {
         [Column("id")]
         [Key]
         public int Id { get; set; }
         [Column("name")]
-        public string Name { get; set; }
-        [Column("planned_sum")]
-        public double PlannedSum { get; set; }
-        [Column("notification_date")]
-        public string NotigicationDate { get; set; }
+        public string Name { get; set; } = string.Empty!;
         [Column("user_id")]
         public int UserId { get; set; }
-        [ForeignKey(nameof(UserId))]
-
-        DbSet<User> Users { get; set; }
+        [ForeignKey("UserId")]
+        public DbSet<User> User { get; set; }
 
     }
 }
 
-
-//CREATE TABLE planned_expenses (
-//	id INTEGER PRIMARY KEY,
+//CREATE TABLE expenses_categories (
+//	id INTEGER PRIMARY KEY AUTOINCREMENT,
 //    name TEXT NOT NULL,
-//    planned_sum REAL NOT NULL,
-//    notification_date INTEGER NOT NULL,
 //    user_id INTEGER,
 //    FOREIGN KEY (user_id) REFERENCES users(id)
 //);

@@ -1,5 +1,4 @@
-﻿using BusinessLogic.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -82,8 +81,8 @@ namespace Presentation
             {
                 try
                 {
-                    var userService = new UserService(new DAL.Data.BudgetBaeContext());
-                    await userService.RegisterUserAsync(emailInput, nameInput, createPasswordInput);
+                    //var userService = new UserService(new DAL.Data.BudgetBaeContext());
+                    //await userService.RegisterUserAsync(emailInput, nameInput, createPasswordInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)

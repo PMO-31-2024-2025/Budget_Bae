@@ -1,21 +1,43 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DAL.Models;
-
-public partial class Expense
+namespace DAL.Models
 {
-    public int Id { get; set; }
+    [Table("expenses")]
+    public class Expense
+    {
+        [Column("id")]
+        [Key]
+        public int Id { get; set; }
+        [Column("category_id")]
+        public int CategoryId { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        [Column("expense_date")]
+        public string ExpenseDate { get; set; }
+        [Column("expense_sum")]
+        public double ExpenseSum { get; set; }
+        [Column("account_id")]
+        public int AccountId { get; set; }
+        [ForeignKey(nameof(AccountId))]
 
-    public int CategoryId { get; set; }
+        DbSet<ExpenseCategory> ExpensesCategories { get; set; }
+        DbSet<Account> Accounts { get; set; }
 
-    public string ExpenseDate { get; set; } = null!;
-
-    public double? ExpenseSum { get; set; }
-
-    public int? AccountId { get; set; }
-
-    public virtual Account? Account { get; set; }
-
-    public virtual ExpensesCategory Category { get; set; } = null!;
+    }
 }
+
+//CREATE TABLE expenses (
+//	id INTEGER PRIMARY KEY AUTOINCREMENT,
+//    category_id INTEGER NOT NULL,
+//    expense_date TEXT NOT NULL,
+//    expense_sum REAL,
+//    account_id INTEGER,
+//    FOREIGN KEY (account_id) REFERENCES accounts(id),
+//    FOREIGN KEY (category_id) REFERENCES expenses_categories(id)
+//);
