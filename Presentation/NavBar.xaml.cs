@@ -32,13 +32,15 @@ namespace Presentation
             ((MainWindow)Window.GetWindow(this)).MainFrame.Navigate(new MainPage());
 
         }
-
-        private void nbAnalyticsButton_Click(object sender, RoutedEventArgs e)
+        public void OpenAnalitics()
         {
             nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
             nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
             ((MainWindow)Window.GetWindow(this)).MainFrame.Navigate(new AnalyticsPage());
-
+        }
+        private void nbAnalyticsButton_Click(object sender, RoutedEventArgs e)
+        {
+           OpenAnalitics();
         }
 
         private void nbExitButton_Click(object sender, RoutedEventArgs e)

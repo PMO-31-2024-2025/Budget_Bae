@@ -10,7 +10,26 @@
       Title="MainPage"
       Background="#FFFAF0">
 
-    <Grid>
+    <Page.Resources>
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="#FFFAF0"/>
+            <Setter Property="FontFamily" Value="{StaticResource CustomFont}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#9B70C2"/>
+        </Style>
+        <ContextMenu x:Key="ContextMenu">
+            <MenuItem x:Name="AddCategory" Header="Додати категорію" Click="AddCategory_Click"/>
+            <MenuItem x:Name="AddAccount" Header="Додати рахунок" Click="AddAccount_Click_1"/>
+            <MenuItem x:Name="AddExpense" Header="Додати витрату" Click="AddExpense_Click"/>
+            <MenuItem x:Name="AddIncome" Header="Додати дохід" Click="AddIncome_Click_1"/>
+            <MenuItem x:Name="Savings" Header="Заощадження" Click="Savings_Click"/>
+            <MenuItem x:Name="Payment" Header="Заплановані платежі" Click="Payment_Click"/>
+            <MenuItem x:Name="ViewHistory" Header="Переглянути історію" Click="ViewHistory_Click"/>
+        </ContextMenu>
+    </Page.Resources>
+
+    <Grid MouseRightButtonDown="Grid_MouseRightButtonDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

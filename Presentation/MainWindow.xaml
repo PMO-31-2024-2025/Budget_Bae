@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="BudgetBae" Height="450" Width="800">
     <DockPanel>
-        <local:NavBar DockPanel.Dock="Top" />
+        <local:NavBar x:Name="NavBar" DockPanel.Dock="Top" />
 
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" 
                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
