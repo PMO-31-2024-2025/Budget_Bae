@@ -76,13 +76,14 @@ namespace Presentation
             window.ShowDialog();
         }
 
-        private void Grid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void Grid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ContextMenu cm = (ContextMenu)this.Resources["ContextMenu"];
-            if (cm != null)
+            if (sender is Grid grid && grid.ContextMenu != null)
             {
-                cm.PlacementTarget = sender as FrameworkElement;
-                cm.IsOpen = true;
+                // Переконаємось, що контекстне меню прив’язане до Grid і відкрити його на місці кліку
+                grid.ContextMenu.PlacementTarget = grid;
+                grid.ContextMenu.IsOpen = true;
+                e.Handled = true; // Зупиняємо подальшу обробку події
             }
         }
 
