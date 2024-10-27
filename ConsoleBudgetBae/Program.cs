@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using BusinessLogic.Session;
+using DAL;
 using DAL.Data;
 using DAL.Models;
 using System;
@@ -69,14 +70,15 @@ namespace ConsoleLevel
             //DbHelper.db.SaveChanges();
 
 
-            int accountCount = DbHelper.db.Accounts.Count();
-            Console.WriteLine($"Accounts: {accountCount}");
-            int expenseCount = DbHelper.db.Expenses.Count();
-            Console.WriteLine($"Expenses: {expenseCount}");
-            int savingCount = DbHelper.db.Savings.Count();
-            Console.WriteLine($"Savings: {savingCount}");
-            int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
-            Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
+            //int accountCount = DbHelper.db.Accounts.Count();
+            //Console.WriteLine($"Accounts: {accountCount}");
+            //int expenseCount = DbHelper.db.Expenses.Count();
+            //Console.WriteLine($"Expenses: {expenseCount}");
+            //int savingCount = DbHelper.db.Savings.Count();
+            //Console.WriteLine($"Savings: {savingCount}");
+            //int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
+            //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
+
 
         }
     }

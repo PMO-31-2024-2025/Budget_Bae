@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using DAL.Models;
+using DAL.Data;
+using BusinessLogic.Session;
 
 namespace Presentation
 {
@@ -31,6 +33,8 @@ namespace Presentation
         public MainPage()
         {
             InitializeComponent();
+
+            DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

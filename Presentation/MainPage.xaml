@@ -65,7 +65,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" HorizontalAlignment="Center" Margin="0,4,0,4"/>
+                        <TextBlock x:Name="UserExpenses" FontSize="20" Foreground="#695D74" HorizontalAlignment="Center" Margin="0,4,0,4"/>
                         <TextBlock Margin="1.5,0,0,0" Text="UAH" FontSize="15" Height="24.5" FontWeight="Bold" Foreground="#695D74" 
                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"/>
                     </Grid>
@@ -105,6 +105,7 @@
                 <Border.Effect>
                     <DropShadowEffect Direction="310" Color="#D5CBBA" BlurRadius="20" ShadowDepth="8"/>
                 </Border.Effect>
+                
             </Border>
         </Grid>
 

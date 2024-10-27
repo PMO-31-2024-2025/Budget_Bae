@@ -27,6 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="PieChart" Version="1.0.1" />
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
   </ItemGroup>
 
