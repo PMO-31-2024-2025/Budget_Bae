@@ -21,6 +21,9 @@ using DAL.Data;
 using BusinessLogic.Session;
 using System.Drawing;
 using System.Diagnostics;
+using WebAssemblyMan;
+using BusinessLogic.Services;
+using LiveCharts.Definitions.Charts;
 
 namespace Presentation
 {
@@ -32,21 +35,13 @@ namespace Presentation
         public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
         public ObservableCollection<string> savings = new ObservableCollection<string> { "Кокальока обсешн", "На церкву", "Lip tint Rhode" };
 
+        private PlannedExpenseService plannedExpenseService;
+
         public MainPage()
         {
             InitializeComponent();
-            var accountIds = DbHelper.db.Accounts
-                .Where(a => a.UserId == SessionManager.CurrentUserId)
-                .Select(a => a.Id)
-                .ToList();
-
-            var expenses = DbHelper.db.Expenses
-                .Where(e => accountIds.Contains(e.AccountId))
-                .Sum(e => e.ExpenseSum);
-           
-            UserExpenses.Text = expenses.ToString();
-
-            //UpdatePieChart();
+            plannedExpenseService = new PlannedExpenseService();
+            UpdatePieChart();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -155,13 +150,7 @@ namespace Presentation
             }
         }
 
-        //private double GetPaymentsAmount()
-        //{
-        //    return DbHelper.db.PlannedExpenses
-        //        .Where(p => p.UserId == SessionManager.CurrentUserId)
-        //        .Sum(p => p.PlannedSum);
-
-        //}
+        
 
         //private double GetPreviousIncome()
         //{
@@ -186,60 +175,63 @@ namespace Presentation
         //    return 0.0;
         //}
 
-        //private void UpdatePieChart()
-        //{
-        //    var pieSeriesCollection = new SeriesCollection();
-        //    var legendItems = new List<dynamic>();
+        public void UpdatePieChart()
+        {
+            var pieSeriesCollection = new SeriesCollection();
+            var legendItems = new List<dynamic>();
 
-        //    pieChart.Series.Add(new PieSeries
-        //    {
-        //        Title = "дохід за минулий місяць",
-        //        Values = new ChartValues<double> { GetPreviousIncome() },
-        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-        //    pieChart.Series.Add(new PieSeries
-        //    {
-        //        Title = "витрати цього місяця",
-        //        Values = new ChartValues<double> { GetPreviousIncome() },
-        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-        //    pieChart.Series.Add(new PieSeries
-        //    {
-        //        Title = "заплановані витрати",
-        //        Values = new ChartValues<double> { GetPaymentsAmount() },
-        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-        //    pieChart.Series.Add(new PieSeries
-        //    {
-        //        Title = "в заощадження",
-        //        Values = new ChartValues<double> { GetSavingsAmount() },
-        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
+            var seriesData = new[]
+            {
+                new { Title = "витрати цього місяця", Value = 0.0, Color = "#9B70C2" },
+                new { Title = "заплановані витрати", Value = plannedExpenseService.GetPaymentsAmount(), Color = "#999B70C2" },
+                new { Title = "в заощадження", Value = 0.0, Color = "#DAB6FC" },
+                new { Title = "залишок доходу за минулий місяць", Value = 0.0, Color = "#99DAB6FC" }
+            };
 
-        //    legendItems.Add(new
-        //        {
-        //        Title = "дохід за минулий місяць",
-        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-            
-        //    legendItems.Add(new
-        //        {
-        //        Title = "витрати цього місяця",
-        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-        //    legendItems.Add(new
-        //    {
-        //        Title = "заплановані витрати",
-        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-        //    legendItems.Add(new
-        //    {
-        //        Title = "в заощадження",
-        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
-        //    });
-        //}
+            bool hasData = seriesData.Any(item => item.Value > 0);
+
+            if (!hasData)
+            {
+                var defaultPieSeries = new PieSeries
+                {
+                    Title = "Немає даних",
+                    Values = new ChartValues<double> { 1 },
+                    Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#99DAB6FC"))
+                };
+
+                pieSeriesCollection.Add(defaultPieSeries);
+                legendItems.Add(new
+                {
+                    Title = "Немає даних",
+                    Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#99DAB6FC"))
+                });
+            }
+            else
+            {
+                for (int i = 0; i < seriesData.Length; i++)
+                {
+                    var item = seriesData[i];
+
+                    var pieSeries = new PieSeries
+                    {
+                        Title = item.Title,
+                        Values = new ChartValues<double> { item.Value },
+                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(item.Color))
+                    };
+
+                    pieSeriesCollection.Add(pieSeries);
+                    legendItems.Add(new
+                    {
+                        Title = item.Title,
+                        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom(item.Color))
+                    });
+                }
+            }
+            MainPieChart.Series = pieSeriesCollection;
+            MainLegend.ItemsSource = legendItems;
+        }
     }
 
- 
+
 }
 

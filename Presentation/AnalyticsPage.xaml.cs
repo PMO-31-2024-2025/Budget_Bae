@@ -64,23 +64,42 @@ namespace Presentation
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#AECCE9")),
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#BDD5ED"))
             };
-            for (int i = 0; i < categories.Count; i++)
-            {
-                var category = categories[i];
-                var color = colors[i % colors.Count];
 
+            if (categories.Count == 0)
+            {
                 pieSeriesCollection.Add(new PieSeries
                 {
-                    Title = category.Name,
-                    Values = new ChartValues<double> { expenseService.GetTotalExpensesByCategoryId(category.Id) },
-                    Fill = color
+                    Title = "Немає даних",
+                    Values = new ChartValues<double> { 1 }, 
+                    Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#BDD5ED"))
                 });
 
                 legendItems.Add(new
                 {
-                    Title = category.Name,
-                    Color = color
+                    Title = "Немає даних",
+                    Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#BDD5ED"))
                 });
+            }
+            else
+            {
+                for (int i = 0; i < categories.Count; i++)
+                {
+                    var category = categories[i];
+                    var color = colors[i % colors.Count];
+
+                    pieSeriesCollection.Add(new PieSeries
+                    {
+                        Title = category.Name,
+                        Values = new ChartValues<double> { expenseService.GetTotalExpensesByCategoryId(category.Id) },
+                        Fill = color
+                    });
+
+                    legendItems.Add(new
+                    {
+                        Title = category.Name,
+                        Color = color
+                    });
+                }
             }
 
             AnalyticsPieChart.Series = pieSeriesCollection;
