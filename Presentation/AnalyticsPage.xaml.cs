@@ -18,6 +18,7 @@ using BusinessLogic.Session;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Definitions.Series;
+using BusinessLogic.Services;
 
 namespace Presentation
 {
@@ -26,9 +27,14 @@ namespace Presentation
     /// </summary>
     public partial class AnalyticsPage : Page
     {
+        private ExpenseService expenseService;
+        private ExpenseCategoryService expenseCategoryService;
+
         public AnalyticsPage()
         {
             InitializeComponent();
+            expenseService = new ExpenseService();
+            expenseCategoryService = new ExpenseCategoryService();
             UpdatePieChart();
         }
 
@@ -40,7 +46,7 @@ namespace Presentation
 
         private void UpdatePieChart()
         {
-            var categories = GetCategories();
+            var categories = expenseCategoryService.GetCategories();
             var pieSeriesCollection = new SeriesCollection();
             var legendItems = new List<dynamic>();
 
@@ -49,8 +55,8 @@ namespace Presentation
             {
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C")),
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#3C6890")),
-                (SolidColorBrush)(new BrushConverter().ConvertFrom("#4A82B4")),
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#3274B6")),
+                (SolidColorBrush)(new BrushConverter().ConvertFrom("#4A82B4")),
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#5995D2")),
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#8DB6E0")),
                 (SolidColorBrush)(new BrushConverter().ConvertFrom("#6E9BC3")),
@@ -66,7 +72,7 @@ namespace Presentation
                 pieSeriesCollection.Add(new PieSeries
                 {
                     Title = category.Name,
-                    Values = new ChartValues<double> { GetTotalExpensesByCategoryId(category.Id) },
+                    Values = new ChartValues<double> { expenseService.GetTotalExpensesByCategoryId(category.Id) },
                     Fill = color
                 });
 
@@ -77,38 +83,8 @@ namespace Presentation
                 });
             }
 
-            pieChart.Series = pieSeriesCollection;
-            legend.ItemsSource = legendItems;
-        }
-
-        private List<Expense> GetExpensesByUserId(int userId)
-        {
-            var accountIds = DbHelper.db.Accounts
-                .Where(a => a.UserId == userId)
-                .Select(a => a.Id)
-                .ToList();
-
-            var expenses = DbHelper.db.Expenses
-                .Where(e => accountIds.Contains(e.AccountId))
-                .ToList();
-
-            return expenses;
-        }
-
-        private double GetTotalExpensesByCategoryId(int categoryId)
-        {
-            double totalAmount = DbHelper.db.Expenses
-                .Where(e => e.CategoryId == categoryId)
-                .Sum(e => e.ExpenseSum);
-
-            return totalAmount;
-        }
-
-        private List<ExpenseCategory> GetCategories()
-        {
-            return DbHelper.db.ExpensesCategories
-                    .Where(ec => ec.UserId == SessionManager.CurrentUserId) 
-                    .ToList();
+            AnalyticsPieChart.Series = pieSeriesCollection;
+            AnalyticsLegend.ItemsSource = legendItems;
         }
     }
 }

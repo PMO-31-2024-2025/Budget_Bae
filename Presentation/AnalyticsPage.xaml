@@ -30,17 +30,12 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <!-- Стовпець для графіка -->
                         <ColumnDefinition Width="200" />
-                        <!-- Стовпець для легенди -->
                     </Grid.ColumnDefinitions>
 
-                    <lvc:PieChart Name="pieChart" DataContext="{Binding}" Series="{Binding pieSeriesCollection}" InnerRadius="90"
-                  Margin="0, 20, 30, 20" Grid.Column="0">
-                        <!-- Серії будуть додані динамічно в коді -->
-                    </lvc:PieChart>
-
-                    <ItemsControl x:Name="legend" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1">
+                    <lvc:PieChart Name="AnalyticsPieChart" DataContext="{Binding}" Series="{Binding pieSeriesCollection}" InnerRadius="90"
+                  Margin="0, 20, 30, 20" Grid.Column="0"/>
+                    <ItemsControl x:Name="AnalyticsLegend" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="0,2">

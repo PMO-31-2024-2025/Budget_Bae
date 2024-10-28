@@ -46,7 +46,11 @@ namespace ConsoleLevel
 
 
             //DbHelper.db.Add(new Income() { Category = "Salary", IncomeDate = "2024-09-01", IncomeSum = 3000.00, AccountId = 1 });
-            //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-09-10", IncomeSum = 12000.50, AccountId = 1 });
+            ////DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-09-10", IncomeSum = 12000.50, AccountId = 1 });
+            //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-08-10", IncomeSum = 15000.50, AccountId = 1 });
+            //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-08-23", IncomeSum = 7000.00, AccountId = 1 });
+            //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-10-05", IncomeSum = 7000.00, AccountId = 1 });
+            //DbHelper.db.Add(new Income() { Category = "Salary", IncomeDate = "2024-10-23", IncomeSum = 20000.00, AccountId = 1 });
             //DbHelper.db.SaveChanges();
 
             //DbHelper.db.Add(new Saving()
@@ -78,8 +82,6 @@ namespace ConsoleLevel
             //Console.WriteLine($"Savings: {savingCount}");
             //int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
             //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
-
-
         }
     }
 }

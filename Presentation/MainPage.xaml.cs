@@ -19,6 +19,8 @@ using System.Data.SqlClient;
 using DAL.Models;
 using DAL.Data;
 using BusinessLogic.Session;
+using System.Drawing;
+using System.Diagnostics;
 
 namespace Presentation
 {
@@ -33,8 +35,18 @@ namespace Presentation
         public MainPage()
         {
             InitializeComponent();
+            var accountIds = DbHelper.db.Accounts
+                .Where(a => a.UserId == SessionManager.CurrentUserId)
+                .Select(a => a.Id)
+                .ToList();
 
-            DataContext = this;
+            var expenses = DbHelper.db.Expenses
+                .Where(e => accountIds.Contains(e.AccountId))
+                .Sum(e => e.ExpenseSum);
+           
+            UserExpenses.Text = expenses.ToString();
+
+            //UpdatePieChart();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -84,10 +96,9 @@ namespace Presentation
         {
             if (sender is Grid grid && grid.ContextMenu != null)
             {
-                // Переконаємось, що контекстне меню прив’язане до Grid і відкрити його на місці кліку
                 grid.ContextMenu.PlacementTarget = grid;
                 grid.ContextMenu.IsOpen = true;
-                e.Handled = true; // Зупиняємо подальшу обробку події
+                e.Handled = true;
             }
         }
 
@@ -144,7 +155,91 @@ namespace Presentation
             }
         }
 
-        
+        //private double GetPaymentsAmount()
+        //{
+        //    return DbHelper.db.PlannedExpenses
+        //        .Where(p => p.UserId == SessionManager.CurrentUserId)
+        //        .Sum(p => p.PlannedSum);
+
+        //}
+
+        //private double GetPreviousIncome()
+        //{
+        //    int month = DateTime.Now.Month;
+        //    var accountIds = DbHelper.db.Accounts
+        //       .Where(a => a.UserId == SessionManager.CurrentUserId)
+        //       .Select(a => a.Id)
+        //       .ToList();
+
+        //    //double prevIncome = DbHelper.db.Incomes
+        //    //    .Where(pi => accountIds.Contains(pi.AccountId)
+        //    //    .Select(pi => pi.IncomeDate == DbMonth);
+
+        //    return 0.0;
+        //}
+
+        //private double GetSavingsAmount()
+        //{
+        //    //double savongsAmount = DbHelper.db.Savings
+        //    //    .Where(s => s.UserId == SessionManager.CurrentUserId)
+        //    //    .Sum(s => s.)
+        //    return 0.0;
+        //}
+
+        //private void UpdatePieChart()
+        //{
+        //    var pieSeriesCollection = new SeriesCollection();
+        //    var legendItems = new List<dynamic>();
+
+        //    pieChart.Series.Add(new PieSeries
+        //    {
+        //        Title = "дохід за минулий місяць",
+        //        Values = new ChartValues<double> { GetPreviousIncome() },
+        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+        //    pieChart.Series.Add(new PieSeries
+        //    {
+        //        Title = "витрати цього місяця",
+        //        Values = new ChartValues<double> { GetPreviousIncome() },
+        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+        //    pieChart.Series.Add(new PieSeries
+        //    {
+        //        Title = "заплановані витрати",
+        //        Values = new ChartValues<double> { GetPaymentsAmount() },
+        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+        //    pieChart.Series.Add(new PieSeries
+        //    {
+        //        Title = "в заощадження",
+        //        Values = new ChartValues<double> { GetSavingsAmount() },
+        //        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+
+        //    legendItems.Add(new
+        //        {
+        //        Title = "дохід за минулий місяць",
+        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+            
+        //    legendItems.Add(new
+        //        {
+        //        Title = "витрати цього місяця",
+        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+        //    legendItems.Add(new
+        //    {
+        //        Title = "заплановані витрати",
+        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+        //    legendItems.Add(new
+        //    {
+        //        Title = "в заощадження",
+        //        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#2D4E6C"))
+        //    });
+        //}
     }
+
+ 
 }
 
