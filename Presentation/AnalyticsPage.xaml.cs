@@ -27,15 +27,11 @@ namespace Presentation
     /// </summary>
     public partial class AnalyticsPage : Page
     {
-        private ExpenseService expenseService;
-        private ExpenseCategoryService expenseCategoryService;
-
         public AnalyticsPage()
         {
             InitializeComponent();
-            expenseService = new ExpenseService();
-            expenseCategoryService = new ExpenseCategoryService();
             UpdatePieChart();
+            UpdateBarChart();
         }
 
         private void More_Click(object sender, RoutedEventArgs e)
@@ -46,7 +42,7 @@ namespace Presentation
 
         private void UpdatePieChart()
         {
-            var categories = expenseCategoryService.GetCategories();
+            var categories = ExpenseCategoryService.GetCategories();
             var pieSeriesCollection = new SeriesCollection();
             var legendItems = new List<dynamic>();
 
@@ -90,7 +86,7 @@ namespace Presentation
                     pieSeriesCollection.Add(new PieSeries
                     {
                         Title = category.Name,
-                        Values = new ChartValues<double> { expenseService.GetTotalExpensesByCategoryId(category.Id) },
+                        Values = new ChartValues<double> { ExpenseService.GetTotalExpensesByCategoryId(category.Id) },
                         Fill = color
                     });
 
@@ -105,5 +101,79 @@ namespace Presentation
             AnalyticsPieChart.Series = pieSeriesCollection;
             AnalyticsLegend.ItemsSource = legendItems;
         }
+
+        public void UpdateBarChart()
+        {
+            double incomeTwoMonthsAgo = IncomeService.PrevPrevIncome();
+            double expenseTwoMonthsAgo = ExpenseService.PrevPrevExpense();
+
+            double incomePreviousMonth = IncomeService.PrevIncome();
+            double expensePreviousMonth = ExpenseService.PrevExpense();
+
+            double incomeCurrentMonth = IncomeService.CurrentIncome();
+            double expenseCurrentMonth = ExpenseService.CurrentExpense();
+
+            var currentDate = DateTime.Now;
+
+            var monthLabels = new List<string>
+            {
+                currentDate.AddMonths(-2).ToString("MMM"),
+                currentDate.AddMonths(-1).ToString("MMM"),
+                currentDate.ToString("MMM")             
+            };
+
+            bool hasData = expenseTwoMonthsAgo > 0 || expensePreviousMonth > 0 || expenseCurrentMonth > 0 ||
+                   incomeTwoMonthsAgo > 0 || incomePreviousMonth > 0 || incomeCurrentMonth > 0;
+
+            if (!hasData)
+            {
+                // Порожній графік у разі відсутності даних
+                AnalyticsBarChart.Series = new SeriesCollection
+                {
+                    new ColumnSeries
+                    {
+                        Title = "Немає даних",
+                        Values = new ChartValues<double> { 0 },
+                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E0E0E0"))
+                    }
+                };
+
+                // Порожні підписи для осі X
+                AnalyticsBarChart.AxisX.Clear();
+                AnalyticsBarChart.AxisX.Add(new Axis
+                {
+                    Labels = new List<string> { "" }
+                });
+
+                // Прибираємо підписи осі Y
+                AnalyticsBarChart.AxisY[0].LabelFormatter = value => "";
+            }
+            else
+            {
+                var seriesCollection = new SeriesCollection
+                {
+                    new ColumnSeries
+                    {
+                        Title = "Витрати",
+                        Values = new ChartValues<double> { expenseTwoMonthsAgo, expensePreviousMonth, expenseCurrentMonth },
+                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#CCDAB6FC"))
+                    },
+                    new ColumnSeries
+                    {
+                        Title = "Доходи",
+                        Values = new ChartValues<double> { incomeTwoMonthsAgo, incomePreviousMonth, incomeCurrentMonth },
+                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#CC9B70C2"))
+                    }
+                };
+                AnalyticsBarChart.Series = seriesCollection;
+                AnalyticsBarChart.AxisX.Clear();
+                AnalyticsBarChart.AxisX.Add(new Axis
+                {
+                    Labels = monthLabels
+                });
+                AnalyticsBarChart.AxisY[0].LabelFormatter = value => value.ToString("C");
+            }
+        }
+
     }
 }

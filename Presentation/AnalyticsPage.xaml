@@ -50,7 +50,16 @@
 
             </Border>
             <Label Grid.Row="2" Content="Звіт доходів та витрат за останні місяці" FontSize="30" HorizontalAlignment="Center" Margin="10"/>
-
+            <Grid Grid.Row="3">
+                <lvc:CartesianChart x:Name="AnalyticsBarChart" LegendLocation="Top" Height="250" Margin="50, 20, 30, 10">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis />
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis />
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Grid>
         </Grid>
 
         <Grid Grid.Column="1">

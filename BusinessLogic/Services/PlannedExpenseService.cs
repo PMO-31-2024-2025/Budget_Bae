@@ -10,7 +10,7 @@ namespace BusinessLogic.Services
 {
     public class PlannedExpenseService
     {
-        public double GetPaymentsAmount()
+        public static double GetPaymentsAmount()
         {
             return DbHelper.db.PlannedExpenses
                 .Where(p => p.UserId == SessionManager.CurrentUserId)

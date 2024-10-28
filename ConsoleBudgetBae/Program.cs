@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Session;
+﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
 using DAL;
 using DAL.Data;
 using DAL.Models;
@@ -82,6 +83,13 @@ namespace ConsoleLevel
             //Console.WriteLine($"Savings: {savingCount}");
             //int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
             //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
+        //    Console.WriteLine($"Current {IncomeService.CurrentIncome()}");
+        //    Console.WriteLine($"Prev {IncomeService.PrevIncome()}");
+        //    Console.WriteLine($"Prev prev {IncomeService.PrevPrevIncome()}");
+
+        //    Console.WriteLine($"Current {ExpenseService.CurrentExpense()}");
+        //    Console.WriteLine($"Prev {ExpenseService.PrevExpense()}");
+        //    Console.WriteLine($"Prev prev {ExpenseService.PrevPrevExpense()}");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace BusinessLogic.Services
 {
     public class ExpenseCategoryService
     {
-        public List<ExpenseCategory> GetCategories()
+        public static List<ExpenseCategory> GetCategories()
         {
             return DbHelper.db.ExpensesCategories
                     .Where(ec => ec.UserId == SessionManager.CurrentUserId)

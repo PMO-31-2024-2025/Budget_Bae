@@ -183,7 +183,7 @@ namespace Presentation
             var seriesData = new[]
             {
                 new { Title = "витрати цього місяця", Value = 0.0, Color = "#9B70C2" },
-                new { Title = "заплановані витрати", Value = plannedExpenseService.GetPaymentsAmount(), Color = "#999B70C2" },
+                new { Title = "заплановані витрати", Value = PlannedExpenseService.GetPaymentsAmount(), Color = "#999B70C2" },
                 new { Title = "в заощадження", Value = 0.0, Color = "#DAB6FC" },
                 new { Title = "залишок доходу за минулий місяць", Value = 0.0, Color = "#99DAB6FC" }
             };
