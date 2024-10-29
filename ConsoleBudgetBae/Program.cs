@@ -83,13 +83,44 @@ namespace ConsoleLevel
             //Console.WriteLine($"Savings: {savingCount}");
             //int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
             //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
-        //    Console.WriteLine($"Current {IncomeService.CurrentIncome()}");
-        //    Console.WriteLine($"Prev {IncomeService.PrevIncome()}");
-        //    Console.WriteLine($"Prev prev {IncomeService.PrevPrevIncome()}");
 
-        //    Console.WriteLine($"Current {ExpenseService.CurrentExpense()}");
-        //    Console.WriteLine($"Prev {ExpenseService.PrevExpense()}");
-        //    Console.WriteLine($"Prev prev {ExpenseService.PrevPrevExpense()}");
+            //List<Account> accounts = DbHelper.db.Accounts
+            //    .Where(a => a.UserId == 21)
+            //    .ToList();
+
+            //for (int i = 0; i < accounts.Count; i++)
+            //{
+            //    Console.WriteLine(accounts[i].Name);
+            //    Console.WriteLine(accounts[i].Balance);
+            //}
+
+            //List<int> ids = DbHelper.db.Accounts
+            //    .Where(a => a.UserId == 21)
+            //    .Select(a => a.Id)
+            //    .ToList();
+
+            //for (int i = 0; i < ids.Count; i++)
+            //{
+            //    Console.WriteLine(ids[i]);
+            //}
+
+            try
+            {
+                List<Account> accounts = DbHelper.db.Accounts
+                    .Where(a => a.UserId == 21)
+                    .ToList();
+
+                foreach (var account in accounts)
+                {
+                    Console.WriteLine($"ID: {account.Id}, Name: {account.Name}, Balance: {account.Balance}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+            }
+
         }
     }
 }

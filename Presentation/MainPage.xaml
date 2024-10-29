@@ -152,14 +152,14 @@
                     <StackPanel Orientation="Vertical">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 10">
                             <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
-                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                <TextBlock x:Name="a1" TextAlignment="Center" LineHeight="40">
                                     Готівка
                                     <LineBreak/>
                                     10000 UAH
                                 </TextBlock>
                             </Button>
                             <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Click="AddIncome_Click">
-                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                <TextBlock x:Name="a2" TextAlignment="Center" LineHeight="40">
                                     Карта 1
                                     <LineBreak/>
                                     20000 UAH
@@ -168,13 +168,13 @@
                         </Grid>
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 20">
                             <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
-                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                <TextBlock x:Name="a3" TextAlignment="Center" LineHeight="40">
                                     Карта 2
                                     <LineBreak/>
                                     50000 UAH
                                 </TextBlock>
                             </Button>
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Content="+" FontSize="70" Click="AddAccount_Click"/>
+                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Content="БІЛЬШЕ" FontSize="30" Click="OpenAccounts_Click"/>
                         </Grid>
                     </StackPanel>
                 </Border>

@@ -171,5 +171,10 @@ namespace Presentation
             }
         }
 
+        private void UpdateHistory()
+        {
+
+           // HistoryElements.Children.Insert(0, newElement);
+        }
     }
 }

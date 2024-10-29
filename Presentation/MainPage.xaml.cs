@@ -32,9 +32,6 @@ namespace Presentation
     /// </summary>
     public partial class MainPage : Page
     {
-        public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
-        public ObservableCollection<string> savings = new ObservableCollection<string> { "Кокальока обсешн", "На церкву", "Lip tint Rhode" };
-
         public MainPage()
         {
             InitializeComponent();
@@ -42,7 +39,12 @@ namespace Presentation
             if(SessionManager.CurrentUserId != null)
             {
                 UserExpenses.Text = $"{ExpenseService.CurrentExpense().ToString()} UAH";
-
+            }
+            else
+            {
+                a1.Visibility = Visibility.Collapsed;
+                a2.Visibility = Visibility.Collapsed;
+                a3.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -71,9 +73,9 @@ namespace Presentation
             window.ShowDialog();
         }
 
-        private void AddAccount_Click(object sender, RoutedEventArgs e)
+        private void OpenAccounts_Click(object sender, RoutedEventArgs e)
         {
-            AddAccountWindow window = new AddAccountWindow();
+            AccountsWindow window = new AccountsWindow();
             window.ShowDialog();
         }
 

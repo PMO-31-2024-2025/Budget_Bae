@@ -107,7 +107,7 @@ namespace Presentation
                 RotateTransform rotateTransform = new RotateTransform(аngle);
                 CategoryExpanderButton.RenderTransform = rotateTransform;
                 CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                categoriesWindow = new SettingsCategoriesWindow(categories);
+                categoriesWindow = new SettingsCategoriesWindow();
                 categoriesWindow.Owner = this;
                 categoriesWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 var screenWidth = SystemParameters.PrimaryScreenWidth;

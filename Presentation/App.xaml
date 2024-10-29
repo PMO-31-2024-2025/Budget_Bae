@@ -295,5 +295,16 @@
             <Setter Property="Foreground" Value="#CC000000"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-    </Application.Resources>
+        
+        <Style TargetType="Border" x:Key="HistoryElement">
+            <Setter Property="Background" Value="#CCDAB6FC"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Margin" Value="20, 10, 20, 10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="#9B70C2" BlurRadius="10" ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        </Application.Resources>
 </Application>

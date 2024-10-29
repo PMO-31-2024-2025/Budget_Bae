@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,13 @@ namespace BusinessLogic.Services
             return DbHelper.db.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .Select(a => a.Id)
+                .ToList();
+        }
+
+        public static List<Account> GetUsersAccounts()
+        {
+            return DbHelper.db.Accounts
+                .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
     }
