@@ -127,7 +127,6 @@ namespace Presentation
 
             if (!hasData)
             {
-                // Порожній графік у разі відсутності даних
                 AnalyticsBarChart.Series = new SeriesCollection
                 {
                     new ColumnSeries
@@ -137,15 +136,12 @@ namespace Presentation
                         Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E0E0E0"))
                     }
                 };
-
-                // Порожні підписи для осі X
                 AnalyticsBarChart.AxisX.Clear();
                 AnalyticsBarChart.AxisX.Add(new Axis
                 {
                     Labels = new List<string> { "" }
                 });
 
-                // Прибираємо підписи осі Y
                 AnalyticsBarChart.AxisY[0].LabelFormatter = value => "";
             }
             else

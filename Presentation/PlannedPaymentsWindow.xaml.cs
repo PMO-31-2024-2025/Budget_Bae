@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
+using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,17 +23,21 @@ namespace Presentation
     /// </summary>
     public partial class PlannedPaymentsWindow : Window
     {
-        public ObservableCollection<string> PlannedPayments { get; set; }
+        public List<PlannedExpense> PlannedPayments { get; set; }
 
         public PlannedPaymentsWindow()
         {
             InitializeComponent();
-        }
-        public PlannedPaymentsWindow(ObservableCollection<string> plannedPayments)
-        {
-            InitializeComponent();
-            PlannedPayments = plannedPayments;
+            if (SessionManager.CurrentUserId != null)
+            {
+                PlannedPayments = PlannedExpenseService.GetPlannedExpenses();
+            }
+            else
+            {
+                PlannedPayments = [];
+            }
             UpdatePaymentsGrid();
+
         }
 
         private void UpdatePaymentsGrid()
@@ -61,13 +68,13 @@ namespace Presentation
                     Width = 225,
                     Content = new TextBlock
                     {
-                        Text = PlannedPayments[i],
+                        Text = PlannedPayments[i].Name,
                         TextWrapping = TextWrapping.Wrap
                     },
                     FontSize = 18,
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Center,
-
+                    Margin = new Thickness(10, 0, 0, 0)
                 };
                 Grid.SetRow(name, 0);
                 Grid.SetColumn(name, 0);
@@ -94,7 +101,7 @@ namespace Presentation
                 {
                     Content = new TextBlock
                     {
-                        Text = "Внесок 20 числа\n1000 UAH",
+                        Text = $"Внесок !!! числа\n{PlannedPayments[i].PlannedSum} UAH",
                         TextAlignment = TextAlignment.Right
                     },
                     VerticalAlignment = VerticalAlignment.Bottom,

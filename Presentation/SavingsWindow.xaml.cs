@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using DAL.Models;
+using BusinessLogic.Services;
+using BusinessLogic.Session;
 
 namespace Presentation
 {
@@ -21,17 +24,20 @@ namespace Presentation
     /// </summary>
     public partial class SavingsWindow : Window
     {
-        public ObservableCollection<string> Savings { get; set; }
+        public List<Saving> Savings { get; set; }
 
         public SavingsWindow()
         {
             InitializeComponent();
-        }
+            if (SessionManager.CurrentUserId != null)
+            {
+                Savings = SavingService.GetSavings();
+            }
+            else
+            {
+                Savings = [];
+            }
 
-        public SavingsWindow(ObservableCollection<string> savings)
-        {
-            InitializeComponent();
-            Savings = savings;
             UpdateSavingsGrid();
         }
 
@@ -64,7 +70,7 @@ namespace Presentation
                 };
                 Label goal = new Label()
                 {
-                    Content = Savings[i],
+                    Content = Savings[i].TargetName,
                     HorizontalAlignment = HorizontalAlignment.Left,
                     Margin = new Thickness(5, 5, 10, 5)
                 };
@@ -73,7 +79,7 @@ namespace Presentation
                 savings.Children.Add(goal);
                 Label amount = new Label()
                 {
-                    Content = "5000 UAH",
+                    Content = $"{Savings[i].TargetSum} UAH",
                     HorizontalAlignment = HorizontalAlignment.Right,
                     FontSize = 12,
                     Margin = new Thickness(5)

@@ -70,7 +70,7 @@ namespace Presentation
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow.MainFrame != null)
             {
-                PlannedPaymentsWindow window = new PlannedPaymentsWindow(plannedPayments);
+                PlannedPaymentsWindow window = new PlannedPaymentsWindow();
                 window.ShowDialog();
             }
             

@@ -35,13 +35,15 @@ namespace Presentation
         public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
         public ObservableCollection<string> savings = new ObservableCollection<string> { "Кокальока обсешн", "На церкву", "Lip tint Rhode" };
 
-        private PlannedExpenseService plannedExpenseService;
-
         public MainPage()
         {
             InitializeComponent();
-            plannedExpenseService = new PlannedExpenseService();
             UpdatePieChart();
+            if(SessionManager.CurrentUserId != null)
+            {
+                UserExpenses.Text = $"{ExpenseService.CurrentExpense().ToString()} UAH";
+
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -77,13 +79,13 @@ namespace Presentation
 
         private void SavingsButton_Click(object sender, RoutedEventArgs e)
         {
-            SavingsWindow window = new SavingsWindow(savings);
+            SavingsWindow window = new SavingsWindow();
             window.ShowDialog();
         }
 
         private void PlannedPaymentsButton_Click(object sender, RoutedEventArgs e)
         {
-            PlannedPaymentsWindow window = new PlannedPaymentsWindow(plannedPayments);
+            PlannedPaymentsWindow window = new PlannedPaymentsWindow();
             window.ShowDialog();
         }
 
@@ -123,13 +125,13 @@ namespace Presentation
 
         private void Savings_Click(object sender, RoutedEventArgs e)
         {
-            SavingsWindow savingsWindow = new SavingsWindow(savings);  
+            SavingsWindow savingsWindow = new SavingsWindow();  
             savingsWindow.ShowDialog();
         }
 
         private void Payment_Click(object sender, RoutedEventArgs e)
         {
-            PlannedPaymentsWindow plannedPaymentsWindow = new PlannedPaymentsWindow(plannedPayments);
+            PlannedPaymentsWindow plannedPaymentsWindow = new PlannedPaymentsWindow();
             plannedPaymentsWindow.ShowDialog();
         }
 

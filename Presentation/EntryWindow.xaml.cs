@@ -154,6 +154,7 @@ namespace Presentation
                         // HERE IS THE USERS ID!!!!!!!!!!!!!!!
                         SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
                         //settingsEntryEmailTextBox.Text = SessionManager.CurrentUserId.ToString();
+
                         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                         if (mainWindow != null && mainWindow.MainFrame != null)
                         {
@@ -162,6 +163,7 @@ namespace Presentation
                             navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
                             mainWindow.MainFrame.Navigate(new MainPage());
                         }
+
                         Close();
                     }
                 }
