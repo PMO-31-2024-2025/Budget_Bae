@@ -25,7 +25,7 @@ namespace Presentation
             InitializeComponent();
 
         }
-        private void nbMainButton_Click(object sender, RoutedEventArgs e)
+        public void nbMainButton_Click(object sender, RoutedEventArgs e)
         {
             nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
             nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));

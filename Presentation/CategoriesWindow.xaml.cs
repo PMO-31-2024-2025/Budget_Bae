@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
+using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,28 @@ namespace Presentation
     /// </summary>
     public partial class CategoriesWindow : Window
     {
+        private List<string> categories;
+
         public CategoriesWindow()
         {
             InitializeComponent();
+
+            categories = new List<string>();
+            if (SessionManager.CurrentUserId != null)
+            {
+                List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
+
+                foreach (var category in fetchedCategories)
+                {
+                    categories.Add(category.Name);
+                }
+            }
+            else
+            {
+                categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+            }
+
+            SetCategories();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -86,5 +108,41 @@ namespace Presentation
                 }
             }
         }
+
+        private void SetCategories()
+        {
+            StackPanel horizontalPanel = null;
+
+            for (int i = 0; i < categories.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    horizontalPanel = new StackPanel
+                    {
+                        Orientation = Orientation.Horizontal,
+                        Margin = new Thickness(25, i == 0 ? 5 : 10, 30, 0)
+                    };
+                    CategoriesPanel.Children.Add(horizontalPanel);
+                }
+
+                Button categoryButton = new Button
+                {
+                    Content = categories[i],
+                    Width = 150,
+                    Height = 40,
+                    FontSize = 16,
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
+                    Style = (Style)FindResource("CategoryButton"),
+                    Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
+                    HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
+                };
+
+                categoryButton.Click += AddExpense_Click;
+
+                horizontalPanel.Children.Add(categoryButton);
+            }
+        }
+        
     }
 }

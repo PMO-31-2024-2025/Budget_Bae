@@ -29,7 +29,7 @@
         </ContextMenu>
     </Page.Resources>
 
-    <Grid MouseRightButtonDown="Grid_MouseRightButtonDown">
+    <Grid Background="Transparent" PreviewMouseRightButtonDown="Grid_PreviewMouseRightButtonDown" ContextMenu="{StaticResource ContextMenu}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -65,9 +65,8 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="409.66" FontSize="20" Foreground="#695D74" HorizontalAlignment="Center" Margin="0,4,0,4"/>
-                        <TextBlock Margin="1.5,0,0,0" Text="UAH" FontSize="15" Height="24.5" FontWeight="Bold" Foreground="#695D74" 
-                           VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"/>
+                        <TextBlock x:Name="UserExpenses" FontFamily="{StaticResource CustomFont}" FontSize="20" Foreground="#B3000000" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,7,0,5"/>
+                        
                     </Grid>
                 </Grid>
             </Border>
@@ -87,15 +86,15 @@
                     </Border.Effect>-->
                     <StackPanel Orientation="Vertical">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 0">
-                            <Button Style="{StaticResource CategoryButton}" Content="ЇЖА" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
-                            <Button Style="{StaticResource CategoryButton}" Content="ОДЯГ" HorizontalAlignment="Right" Click="AddExpenseButton_Click"/>
+                            <Button x:Name="c1" Style="{StaticResource CategoryButton}" Content="ЇЖА" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
+                            <Button x:Name="c2" Style="{StaticResource CategoryButton}" Content="ОДЯГ" HorizontalAlignment="Right" Click="AddExpenseButton_Click"/>
                         </Grid>
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 0">
-                            <Button Style="{StaticResource CategoryButton}" Content="РОЗВАГИ" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
-                            <Button Style="{StaticResource CategoryButton}" Content="ТРАНСПОРТ" HorizontalAlignment="Right" Click="AddExpenseButton_Click"/>
+                            <Button x:Name="c3" Style="{StaticResource CategoryButton}" Content="РОЗВАГИ" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
+                            <Button x:Name="c4" Style="{StaticResource CategoryButton}" Content="ТРАНСПОРТ" HorizontalAlignment="Right" Click="AddExpenseButton_Click"/>
                         </Grid>
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 20">
-                            <Button Style="{StaticResource CategoryButton}" Content="ЗДОРОВ'Я" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
+                            <Button x:Name="c5" Style="{StaticResource CategoryButton}" Content="ЗДОРОВ'Я" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
                             <Button Style="{StaticResource CategoryButton}" Content="ІНШЕ" HorizontalAlignment="Right" Click="OpenCategories_Click"/>
                         </Grid>
                     </StackPanel>
@@ -105,6 +104,28 @@
                 <Border.Effect>
                     <DropShadowEffect Direction="310" Color="#D5CBBA" BlurRadius="20" ShadowDepth="8"/>
                 </Border.Effect>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+                    <lvc:PieChart Name="MainPieChart" DataContext="{Binding}" Series="{Binding pieSeriesCollection}" InnerRadius="75"
+                        Margin="50, 20, 30, 20" Grid.Column="0"/>
+                    <ItemsControl x:Name="MainLegend" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,7">
+                                    <Rectangle Width="15" Height="15" Fill="{Binding Color}" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Style="{StaticResource LegendTextStyle}"
+                           TextWrapping="Wrap" Width="250"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                
+                
             </Border>
         </Grid>
 
@@ -131,14 +152,14 @@
                     <StackPanel Orientation="Vertical">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 10">
                             <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
-                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                <TextBlock x:Name="a1" TextAlignment="Center" LineHeight="40">
                                     Готівка
                                     <LineBreak/>
                                     10000 UAH
                                 </TextBlock>
                             </Button>
                             <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Click="AddIncome_Click">
-                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                <TextBlock x:Name="a2" TextAlignment="Center" LineHeight="40">
                                     Карта 1
                                     <LineBreak/>
                                     20000 UAH
@@ -147,13 +168,13 @@
                         </Grid>
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 20">
                             <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
-                                <TextBlock TextAlignment="Center" LineHeight="40">
+                                <TextBlock x:Name="a3" TextAlignment="Center" LineHeight="40">
                                     Карта 2
                                     <LineBreak/>
                                     50000 UAH
                                 </TextBlock>
                             </Button>
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Content="+" FontSize="70" Click="AddAccount_Click"/>
+                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Content="БІЛЬШЕ" FontSize="30" Click="OpenAccounts_Click"/>
                         </Grid>
                     </StackPanel>
                 </Border>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
+using DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,32 +23,43 @@ namespace Presentation
     /// </summary>
     public partial class SettingsCategoriesWindow : Window
     {
-        public ObservableCollection<string> Сategories { get; set; }
+        private List<string> categories;
 
         public SettingsCategoriesWindow()
         {
-            InitializeComponent(); 
-        }
-
-        public SettingsCategoriesWindow(ObservableCollection<string> categories)
-        {
             InitializeComponent();
-            Сategories = categories;
+
+            categories = new List<string>();
+            if (SessionManager.CurrentUserId != null)
+            {
+                List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
+
+                foreach (var category in fetchedCategories)
+                {
+                    categories.Add(category.Name);
+                }
+            }
+            else
+            {
+                categories = [];
+            }
+
             UpdateCategoryGrid();
         }
+
 
         private void UpdateCategoryGrid()
         {
             categoryGrid.RowDefinitions.Clear();
             categoryGrid.Children.Clear();
 
-            for (int i = 0; i < Сategories.Count; i++)
+            for (int i = 0; i < categories.Count; i++)
             {
                 RowDefinition row = new RowDefinition();
                 categoryGrid.RowDefinitions.Add(row);
 
                 Label label = new Label();
-                label.Content = Сategories[i];
+                label.Content = categories[i];
                 label.FontSize = 18;
                 label.Margin = new Thickness(10, 5, 5, 0);
 
@@ -73,9 +87,9 @@ namespace Presentation
         {
             Button deleteButton = sender as Button;
             int categoryIndex = (int)deleteButton.Tag;
-            if (categoryIndex >= 0 && categoryIndex < Сategories.Count)
+            if (categoryIndex >= 0 && categoryIndex < categories.Count)
             {
-                Сategories.RemoveAt(categoryIndex);
+                categories.RemoveAt(categoryIndex);
                 UpdateCategoryGrid();
             }
         }

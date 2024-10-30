@@ -87,6 +87,7 @@ namespace BusinessLogic.Services
         {
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            
             return user?.Id;
         }
     }

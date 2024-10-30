@@ -25,6 +25,7 @@
         <Border Grid.Row="2" Margin="10, 10, 10, 10" BorderBrush="#9B70C2" BorderThickness="2" CornerRadius="15" Background="Transparent" Padding="5, 20, 5, 20">
             <ScrollViewer  Height="150">
                 <StackPanel Orientation="Vertical" x:Name="CategoriesPanel">
+                    <!--
                     <StackPanel Orientation="Horizontal" Margin="25, 5, 30, 0">
                     <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 1" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Left" Margin="0, 0, 30, 0" Click="AddExpense_Click"/>
                         <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 2" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Right" Click="AddExpense_Click"/>
@@ -41,6 +42,7 @@
                         <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 7" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Left" Margin="0, 0, 30, 0" Click="AddExpense_Click"/>
                         <Button Style="{StaticResource CategoryButton}" Background="#CCDAB6FC" Content="Категорія 8" FontSize="16" Foreground="#CC000000" Width="150" Height="40" HorizontalAlignment="Right" Click="AddExpense_Click"/>
                     </StackPanel>
+                    -->
                 </StackPanel>
             </ScrollViewer>
         </Border>

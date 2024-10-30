@@ -25,6 +25,8 @@ namespace Presentation
     /// </summary>
     public partial class EntryWindow : Window
     {
+        NavBar navBar;
+
         public EntryWindow()
         {
             InitializeComponent();
@@ -152,6 +154,16 @@ namespace Presentation
                         // HERE IS THE USERS ID!!!!!!!!!!!!!!!
                         SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
                         //settingsEntryEmailTextBox.Text = SessionManager.CurrentUserId.ToString();
+
+                        MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                        if (mainWindow != null && mainWindow.MainFrame != null)
+                        {
+                            navBar = mainWindow.NavBar;
+                            navBar.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
+                            navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
+                            mainWindow.MainFrame.Navigate(new MainPage());
+                        }
+
                         Close();
                     }
                 }
