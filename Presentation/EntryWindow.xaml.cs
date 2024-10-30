@@ -134,8 +134,8 @@ namespace Presentation
                     User user = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput);
                     if (user.Id == -1)
                     {
-                        //MessageBox.Show("Ая, думав отак влізеш в систему якшо не зареєстрований?");
-                        throw new Exception("Ая, думав отак влізеш в систему якшо не зареєстрований?");
+                        MessageBox.Show("Ая, думав отак влізеш в систему якшо не зареєстрований?");
+                        //throw new Exception("Ая, думав отак влізеш в систему якшо не зареєстрований?");
                     }
                     if (user.Password != passwordInput)
                     {
@@ -144,14 +144,6 @@ namespace Presentation
                     else
                     {
                         MessageBox.Show($"Вітаємо, {DbHelper.db.Users.First(x => x.Id == user.Id).Name}!");
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
-                        // HERE IS THE USERS ID!!!!!!!!!!!!!!!
                         SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
                         //settingsEntryEmailTextBox.Text = SessionManager.CurrentUserId.ToString();
 
@@ -163,6 +155,7 @@ namespace Presentation
                             navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
                             mainWindow.MainFrame.Navigate(new MainPage());
                         }
+                        navBar.nbExitButton.Content = (DbHelper.db.Users.First(x => x.Id == user.Id).Name);
 
                         Close();
                     }
@@ -171,6 +164,27 @@ namespace Presentation
                 {
                     MessageBox.Show(ex.InnerException.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            settingsEntryEmailTextBox.Focus();
+        }
+
+        private void settingsEntryEmailTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                settingsEntryPasswordTextBox.Focus();
+            }
+        }
+
+        private void settingsEntryPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key== Key.Enter)
+            {
+                settingsEntryButton_Click(sender, e);
             }
         }
     }
