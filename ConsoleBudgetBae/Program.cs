@@ -62,6 +62,14 @@ namespace ConsoleLevel
             //    EndDate = "2025-10-31",
             //    UserId = 21
             //});
+            //DbHelper.db.Add(new Saving()
+            //{
+            //    TargetName = "На рожевий 16 айфон",
+            //    TargetSum = 45000.00,
+            //    CurrentSum = 10000.00,
+            //    EndDate = "2026-07-30",
+            //    UserId = 21
+            //});
             //DbHelper.db.SaveChanges();
 
             //DbHelper.db.Add(new PlannedExpense()
@@ -104,23 +112,7 @@ namespace ConsoleLevel
             //    Console.WriteLine(ids[i]);
             //}
 
-            try
-            {
-                List<Account> accounts = DbHelper.db.Accounts
-                    .Where(a => a.UserId == 21)
-                    .ToList();
-
-                foreach (var account in accounts)
-                {
-                    Console.WriteLine($"ID: {account.Id}, Name: {account.Name}, Balance: {account.Balance}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.WriteLine(ex.StackTrace);
-            }
-
+            
         }
     }
 }

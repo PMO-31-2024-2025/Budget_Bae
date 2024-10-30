@@ -48,10 +48,10 @@ namespace Presentation
             for(int i = 0; i < Savings.Count; i++)
             {
                 Grid savings = new Grid();
-                savings.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-                savings.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-                savings.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(165) });
-                savings.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(130) });
+                savings.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35) });
+                savings.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35) });
+                savings.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(205) });
+                savings.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(90) });
                 savings.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(35) });
                 Border border = new Border()
                 {
@@ -103,7 +103,19 @@ namespace Presentation
                 Grid.SetColumn(delete, 2);
                 savings.Children.Add(delete);
 
+                ProgressBar progressBar = new ProgressBar()
+                {
+                    Minimum = 0,
+                    Maximum = Savings[i].TargetSum,
+                    Value = Savings[i].CurrentSum,
+                    Height = 15,
+                    Margin = new Thickness(15, 5, 10, 15),
+                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0")),
+                };
 
+                Grid.SetRow(progressBar, 1);
+                savings.Children.Add(progressBar);
 
                 border.Child = savings;
                 SavingsStackPannel.Children.Add(border);
