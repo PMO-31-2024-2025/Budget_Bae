@@ -22,7 +22,6 @@ namespace Presentation
         public MainWindow()
         {
             InitializeComponent();
-            this.WindowState = WindowState.Maximized;
             MainFrame.Navigate(new MainPage());
         }
 

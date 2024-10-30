@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Presentation"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
-      d:DesignHeight="840" d:DesignWidth="1440"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Stretch"
       Title="MainPage"
       Background="#FFFAF0">
 
