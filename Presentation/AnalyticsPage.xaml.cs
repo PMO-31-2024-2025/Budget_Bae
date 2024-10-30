@@ -34,12 +34,6 @@ namespace Presentation
             UpdateBarChart();
         }
 
-        private void More_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
         private void UpdatePieChart()
         {
             var categories = ExpenseCategoryService.GetCategories();
