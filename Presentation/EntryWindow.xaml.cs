@@ -39,11 +39,16 @@ namespace Presentation
 
         private void settingsEntryEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsRegistrationEmailTextBox.Text;
+            string emailInput = settingsEntryEmailTextBox.Text;
 
-            if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            if (emailInput == "")
+            {
+                MessageBox.Show("Поле з адресою має бути заповненим!");
+            }
+            else if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+                MessageBox.Show("Неправильний формат електронної адреси!");
             }
             else
             {
@@ -89,6 +94,10 @@ namespace Presentation
             else if (createPasswordInput.Length < 8)
             {
                 MessageBox.Show("Пароль має складатися з 8 символів щонайменше.");
+            }
+            else if (createPasswordInput.Contains(" "))
+            {
+                MessageBox.Show("Пароль не може містити пробіли!");
             }
             else
             {

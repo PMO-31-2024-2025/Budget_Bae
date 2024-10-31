@@ -33,5 +33,50 @@ namespace Presentation
         {
 
         }
+
+        private void expenseAddingSumTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string sumInput = expenseAddingSumTextBox.Text;
+
+            if (sumInput == "")
+            {
+                MessageBox.Show("Вкажіть суму витрати!");
+            }
+            else if (sumInput.Contains("-"))
+            {
+                MessageBox.Show("Сума витрати повинна бути додатньою!");
+            }
+            else if (!int.TryParse(sumInput, out int result))
+            {
+                MessageBox.Show("Сума витрати повинна бути числом!");
+            }
+            else
+            {
+                MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
+            }
+        }
+
+        private void expenseAddingAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            string sumInput = expenseAddingSumTextBox.Text;
+            string accountSelection = "";
+
+            if (sumInput == "")
+            {
+                MessageBox.Show("Вкажіть суму витрати!");
+            }
+            else if (sumInput.Contains("-"))
+            {
+                MessageBox.Show("Сума витрати повинна бути додатньою!");
+            }
+            else if (!int.TryParse(sumInput, out int result))
+            {
+                MessageBox.Show("Сума витрати повинна бути числом!");
+            }
+            else
+            {
+                MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
+            }
+        }
     }
 }
