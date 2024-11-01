@@ -39,7 +39,7 @@ namespace Presentation
 
         private void settingsEntryEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsEntryEmailTextBox.Text;
+            string emailInput = settingsEntryEmailTextBox.Text.ToLower();
 
             if (emailInput == "")
             {
@@ -58,7 +58,7 @@ namespace Presentation
 
         private void settingsRegistrationEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsRegistrationEmailTextBox.Text;
+            string emailInput = settingsRegistrationEmailTextBox.Text.ToLower();
             
             if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
@@ -74,7 +74,7 @@ namespace Presentation
 
         private async void settingsRegistrationButton_Click(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsRegistrationEmailTextBox.Text;
+            string emailInput = settingsRegistrationEmailTextBox.Text.ToLower();
             string nameInput = settingsRegistrationNameTextBox.Text;
             string createPasswordInput = settingsRegistrationCreatePasswordTextBox.Text;
             string confirmPasswordInput = settingsRegistrationConfirmPasswordTextBox.Text;
@@ -119,7 +119,7 @@ namespace Presentation
 
         private async void settingsEntryButton_Click(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsEntryEmailTextBox.Text;
+            string emailInput = settingsEntryEmailTextBox.Text.ToLower();
             string passwordInput = settingsEntryPasswordTextBox.Text;
 
             if (emailInput == "" && passwordInput == "")

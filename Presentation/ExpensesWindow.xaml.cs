@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +60,11 @@ namespace Presentation
         private void expenseAddingAddButton_Click(object sender, RoutedEventArgs e)
         {
             string sumInput = expenseAddingSumTextBox.Text;
-            string accountSelection = "";
+            string accountSelection = expenseAddingAccountChooseComboBox.SelectedValue.ToString();
+            foreach (var item in DbHelper.db.Accounts.ToList())
+            {
+                expenseAddingAccountChooseComboBox.Items.Add(item);
+            }
 
             if (sumInput == "")
             {
@@ -76,6 +81,7 @@ namespace Presentation
             else
             {
                 MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
+                
             }
         }
     }
