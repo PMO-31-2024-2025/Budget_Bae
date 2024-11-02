@@ -17,7 +17,7 @@ namespace BusinessLogic.Session
 
         public static void ClearCurrentUser()
         {
-            CurrentUserId = null;
+            CurrentUserId = -1;
         }
     }
 }

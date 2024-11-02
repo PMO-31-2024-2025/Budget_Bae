@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,6 +49,28 @@ namespace Presentation
                 {
                     textBox.Text = textBox.Tag.ToString();
                 }
+            }
+        }
+
+        private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string categoryInput = Name.Text;
+                if (categoryInput.ToLower() == "введіть назву категорії")
+                {
+                    MessageBox.Show("Введіть назву категорії!");
+                }
+                else
+                {
+                    ExpenseCategoryService.AddExpense(categoryInput);
+                    MessageBox.Show("Категорії додано успішно!");
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

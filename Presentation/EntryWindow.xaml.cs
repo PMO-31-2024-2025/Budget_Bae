@@ -141,12 +141,11 @@ namespace Presentation
                 {
                     //int userId = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id;
                     User user = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput);
-                    if (user.Id == -1)
+                    if (user == null)
                     {
                         MessageBox.Show("Ая, думав отак влізеш в систему якшо не зареєстрований?");
-                        //throw new Exception("Ая, думав отак влізеш в систему якшо не зареєстрований?");
                     }
-                    if (user.Password != passwordInput)
+                    else if (user.Password != passwordInput)
                     {
                         MessageBox.Show("Нє, пароль не той. Сліпаки роззуй і введи всьо правильно.");
                     }

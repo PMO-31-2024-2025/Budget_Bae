@@ -77,5 +77,34 @@ namespace BusinessLogic.Services
 
             return currentMonthExpense;
         }
+
+        public static void AddExpense(int categoryId, double expenseSum, int accountId)
+        {
+            //if (DbHelper.db.Users.Any(u => u.Email == email))
+            //{
+            //    throw new Exception("Користувач з такою електронною поштою вже існує!");
+            //}
+
+            var expense = new Expense
+            {
+                CategoryId = categoryId,
+                ExpenseSum = expenseSum,
+                ExpenseDate = DateTime.Now.ToString(),
+                AccountId = accountId
+            };
+
+            DbHelper.db.Expenses.Add(expense);
+            DbHelper.db.SaveChangesAsync();
+        }
+
+        public static void DeleteExpense(int expenseId)
+        {
+            var expense = DbHelper.db.Expenses.Find(expenseId);
+            if (expense != null)
+            {
+                DbHelper.db.Remove(expense);
+                DbHelper.db.SaveChangesAsync();
+            }
+        }
     }
 }
