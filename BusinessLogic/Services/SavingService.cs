@@ -17,5 +17,10 @@ namespace BusinessLogic.Services
                 .Where(s => s.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
+
+        public static void AddSaving(string name, int sum, int monthsNumber)
+        {
+
+        }
     }
 }

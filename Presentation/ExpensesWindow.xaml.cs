@@ -1,4 +1,5 @@
-﻿using DAL.Data;
+﻿using BusinessLogic.Session;
+using DAL.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Presentation
         public ExpensesWindow()
         {
             InitializeComponent();
+            FillAccountsComboboxWithAccounts();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -82,6 +84,24 @@ namespace Presentation
             {
                 MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
                 
+            }
+        }
+
+        private void FillAccountsComboboxWithAccounts()
+        {
+            int? currUserId = SessionManager.CurrentUserId;
+            if (currUserId == null)
+            {
+                MessageBox.Show("Авторизуйтесь для можливості додавання витрат!");
+            }
+            else if (DbHelper.db.Accounts == null)
+            {
+                MessageBox.Show("Спершу потрібно додати рахунки, а тоді вже витрати!");
+            }
+            else
+            {
+                Dictionary<string, int> accounts = new Dictionary<string, int>();
+                expenseAddingAccountChooseComboBox.ItemsSource = DbHelper.db.Accounts.ToList();
             }
         }
     }

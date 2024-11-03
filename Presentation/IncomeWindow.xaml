@@ -36,13 +36,13 @@
 
     <StackPanel Grid.Row="1" Margin="16">
         <Label Content="Введіть суму:" Style="{StaticResource ModalWindowLabel}" Margin="30, 0, 0, 0"/>
-        <TextBox Style="{StaticResource ModalWindowTextBox}" TextWrapping="Wrap" Margin="0,10,0,10"/>
+        <TextBox x:Name="incomeAddingIncomeSumTextBox" Style="{StaticResource ModalWindowTextBox}" TextWrapping="Wrap" Margin="0,10,0,10" LostFocus="incomeAddingIncomeSum_LostFocus"/>
 
         <Label Content="Категоія доходу:" Style="{StaticResource ModalWindowLabel}" Margin="30, 20, 0, 0"/>
-        <ComboBox Style="{StaticResource ModalWindowComboBox}" Margin="0,10,0,10"/>
+        <ComboBox x:Name="incomeAddingCategoryChooseCombobox" Style="{StaticResource ModalWindowComboBox}" Margin="0,10,0,10"/>
     </StackPanel>
 
-    <Button Content="Додати" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center"
-            Style="{StaticResource ModalWindowButton}" Margin="0,10,0,20"/>
+    <Button x:Name="incomeAddingButton" Content="Додати" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+            Style="{StaticResource ModalWindowButton}" Margin="0,10,0,20" Click="incomeAddingButton_Click"/>
     </Grid>
 </Window>

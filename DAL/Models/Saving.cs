@@ -21,14 +21,17 @@ namespace DAL.Models
         public double TargetSum { get; set; }
         [Column("current_sum")]
         public double CurrentSum { get; set; }
-        [Column("end_date")]
-        public string EndDate { get; set; } = null!;
+        [Column("months_number")]
+        public int MonthsNumber { get; set; } 
         [Column("user_id")]
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
 
         DbSet<User> Users { get; set; }
+
     }
+
+
 }
 
 
