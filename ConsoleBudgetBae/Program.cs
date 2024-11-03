@@ -72,13 +72,13 @@ namespace ConsoleLevel
             //});
             //DbHelper.db.SaveChanges();
 
-            DbHelper.db.Add(new PlannedExpense()
-            {
-                Name = "спотіфай",
-                PlannedSum = 120.00,
-                NotigicationDate = "2024-11-01",
-                UserId = 21
-            });
+            //DbHelper.db.Add(new PlannedExpense()
+            //{
+            //    Name = "спотіфай",
+            //    PlannedSum = 120.00,
+            //    NotigicationDate = "2024-11-01",
+            //    UserId = 21
+            //});
 
             //DbHelper.db.SaveChanges();
 
