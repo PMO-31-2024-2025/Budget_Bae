@@ -63,6 +63,15 @@ namespace BusinessLogic.Services
             return currentMonthIncome;
         }
 
+        public static List<Income> GetIncomesByUserId()
+        {
+            var accountIds = AccountService.GetUsersAccountsId();
+
+            return DbHelper.db.Incomes
+                .Where(i => accountIds.Contains(i.AccountId))
+                .ToList();
+        }
+
         //public static void AddIncome(string category, int sum)
         //{
         //    int? currUser = SessionManager.CurrentUserId;

@@ -26,6 +26,12 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
-
+        public static string GetAccountName(int accountId)
+        {
+            return DbHelper.db.Accounts
+                .Where(a => a.Id == accountId)
+                .Select(a => a.Name)
+                .FirstOrDefault();
+        }
     }
 }

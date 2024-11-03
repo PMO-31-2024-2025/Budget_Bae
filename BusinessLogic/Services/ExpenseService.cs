@@ -20,11 +20,27 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
-        public static double GetTotalExpensesByCategoryId(int categoryId)
+        /*public static double GetTotalExpensesByCategoryId(int categoryId)
         {
             return DbHelper.db.Expenses
                 .Where(e => e.CategoryId == categoryId)
                 .Sum(e => e.ExpenseSum);
+        }*/
+
+        public static double GetCurrentExpensesByCategoryId(int categoryId)
+        {
+            var accountIds = AccountService.GetUsersAccountsId();
+            var currentDate = DateTime.Now;
+
+            double total = DbHelper.db.Expenses
+                .AsEnumerable()
+                .Where(e => e.CategoryId == categoryId &&
+                         accountIds.Contains(e.AccountId) &&
+                         DateTime.Parse(e.ExpenseDate).Year == currentDate.Year &&
+                         DateTime.Parse(e.ExpenseDate).Month == currentDate.Month)
+                .Sum(e => e.ExpenseSum);
+
+            return total;
         }
 
         public static double PrevPrevExpense()

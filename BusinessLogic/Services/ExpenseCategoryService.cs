@@ -22,6 +22,14 @@ namespace BusinessLogic.Services
                     .ToList();
         }
 
+        public static string GetCategoryName(int categoryId)
+        {
+            return DbHelper.db.ExpensesCategories
+                .Where(ec => ec.Id == categoryId)
+                .Select(ec => ec.Name)
+                .FirstOrDefault();
+        }
+
         public static void AddExpense(string categoryName)
         {
             int? currUser = SessionManager.CurrentUserId;
