@@ -43,6 +43,11 @@ namespace ConsoleLevel
             //DbHelper.db.Add(new Expense() { CategoryId = 1, ExpenseDate = "2024-06-27", ExpenseSum = 800.00, AccountId = 2 });
             //DbHelper.db.Add(new Expense() { CategoryId = 2, ExpenseDate = "2024-09-17", ExpenseSum = 90.00, AccountId = 1 });
             //DbHelper.db.Add(new Expense() { CategoryId = 4, ExpenseDate = "2024-10-07", ExpenseSum = 340.00, AccountId = 1 });
+
+            //DbHelper.db.Add(new Expense() { CategoryId = 7, ExpenseDate = "2024-11-01 16:30:00", ExpenseSum = 700.00, AccountId = 2 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 1, ExpenseDate = "2024-11-02 19:35:00", ExpenseSum = 200.00, AccountId = 2 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 2, ExpenseDate = "2024-11-01 13:25:00", ExpenseSum = 90.00, AccountId = 1 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 4, ExpenseDate = "2024-11-02 22:10:00", ExpenseSum = 950.00, AccountId = 1 });
             //DbHelper.db.SaveChanges();
 
 
@@ -52,6 +57,9 @@ namespace ConsoleLevel
             //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-08-23", IncomeSum = 7000.00, AccountId = 1 });
             //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-10-05", IncomeSum = 7000.00, AccountId = 1 });
             //DbHelper.db.Add(new Income() { Category = "Salary", IncomeDate = "2024-10-23", IncomeSum = 20000.00, AccountId = 1 });
+
+            //DbHelper.db.Add(new Income() { Category = "Freelance Work", IncomeDate = "2024-11-02 15:00:00", IncomeSum = 2000.00, AccountId = 1 });
+            //DbHelper.db.Add(new Income() { Category = "Salary", IncomeDate = "2024-11-01 12:00:00", IncomeSum = 20000.00, AccountId = 1 });
             //DbHelper.db.SaveChanges();
 
             //DbHelper.db.Add(new Saving()

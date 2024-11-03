@@ -178,8 +178,8 @@ namespace Presentation
             };
             elemGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             elemGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
-            elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+            elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
             Label categoryLabel = new Label()
             {
@@ -233,15 +233,15 @@ namespace Presentation
             {
                 DateTime prevDate = sortedTransactions.First() switch
                 {
-                    Expense e => DateTime.Parse(e.ExpenseDate),
-                    Income i => DateTime.Parse(i.IncomeDate)
+                    Expense e => DateTime.Parse(e.ExpenseDate).Date,
+                    Income i => DateTime.Parse(i.IncomeDate).Date
                 };
                 DateTime date = prevDate;
                 foreach (var transaction in sortedTransactions)
                 {
                     if (transaction is Expense expense)
                     {
-                        date = DateTime.Parse(expense.ExpenseDate);
+                        date = DateTime.Parse(expense.ExpenseDate).Date;
                         Border elem = new Border()
                         {
                             Style = (Style)FindResource("HistoryElement"),
@@ -262,7 +262,7 @@ namespace Presentation
                     }
                     else if (transaction is Income income)
                     {
-                        date = DateTime.Parse(income.IncomeDate);
+                        date = DateTime.Parse(income.IncomeDate).Date;
                         Border elem = new Border()
                         {
                             Style = (Style)FindResource("HistoryElement"),

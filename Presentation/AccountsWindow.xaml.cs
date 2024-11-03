@@ -35,7 +35,7 @@ namespace Presentation
             {
                 accounts = new List<Account>();
             }
-
+            SetAccounts();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -59,38 +59,26 @@ namespace Presentation
 
         private void SetAccounts()
         {
-            StackPanel horizontalPanel = null;
-
-            for (int i = 0; i < accounts.Count; i++)
+            foreach (var account in accounts)
             {
-                if (i % 2 == 0)
-                {
-                    horizontalPanel = new StackPanel
-                    {
-                        Orientation = Orientation.Horizontal,
-                        Margin = new Thickness(25, i == 0 ? 5 : 10, 30, 0)
-                    };
-                    AccountsPanel.Children.Add(horizontalPanel);
-                }
-
                 Button accountButton = new Button
                 {
-                    Content = $"{accounts[i].Name}/n{accounts[i].Balance} UAH",
-                    Width = 150,
+                    Content = $"{account.Name}",
+                    Width = 300,
                     Height = 40,
                     FontSize = 16,
                     Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
                     Style = (Style)FindResource("CategoryButton"),
-                    Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
-                    HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
+                    Margin = new Thickness(15, 10, 15, 10)
                 };
-
+                AccountsPanel.Children.Add(accountButton);
                 accountButton.Click += AddAccountButton_Click;
-
-                horizontalPanel.Children.Add(accountButton);
             }
+               
         }
+
+        
 
     }
 }
