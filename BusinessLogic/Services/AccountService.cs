@@ -25,5 +25,7 @@ namespace BusinessLogic.Services
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
+
+
     }
 }

@@ -13,8 +13,7 @@
         </Grid.ColumnDefinitions>
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#FFFAF0" Height="50">
-                <Image Source="pack://application:,,,/Pictures/unregistered_user.jpg" Height="45" Width="45" Margin="5,5,5,5" Stretch="Uniform"/>
-                <Button Name="nbExitButton" Content="Вхід" Width="100" Background="#FFFAF0"
+                <Button Name="nbExitButton" Content="Вхід" HorizontalAlignment="Center" Margin="30, 5, 20, 5"  Background="#FFFAF0"
                     Style="{StaticResource NavBarButton}" Click="nbExitButton_Click"/>
                 <Button Name="nbMainButton" Content="Головна" Width="100"  Background="#50DAB6FC"
                 Style="{StaticResource NavBarButton}" Click="nbMainButton_Click"/>
