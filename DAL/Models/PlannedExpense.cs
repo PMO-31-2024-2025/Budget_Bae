@@ -20,7 +20,7 @@ namespace DAL.Models
         [Column("planned_sum")]
         public double PlannedSum { get; set; }
         [Column("notification_date")]
-        public string NotigicationDate { get; set; } = null!;
+        public int NotigicationDate { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
