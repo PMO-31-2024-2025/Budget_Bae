@@ -61,31 +61,24 @@ namespace Presentation
 
         private void expenseAddingAddButton_Click(object sender, RoutedEventArgs e)
         {
-            string sumInput = expenseAddingSumTextBox.Text;
-            string accountSelection = expenseAddingAccountChooseComboBox.SelectedValue.ToString();
-            foreach (var item in DbHelper.db.Accounts.ToList())
-            {
-                expenseAddingAccountChooseComboBox.Items.Add(item);
-            }
-
-            if (sumInput == "")
+            if (string.IsNullOrWhiteSpace(expenseAddingSumTextBox.Text))
             {
                 MessageBox.Show("Вкажіть суму витрати!");
             }
-            else if (sumInput.Contains("-"))
+            else if (!decimal.TryParse(expenseAddingSumTextBox.Text, out decimal amount) || amount <= 0)
             {
-                MessageBox.Show("Сума витрати повинна бути додатньою!");
+                MessageBox.Show("Сума витрати повинна бути додатньою та числом!");
             }
-            else if (!int.TryParse(sumInput, out int result))
+            else if (expenseAddingAccountChooseComboBox.SelectedValue == null)
             {
-                MessageBox.Show("Сума витрати повинна бути числом!");
+                MessageBox.Show("Виберіть рахунок витрати!");
             }
             else
             {
                 MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
-                
             }
         }
+
 
         private void FillAccountsComboboxWithAccounts()
         {
@@ -94,14 +87,17 @@ namespace Presentation
             {
                 MessageBox.Show("Авторизуйтесь для можливості додавання витрат!");
             }
-            else if (DbHelper.db.Accounts == null)
+            else if (DbHelper.db.Accounts == null || !DbHelper.db.Accounts.Any())
             {
                 MessageBox.Show("Спершу потрібно додати рахунки, а тоді вже витрати!");
             }
             else
             {
-                Dictionary<string, int> accounts = new Dictionary<string, int>();
-                expenseAddingAccountChooseComboBox.ItemsSource = DbHelper.db.Accounts.ToList();
+                expenseAddingAccountChooseComboBox.Items.Clear();
+                foreach (var account in DbHelper.db.Accounts.ToList())
+                {
+                    expenseAddingAccountChooseComboBox.Items.Add(account.Name);
+                }
             }
         }
     }

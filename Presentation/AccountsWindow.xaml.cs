@@ -73,7 +73,7 @@ namespace Presentation
                     Margin = new Thickness(15, 10, 15, 10)
                 };
                 AccountsPanel.Children.Add(accountButton);
-                accountButton.Click += AddAccountButton_Click;
+                accountButton.Click += AddIncome_Click;
             }
                
         }

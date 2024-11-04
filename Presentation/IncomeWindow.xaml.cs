@@ -20,9 +20,19 @@ namespace Presentation
     /// </summary>
     public partial class IncomeWindow : Window
     {
+        List<string> incomeCategories = new List<string>
+        {
+            "З/П",
+            "Стипендія",
+            "Кишенькові",
+            "Соц. виплати",
+            "Премія",
+            "Інше"
+        };
         public IncomeWindow()
         {
             InitializeComponent();
+            UpdateIncomeWindowComboBox();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -54,30 +64,28 @@ namespace Presentation
 
         private void incomeAddingButton_Click(object sender, RoutedEventArgs e)
         {
-            string sumInput = incomeAddingIncomeSumTextBox.Text;
-            string accountSelection = incomeAddingCategoryChooseCombobox.SelectedValue.ToString();
-            foreach (var item in DbHelper.db.Accounts.ToList())
-            {
-                incomeAddingCategoryChooseCombobox.Items.Add(item);
-            }
-
-            if (sumInput == "")
+            if (string.IsNullOrWhiteSpace(incomeAddingIncomeSumTextBox.Text))
             {
                 MessageBox.Show("Вкажіть суму витрати!");
             }
-            else if (sumInput.Contains("-"))
+            else if (!decimal.TryParse(incomeAddingIncomeSumTextBox.Text, out decimal amount) || amount <= 0)
             {
-                MessageBox.Show("Сума витрати повинна бути додатньою!");
+                MessageBox.Show("Сума витрати повинна бути додатньою та числом!");
             }
-            else if (!int.TryParse(sumInput, out int result))
+            else if (incomeAddingCategoryChooseCombobox.SelectedValue == null)
             {
-                MessageBox.Show("Сума витрати повинна бути числом!");
+                MessageBox.Show("Виберіть категорію витрати!");
             }
             else
             {
                 MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
-
             }
+        }
+
+
+        private void UpdateIncomeWindowComboBox()
+        {
+            incomeAddingCategoryChooseCombobox.ItemsSource = incomeCategories;
         }
     }
 }

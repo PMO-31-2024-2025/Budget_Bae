@@ -16,6 +16,7 @@ using System.ComponentModel;
 using DAL.Models;
 using BusinessLogic.Services;
 using BusinessLogic.Session;
+using Microsoft.VisualBasic;
 
 namespace Presentation
 {
@@ -39,6 +40,7 @@ namespace Presentation
             }
 
             UpdateSavingsGrid();
+            UpdateSavingsComboBox();
         }
 
         private void UpdateSavingsGrid() 
@@ -183,13 +185,13 @@ namespace Presentation
             string topUpAmountInput = TopUpAmountSavings.Text;
             var selectedSavings = SavingsList.SelectedItem;
 
-            if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null)
+            if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || topUpAmountInput == null)
             {
                 MessageBox.Show("Усі поля мають бути заповнені!");
             }
             else if (!decimal.TryParse(topUpAmountInput, out _))
             {
-                MessageBox.Show("Поле суми поповнення має містити лише число!");
+                MessageBox.Show("Поле суми поповнення має містити число!");
             }
             else
             {
@@ -202,6 +204,17 @@ namespace Presentation
                     MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void UpdateSavingsComboBox()
+        {
+            List<string> SavingsName = new List<string>();
+
+            foreach (var saving in Savings)
+            {
+                SavingsName.Add(saving.TargetName); 
+            }
+            SavingsList.ItemsSource = SavingsName;
         }
     }
 }
