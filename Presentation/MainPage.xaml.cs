@@ -154,31 +154,6 @@ namespace Presentation
             }
         }
 
-        
-
-        //private double GetPreviousIncome()
-        //{
-        //    int month = DateTime.Now.Month;
-        //    var accountIds = DbHelper.db.Accounts
-        //       .Where(a => a.UserId == SessionManager.CurrentUserId)
-        //       .Select(a => a.Id)
-        //       .ToList();
-
-        //    //double prevIncome = DbHelper.db.Incomes
-        //    //    .Where(pi => accountIds.Contains(pi.AccountId)
-        //    //    .Select(pi => pi.IncomeDate == DbMonth);
-
-        //    return 0.0;
-        //}
-
-        //private double GetSavingsAmount()
-        //{
-        //    //double savongsAmount = DbHelper.db.Savings
-        //    //    .Where(s => s.UserId == SessionManager.CurrentUserId)
-        //    //    .Sum(s => s.)
-        //    return 0.0;
-        //}
-
         public void UpdatePieChart()
         {
             var pieSeriesCollection = new SeriesCollection();
@@ -186,10 +161,10 @@ namespace Presentation
 
             var seriesData = new[]
             {
-                new { Title = "витрати цього місяця", Value = 0.0, Color = "#9B70C2" },
+                new { Title = "витрати цього місяця", Value = ExpenseService.CurrentExpense(), Color = "#9B70C2" },
                 new { Title = "заплановані витрати", Value = PlannedExpenseService.GetPaymentsAmount(), Color = "#999B70C2" },
-                new { Title = "в заощадження", Value = 0.0, Color = "#DAB6FC" },
-                new { Title = "залишок доходу за минулий місяць", Value = 0.0, Color = "#99DAB6FC" }
+                new { Title = "в заощадження", Value = Math.Round(SavingService.GetTotalSavings(), 2), Color = "#DAB6FC" },
+                new { Title = "залишок доходу за минулий місяць", Value = IncomeService.PrevIncome() - ExpenseService.CurrentExpense(), Color = "#99DAB6FC" }
             };
 
             bool hasData = seriesData.Any(item => item.Value > 0);

@@ -18,6 +18,13 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
+        public static double GetTotalSavings()
+        {
+            return DbHelper.db.Savings
+                .Where(s => s.UserId == SessionManager.CurrentUserId)
+                .Sum(s => s.TargetSum / s.MonthsNumber);
+        }
+
         public static void AddSaving(string name, int sum, int monthsNumber)
         {
 

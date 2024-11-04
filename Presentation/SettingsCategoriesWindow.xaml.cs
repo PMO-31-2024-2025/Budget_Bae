@@ -28,10 +28,9 @@ namespace Presentation
         public SettingsCategoriesWindow()
         {
             InitializeComponent();
-
-            categories = new List<string>();
             if (SessionManager.CurrentUserId != null)
             {
+                categories = new List<string>();
                 List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
 
                 foreach (var category in fetchedCategories)
@@ -41,7 +40,7 @@ namespace Presentation
             }
             else
             {
-                categories = [];
+                categories = [ "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я"];
             }
 
             UpdateCategoryGrid();

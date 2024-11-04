@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Presentation.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SettingsWindow" Width="400"
+        Title="SettingsWindow" Width="400" 
+        VerticalAlignment="Stretch"
         WindowStyle="None"
         Background="#FFFAF0">
 
@@ -57,7 +58,5 @@
         <Button Name="SupportExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="8" Grid.Column="0" Click="SupportExpanderButton_Click"/>
         <Label Content="Служба підтримки" Grid.Row="8" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
         
-        <Button Name="ExitButton" Style="{StaticResource SettingsButton}" Width="200" Height="50" FontSize="18" Content="Видалити акаунт" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0, 230, 0, 0" Click="ExitButton_Click"/>
-
     </Grid>
 </Window>

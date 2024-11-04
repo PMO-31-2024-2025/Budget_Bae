@@ -120,6 +120,35 @@ namespace ConsoleLevel
             //    Console.WriteLine(ids[i]);
             //}
 
+            //DbHelper.db.Add(new Saving()
+            //{
+            //    TargetName = "На концерт бтс",
+            //    TargetSum = 20000.00,
+            //    CurrentSum = 2500.00,
+            //    MonthsNumber = 7,
+            //    UserId = 21
+            //});
+            //DbHelper.db.Add(new Saving()
+            //{
+            //    TargetName = "На рожевий 16 айфон",
+            //    TargetSum = 45000.00,
+            //    CurrentSum = 10000.00,
+            //    MonthsNumber = 10,
+            //    UserId = 21
+            //});
+            //DbHelper.db.SaveChanges();
+
+            //DbHelper.db.Add(new PlannedExpense()
+            //{
+            //    Name = "спотіфай",
+            //    PlannedSum = 120.00,
+            //    NotigicationDate = 01,
+            //    UserId = 21
+            //});
+
+            //int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
+            //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
+
 
         }
     }
