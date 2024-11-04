@@ -165,23 +165,23 @@ namespace Presentation
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(amountText) || string.IsNullOrEmpty(dateText))
             {
-                MessageBox.Show("Усі поля мають бути заповненими.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Усі поля мають бути заповненими.");
                 return;
             }
 
             if (!decimal.TryParse(amountText, out decimal amount))
             {
-                MessageBox.Show("Сума поповнення повинна бути числом.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Сума поповнення повинна бути числом.");
                 return;
             }
 
             if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
             {
-                MessageBox.Show("Число дати повинно бути від 1 до 28.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Число дати повинно бути від 1 до 28.");
                 return;
             }
 
-            MessageBox.Show("Платіж створено успішно!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Платіж створено успішно!");
         }
     }
 }

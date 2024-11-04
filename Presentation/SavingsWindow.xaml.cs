@@ -185,7 +185,7 @@ namespace Presentation
             string topUpAmountInput = TopUpAmountSavings.Text;
             var selectedSavings = SavingsList.SelectedItem;
 
-            if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || topUpAmountInput == null)
+            if (string.IsNullOrWhiteSpace(TopUpAmountSavings.Text) || selectedSavings == null )
             {
                 MessageBox.Show("Усі поля мають бути заповнені!");
             }
@@ -216,5 +216,34 @@ namespace Presentation
             }
             SavingsList.ItemsSource = SavingsName;
         }
+
+        private void TopUp_Click(object sender, RoutedEventArgs e)
+        {
+            string name = Name.Text.Trim();
+            string dateText = Date.Text.Trim();
+            string amountText = Amount_.Text.Trim();
+
+            if (name == "Введіть назву")
+            {
+                MessageBox.Show("Усі поля повинні бути заповненими!");
+            }
+            else if (!decimal.TryParse(amountText, out decimal amount) || amount <= 0)
+            {
+                MessageBox.Show("Сума повинна бути додатнім числом!");
+            }
+            else if (!int.TryParse(dateText, out int date) || date < 1 )
+            {
+                MessageBox.Show("Кількість місяців повинна бути 1 чи більше");
+            }
+            else
+            {
+                decimal amountPerMonth = amount / date;
+                AmountPerMonth.Text = amountPerMonth.ToString("F2"); 
+                MessageBox.Show("Дані пройшли перевірку!");
+            }
+        }
+
+
+
     }
 }
