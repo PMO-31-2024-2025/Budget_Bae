@@ -41,7 +41,7 @@ namespace Presentation
             UpdatePieChart();
             if(SessionManager.CurrentUserId != null)
             {
-                UserExpenses.Text = $"{ExpenseService.CurrentExpense().ToString()} UAH";
+                UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
                 accounts = AccountService.GetUsersAccounts();
             }
             else

@@ -32,11 +32,6 @@ namespace Presentation
             InitializeComponent();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void settingsEntryEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             string emailInput = settingsEntryEmailTextBox.Text.ToLower();

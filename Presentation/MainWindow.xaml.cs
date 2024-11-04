@@ -23,8 +23,13 @@ namespace Presentation
         {
             InitializeComponent();
             MainFrame.Navigate(new MainPage());
+            Loaded += MainWindow_Loaded;
         }
 
-
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            EntryWindow entryWindow = new EntryWindow();
+            entryWindow.ShowDialog();
+        }
     }
 }

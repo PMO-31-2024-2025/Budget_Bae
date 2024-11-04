@@ -32,10 +32,10 @@
     Height="40" Margin="100, 0, 0, 0"/>
         <Button Content="X" Click="CloseButton_Click" Margin="60, 5, 0, 5" Style="{StaticResource CloseButton}" Background="#BF6E9BC3" Foreground="#CC000000"/>
         </TextBlock>
-        <Button Name="SettigsEntryButton" Background="#FFFAF0" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
-                 BorderThickness="0" Margin="50, 0, 0, 0" Click="SettingsEntryButton_Click">
-            <Label Style="{StaticResource ModalWindowLabel}" Foreground="#6E9BC3" Content="Увійти" FontSize="20" FontWeight="Bold" Margin="5, 10, 0, 10"/>
-        </Button>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Height="50">
+            <Label x:Name="UserName" Style="{StaticResource ModalWindowLabel}" Foreground="#6E9BC3" FontSize="20" FontWeight="Bold" Width="300" Margin="5, 10, 30, 10"/>
+            <Button x:Name="Exit" Content="Вийти" FontFamily="{StaticResource CustomFont}" Foreground="#A7C7E7" FontSize="15" FontWeight="Bold" BorderThickness="0" Background="Transparent" Click="Exit_Click"/>
+        </StackPanel>
 
         <Button Name="CategoryExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="2" Grid.Column="0" Click="CategoryExpanderButton_Click"/>
         <Label Content="Категорії" Grid.Row="2" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
@@ -54,9 +54,7 @@
 
         <Button Name="TermsOfUseArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="7" Grid.Column="0" Click="TermsOfUseButton_Click"/>
         <Label Content="Умови використання" Grid.Row="7" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
-
         <Button Name="SupportExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="8" Grid.Column="0" Click="SupportExpanderButton_Click"/>
         <Label Content="Служба підтримки" Grid.Row="8" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
-        
     </Grid>
 </Window>

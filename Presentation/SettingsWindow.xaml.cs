@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLogic.Session;
+using DAL.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -34,6 +36,7 @@ namespace Presentation
         public SettingsWindow()
         {
             InitializeComponent();
+            UserName.Content = DbHelper.db.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -191,7 +194,7 @@ namespace Presentation
             }
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
 
         }
