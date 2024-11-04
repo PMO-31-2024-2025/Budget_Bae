@@ -149,7 +149,49 @@ namespace ConsoleLevel
             //int plannedExpenseCount = DbHelper.db.PlannedExpenses.Count();
             //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
 
+            //var account1 = DbHelper.db.Accounts.FirstOrDefault(a => a.Id == 1);
+            //if (account1 != null)
+            //{
+            //    account1.Name = "карта моно";
+            //}
 
+            //// Отримуємо рахунок з Id = 2
+            //var account2 = DbHelper.db.Accounts.FirstOrDefault(a => a.Id == 2);
+            //if (account2 != null)
+            //{
+            //    account2.Name = "готівка";
+            //}
+
+            //// Зберігаємо зміни у базі даних
+            //DbHelper.db.SaveChanges();
+
+            //Console.WriteLine("Назви рахунків успішно змінено.");
+
+            // Отримуємо перші два об'єкти Saving
+            //var firstTwoSavings = DbHelper.db.Savings
+            //    .OrderBy(s => s.Id)
+            //    .Take(2)
+            //    .ToList();
+
+            //// Видаляємо ці об'єкти
+            //DbHelper.db.Savings.RemoveRange(firstTwoSavings);
+
+            //// Зберігаємо зміни у базі даних
+            //DbHelper.db.SaveChanges();
+
+            //Console.WriteLine("Перші два об'єкти Saving успішно видалено.");
+
+            // Отримуємо всі Id з таблиці Savings
+            //List<int> savingIds = DbHelper.db.Savings
+            //    .Select(s => s.Id)
+            //    .ToList();
+
+            //// Виводимо кожен Id
+            //Console.WriteLine("Існуючі Id заощаджень:");
+            //foreach (int id in savingIds)
+            //{
+            //    Console.WriteLine(id);
+            //}
         }
     }
 }
