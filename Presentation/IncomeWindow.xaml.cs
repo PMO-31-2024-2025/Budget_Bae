@@ -42,43 +42,31 @@ namespace Presentation
 
         private void incomeAddingIncomeSum_LostFocus(object sender, RoutedEventArgs e)
         {
-            string sumInput = incomeAddingIncomeSumTextBox.Text;
-
-            if (sumInput == "")
-            {
-                MessageBox.Show("Вкажіть суму витрати!");
-            }
-            else if (sumInput.Contains("-"))
-            {
-                MessageBox.Show("Сума витрати повинна бути додатньою!");
-            }
-            else if (!int.TryParse(sumInput, out int result))
-            {
-                MessageBox.Show("Сума витрати повинна бути числом!");
-            }
-            else
-            {
-                MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
-            }
+            
         }
-
-        private void incomeAddingButton_Click(object sender, RoutedEventArgs e)
+        private async void incomeAddingButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(incomeAddingIncomeSumTextBox.Text))
+            string sum = incomeAddingIncomeSumTextBox.Text;
+            var selectedCategory = incomeAddingCategoryChooseCombobox.SelectedItem;
+
+            if (sum == null || selectedCategory == null)
             {
-                MessageBox.Show("Вкажіть суму витрати!");
+                MessageBox.Show("Усі поля мають бути заповнені!");
             }
-            else if (!decimal.TryParse(incomeAddingIncomeSumTextBox.Text, out decimal amount) || amount <= 0)
+            else if (!decimal.TryParse(sum, out _))
             {
-                MessageBox.Show("Сума витрати повинна бути додатньою та числом!");
-            }
-            else if (incomeAddingCategoryChooseCombobox.SelectedValue == null)
-            {
-                MessageBox.Show("Виберіть категорію витрати!");
+                MessageBox.Show("Поле суми поповнення має містити число!");
             }
             else
             {
-                MessageBox.Show("Всьо ґуд, дані пройшли перевірку!");
+                try
+                {
+                    MessageBox.Show("Поповнення успішно!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
