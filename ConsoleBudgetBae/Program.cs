@@ -192,6 +192,32 @@ namespace ConsoleLevel
             //{
             //    Console.WriteLine(id);
             //}
+
+            var standardCategories = new List<string> { "Їжа",  "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+            var users = DbHelper.db.Users.ToList();
+
+            foreach (var user in users)
+            {
+                foreach (var categoryName in standardCategories)
+                {
+                    bool categoryExists = DbHelper.db.ExpensesCategories
+                        .Any(c => c.UserId == user.Id && c.Name == categoryName);
+
+                    if (!categoryExists)
+                    {
+                        var newCategory = new ExpenseCategory
+                        {
+                            Name = categoryName,
+                            UserId = user.Id
+                        };
+                        DbHelper.db.ExpensesCategories.Add(newCategory);
+                    }
+                }
+            }
+
+            DbHelper.db.SaveChanges();
+            Console.WriteLine("Стандартні категорії додані для всіх існуючих користувачів.");
+
         }
     }
 }
