@@ -45,8 +45,11 @@ namespace Presentation
 
         private void nbExitButton_Click(object sender, RoutedEventArgs e)
         {
-            EntryWindow entryWindow = new EntryWindow();
-            entryWindow.ShowDialog();
+            if (nbExitButton.Content != "Вхід")
+            {
+                EntryWindow entryWindow = new EntryWindow();
+                entryWindow.ShowDialog();
+            }
         }
 
         private void nbSettingsButton_Click(Object sender, RoutedEventArgs e)
