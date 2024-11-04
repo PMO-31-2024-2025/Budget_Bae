@@ -73,18 +73,12 @@
             </Border>
             <StackPanel Name="Categories" Orientation="Vertical" Grid.Column="0" Grid.Row="1">
                 <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#CC6E9BC3" Height="60" Width="650">
-                    <!--<Border.Effect>
-                        <DropShadowEffect Direction="310" Color="#6E9BC3" BlurRadius="20" ShadowDepth="8"/>
-                    </Border.Effect>-->
                     <Border>
                         <TextBlock Text="Категорії" FontFamily="{StaticResource CustomFont}" FontSize="35" FontWeight="SemiBold" Foreground="#F4F4F4" 
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </Border>
                 <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650">
-                    <!--<Border.Effect>
-                        <DropShadowEffect Direction="310" Color="#A7C7E7" BlurRadius="20" ShadowDepth="8"/>
-                    </Border.Effect>-->
                     <StackPanel Orientation="Vertical">
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 0">
                             <Button x:Name="c1" Style="{StaticResource CategoryButton}" Content="ЇЖА" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
@@ -138,45 +132,14 @@
             </Grid.RowDefinitions>
             <StackPanel Name="Accounts" Orientation="Vertical" Grid.Row="0" Margin="20, 30, 20, 20">
                 <Border Grid.Row="0" CornerRadius="40, 40, 0, 0" Background="#CC6E9BC3" Height="60" Width="650">
-                    <!--<Border.Effect>
-                        <DropShadowEffect Direction="310" Color="#6E9BC3" BlurRadius="20" ShadowDepth="8"/>
-                    </Border.Effect>-->
                     <Border>
                         <TextBlock Text="Рахунки" FontFamily="{StaticResource CustomFont}" FontSize="35" FontWeight="SemiBold" Foreground="#F4F4F4" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </Border>
-                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650">
-                    <!--<Border.Effect>
-                        <DropShadowEffect Direction="310" Color="#A7C7E7" BlurRadius="20" ShadowDepth="8"/>
-                    </Border.Effect>-->
-                    <StackPanel Orientation="Vertical">
-                        <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 10">
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
-                                <TextBlock x:Name="a1" TextAlignment="Center" LineHeight="40">
-                                    Готівка
-                                    <LineBreak/>
-                                    10000 UAH
-                                </TextBlock>
-                            </Button>
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Click="AddIncome_Click">
-                                <TextBlock x:Name="a2" TextAlignment="Center" LineHeight="40">
-                                    Карта 1
-                                    <LineBreak/>
-                                    20000 UAH
-                                </TextBlock>
-                            </Button>
-                        </Grid>
-                        <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 20">
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Left" Click="AddIncome_Click">
-                                <TextBlock x:Name="a3" TextAlignment="Center" LineHeight="40">
-                                    Карта 2
-                                    <LineBreak/>
-                                    50000 UAH
-                                </TextBlock>
-                            </Button>
-                            <Button Style="{StaticResource AccountsButton}" HorizontalAlignment="Right" Content="БІЛЬШЕ" FontSize="30" Click="OpenAccounts_Click"/>
-                        </Grid>
+                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650" Height="320">
+                    <StackPanel x:Name="AccountsPanel" Orientation="Vertical">
+                        
                     </StackPanel>
                 </Border>
             </StackPanel>

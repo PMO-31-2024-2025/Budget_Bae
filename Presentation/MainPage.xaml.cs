@@ -24,6 +24,8 @@ using System.Diagnostics;
 using WebAssemblyMan;
 using BusinessLogic.Services;
 using LiveCharts.Definitions.Charts;
+using Microsoft.VisualBasic;
+using System.Xml.Linq;
 
 namespace Presentation
 {
@@ -32,6 +34,7 @@ namespace Presentation
     /// </summary>
     public partial class MainPage : Page
     {
+        private List<Account> accounts;
         public MainPage()
         {
             InitializeComponent();
@@ -39,13 +42,13 @@ namespace Presentation
             if(SessionManager.CurrentUserId != null)
             {
                 UserExpenses.Text = $"{ExpenseService.CurrentExpense().ToString()} UAH";
+                accounts = AccountService.GetUsersAccounts();
             }
             else
             {
-                a1.Visibility = Visibility.Collapsed;
-                a2.Visibility = Visibility.Collapsed;
-                a3.Visibility = Visibility.Collapsed;
+                accounts = new List<Account>();
             }
+            SetAccounts();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -152,6 +155,98 @@ namespace Presentation
                     navBarControl.OpenAnalitics();
                 }
             }
+        }
+
+        public void SetAccounts()
+        {
+            Grid accountsGrid = new Grid();
+            accountsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(160) });
+            accountsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(160) });
+            accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
+            accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
+
+            if (accounts.Count > 0)
+            {
+                Button accountButton1 = new Button
+                {
+                    Content = new TextBlock()
+                    {
+                        Text = $"{accounts[0].Name}\n{accounts[0].Balance} UAH",
+                        TextAlignment = TextAlignment.Center
+                    },
+                    FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+                    FontSize = 20,
+                    FontWeight = FontWeights.SemiBold,
+                    Style = (Style)FindResource("AccountsButton"),
+                    Margin = new Thickness(35, 20, 20, 10)
+                };
+                accountButton1.Click += AddIncome_Click;
+                Grid.SetRow(accountButton1, 0);
+                Grid.SetColumn(accountButton1, 0);
+                accountsGrid.Children.Add(accountButton1);
+            }
+
+            if (accounts.Count > 1)
+            {
+                Button accountButton2 = new Button
+                {
+                    Content = new TextBlock()
+                    {
+                        Text = $"{accounts[1].Name}\n{accounts[1].Balance} UAH",
+                        TextAlignment = TextAlignment.Center
+                    },
+                    FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+                    FontSize = 20,
+                    FontWeight = FontWeights.SemiBold,
+                    Style = (Style)FindResource("AccountsButton"),
+                    Margin = new Thickness(20, 20, 35, 10)
+                };
+                accountButton2.Click += AddIncome_Click;
+                Grid.SetRow(accountButton2, 0);
+                Grid.SetColumn(accountButton2, 1);
+                accountsGrid.Children.Add(accountButton2);
+            }
+
+            if (accounts.Count > 2)
+            {
+                Button accountButton3 = new Button
+                {
+                    Content = new TextBlock()
+                    {
+                        Text = $"{accounts[2].Name}\n{accounts[2].Balance} UAH",
+                        TextAlignment = TextAlignment.Center
+                    },
+                    FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+                    FontSize = 20,
+                    FontWeight = FontWeights.SemiBold,
+                    Style = (Style)FindResource("AccountsButton"),
+                    Margin = new Thickness(35, 5, 20, 15)
+                };
+                accountButton3.Click += AddIncome_Click;
+                Grid.SetRow(accountButton3, 1);
+                Grid.SetColumn(accountButton3, 0);
+                accountsGrid.Children.Add(accountButton3);
+            }
+
+            Button moreButton = new Button
+            {
+                Content = "БІЛЬШЕ",
+                FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+                FontSize = 30,
+                FontWeight = FontWeights.SemiBold,
+                Style = (Style)FindResource("AccountsButton"),
+                Margin = new Thickness(20, 5, 35, 15)
+            };
+            moreButton.Click += OpenAccounts_Click;
+            Grid.SetRow(moreButton, 1);
+            Grid.SetColumn(moreButton, 1);
+            accountsGrid.Children.Add(moreButton);
+
+            AccountsPanel.Children.Add(accountsGrid);
         }
 
         public void UpdatePieChart()
