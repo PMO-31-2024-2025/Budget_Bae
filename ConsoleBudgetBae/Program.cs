@@ -193,31 +193,55 @@ namespace ConsoleLevel
             //    Console.WriteLine(id);
             //}
 
-            var standardCategories = new List<string> { "Їжа",  "Одяг", "Розваги", "Транспорт", "Здоров'я" };
-            var users = DbHelper.db.Users.ToList();
+            //var standardCategories = new List<string> { "Їжа",  "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+            //var users = DbHelper.db.Users.ToList();
 
-            foreach (var user in users)
-            {
-                foreach (var categoryName in standardCategories)
-                {
-                    bool categoryExists = DbHelper.db.ExpensesCategories
-                        .Any(c => c.UserId == user.Id && c.Name == categoryName);
+            //foreach (var user in users)
+            //{
+            //    foreach (var categoryName in standardCategories)
+            //    {
+            //        bool categoryExists = DbHelper.db.ExpensesCategories
+            //            .Any(c => c.UserId == user.Id && c.Name == categoryName);
 
-                    if (!categoryExists)
-                    {
-                        var newCategory = new ExpenseCategory
-                        {
-                            Name = categoryName,
-                            UserId = user.Id
-                        };
-                        DbHelper.db.ExpensesCategories.Add(newCategory);
-                    }
-                }
-            }
+            //        if (!categoryExists)
+            //        {
+            //            var newCategory = new ExpenseCategory
+            //            {
+            //                Name = categoryName,
+            //                UserId = user.Id
+            //            };
+            //            DbHelper.db.ExpensesCategories.Add(newCategory);
+            //        }
+            //    }
+            //}
 
-            DbHelper.db.SaveChanges();
-            Console.WriteLine("Стандартні категорії додані для всіх існуючих користувачів.");
+            //DbHelper.db.SaveChanges();
+            ////Console.WriteLine("Стандартні категорії додані для всіх існуючих користувачів.");
 
+
+            //DbHelper.db.Add(new Expense() { CategoryId = 8, ExpenseDate = "2024-11-01 12:30:00", ExpenseSum = 700.00, AccountId = 3 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 8, ExpenseDate = "2024-11-02 09:12:47", ExpenseSum = 250.60, AccountId = 3 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 3, ExpenseDate = "2024-11-01 10:01:34", ExpenseSum = 90.11, AccountId = 4 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 2, ExpenseDate = "2024-11-02 21:10:00", ExpenseSum = 267.00, AccountId = 4 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 3, ExpenseDate = "2024-11-01 12:30:00", ExpenseSum = 700.00, AccountId = 4 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 1, ExpenseDate = "2024-11-03 09:12:47", ExpenseSum = 250.60, AccountId = 4 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 1, ExpenseDate = "2024-11-03 07:11:34", ExpenseSum = 760.23, AccountId = 3 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 2, ExpenseDate = "2024-11-04 20:56:65", ExpenseSum = 1899.99, AccountId = 4 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 8, ExpenseDate = "2024-11-04 09:24:45", ExpenseSum = 129.50, AccountId = 2 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 5, ExpenseDate = "2024-11-04 09:38:47", ExpenseSum = 54.50, AccountId = 2 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 5, ExpenseDate = "2024-11-03 13:22:12", ExpenseSum = 110.81, AccountId = 1 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 4, ExpenseDate = "2024-11-03 18:10:11", ExpenseSum = 3446.10, AccountId = 1 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 7, ExpenseDate = "2024-11-05 05:11:34", ExpenseSum = 760.23, AccountId = 1 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 6, ExpenseDate = "2024-11-04 10:56:65", ExpenseSum = 1899.99, AccountId = 1 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 2, ExpenseDate = "2024-11-04 10:20:45", ExpenseSum = 129.50, AccountId = 2 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 2, ExpenseDate = "2024-11-04 23:32:47", ExpenseSum = 54.50, AccountId = 2 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 1, ExpenseDate = "2024-11-03 20:00:12", ExpenseSum = 110.81, AccountId = 1 });
+            //DbHelper.db.Add(new Expense() { CategoryId = 3, ExpenseDate = "2024-11-03 19:01:11", ExpenseSum = 3446.10, AccountId = 1 });
+
+            //DbHelper.db.SaveChanges();
+
+            //int expenseCount = DbHelper.db.Expenses.Count();
+            //Console.WriteLine($"Expenses: {expenseCount}");
         }
     }
 }
