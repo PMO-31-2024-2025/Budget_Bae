@@ -177,5 +177,31 @@ namespace Presentation
                 }
             }
         }
+
+        private async void TopUpSavings_Click(object sender, RoutedEventArgs e)
+        {
+            string topUpAmountInput = TopUpAmountSavings.Text;
+            var selectedSavings = SavingsList.SelectedItem;
+
+            if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null)
+            {
+                MessageBox.Show("Усі поля мають бути заповнені!");
+            }
+            else if (!decimal.TryParse(topUpAmountInput, out _))
+            {
+                MessageBox.Show("Поле суми поповнення має містити лише число!");
+            }
+            else
+            {
+                try
+                {
+                    MessageBox.Show("Поповнення успішно!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

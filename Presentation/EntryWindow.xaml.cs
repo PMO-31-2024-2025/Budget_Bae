@@ -122,7 +122,7 @@ namespace Presentation
             string emailInput = settingsEntryEmailTextBox.Text.ToLower();
             string passwordInput = settingsEntryPasswordTextBox.Text;
 
-            if (emailInput == "" && passwordInput == "")
+            if (emailInput == "" || passwordInput == "")
             {
                 MessageBox.Show("Усі поля мають бути заповнені");
             }

@@ -38,7 +38,7 @@
                                     Text="{Binding ElementName=Amount, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                            <TextBox x:Name="Date" Style="{StaticResource ModalWindowTextBox}" Tag="Число внесення" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 80"
                                     Text="{Binding ElementName=Date, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-                           <Button Style="{StaticResource ModalWindowButton}" Content="Створити" Margin="0, 0, 0, 30"/>
+                <Button x:Name="CreatePayment_Button" Style="{StaticResource ModalWindowButton}" Content="Створити" Margin="0, 0, 0, 30" Click="CreatePayment_Click"/>
                        </StackPanel>
         </Border>
     </Grid>

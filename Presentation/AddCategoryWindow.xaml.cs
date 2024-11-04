@@ -57,14 +57,14 @@ namespace Presentation
             try
             {
                 string categoryInput = Name.Text;
-                if (categoryInput.ToLower() == "введіть назву категорії")
+                if (categoryInput.ToLower() == "Введіть назву категорії")
                 {
-                    MessageBox.Show("Введіть назву категорії!");
+                    MessageBox.Show("Заповніть поле з назвою!");
                 }
                 else
                 {
                     ExpenseCategoryService.AddExpense(categoryInput);
-                    MessageBox.Show("Категорії додано успішно!");
+                    MessageBox.Show("Категорію додано успішно!");
                     Close();
                 }
             }

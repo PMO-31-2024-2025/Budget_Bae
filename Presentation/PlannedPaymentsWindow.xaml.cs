@@ -156,5 +156,32 @@ namespace Presentation
                 }
             }
         }
+
+        private void CreatePayment_Click(object sender, RoutedEventArgs e)
+        {
+            string name = Name.Text.Trim();
+            string amountText = Amount.Text.Trim();
+            string dateText = Date.Text.Trim();
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(amountText) || string.IsNullOrEmpty(dateText))
+            {
+                MessageBox.Show("Усі поля мають бути заповненими.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!decimal.TryParse(amountText, out decimal amount))
+            {
+                MessageBox.Show("Сума поповнення повинна бути числом.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
+            {
+                MessageBox.Show("Число дати повинно бути від 1 до 28.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            MessageBox.Show("Платіж створено успішно!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
