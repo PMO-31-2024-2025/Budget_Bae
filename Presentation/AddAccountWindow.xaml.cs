@@ -28,5 +28,25 @@ namespace Presentation
         {
             Close();
         }
+
+        private void AddAccount_Click(object sender, RoutedEventArgs e)
+        {
+            string name = Name.Text.Trim();
+            string balanceText = Balance.Text.Trim();
+
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(balanceText))
+            {
+                MessageBox.Show("Усі поля мають бути заповненими.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!decimal.TryParse(balanceText, out decimal balance) || balance < 0)
+            {
+                MessageBox.Show("Введіть достовірний баланс", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            MessageBox.Show("Акаунт створено успішно!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
