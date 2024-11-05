@@ -43,13 +43,13 @@ namespace Presentation
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textBox)
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    textBox.Text = textBox.Tag.ToString();
-                }
-            }
+            //if (sender is TextBox textBox)
+            //{
+            //    if (string.IsNullOrWhiteSpace(textBox.Text))
+            //    {
+            //        textBox.Text = textBox.Tag.ToString();
+            //    }
+            //}
         }
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)

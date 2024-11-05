@@ -34,36 +34,36 @@ namespace Presentation
 
         private void settingsEntryEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsEntryEmailTextBox.Text.ToLower();
+            //string emailInput = settingsEntryEmailTextBox.Text.ToLower();
 
-            if (emailInput == "")
-            {
-                MessageBox.Show("Поле з адресою має бути заповненим!");
-            }
-            else if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            {
-                settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                MessageBox.Show("Неправильний формат електронної адреси!");
-            }
-            else
-            {
-                settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            }
+            //if (emailInput == "")
+            //{
+            //    MessageBox.Show("Поле з адресою має бути заповненим!");
+            //}
+            //else if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            //{
+            //    settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            //    MessageBox.Show("Неправильний формат електронної адреси!");
+            //}
+            //else
+            //{
+            //    settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            //}
         }
 
         private void settingsRegistrationEmailTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            string emailInput = settingsRegistrationEmailTextBox.Text.ToLower();
+            //string emailInput = settingsRegistrationEmailTextBox.Text.ToLower();
             
-            if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            {
-                settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                MessageBox.Show("Неправильний формат електронної адреси!");
-            }
-            else
-            {
-                settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
-            }
+            //if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            //{
+            //    settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
+            //    MessageBox.Show("Неправильний формат електронної адреси!");
+            //}
+            //else
+            //{
+            //    settingsRegistrationEmailTextBox.BorderBrush = new SolidColorBrush(Colors.Green);
+            //}
             
         }
 
@@ -80,7 +80,7 @@ namespace Presentation
             }
             else if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                settingsRegistrationEmailTextBox_LostFocus(sender, e);
+                MessageBox.Show("Неправильний формат електронної адреси!");
             }
             else if (createPasswordInput != confirmPasswordInput)
             {
@@ -123,7 +123,7 @@ namespace Presentation
             }
             else if (!Regex.IsMatch(emailInput, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
-                settingsEntryEmailTextBox_LostFocus(sender, e);
+                MessageBox.Show("Неправильний формат електронної адреси!");
             }
             else if (passwordInput.Length < 8)
             {
@@ -138,11 +138,11 @@ namespace Presentation
                     User user = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput);
                     if (user == null)
                     {
-                        MessageBox.Show("Ая, думав отак влізеш в систему якшо не зареєстрований?");
+                        MessageBox.Show("Не коректна пошта");
                     }
                     else if (user.Password != passwordInput)
                     {
-                        MessageBox.Show("Нє, пароль не той. Сліпаки роззуй і введи всьо правильно.");
+                        MessageBox.Show("Не коректний пароль");
                     }
                     else
                     {
