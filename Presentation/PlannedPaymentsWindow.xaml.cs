@@ -101,7 +101,7 @@ namespace Presentation
                 {
                     Content = new TextBlock
                     {
-                        Text = $"Внесок !!! числа\n{PlannedPayments[i].PlannedSum} UAH",
+                        Text = $"Внесок {PlannedPayments[i].NotigicationDate} числа\n{PlannedPayments[i].PlannedSum} UAH",
                         TextAlignment = TextAlignment.Right
                     },
                     VerticalAlignment = VerticalAlignment.Bottom,

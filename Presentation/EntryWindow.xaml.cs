@@ -191,7 +191,7 @@ namespace Presentation
             }
         }
 
-        private void settingsEntryExitButton_Click(object sender, RoutedEventArgs e)
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
