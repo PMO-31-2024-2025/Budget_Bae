@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Session;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,10 @@ namespace Presentation
         {
             InitializeComponent();
             MainFrame.Navigate(new MainPage());
-            Loaded += MainWindow_Loaded;
+            if (SessionManager.CurrentUserId == null)
+            {
+                Loaded += MainWindow_Loaded;
+            }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

@@ -38,20 +38,19 @@ namespace Presentation
         public MainPage()
         {
             InitializeComponent();
+            Loaded += MainPage_Loaded;
+            
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
             UpdatePieChart();
-            if(SessionManager.CurrentUserId != null)
-            {
-                UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
-                accounts = AccountService.GetUsersAccounts();
-            }
-            else
-            {
-                accounts = new List<Account>();
-            }
+            UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
+            accounts = AccountService.GetUsersAccounts();
             SetAccounts();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+            private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddAccountWindow window = new AddAccountWindow();
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
