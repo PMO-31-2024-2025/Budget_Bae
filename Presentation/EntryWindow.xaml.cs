@@ -146,8 +146,8 @@ namespace Presentation
                     }
                     else
                     {
-                        MessageBox.Show($"Вітаємо, {DbHelper.db.Users.First(x => x.Id == user.Id).Name}!");
-                        SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
+                        //MessageBox.Show($"Вітаємо, {DbHelper.db.Users.First(x => x.Id == user.Id).Name}!");
+                        //SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
                         //settingsEntryEmailTextBox.Text = SessionManager.CurrentUserId.ToString();
 
                         MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -158,8 +158,8 @@ namespace Presentation
                             navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
                             mainWindow.MainFrame.Navigate(new MainPage());
                         }
-                        navBar.nbExitButton.Content = (DbHelper.db.Users.First(x => x.Id == user.Id).Name);
-
+                        navBar.nbEntryButton.Content = (DbHelper.db.Users.First(x => x.Id == user.Id).Name);
+                        SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
                         Close();
                     }
                 }
@@ -189,6 +189,11 @@ namespace Presentation
             {
                 settingsEntryButton_Click(sender, e);
             }
+        }
+
+        private void settingsEntryExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

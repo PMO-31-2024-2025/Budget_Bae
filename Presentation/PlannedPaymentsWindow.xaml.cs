@@ -168,20 +168,25 @@ namespace Presentation
                 MessageBox.Show("Усі поля мають бути заповненими.");
                 return;
             }
-
-            if (!decimal.TryParse(amountText, out decimal amount))
+            else if (!decimal.TryParse(amountText, out decimal amount))
             {
                 MessageBox.Show("Сума поповнення повинна бути числом.");
                 return;
             }
-
-            if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
+            else if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
             {
                 MessageBox.Show("Число дати повинно бути від 1 до 28.");
                 return;
             }
+            else
+            {
+                int notificationDate = int.Parse(dateText);
+                double expenseAmount = double.Parse(amountText);
+                PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
+                MessageBox.Show("Платіж створено успішно!");
+            }
 
-            MessageBox.Show("Платіж створено успішно!");
+            
         }
     }
 }

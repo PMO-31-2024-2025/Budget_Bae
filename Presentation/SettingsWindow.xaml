@@ -33,7 +33,7 @@
         <Button Content="X" Click="CloseButton_Click" Margin="60, 5, 0, 5" Style="{StaticResource CloseButton}" Background="#BF6E9BC3" Foreground="#CC000000"/>
         </TextBlock>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Height="50">
-            <Label x:Name="UserName" Style="{StaticResource ModalWindowLabel}" Foreground="#6E9BC3" FontSize="20" FontWeight="Bold" Width="300" Margin="5, 10, 30, 10"/>
+            <Label x:Name="UserNameLabel" Style="{StaticResource ModalWindowLabel}" Foreground="#6E9BC3" FontSize="20" FontWeight="Bold" Width="300" Margin="5, 10, 30, 10"/>
             <Button x:Name="Exit" Content="Вийти" FontFamily="{StaticResource CustomFont}" Foreground="#A7C7E7" FontSize="15" FontWeight="Bold" BorderThickness="0" Background="Transparent" Click="Exit_Click"/>
         </StackPanel>
 

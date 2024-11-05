@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,7 +37,7 @@ namespace Presentation
         public SettingsWindow()
         {
             InitializeComponent();
-            UserName.Content = DbHelper.db.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
+            UserNameLabel.Content = DbHelper.db.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -194,9 +195,22 @@ namespace Presentation
             }
         }
 
+        NavBar navBar;
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            EntryWindow entryWindow = new EntryWindow();
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            if (mainWindow != null && mainWindow.MainFrame != null)
+            {
+                navBar = mainWindow.NavBar;
+                navBar.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
+                navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
+                mainWindow.MainFrame.Navigate(new MainPage());
+            }
+            navBar.nbEntryButton.Content = "Немає даних";
+            SessionManager.ClearCurrentAccount();
+            Close();
+            entryWindow.ShowDialog();
         }
     }
 

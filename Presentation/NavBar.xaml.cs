@@ -43,13 +43,23 @@ namespace Presentation
            OpenAnalitics();
         }
 
-        private void nbExitButton_Click(object sender, RoutedEventArgs e)
+        private void nbEntryButton_Click(object sender, RoutedEventArgs e)
         {
-            if (nbExitButton.Content != "Вхід")
+            // Показуємо діалогове вікно з повідомленням та двома кнопками
+            MessageBoxResult result = MessageBox.Show("Бажаєте вийти з акаунту?", "Застереження", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // Обробка результату
+            if (result == MessageBoxResult.Yes && nbEntryButton.Content != "Вхід")
             {
                 EntryWindow entryWindow = new EntryWindow();
                 entryWindow.ShowDialog();
             }
+            // ТУТ Я НЕ ХОТІВ ВИДАЛЯТИ ЧИЙСЬ КОД ТОМУ ЗАКОМЕНТУВАВ ЙОГО
+            //if (nbEntryButton.Content != "Вхід")
+            //{
+            //    EntryWindow entryWindow = new EntryWindow();
+            //    entryWindow.ShowDialog();
+            //}
         }
 
         private void nbSettingsButton_Click(Object sender, RoutedEventArgs e)
