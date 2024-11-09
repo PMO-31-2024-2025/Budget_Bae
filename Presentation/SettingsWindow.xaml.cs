@@ -29,10 +29,7 @@ namespace Presentation
         private SettingsCategoriesWindow categoriesWindow;
         private SettingsNotificationWindow notificationWindow;
         private SettingsSupportWindow supportWindow;
-        public ObservableCollection<string> categories = new ObservableCollection<string> { "Категорія 1", "Категорія 2",
-        "Категорія 3", "Категорія 4", "Категорія 5", "Категорія 6", "Категорія 7", "Категорія 8" };
-        public ObservableCollection<string> plannedPayments = new ObservableCollection<string> { "Комунальні послуги", "Спортзал" };
-
+        private NavBar navBar;
 
         public SettingsWindow()
         {
@@ -171,47 +168,46 @@ namespace Presentation
             if (supportWindow == null || !supportWindow.IsVisible)
             {
                 RotateTransform rotateTransform = new RotateTransform(аngle);
-                SupportExpanderButton.RenderTransform = rotateTransform;
-                SupportExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                supportWindow = new SettingsSupportWindow();
-                supportWindow.Owner = this;
-                supportWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                this.SupportExpanderButton.RenderTransform = rotateTransform;
+                this.SupportExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.supportWindow = new SettingsSupportWindow();
+                this.supportWindow.Owner = this;
+                this.supportWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 var screenWidth = SystemParameters.PrimaryScreenWidth;
-                var windowWidth = supportWindow.Width;
-                supportWindow.Left = screenWidth - windowWidth;
+                var windowWidth = this.supportWindow.Width;
+                this.supportWindow.Left = screenWidth - windowWidth;
                 var button = sender as Button;
                 var buttonPosition = button.PointToScreen(new Point(0, 0));
                 var buttonHeight = button.ActualHeight;
-                supportWindow.Top = buttonPosition.Y - 80;
-                supportWindow.Show();
+                this.supportWindow.Top = buttonPosition.Y - 80;
+                this.supportWindow.Show();
             }
             else
             {
                 аngle = 0;
                 RotateTransform rotateTransform = new RotateTransform(аngle);
-                SupportExpanderButton.RenderTransform = rotateTransform;
-                SupportExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                supportWindow.Close();
+                this.SupportExpanderButton.RenderTransform = rotateTransform;
+                this.SupportExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.supportWindow.Close();
             }
         }
 
-        NavBar navBar;
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             EntryWindow entryWindow = new EntryWindow();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow != null && mainWindow.MainFrame != null)
             {
-                navBar = mainWindow.NavBar;
-                navBar.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
-                navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
+                this.navBar = mainWindow.NavBar;
+                this.navBar.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
+                this.navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
                 mainWindow.MainFrame.Navigate(new MainPage());
             }
-            navBar.nbEntryButton.Content = "Немає даних";
+
+            this.navBar.nbEntryButton.Content = "Немає даних";
             SessionManager.ClearCurrentAccount();
-            Close();
+            this.Close();
             entryWindow.ShowDialog();
         }
     }
-
 }

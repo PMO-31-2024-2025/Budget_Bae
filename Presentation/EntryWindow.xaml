@@ -27,7 +27,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label x:Name="settingsEntryEmailLabel" Grid.Row="0" Content="Електронна пошта:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="30,30,30,0" Style="{StaticResource ModalWindowLabel}" Height="28" Width="165"/>
-                    <TextBox x:Name="settingsEntryEmailTextBox" Grid.Row="1" HorizontalAlignment="Left" Margin="35, 10, 35, 0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300" LostFocus="settingsEntryEmailTextBox_LostFocus"  KeyDown="settingsEntryEmailTextBox_KeyDown">
+                    <TextBox x:Name="settingsEntryEmailTextBox" Grid.Row="1" HorizontalAlignment="Left" Margin="35, 10, 35, 0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300" LostFocus="SettingsEntryEmailTextBox_LostFocus"  KeyDown="SettingsEntryEmailTextBox_KeyDown">
                         <TextBox.Text>
                             <Binding Path="Email" UpdateSourceTrigger="LostFocus" ValidatesOnDataErrors="True" ValidatesOnExceptions="True" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
@@ -37,8 +37,8 @@
                         </TextBox.Text>
                     </TextBox>
                     <Label x:Name="settingsEntryPasswordLabel" Grid.Row="2" Content="Пароль:" HorizontalAlignment="Left" Margin="30, 20, 30, 0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}" Height="28" Width="73"/>
-                    <TextBox x:Name="settingsEntryPasswordTextBox" Grid.Row="3" Margin="35, 10, 35, 0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300" KeyDown="settingsEntryPasswordTextBox_KeyDown"/>
-                    <Button x:Name="settingsEntryButton" Content="Увійти" Grid.Row="4" Margin="0, 150, 10, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource ModalWindowButton}" Height="35" Width="150" Click="settingsEntryButton_Click"/>
+                    <TextBox x:Name="settingsEntryPasswordTextBox" Grid.Row="3" Margin="35, 10, 35, 0" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" Height="30" Width="300" KeyDown="SettingsEntryPasswordTextBox_KeyDown"/>
+                    <Button x:Name="settingsEntryButton" Content="Увійти" Grid.Row="4" Margin="0, 150, 10, 10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{StaticResource ModalWindowButton}" Height="35" Width="150" Click="SettingsEntryButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Реєстрація" FontFamily="{StaticResource CustomFont}" FontSize="15">
@@ -54,14 +54,14 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label x:Name="settingsRegistrationEmailLabel" Grid.Row="0" Content="Електронна пошта:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="30,10,0,0" Style="{StaticResource ModalWindowLabel}"/>
-                    <TextBox x:Name="settingsRegistrationEmailTextBox" HorizontalAlignment="Left" Grid.Row="1" Margin="35,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" LostFocus="settingsRegistrationEmailTextBox_LostFocus"/>
+                    <TextBox x:Name="settingsRegistrationEmailTextBox" HorizontalAlignment="Left" Grid.Row="1" Margin="35,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}" LostFocus="SettingsRegistrationEmailTextBox_LostFocus"/>
                     <Label x:Name="settingsRegistrationNameLabel" Grid.Row="2" Content="Ім'я користувача:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="30,10,0,0" Style="{StaticResource ModalWindowLabel}"/>
                     <TextBox x:Name="settingsRegistrationNameTextBox" HorizontalAlignment="Left" Grid.Row="3" Margin="35,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}"/>
                     <Label x:Name="settingsRegistrationCreatePasswordLabel" Grid.Row="4" Content="Створіть пароль:" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}"/>
                     <TextBox x:Name="settingsRegistrationCreatePasswordTextBox" HorizontalAlignment="Left" Grid.Row="5" Margin="35,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}"/>
                     <Label x:Name="settingsRegistrationConfirmPasswordLabel" Grid.Row="6" Content="Повторіть пароль:" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Style="{StaticResource ModalWindowLabel}"/>
                     <TextBox x:Name="settingsRegistrationConfirmPasswordTextBox" HorizontalAlignment="Left" Grid.Row="7" Margin="35,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource ModalWindowTextBox}"/>
-                    <Button x:Name="settingsRegistrationButton" Grid.Row="8" Content="Зареєструватися" HorizontalAlignment="Left" Margin="200, 85, 10, 10" VerticalAlignment="Top" Style="{StaticResource ModalWindowButton}" Click="settingsRegistrationButton_Click" />
+                    <Button x:Name="settingsRegistrationButton" Grid.Row="8" Content="Зареєструватися" HorizontalAlignment="Left" Margin="200, 85, 10, 10" VerticalAlignment="Top" Style="{StaticResource ModalWindowButton}" Click="SettingsRegistrationButton_Click" />
                 </Grid>
             </TabItem>
         </TabControl>
