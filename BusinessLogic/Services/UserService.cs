@@ -1,22 +1,26 @@
-﻿namespace BusinessLogic.Services
+﻿// <copyright file="UserService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace BusinessLogic.Services
 {
+    using System.Data.Entity;
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
-    using System.Data.Entity;
 
     public class UserService
     {
-        private readonly BudgetBaeContext _context;
+        private readonly BudgetBaeContext context;
 
         public UserService(BudgetBaeContext context)
         {
-            this._context = context;
+            this.context = context;
         }
 
         public void RegisterUser(string email, string password, string name)
         {
-            if (this._context.Users.Any(u => u.Email == email))
+            if (this.context.Users.Any(u => u.Email == email))
             {
                 throw new Exception("Користувач з такою електронною поштою вже існує!");
             }
@@ -25,16 +29,16 @@
             {
                 Email = email,
                 Password = password,
-                Name = name
+                Name = name,
             };
 
-            this._context.Users.Add(user);
-            this._context.SaveChangesAsync();
+            this.context.Users.Add(user);
+            this.context.SaveChangesAsync();
         }
 
         public async Task<User> AuthenticateUserAsync(string email, string password)
         {
-            var user = await this._context.Users
+            var user = await this.context.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             if (user == null)
@@ -49,14 +53,14 @@
 
         public async Task UpdateUserAsync(User user)
         {
-            var existingUser = await this._context.Users.FindAsync(user.Id);
+            var existingUser = await this.context.Users.FindAsync(user.Id);
             if (existingUser != null)
             {
                 existingUser.Name = user.Name;
                 existingUser.Email = user.Email;
                 existingUser.Password = user.Password;
 
-                await this._context.SaveChangesAsync();
+                await this.context.SaveChangesAsync();
             }
             else
             {
@@ -66,11 +70,11 @@
 
         public async Task DeleteUserAsync(int userId)
         {
-            var user = await this._context.Users.FindAsync(userId);
+            var user = await this.context.Users.FindAsync(userId);
             if (user != null)
             {
-                this._context.Users.Remove(user);
-                await this._context.SaveChangesAsync();
+                this.context.Users.Remove(user);
+                await this.context.SaveChangesAsync();
             }
             else
             {
@@ -80,7 +84,7 @@
 
         public async Task<int?> AuthorizeUserAsync(string email, string password)
         {
-            var user = await this._context.Users
+            var user = await this.context.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             return user?.Id;

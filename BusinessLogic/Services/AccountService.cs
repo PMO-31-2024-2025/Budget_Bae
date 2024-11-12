@@ -1,4 +1,8 @@
-﻿namespace BusinessLogic.Services
+﻿// <copyright file="AccountService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace BusinessLogic.Services
 {
     using BusinessLogic.Session;
     using DAL.Data;
@@ -21,7 +25,7 @@
                 .ToList();
         }
 
-        public static string GetAccountName(int accountId)
+        public static string? GetAccountName(int accountId)
         {
             return DbHelper.db.Accounts
                 .Where(a => a.Id == accountId)

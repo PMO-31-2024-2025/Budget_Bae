@@ -1,4 +1,8 @@
-﻿namespace BusinessLogic.Services
+﻿// <copyright file="PlannedExpenseService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace BusinessLogic.Services
 {
     using BusinessLogic.Session;
     using DAL.Data;
@@ -18,7 +22,6 @@
             return DbHelper.db.PlannedExpenses
                 .Where(p => p.UserId == SessionManager.CurrentUserId)
                 .Sum(p => p.PlannedSum);
-
         }
 
         public static void AddPlannedExpense(string expenseName, int notification_date, double plannedSum)
@@ -36,7 +39,7 @@
                         Name = expenseName,
                         NotigicationDate = notification_date,
                         PlannedSum = plannedSum,
-                        UserId = currUser.Value
+                        UserId = currUser.Value,
                     };
                     DbHelper.db.PlannedExpenses.Add(plannedExpense);
                     DbHelper.db.SaveChangesAsync();
@@ -60,13 +63,12 @@
                 List<PlannedExpense> currUserData = DbHelper.db.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
 
                 var plannedExpenseToDelete = currUserData.FirstOrDefault(x => x.Name == expenseName);
-                if (plannedExpenseToDelete.UserId == SessionManager.CurrentUserId)
+                if (plannedExpenseToDelete != null && plannedExpenseToDelete.UserId == SessionManager.CurrentUserId)
                 {
                     DbHelper.db.PlannedExpenses.Remove(plannedExpenseToDelete);
                     DbHelper.db.SaveChangesAsync();
                 }
             }
-
         }
     }
 }

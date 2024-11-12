@@ -1,4 +1,8 @@
-﻿namespace BusinessLogic.Services
+﻿// <copyright file="SavingService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace BusinessLogic.Services
 {
     using BusinessLogic.Session;
     using DAL.Data;
@@ -22,7 +26,7 @@
 
         public static void AddSaving(string name, int sum, int monthsNumber)
         {
-
+            // реалізація
         }
     }
 }
