@@ -1,8 +1,13 @@
-﻿namespace BusinessLogic.Session
+﻿// <copyright file="SessionManager.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace BusinessLogic.Session
 {
     public class SessionManager
     {
         public static int? CurrentUserId { get; private set; }
+
         public static int? CurrentAccountId { get; private set; }
 
         public static void SetCurrentUser(int userId)

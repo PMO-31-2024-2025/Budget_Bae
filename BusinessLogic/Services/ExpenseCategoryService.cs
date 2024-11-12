@@ -1,10 +1,13 @@
-﻿using BusinessLogic.Session;
-using DAL.Data;
-using DAL.Models;
-
+﻿// <copyright file="ExpenseCategoryService.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace BusinessLogic.Services
 {
+    using BusinessLogic.Session;
+    using DAL.Data;
+    using DAL.Models;
+
     public class ExpenseCategoryService
     {
         public static List<ExpenseCategory> GetCategories()
@@ -14,7 +17,7 @@ namespace BusinessLogic.Services
                     .ToList();
         }
 
-        public static string GetCategoryName(int categoryId)
+        public static string? GetCategoryName(int categoryId)
         {
             return DbHelper.db.ExpensesCategories
                 .Where(ec => ec.Id == categoryId)
@@ -32,12 +35,12 @@ namespace BusinessLogic.Services
             else
             {
                 var category = DbHelper.db.ExpensesCategories.FirstOrDefault(c => c.Name == categoryName);
-                if (category == null)
+                if (category == null && SessionManager.CurrentUserId != null)
                 {
                     category = new ExpenseCategory
                     {
                         Name = categoryName,
-                        UserId = SessionManager.CurrentUserId.Value
+                        UserId = SessionManager.CurrentUserId.Value,
                     };
                     DbHelper.db.ExpensesCategories.Add(category);
                     DbHelper.db.SaveChangesAsync();
@@ -52,7 +55,7 @@ namespace BusinessLogic.Services
         public static void DeleteExpense(int categoryId)
         {
             var category = DbHelper.db.ExpensesCategories.Find(categoryId);
-            if (category.UserId == SessionManager.CurrentUserId)
+            if (category != null && category.UserId == SessionManager.CurrentUserId)
             {
                 DbHelper.db.ExpensesCategories.Remove(category);
                 DbHelper.db.SaveChangesAsync();

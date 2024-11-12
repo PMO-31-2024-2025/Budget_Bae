@@ -1,9 +1,9 @@
-﻿using BusinessLogic.Services;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace Presentation
+﻿namespace Presentation
 {
+    using BusinessLogic.Services;
+    using System.Windows;
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for AddCategoryWindow.xaml
     /// </summary>

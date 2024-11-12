@@ -1,7 +1,7 @@
-﻿using System.Windows;
-
-namespace Presentation
+﻿namespace Presentation
 {
+    using System.Windows;
+
     /// <summary>
     /// Interaction logic for SettingsSupportWindow.xaml
     /// </summary>

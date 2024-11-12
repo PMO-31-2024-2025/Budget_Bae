@@ -1,8 +1,8 @@
-﻿using DAL.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace DAL.Data
+﻿namespace DAL.Data
 {
+    using DAL.Models;
+    using Microsoft.EntityFrameworkCore;
+
     public partial class BudgetBaeContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }

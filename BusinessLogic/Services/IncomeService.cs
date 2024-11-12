@@ -1,8 +1,8 @@
-﻿using DAL.Data;
-using DAL.Models;
-
-namespace BusinessLogic.Services
+﻿namespace BusinessLogic.Services
 {
+    using DAL.Data;
+    using DAL.Models;
+
     public class IncomeService
     {
 

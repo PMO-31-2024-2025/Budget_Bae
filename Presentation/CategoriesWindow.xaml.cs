@@ -1,11 +1,11 @@
 ﻿namespace Presentation
 {
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
     using BusinessLogic.Services;
     using BusinessLogic.Session;
     using DAL.Models;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for CategoriesWindow.xaml

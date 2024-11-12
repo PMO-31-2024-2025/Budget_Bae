@@ -1,10 +1,10 @@
-﻿using BusinessLogic.Session;
-using DAL.Data;
-using System.Windows;
-using System.Windows.Controls;
-
-namespace Presentation
+﻿namespace Presentation
 {
+    using BusinessLogic.Session;
+    using DAL.Data;
+    using System.Windows;
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for ExpensesWindow.xaml
     /// </summary>

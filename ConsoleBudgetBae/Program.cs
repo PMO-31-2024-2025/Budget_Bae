@@ -1,4 +1,4 @@
-﻿namespace ConsoleLevel
+﻿namespace ConsoleBudgetBae
 {
     class Program
     {

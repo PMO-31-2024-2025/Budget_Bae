@@ -1,9 +1,9 @@
-﻿using BusinessLogic.Session;
-using DAL.Data;
-using DAL.Models;
-
-namespace BusinessLogic.Services
+﻿namespace BusinessLogic.Services
 {
+    using BusinessLogic.Session;
+    using DAL.Data;
+    using DAL.Models;
+
     public class PlannedExpenseService
     {
         public static List<PlannedExpense> GetPlannedExpenses()

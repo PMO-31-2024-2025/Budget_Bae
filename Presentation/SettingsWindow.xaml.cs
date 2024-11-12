@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Session;
-using DAL.Data;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-
-namespace Presentation
+﻿namespace Presentation
 {
+    using BusinessLogic.Session;
+    using DAL.Data;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>

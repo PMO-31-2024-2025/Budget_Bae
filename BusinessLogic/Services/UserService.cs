@@ -1,10 +1,10 @@
-﻿using BusinessLogic.Session;
-using DAL.Data;
-using DAL.Models;
-using System.Data.Entity;
-
-namespace BusinessLogic.Services
+﻿namespace BusinessLogic.Services
 {
+    using BusinessLogic.Session;
+    using DAL.Data;
+    using DAL.Models;
+    using System.Data.Entity;
+
     public class UserService
     {
         private readonly BudgetBaeContext _context;
