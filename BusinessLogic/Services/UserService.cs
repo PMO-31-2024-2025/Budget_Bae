@@ -1,12 +1,7 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -16,12 +11,12 @@ namespace BusinessLogic.Services
 
         public UserService(BudgetBaeContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public void RegisterUser(string email, string password, string name)
         {
-            if (_context.Users.Any(u => u.Email == email))
+            if (this._context.Users.Any(u => u.Email == email))
             {
                 throw new Exception("Користувач з такою електронною поштою вже існує!");
             }
@@ -33,13 +28,13 @@ namespace BusinessLogic.Services
                 Name = name
             };
 
-            _context.Users.Add(user);
-            _context.SaveChangesAsync();
+            this._context.Users.Add(user);
+            this._context.SaveChangesAsync();
         }
 
         public async Task<User> AuthenticateUserAsync(string email, string password)
         {
-            var user = await _context.Users
+            var user = await this._context.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             if (user == null)
@@ -54,14 +49,14 @@ namespace BusinessLogic.Services
 
         public async Task UpdateUserAsync(User user)
         {
-            var existingUser = await _context.Users.FindAsync(user.Id);
+            var existingUser = await this._context.Users.FindAsync(user.Id);
             if (existingUser != null)
             {
                 existingUser.Name = user.Name;
                 existingUser.Email = user.Email;
                 existingUser.Password = user.Password;
 
-                await _context.SaveChangesAsync();
+                await this._context.SaveChangesAsync();
             }
             else
             {
@@ -71,11 +66,11 @@ namespace BusinessLogic.Services
 
         public async Task DeleteUserAsync(int userId)
         {
-            var user = await _context.Users.FindAsync(userId);
-            if(user != null)
+            var user = await this._context.Users.FindAsync(userId);
+            if (user != null)
             {
-                _context.Users.Remove(user);
-                await _context.SaveChangesAsync();
+                this._context.Users.Remove(user);
+                await this._context.SaveChangesAsync();
             }
             else
             {
@@ -85,9 +80,9 @@ namespace BusinessLogic.Services
 
         public async Task<int?> AuthorizeUserAsync(string email, string password)
         {
-            var user = await _context.Users
+            var user = await this._context.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
-            
+
             return user?.Id;
         }
     }

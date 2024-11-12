@@ -1,11 +1,6 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -38,7 +33,7 @@ namespace BusinessLogic.Services
                 {
                     plannedExpense = new PlannedExpense
                     {
-                        Name = expenseName, 
+                        Name = expenseName,
                         NotigicationDate = notification_date,
                         PlannedSum = plannedSum,
                         UserId = currUser.Value
@@ -71,7 +66,7 @@ namespace BusinessLogic.Services
                     DbHelper.db.SaveChangesAsync();
                 }
             }
-            
+
         }
     }
 }

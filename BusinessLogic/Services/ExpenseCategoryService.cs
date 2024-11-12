@@ -1,14 +1,6 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
 using DAL.Models;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees;
-using System.Linq;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace BusinessLogic.Services
@@ -37,7 +29,7 @@ namespace BusinessLogic.Services
             {
                 throw new Exception("Авторизуйтесь для додавання категорії.");
             }
-            else 
+            else
             {
                 var category = DbHelper.db.ExpensesCategories.FirstOrDefault(c => c.Name == categoryName);
                 if (category == null)
@@ -53,7 +45,7 @@ namespace BusinessLogic.Services
                 else
                 {
                     throw new Exception("Категорія вже існує!");
-                }   
+                }
             }
         }
 

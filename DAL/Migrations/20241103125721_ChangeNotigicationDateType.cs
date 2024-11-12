@@ -7,7 +7,7 @@ namespace DAL.Migrations
     /// <inheritdoc />
     public partial class ChangeNotigicationDateType : Migration
     {
-        
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             //migrationBuilder.AlterColumn<int>(

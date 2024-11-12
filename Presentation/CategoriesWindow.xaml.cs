@@ -1,22 +1,12 @@
-﻿using BusinessLogic.Services;
-using BusinessLogic.Session;
-using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-namespace Presentation
+﻿namespace Presentation
 {
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using BusinessLogic.Services;
+    using BusinessLogic.Session;
+    using DAL.Models;
+
     /// <summary>
     /// Interaction logic for CategoriesWindow.xaml
     /// </summary>
@@ -26,29 +16,29 @@ namespace Presentation
 
         public CategoriesWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            categories = new List<string>();
+            this.categories = new List<string>();
             if (SessionManager.CurrentUserId != null)
             {
                 List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
 
                 foreach (var category in fetchedCategories)
                 {
-                    categories.Add(category.Name);
+                    this.categories.Add(category.Name);
                 }
             }
             else
             {
-                categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+                this.categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
             }
 
-            SetCategories();
+            this.SetCategories();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
@@ -60,8 +50,8 @@ namespace Presentation
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchText = SearchTextBox.Text.ToLower();
-            foreach (UIElement element in CategoriesPanel.Children)
+            string searchText = this.SearchTextBox.Text.ToLower();
+            foreach (UIElement element in this.CategoriesPanel.Children)
             {
                 if (element is StackPanel innerPanel)
                 {
@@ -113,7 +103,7 @@ namespace Presentation
         {
             StackPanel horizontalPanel = null;
 
-            for (int i = 0; i < categories.Count; i++)
+            for (int i = 0; i < this.categories.Count; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -122,27 +112,27 @@ namespace Presentation
                         Orientation = Orientation.Horizontal,
                         Margin = new Thickness(25, i == 0 ? 5 : 10, 30, 0)
                     };
-                    CategoriesPanel.Children.Add(horizontalPanel);
+                    this.CategoriesPanel.Children.Add(horizontalPanel);
                 }
 
                 Button categoryButton = new Button
                 {
-                    Content = categories[i],
+                    Content = this.categories[i],
                     Width = 150,
                     Height = 40,
                     FontSize = 16,
                     Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
-                    Style = (Style)FindResource("CategoryButton"),
+                    Style = (Style)this.FindResource("CategoryButton"),
                     Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
                     HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
                 };
 
-                categoryButton.Click += AddExpense_Click;
+                categoryButton.Click += this.AddExpense_Click;
 
                 horizontalPanel.Children.Add(categoryButton);
             }
         }
-        
+
     }
 }

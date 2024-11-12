@@ -3,6 +3,10 @@
 /// </summary>
 namespace Presentation
 {
+    using BusinessLogic.Services;
+    using DAL.Models;
+    using LiveCharts;
+    using LiveCharts.Wpf;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -10,10 +14,6 @@ namespace Presentation
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Media;
-    using BusinessLogic.Services;
-    using DAL.Models;
-    using LiveCharts;
-    using LiveCharts.Wpf;
 
     public partial class MainPage : Page
     {
@@ -21,8 +21,8 @@ namespace Presentation
 
         public MainPage()
         {
-            InitializeComponent();
-            Loaded += MainPage_Loaded;
+            this.InitializeComponent();
+            Loaded += this.MainPage_Loaded;
         }
 
         public void SetAccounts()
@@ -33,67 +33,67 @@ namespace Presentation
             accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
             accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
 
-            if (accounts.Count > 0)
+            if (this.accounts.Count > 0)
             {
                 Button accountButton1 = new Button
                 {
                     Content = new TextBlock()
                     {
-                        Text = $"{accounts[0].Name}\n{accounts[0].Balance} UAH",
-                        TextAlignment = TextAlignment.Center
+                        Text = $"{this.accounts[0].Name}\n{this.accounts[0].Balance} UAH",
+                        TextAlignment = TextAlignment.Center,
                     },
-                    FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
                     Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
                     FontSize = 20,
                     FontWeight = FontWeights.SemiBold,
-                    Style = (Style)FindResource("AccountsButton"),
-                    Margin = new Thickness(35, 20, 20, 10)
+                    Style = (Style)this.FindResource("AccountsButton"),
+                    Margin = new Thickness(35, 20, 20, 10),
                 };
-                accountButton1.Click += AddIncome_Click;
+                accountButton1.Click += this.AddIncome_Click;
                 Grid.SetRow(accountButton1, 0);
                 Grid.SetColumn(accountButton1, 0);
                 accountsGrid.Children.Add(accountButton1);
             }
 
-            if (accounts.Count > 1)
+            if (this.accounts.Count > 1)
             {
                 Button accountButton2 = new Button
                 {
                     Content = new TextBlock()
                     {
-                        Text = $"{accounts[1].Name}\n{accounts[1].Balance} UAH",
-                        TextAlignment = TextAlignment.Center
+                        Text = $"{this.accounts[1].Name}\n{this.accounts[1].Balance} UAH",
+                        TextAlignment = TextAlignment.Center,
                     },
-                    FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
                     Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
                     FontSize = 20,
                     FontWeight = FontWeights.SemiBold,
-                    Style = (Style)FindResource("AccountsButton"),
-                    Margin = new Thickness(20, 20, 35, 10)
+                    Style = (Style)this.FindResource("AccountsButton"),
+                    Margin = new Thickness(20, 20, 35, 10),
                 };
-                accountButton2.Click += AddIncome_Click;
+                accountButton2.Click += this.AddIncome_Click;
                 Grid.SetRow(accountButton2, 0);
                 Grid.SetColumn(accountButton2, 1);
                 accountsGrid.Children.Add(accountButton2);
             }
 
-            if (accounts.Count > 2)
+            if (this.accounts.Count > 2)
             {
                 Button accountButton3 = new Button
                 {
                     Content = new TextBlock()
                     {
-                        Text = $"{accounts[2].Name}\n{accounts[2].Balance} UAH",
-                        TextAlignment = TextAlignment.Center
+                        Text = $"{this.accounts[2].Name}\n{this.accounts[2].Balance} UAH",
+                        TextAlignment = TextAlignment.Center,
                     },
-                    FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
                     Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
                     FontSize = 20,
                     FontWeight = FontWeights.SemiBold,
-                    Style = (Style)FindResource("AccountsButton"),
-                    Margin = new Thickness(35, 5, 20, 15)
+                    Style = (Style)this.FindResource("AccountsButton"),
+                    Margin = new Thickness(35, 5, 20, 15),
                 };
-                accountButton3.Click += AddIncome_Click;
+                accountButton3.Click += this.AddIncome_Click;
                 Grid.SetRow(accountButton3, 1);
                 Grid.SetColumn(accountButton3, 0);
                 accountsGrid.Children.Add(accountButton3);
@@ -102,19 +102,19 @@ namespace Presentation
             Button moreButton = new Button
             {
                 Content = "БІЛЬШЕ",
-                FontFamily = (System.Windows.Media.FontFamily)FindResource("CustomFont"),
+                FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
                 Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
                 FontSize = 30,
                 FontWeight = FontWeights.SemiBold,
-                Style = (Style)FindResource("AccountsButton"),
-                Margin = new Thickness(20, 5, 35, 15)
+                Style = (Style)this.FindResource("AccountsButton"),
+                Margin = new Thickness(20, 5, 35, 15),
             };
-            moreButton.Click += OpenAccounts_Click;
+            moreButton.Click += this.OpenAccounts_Click;
             Grid.SetRow(moreButton, 1);
             Grid.SetColumn(moreButton, 1);
             accountsGrid.Children.Add(moreButton);
 
-            AccountsPanel.Children.Add(accountsGrid);
+            this.AccountsPanel.Children.Add(accountsGrid);
         }
 
         public void UpdatePieChart()
@@ -127,7 +127,7 @@ namespace Presentation
                 new { Title = "витрати цього місяця", Value = ExpenseService.CurrentExpense(), Color = "#9B70C2" },
                 new { Title = "заплановані витрати", Value = PlannedExpenseService.GetPaymentsAmount(), Color = "#999B70C2" },
                 new { Title = "в заощадження", Value = Math.Round(SavingService.GetTotalSavings(), 2), Color = "#DAB6FC" },
-                new { Title = "залишок доходу за минулий місяць", Value = IncomeService.PrevIncome() - ExpenseService.CurrentExpense(), Color = "#99DAB6FC" }
+                new { Title = "залишок доходу за минулий місяць", Value = IncomeService.PrevIncome() - ExpenseService.CurrentExpense(), Color = "#99DAB6FC" },
             };
 
             bool hasData = seriesData.Any(item => item.Value > 0);
@@ -138,14 +138,14 @@ namespace Presentation
                 {
                     Title = "Немає даних",
                     Values = new ChartValues<double> { 1 },
-                    Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#99DAB6FC"))
+                    Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#99DAB6FC"),
                 };
 
                 pieSeriesCollection.Add(defaultPieSeries);
                 legendItems.Add(new
                 {
                     Title = "Немає даних",
-                    Color = (SolidColorBrush)(new BrushConverter().ConvertFrom("#99DAB6FC"))
+                    Color = (SolidColorBrush)new BrushConverter().ConvertFrom("#99DAB6FC"),
                 });
             }
             else
@@ -158,28 +158,28 @@ namespace Presentation
                     {
                         Title = item.Title,
                         Values = new ChartValues<double> { item.Value },
-                        Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(item.Color))
+                        Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(item.Color),
                     };
 
                     pieSeriesCollection.Add(pieSeries);
                     legendItems.Add(new
                     {
                         Title = item.Title,
-                        Color = (SolidColorBrush)(new BrushConverter().ConvertFrom(item.Color))
+                        Color = (SolidColorBrush)new BrushConverter().ConvertFrom(item.Color),
                     });
                 }
             }
 
-            MainPieChart.Series = pieSeriesCollection;
-            MainLegend.ItemsSource = legendItems;
+            this.MainPieChart.Series = pieSeriesCollection;
+            this.MainLegend.ItemsSource = legendItems;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UpdatePieChart();
-            UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
-            accounts = AccountService.GetUsersAccounts();
-            SetAccounts();
+            this.UpdatePieChart();
+            this.UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
+            this.accounts = AccountService.GetUsersAccounts();
+            this.SetAccounts();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

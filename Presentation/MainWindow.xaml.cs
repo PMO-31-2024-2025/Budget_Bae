@@ -1,20 +1,20 @@
-﻿using BusinessLogic.Session;
-using System.Windows;
-
+﻿/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
 namespace Presentation
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    using BusinessLogic.Session;
+    using System.Windows;
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            InitializeComponent();
-            MainFrame.Navigate(new MainPage());
+            this.InitializeComponent();
+            this.MainFrame.Navigate(new MainPage());
             if (SessionManager.CurrentUserId == null)
             {
-                Loaded += MainWindow_Loaded;
+                Loaded += this.MainWindow_Loaded;
             }
         }
 

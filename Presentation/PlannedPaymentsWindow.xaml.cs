@@ -1,20 +1,9 @@
 ﻿using BusinessLogic.Services;
 using BusinessLogic.Session;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Presentation
 {
@@ -27,24 +16,24 @@ namespace Presentation
 
         public PlannedPaymentsWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             if (SessionManager.CurrentUserId != null)
             {
-                PlannedPayments = PlannedExpenseService.GetPlannedExpenses();
+                this.PlannedPayments = PlannedExpenseService.GetPlannedExpenses();
             }
             else
             {
-                PlannedPayments = [];
+                this.PlannedPayments = [];
             }
-            UpdatePaymentsGrid();
+            this.UpdatePaymentsGrid();
 
         }
 
         private void UpdatePaymentsGrid()
         {
-            PaymentsStackPanel.Children.Clear();
+            this.PaymentsStackPanel.Children.Clear();
 
-            for (int i = 0; i < PlannedPayments.Count; i++)
+            for (int i = 0; i < this.PlannedPayments.Count; i++)
             {
                 Grid payment = new Grid();
                 payment.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(25) });
@@ -68,7 +57,7 @@ namespace Presentation
                     Width = 225,
                     Content = new TextBlock
                     {
-                        Text = PlannedPayments[i].Name,
+                        Text = this.PlannedPayments[i].Name,
                         TextWrapping = TextWrapping.Wrap
                     },
                     FontSize = 18,
@@ -83,16 +72,16 @@ namespace Presentation
 
                 Button delete = new Button()
                 {
-                    Style = (Style)FindResource("CloseButton"),
+                    Style = (Style)this.FindResource("CloseButton"),
                     Width = 15,
                     Height = 15,
                     FontSize = 12,
-                    VerticalAlignment= VerticalAlignment.Top,
+                    VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = new Thickness(0, 5, 15, 0),
                     Tag = i
                 };
-                delete.Click += Delete_Click;
+                delete.Click += this.Delete_Click;
                 Grid.SetRow(delete, 0);
                 Grid.SetColumn(delete, 1);
                 payment.Children.Add(delete);
@@ -101,7 +90,7 @@ namespace Presentation
                 {
                     Content = new TextBlock
                     {
-                        Text = $"Внесок {PlannedPayments[i].NotigicationDate} числа\n{PlannedPayments[i].PlannedSum} UAH",
+                        Text = $"Внесок {this.PlannedPayments[i].NotigicationDate} числа\n{this.PlannedPayments[i].PlannedSum} UAH",
                         TextAlignment = TextAlignment.Right
                     },
                     VerticalAlignment = VerticalAlignment.Bottom,
@@ -114,7 +103,7 @@ namespace Presentation
                 payment.Children.Add(date);
 
                 border.Child = payment;
-                PaymentsStackPanel.Children.Add(border);
+                this.PaymentsStackPanel.Children.Add(border);
 
             }
         }
@@ -123,16 +112,16 @@ namespace Presentation
         {
             Button deleteButton = sender as Button;
             int paymentIndex = (int)deleteButton.Tag;
-            if (paymentIndex >= 0 && paymentIndex < PlannedPayments.Count)
+            if (paymentIndex >= 0 && paymentIndex < this.PlannedPayments.Count)
             {
-                PlannedPayments.RemoveAt(paymentIndex);
-                UpdatePaymentsGrid();
+                this.PlannedPayments.RemoveAt(paymentIndex);
+                this.UpdatePaymentsGrid();
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -159,9 +148,9 @@ namespace Presentation
 
         private void CreatePayment_Click(object sender, RoutedEventArgs e)
         {
-            string name = Name.Text.Trim();
-            string amountText = Amount.Text.Trim();
-            string dateText = Date.Text.Trim();
+            string name = this.Name.Text.Trim();
+            string amountText = this.Amount.Text.Trim();
+            string dateText = this.Date.Text.Trim();
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(amountText) || string.IsNullOrEmpty(dateText))
             {
@@ -186,7 +175,7 @@ namespace Presentation
                 MessageBox.Show("Платіж створено успішно!");
             }
 
-            
+
         }
     }
 }

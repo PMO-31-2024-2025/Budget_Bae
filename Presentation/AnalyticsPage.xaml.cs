@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DAL.Data;
-using DAL.Models;
+﻿using BusinessLogic.Services;
 using BusinessLogic.Session;
+using DAL.Models;
 using LiveCharts;
 using LiveCharts.Wpf;
-using LiveCharts.Definitions.Series;
-using BusinessLogic.Services;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Presentation
 {
@@ -29,10 +16,10 @@ namespace Presentation
     {
         public AnalyticsPage()
         {
-            InitializeComponent();
-            UpdatePieChart();
-            UpdateBarChart();
-            UpdateHistory();
+            this.InitializeComponent();
+            this.UpdatePieChart();
+            this.UpdateBarChart();
+            this.UpdateHistory();
         }
 
         private void UpdatePieChart()
@@ -61,7 +48,7 @@ namespace Presentation
                 pieSeriesCollection.Add(new PieSeries
                 {
                     Title = "Немає даних",
-                    Values = new ChartValues<double> { 1 }, 
+                    Values = new ChartValues<double> { 1 },
                     Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#BDD5ED"))
                 });
 
@@ -96,8 +83,8 @@ namespace Presentation
                 }
             }
 
-            AnalyticsPieChart.Series = pieSeriesCollection;
-            AnalyticsLegend.ItemsSource = legendItems;
+            this.AnalyticsPieChart.Series = pieSeriesCollection;
+            this.AnalyticsLegend.ItemsSource = legendItems;
         }
 
         public void UpdateBarChart()
@@ -117,7 +104,7 @@ namespace Presentation
             {
                 currentDate.AddMonths(-2).ToString("MMM"),
                 currentDate.AddMonths(-1).ToString("MMM"),
-                currentDate.ToString("MMM")             
+                currentDate.ToString("MMM")
             };
 
             bool hasData = expenseTwoMonthsAgo > 0 || expensePreviousMonth > 0 || expenseCurrentMonth > 0 ||
@@ -125,7 +112,7 @@ namespace Presentation
 
             if (!hasData)
             {
-                AnalyticsBarChart.Series = new SeriesCollection
+                this.AnalyticsBarChart.Series = new SeriesCollection
                 {
                     new ColumnSeries
                     {
@@ -134,13 +121,13 @@ namespace Presentation
                         Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#E0E0E0"))
                     }
                 };
-                AnalyticsBarChart.AxisX.Clear();
-                AnalyticsBarChart.AxisX.Add(new Axis
+                this.AnalyticsBarChart.AxisX.Clear();
+                this.AnalyticsBarChart.AxisX.Add(new Axis
                 {
                     Labels = new List<string> { "" }
                 });
 
-                AnalyticsBarChart.AxisY[0].LabelFormatter = value => "";
+                this.AnalyticsBarChart.AxisY[0].LabelFormatter = value => "";
             }
             else
             {
@@ -159,13 +146,13 @@ namespace Presentation
                         Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#CC9B70C2"))
                     }
                 };
-                AnalyticsBarChart.Series = seriesCollection;
-                AnalyticsBarChart.AxisX.Clear();
-                AnalyticsBarChart.AxisX.Add(new Axis
+                this.AnalyticsBarChart.Series = seriesCollection;
+                this.AnalyticsBarChart.AxisX.Clear();
+                this.AnalyticsBarChart.AxisX.Add(new Axis
                 {
                     Labels = monthLabels
                 });
-                AnalyticsBarChart.AxisY[0].LabelFormatter = value => value.ToString("C");
+                this.AnalyticsBarChart.AxisY[0].LabelFormatter = value => value.ToString("C");
             }
         }
 
@@ -221,7 +208,7 @@ namespace Presentation
 
         private void UpdateHistory()
         {
-            
+
             List<Expense> expenses = ExpenseService.GetExpensesByUserId();
             List<Income> incomes = IncomeService.GetIncomesByUserId();
             List<object> transactions = new List<object>();
@@ -244,44 +231,44 @@ namespace Presentation
                         date = DateTime.Parse(expense.ExpenseDate).Date;
                         Border elem = new Border()
                         {
-                            Style = (Style)FindResource("HistoryElement"),
+                            Style = (Style)this.FindResource("HistoryElement"),
                             HorizontalAlignment = HorizontalAlignment.Left,
 
                         };
                         string category = ExpenseCategoryService.GetCategoryName(expense.CategoryId);
                         string sum = expense.ExpenseSum.ToString();
                         string account = AccountService.GetAccountName(expense.AccountId);
-                        Grid elemGrid = AddTransaction(category, $"- {sum}", account);
+                        Grid elemGrid = this.AddTransaction(category, $"- {sum}", account);
                         elem.Child = elemGrid;
                         if (date > prevDate)
                         {
-                            HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
+                            this.HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
                             prevDate = date;
                         }
-                        HistoryElements.Children.Insert(0, elem);
+                        this.HistoryElements.Children.Insert(0, elem);
                     }
                     else if (transaction is Income income)
                     {
                         date = DateTime.Parse(income.IncomeDate).Date;
                         Border elem = new Border()
                         {
-                            Style = (Style)FindResource("HistoryElement"),
+                            Style = (Style)this.FindResource("HistoryElement"),
                             HorizontalAlignment = HorizontalAlignment.Right
                         };
                         string category = income.Category;
                         string sum = income.IncomeSum.ToString();
                         string account = AccountService.GetAccountName(income.AccountId);
-                        Grid elemGrid = AddTransaction(category, $"+ {sum}", account);
+                        Grid elemGrid = this.AddTransaction(category, $"+ {sum}", account);
                         elem.Child = elemGrid;
                         if (date > prevDate)
                         {
-                            HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
+                            this.HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
                             prevDate = date;
                         }
-                        HistoryElements.Children.Insert(0, elem);
+                        this.HistoryElements.Children.Insert(0, elem);
                     }
                 }
-                HistoryElements.Children.Insert(0, new Label() { Content = date.ToString("dddd, d MMMM") });
+                this.HistoryElements.Children.Insert(0, new Label() { Content = date.ToString("dddd, d MMMM") });
             }
         }
     }

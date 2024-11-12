@@ -1,18 +1,7 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Presentation
 {
@@ -23,13 +12,13 @@ namespace Presentation
     {
         public ExpensesWindow()
         {
-            InitializeComponent();
-            FillAccountsComboboxWithAccounts();
+            this.InitializeComponent();
+            this.FillAccountsComboboxWithAccounts();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -43,8 +32,8 @@ namespace Presentation
 
         private async void expenseAddingAddButton_Click(object sender, RoutedEventArgs e)
         {
-            string sum = expenseAddingSumTextBox.Text;
-            var selectedAccount = expenseAddingAccountChooseComboBox.SelectedItem;
+            string sum = this.expenseAddingSumTextBox.Text;
+            var selectedAccount = this.expenseAddingAccountChooseComboBox.SelectedItem;
 
             if (sum == null || selectedAccount == null)
             {
@@ -81,10 +70,10 @@ namespace Presentation
             }
             else
             {
-                expenseAddingAccountChooseComboBox.Items.Clear();
+                this.expenseAddingAccountChooseComboBox.Items.Clear();
                 foreach (var account in DbHelper.db.Accounts.ToList())
                 {
-                    expenseAddingAccountChooseComboBox.Items.Add(account.Name);
+                    this.expenseAddingAccountChooseComboBox.Items.Add(account.Name);
                 }
             }
         }

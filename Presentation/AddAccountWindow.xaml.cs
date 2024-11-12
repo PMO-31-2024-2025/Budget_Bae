@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Presentation
 {
@@ -21,18 +9,18 @@ namespace Presentation
     {
         public AddAccountWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void AddAccount_Click(object sender, RoutedEventArgs e)
         {
-            string name = Name.Text.Trim();
-            string balanceText = Balance.Text.Trim();
+            string name = this.Name.Text.Trim();
+            string balanceText = this.Balance.Text.Trim();
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(balanceText))
             {

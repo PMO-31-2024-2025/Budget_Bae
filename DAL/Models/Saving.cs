@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Models
 {
@@ -22,7 +17,7 @@ namespace DAL.Models
         [Column("current_sum")]
         public double CurrentSum { get; set; }
         [Column("months_number")]
-        public int MonthsNumber { get; set; } 
+        public int MonthsNumber { get; set; }
         [Column("user_id")]
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]

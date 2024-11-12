@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Presentation
 {
@@ -22,25 +11,25 @@ namespace Presentation
     {
         public NavBar()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
         }
         public void nbMainButton_Click(object sender, RoutedEventArgs e)
         {
-            nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
-            nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
+            this.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
+            this.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
             ((MainWindow)Window.GetWindow(this)).MainFrame.Navigate(new MainPage());
 
         }
         public void OpenAnalitics()
         {
-            nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
-            nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
+            this.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
+            this.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
             ((MainWindow)Window.GetWindow(this)).MainFrame.Navigate(new AnalyticsPage());
         }
         private void nbAnalyticsButton_Click(object sender, RoutedEventArgs e)
         {
-           OpenAnalitics();
+            this.OpenAnalitics();
         }
 
         private void nbEntryButton_Click(object sender, RoutedEventArgs e)
@@ -49,7 +38,7 @@ namespace Presentation
             MessageBoxResult result = MessageBox.Show("Бажаєте вийти з акаунту?", "Застереження", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             // Обробка результату
-            if (result == MessageBoxResult.Yes && nbEntryButton.Content != "Вхід")
+            if (result == MessageBoxResult.Yes && this.nbEntryButton.Content != "Вхід")
             {
                 EntryWindow entryWindow = new EntryWindow();
                 entryWindow.ShowDialog();
@@ -75,7 +64,7 @@ namespace Presentation
             var windowHeight = settingsWindow.Height;
             settingsWindow.Top = (screenHeight - windowHeight) / 2;
             settingsWindow.ShowDialog();
-            
+
         }
     }
 }

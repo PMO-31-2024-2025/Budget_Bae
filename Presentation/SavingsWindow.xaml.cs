@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
+using DAL.Models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.ComponentModel;
-using DAL.Models;
-using BusinessLogic.Services;
-using BusinessLogic.Session;
-using Microsoft.VisualBasic;
 
 namespace Presentation
 {
@@ -29,25 +16,25 @@ namespace Presentation
 
         public SavingsWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             if (SessionManager.CurrentUserId != null)
             {
-                Savings = SavingService.GetSavings();
+                this.Savings = SavingService.GetSavings();
             }
             else
             {
-                Savings = [];
+                this.Savings = [];
             }
 
-            UpdateSavingsGrid();
-            UpdateSavingsComboBox();
+            this.UpdateSavingsGrid();
+            this.UpdateSavingsComboBox();
         }
 
-        private void UpdateSavingsGrid() 
+        private void UpdateSavingsGrid()
         {
-            SavingsStackPannel.Children.Clear();
+            this.SavingsStackPannel.Children.Clear();
 
-            for(int i = 0; i < Savings.Count; i++)
+            for (int i = 0; i < this.Savings.Count; i++)
             {
                 Grid savings = new Grid();
                 savings.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(35) });
@@ -72,7 +59,7 @@ namespace Presentation
                 };
                 Label goal = new Label()
                 {
-                    Content = Savings[i].TargetName,
+                    Content = this.Savings[i].TargetName,
                     HorizontalAlignment = HorizontalAlignment.Left,
                     Margin = new Thickness(5, 5, 10, 5)
                 };
@@ -81,7 +68,7 @@ namespace Presentation
                 savings.Children.Add(goal);
                 Label amount = new Label()
                 {
-                    Content = $"{Savings[i].TargetSum} UAH",
+                    Content = $"{this.Savings[i].TargetSum} UAH",
                     HorizontalAlignment = HorizontalAlignment.Right,
                     FontSize = 12,
                     Margin = new Thickness(5)
@@ -91,7 +78,7 @@ namespace Presentation
                 savings.Children.Add(amount);
                 Button delete = new Button()
                 {
-                    Style = (Style)FindResource("CloseButton"),
+                    Style = (Style)this.FindResource("CloseButton"),
                     Width = 15,
                     Height = 15,
                     FontSize = 12,
@@ -100,7 +87,7 @@ namespace Presentation
                     Tag = i,
                     Margin = new Thickness(10, 5, 10, 10)
                 };
-                delete.Click += Delete_Click;
+                delete.Click += this.Delete_Click;
                 Grid.SetRow(delete, 0);
                 Grid.SetColumn(delete, 2);
                 savings.Children.Add(delete);
@@ -108,8 +95,8 @@ namespace Presentation
                 ProgressBar progressBar = new ProgressBar()
                 {
                     Minimum = 0,
-                    Maximum = Savings[i].TargetSum,
-                    Value = Savings[i].CurrentSum,
+                    Maximum = this.Savings[i].TargetSum,
+                    Value = this.Savings[i].CurrentSum,
                     Height = 15,
                     Margin = new Thickness(15, 5, 10, 15),
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
@@ -120,7 +107,7 @@ namespace Presentation
                 savings.Children.Add(progressBar);
 
                 border.Child = savings;
-                SavingsStackPannel.Children.Add(border);
+                this.SavingsStackPannel.Children.Add(border);
             }
         }
 
@@ -128,34 +115,34 @@ namespace Presentation
         {
             Button deleteButton = sender as Button;
             int savingIndex = (int)deleteButton.Tag;
-            if (savingIndex >= 0 && savingIndex < Savings.Count)
+            if (savingIndex >= 0 && savingIndex < this.Savings.Count)
             {
-                Savings.RemoveAt(savingIndex);
-                UpdateSavingsGrid();
+                this.Savings.RemoveAt(savingIndex);
+                this.UpdateSavingsGrid();
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void AddSavings_Click(object sender, RoutedEventArgs e)
         {
-            replenishment.Visibility = Visibility.Collapsed;
-            replenishmentBorder.Visibility = Visibility.Collapsed;
-            adding.Visibility = Visibility.Visible;
-            addingBorder.Visibility = Visibility.Visible;
-            AddSavings.Visibility = Visibility.Collapsed;
+            this.replenishment.Visibility = Visibility.Collapsed;
+            this.replenishmentBorder.Visibility = Visibility.Collapsed;
+            this.adding.Visibility = Visibility.Visible;
+            this.addingBorder.Visibility = Visibility.Visible;
+            this.AddSavings.Visibility = Visibility.Collapsed;
         }
 
         private void closeAddSavings_Click(object sender, RoutedEventArgs e)
         {
-            adding.Visibility = Visibility.Collapsed;
-            addingBorder.Visibility = Visibility.Collapsed;
-            replenishment.Visibility = Visibility.Visible;
-            replenishmentBorder.Visibility= Visibility.Visible;
-            AddSavings.Visibility = Visibility.Visible;
+            this.adding.Visibility = Visibility.Collapsed;
+            this.addingBorder.Visibility = Visibility.Collapsed;
+            this.replenishment.Visibility = Visibility.Visible;
+            this.replenishmentBorder.Visibility = Visibility.Visible;
+            this.AddSavings.Visibility = Visibility.Visible;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -182,10 +169,10 @@ namespace Presentation
 
         private async void TopUpSavings_Click(object sender, RoutedEventArgs e)
         {
-            string topUpAmountInput = TopUpAmountSavings.Text;
-            var selectedSavings = SavingsList.SelectedItem;
+            string topUpAmountInput = this.TopUpAmountSavings.Text;
+            var selectedSavings = this.SavingsList.SelectedItem;
 
-            if (string.IsNullOrWhiteSpace(TopUpAmountSavings.Text) || selectedSavings == null )
+            if (string.IsNullOrWhiteSpace(this.TopUpAmountSavings.Text) || selectedSavings == null)
             {
                 MessageBox.Show("Усі поля мають бути заповнені!");
             }
@@ -210,18 +197,18 @@ namespace Presentation
         {
             List<string> SavingsName = new List<string>();
 
-            foreach (var saving in Savings)
+            foreach (var saving in this.Savings)
             {
-                SavingsName.Add(saving.TargetName); 
+                SavingsName.Add(saving.TargetName);
             }
-            SavingsList.ItemsSource = SavingsName;
+            this.SavingsList.ItemsSource = SavingsName;
         }
 
         private void TopUp_Click(object sender, RoutedEventArgs e)
         {
-            string name = Name.Text.Trim();
-            string dateText = Date.Text.Trim();
-            string amountText = Amount_.Text.Trim();
+            string name = this.Name.Text.Trim();
+            string dateText = this.Date.Text.Trim();
+            string amountText = this.Amount_.Text.Trim();
 
             if (name == "Введіть назву")
             {
@@ -231,14 +218,14 @@ namespace Presentation
             {
                 MessageBox.Show("Сума повинна бути додатнім числом!");
             }
-            else if (!int.TryParse(dateText, out int date) || date < 1 )
+            else if (!int.TryParse(dateText, out int date) || date < 1)
             {
                 MessageBox.Show("Кількість місяців повинна бути 1 чи більше");
             }
             else
             {
                 decimal amountPerMonth = amount / date;
-                AmountPerMonth.Text = amountPerMonth.ToString("F2"); 
+                this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
                 MessageBox.Show("Дані пройшли перевірку!");
             }
         }

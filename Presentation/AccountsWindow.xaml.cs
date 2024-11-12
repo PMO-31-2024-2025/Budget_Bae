@@ -1,46 +1,39 @@
-﻿using BusinessLogic.Services;
-using BusinessLogic.Session;
-using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
+﻿/// <summary>
+/// Interaction logic for AccountsWindow.xaml
+/// </summary>
 namespace Presentation
 {
-    /// <summary>
-    /// Interaction logic for AccountsWindow.xaml
-    /// </summary>
+    using BusinessLogic.Services;
+    using BusinessLogic.Session;
+    using DAL.Models;
+    using System.Collections.Generic;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+
     public partial class AccountsWindow : Window
     {
-        private List<Account> accounts;
+        private List<Account> accounts = new List<Account>();
+
         public AccountsWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             if (SessionManager.CurrentUserId != null)
             {
-                accounts = AccountService.GetUsersAccounts();
+                this.accounts = AccountService.GetUsersAccounts();
             }
             else
             {
-                accounts = new List<Account>();
+                this.accounts = new List<Account>();
             }
-            SetAccounts();
+
+            this.SetAccounts();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void AddAccountButton_Click(object sender, RoutedEventArgs e)
@@ -59,7 +52,7 @@ namespace Presentation
 
         private void SetAccounts()
         {
-            foreach (var account in accounts)
+            foreach (var account in this.accounts)
             {
                 Button accountButton = new Button
                 {
@@ -69,31 +62,27 @@ namespace Presentation
                     FontSize = 16,
                     Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
-                    Style = (Style)FindResource("CategoryButton"),
-                    Margin = new Thickness(15, 10, 15, 10)
+                    Style = (Style)this.FindResource("CategoryButton"),
+                    Margin = new Thickness(15, 10, 15, 10),
                 };
-                AccountsPanel.Children.Add(accountButton);
-                accountButton.Click += AddIncome_Click;
+                this.AccountsPanel.Children.Add(accountButton);
+                accountButton.Click += this.AddIncome_Click;
             }
-               
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchText = SearchTextBox.Text.ToLower();
-            foreach (UIElement element in AccountsPanel.Children)
+            string searchText = this.SearchTextBox.Text.ToLower();
+            foreach (UIElement element in this.AccountsPanel.Children)
             {
-                
-                        if (element is Button accountButton)
-                        {
-                            if (accountButton.Content.ToString().ToLower().Contains(searchText))
-                            {
-                                accountButton.BringIntoView();
-                                return;
-                            }
-                        }
-                    
-                
+                if (element is Button accountButton)
+                {
+                    if (accountButton.Content.ToString().ToLower().Contains(searchText))
+                    {
+                        accountButton.BringIntoView();
+                        return;
+                    }
+                }
             }
         }
 
@@ -118,6 +107,5 @@ namespace Presentation
                 }
             }
         }
-
     }
 }

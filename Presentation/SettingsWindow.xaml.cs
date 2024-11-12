@@ -1,21 +1,8 @@
 ﻿using BusinessLogic.Session;
 using DAL.Data;
-using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Presentation
 {
@@ -33,20 +20,20 @@ namespace Presentation
 
         public SettingsWindow()
         {
-            InitializeComponent();
-            UserNameLabel.Content = DbHelper.db.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
+            this.InitializeComponent();
+            this.UserNameLabel.Content = DbHelper.db.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void SettingsEntryButton_Click(Object sender, RoutedEventArgs e)
         {
 
         }
-        
+
         private void HistoryArrowButton_Click(Object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -56,30 +43,30 @@ namespace Presentation
                 {
                     mainWindow.MainFrame.Navigate(new AnalyticsPage());
                 }
-                NavBar navBarControl = mainWindow.NavBar; 
+                NavBar navBarControl = mainWindow.NavBar;
                 if (navBarControl != null)
                 {
                     navBarControl.OpenAnalitics();
                 }
             }
-            Close();
+            this.Close();
         }
 
         private void PlannedPaymentsButton_Click(Object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow.MainFrame != null)
             {
                 PlannedPaymentsWindow window = new PlannedPaymentsWindow();
                 window.ShowDialog();
             }
-            
+
         }
 
         private void PrivacyPolicyButton_Click(Object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow.MainFrame != null)
             {
@@ -90,7 +77,7 @@ namespace Presentation
 
         private void TermsOfUseButton_Click(Object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow.MainFrame != null)
             {
@@ -103,30 +90,30 @@ namespace Presentation
         {
             double аngle = -90;
 
-            if (categoriesWindow == null || !categoriesWindow.IsVisible)
+            if (this.categoriesWindow == null || !this.categoriesWindow.IsVisible)
             {
                 RotateTransform rotateTransform = new RotateTransform(аngle);
-                CategoryExpanderButton.RenderTransform = rotateTransform;
-                CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                categoriesWindow = new SettingsCategoriesWindow();
-                categoriesWindow.Owner = this;
-                categoriesWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                this.CategoryExpanderButton.RenderTransform = rotateTransform;
+                this.CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.categoriesWindow = new SettingsCategoriesWindow();
+                this.categoriesWindow.Owner = this;
+                this.categoriesWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 var screenWidth = SystemParameters.PrimaryScreenWidth;
-                var windowWidth = categoriesWindow.Width;
-                categoriesWindow.Left = screenWidth - windowWidth;
+                var windowWidth = this.categoriesWindow.Width;
+                this.categoriesWindow.Left = screenWidth - windowWidth;
                 var button = sender as Button;
                 var buttonPosition = button.PointToScreen(new Point(0, 0));
                 var buttonHeight = button.ActualHeight;
-                categoriesWindow.Top = buttonPosition.Y;
-                categoriesWindow.Show();
+                this.categoriesWindow.Top = buttonPosition.Y;
+                this.categoriesWindow.Show();
             }
             else
             {
                 аngle = 0;
                 RotateTransform rotateTransform = new RotateTransform(аngle);
-                CategoryExpanderButton.RenderTransform = rotateTransform;
-                CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                categoriesWindow.Close();
+                this.CategoryExpanderButton.RenderTransform = rotateTransform;
+                this.CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.categoriesWindow.Close();
             }
         }
 
@@ -134,30 +121,30 @@ namespace Presentation
         {
             double аngle = -90;
 
-            if (notificationWindow == null || !notificationWindow.IsVisible)
+            if (this.notificationWindow == null || !this.notificationWindow.IsVisible)
             {
                 RotateTransform rotateTransform = new RotateTransform(аngle);
-                NotificationExpanderButton.RenderTransform = rotateTransform;
-                NotificationExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                notificationWindow = new SettingsNotificationWindow();
-                notificationWindow.Owner = this;
-                notificationWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                this.NotificationExpanderButton.RenderTransform = rotateTransform;
+                this.NotificationExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.notificationWindow = new SettingsNotificationWindow();
+                this.notificationWindow.Owner = this;
+                this.notificationWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 var screenWidth = SystemParameters.PrimaryScreenWidth;
-                var windowWidth = notificationWindow.Width;
-                notificationWindow.Left = screenWidth - windowWidth;
+                var windowWidth = this.notificationWindow.Width;
+                this.notificationWindow.Left = screenWidth - windowWidth;
                 var button = sender as Button;
                 var buttonPosition = button.PointToScreen(new Point(0, 0));
                 var buttonHeight = button.ActualHeight;
-                notificationWindow.Top = buttonPosition.Y - 40;
-                notificationWindow.Show();
+                this.notificationWindow.Top = buttonPosition.Y - 40;
+                this.notificationWindow.Show();
             }
             else
             {
                 аngle = 0;
                 RotateTransform rotateTransform = new RotateTransform(аngle);
-                NotificationExpanderButton.RenderTransform = rotateTransform;
-                NotificationExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
-                notificationWindow.Close();
+                this.NotificationExpanderButton.RenderTransform = rotateTransform;
+                this.NotificationExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.notificationWindow.Close();
             }
         }
 
@@ -165,7 +152,7 @@ namespace Presentation
         {
             double аngle = -90;
 
-            if (supportWindow == null || !supportWindow.IsVisible)
+            if (this.supportWindow == null || !this.supportWindow.IsVisible)
             {
                 RotateTransform rotateTransform = new RotateTransform(аngle);
                 this.SupportExpanderButton.RenderTransform = rotateTransform;

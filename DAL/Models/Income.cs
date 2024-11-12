@@ -1,13 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Models
 {
@@ -22,7 +15,7 @@ namespace DAL.Models
         [Column("income_date")]
         public string IncomeDate { get; set; } = null!;
         [Column("income_sum")]
-        public double IncomeSum { get; set; } 
+        public double IncomeSum { get; set; }
         [Column("account_id")]
         public int AccountId { get; set; }
         [ForeignKey(nameof(AccountId))]

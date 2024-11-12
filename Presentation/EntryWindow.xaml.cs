@@ -3,14 +3,14 @@
 /// </summary>
 namespace Presentation
 {
-    using System.Text.RegularExpressions;
-    using System.Windows;
-    using System.Windows.Input;
-    using System.Windows.Media;
     using BusinessLogic.Services;
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using System.Text.RegularExpressions;
+    using System.Windows;
+    using System.Windows.Input;
+    using System.Windows.Media;
 
     public partial class EntryWindow : Window
     {

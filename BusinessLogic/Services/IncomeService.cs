@@ -1,11 +1,5 @@
-﻿using BusinessLogic.Session;
-using DAL.Data;
+﻿using DAL.Data;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
@@ -21,7 +15,7 @@ namespace BusinessLogic.Services
             var yearTwoMonthsAgo = dateTwoMonthsAgo.Year;
             var monthTwoMonthsAgo = dateTwoMonthsAgo.Month;
             double prevPrevMonthIncome = DbHelper.db.Incomes
-                .AsEnumerable() 
+                .AsEnumerable()
                 .Where(i => accountIds.Contains(i.AccountId) &&
                          DateTime.Parse(i.IncomeDate).Year == yearTwoMonthsAgo &&
                          DateTime.Parse(i.IncomeDate).Month == monthTwoMonthsAgo)
