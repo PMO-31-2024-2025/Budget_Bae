@@ -3,7 +3,7 @@
     using System.Windows;
 
     /// <summary>
-    /// Interaction logic for AddAccountWindow.xaml
+    /// Interaction logic for AddAccountWindow.xaml.
     /// </summary>
     public partial class AddAccountWindow : Window
     {

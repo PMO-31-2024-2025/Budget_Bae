@@ -72,4 +72,8 @@
     </None>
   </ItemGroup>
 
+	<PropertyGroup>
+		<NoWarn>NU1701;SA0001;SA1600;SA1633;CS0108;CS8600;CS8604</NoWarn>
+	</PropertyGroup>
+
 </Project>

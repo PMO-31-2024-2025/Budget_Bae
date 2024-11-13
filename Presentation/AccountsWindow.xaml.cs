@@ -3,14 +3,17 @@
 /// </summary>
 namespace Presentation
 {
-    using BusinessLogic.Services;
-    using BusinessLogic.Session;
-    using DAL.Models;
     using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using BusinessLogic.Services;
+    using BusinessLogic.Session;
+    using DAL.Models;
 
+    /// <summary>
+    /// AccountsWindow.
+    /// </summary>
     public partial class AccountsWindow : Window
     {
         private List<Account> accounts = new List<Account>();

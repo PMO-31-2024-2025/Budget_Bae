@@ -1,11 +1,11 @@
 ﻿namespace Presentation
 {
-    using BusinessLogic.Services;
     using System.Windows;
     using System.Windows.Controls;
+    using BusinessLogic.Services;
 
     /// <summary>
-    /// Interaction logic for AddCategoryWindow.xaml
+    /// Interaction logic for AddCategoryWindow.xaml.
     /// </summary>
     public partial class AddCategoryWindow : Window
     {
@@ -32,13 +32,13 @@
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            //if (sender is TextBox textBox)
-            //{
-            //    if (string.IsNullOrWhiteSpace(textBox.Text))
-            //    {
-            //        textBox.Text = textBox.Tag.ToString();
-            //    }
-            //}
+            // if (sender is TextBox textBox)
+            // {
+            //     if (string.IsNullOrWhiteSpace(textBox.Text))
+            //     {
+            //         textBox.Text = textBox.Tag.ToString();
+            //     }
+            // }
         }
 
         private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
