@@ -7,7 +7,6 @@ namespace DAL.Migrations
     /// <inheritdoc />
     public partial class ChangeNotigicationDateType : Migration
     {
-
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             //migrationBuilder.AlterColumn<int>(
@@ -16,7 +15,6 @@ namespace DAL.Migrations
             //    nullable: false,
             //    oldClrType: typeof(string),
             //    oldType: "TEXT");
-
             migrationBuilder.AlterColumn<int>(
                 name: "notification_date",
                 table: "planned_expenses",

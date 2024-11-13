@@ -41,7 +41,6 @@ namespace DAL.Migrations
             //    type: "TEXT",
             //    nullable: false,
             //    defaultValue: "");
-
             migrationBuilder.AlterColumn<string>(
                 name: "months_number",
                 table: "savings",

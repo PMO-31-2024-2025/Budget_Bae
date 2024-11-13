@@ -22,7 +22,7 @@
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
 
-        DbSet<User> Users { get; set; }
+        private DbSet<User> Users { get; set; }
 
     }
 
@@ -32,7 +32,7 @@
 
 
 //CREATE TABLE savings (
-//	id INTEGER PRIMARY KEY,
+//    id INTEGER PRIMARY KEY,
 //    target_name TEXT NOT NULL,
 //    target_sum REAL NOT NULL,
 //    current_sum REAL DEFAULT(0.0),

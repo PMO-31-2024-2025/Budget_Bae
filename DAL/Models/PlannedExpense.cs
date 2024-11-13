@@ -20,14 +20,14 @@
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
 
-        DbSet<User> Users { get; set; }
+        private DbSet<User> Users { get; set; }
 
     }
 }
 
 
 //CREATE TABLE planned_expenses (
-//	id INTEGER PRIMARY KEY,
+//    id INTEGER PRIMARY KEY,
 //    name TEXT NOT NULL,
 //    planned_sum REAL NOT NULL,
 //    notification_date INTEGER NOT NULL,
