@@ -23,14 +23,14 @@
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            // реалізація
         }
 
-        private void expenseAddingSumTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void ExpenseAddingSumTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
         }
 
-        private async void expenseAddingAddButton_Click(object sender, RoutedEventArgs e)
+        private async void ExpenseAddingAddButton_Click(object sender, RoutedEventArgs e)
         {
             string sum = this.expenseAddingSumTextBox.Text;
             var selectedAccount = this.expenseAddingAccountChooseComboBox.SelectedItem;

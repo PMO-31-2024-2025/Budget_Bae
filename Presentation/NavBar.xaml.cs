@@ -14,7 +14,7 @@
             this.InitializeComponent();
 
         }
-        public void nbMainButton_Click(object sender, RoutedEventArgs e)
+        public void NbMainButton_Click(object sender, RoutedEventArgs e)
         {
             this.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
             this.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
@@ -27,22 +27,23 @@
             this.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
             ((MainWindow)Window.GetWindow(this)).MainFrame.Navigate(new AnalyticsPage());
         }
-        private void nbAnalyticsButton_Click(object sender, RoutedEventArgs e)
+        private void NbAnalyticsButton_Click(object sender, RoutedEventArgs e)
         {
             this.OpenAnalitics();
         }
 
-        private void nbEntryButton_Click(object sender, RoutedEventArgs e)
+        private void NbEntryButton_Click(object sender, RoutedEventArgs e)
         {
             // Показуємо діалогове вікно з повідомленням та двома кнопками
             MessageBoxResult result = MessageBox.Show("Бажаєте вийти з акаунту?", "Застереження", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             // Обробка результату
-            if (result == MessageBoxResult.Yes && this.nbEntryButton.Content != "Вхід")
+            if (result == MessageBoxResult.Yes && this.nbEntryButton.Content.Equals("Вхід"))
             {
                 EntryWindow entryWindow = new EntryWindow();
                 entryWindow.ShowDialog();
             }
+
             // ТУТ Я НЕ ХОТІВ ВИДАЛЯТИ ЧИЙСЬ КОД ТОМУ ЗАКОМЕНТУВАВ ЙОГО
             //if (nbEntryButton.Content != "Вхід")
             //{
@@ -51,7 +52,7 @@
             //}
         }
 
-        private void nbSettingsButton_Click(Object sender, RoutedEventArgs e)
+        private void NbSettingsButton_Click(Object sender, RoutedEventArgs e)
         {
             SettingsWindow settingsWindow = new SettingsWindow();
             var mainWindow = Application.Current.MainWindow;

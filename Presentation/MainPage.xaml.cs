@@ -22,7 +22,7 @@ namespace Presentation
         public MainPage()
         {
             this.InitializeComponent();
-            Loaded += this.MainPage_Loaded;
+            this.Loaded += this.MainPage_Loaded;
         }
 
         public void SetAccounts()

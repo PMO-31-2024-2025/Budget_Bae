@@ -4,10 +4,10 @@
 
 namespace BusinessLogic.Services
 {
-    using System.Data.Entity;
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using System.Data.Entity;
 
     public class UserService
     {

@@ -14,7 +14,7 @@ namespace Presentation
             this.MainFrame.Navigate(new MainPage());
             if (SessionManager.CurrentUserId == null)
             {
-                Loaded += this.MainWindow_Loaded;
+                this.Loaded += this.MainWindow_Loaded;
             }
         }
 

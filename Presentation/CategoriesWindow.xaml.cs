@@ -8,7 +8,7 @@
     using DAL.Models;
 
     /// <summary>
-    /// Interaction logic for CategoriesWindow.xaml
+    /// Interaction logic for CategoriesWindow.xaml.
     /// </summary>
     public partial class CategoriesWindow : Window
     {

@@ -12,7 +12,6 @@
     ///
     public partial class SettingsWindow : Window
     {
-
         private SettingsCategoriesWindow categoriesWindow;
         private SettingsNotificationWindow notificationWindow;
         private SettingsSupportWindow supportWindow;
@@ -27,11 +26,6 @@
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void SettingsEntryButton_Click(Object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void HistoryArrowButton_Click(Object sender, RoutedEventArgs e)

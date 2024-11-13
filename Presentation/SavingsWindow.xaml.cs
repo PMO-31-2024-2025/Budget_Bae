@@ -12,8 +12,6 @@
     /// </summary>
     public partial class SavingsWindow : Window
     {
-        public List<Saving> Savings { get; set; }
-
         public SavingsWindow()
         {
             this.InitializeComponent();
@@ -29,6 +27,8 @@
             this.UpdateSavingsGrid();
             this.UpdateSavingsComboBox();
         }
+
+        public List<Saving> Savings { get; set; }
 
         private void UpdateSavingsGrid()
         {
@@ -136,7 +136,7 @@
             this.AddSavings.Visibility = Visibility.Collapsed;
         }
 
-        private void closeAddSavings_Click(object sender, RoutedEventArgs e)
+        private void CloseAddSavings_Click(object sender, RoutedEventArgs e)
         {
             this.adding.Visibility = Visibility.Collapsed;
             this.addingBorder.Visibility = Visibility.Collapsed;
@@ -195,13 +195,13 @@
 
         private void UpdateSavingsComboBox()
         {
-            List<string> SavingsName = new List<string>();
+            List<string> savingsName = new List<string>();
 
             foreach (var saving in this.Savings)
             {
-                SavingsName.Add(saving.TargetName);
+                savingsName.Add(saving.TargetName);
             }
-            this.SavingsList.ItemsSource = SavingsName;
+            this.SavingsList.ItemsSource = savingsName;
         }
 
         private void TopUp_Click(object sender, RoutedEventArgs e)

@@ -12,8 +12,6 @@
     /// </summary>
     public partial class PlannedPaymentsWindow : Window
     {
-        public List<PlannedExpense> PlannedPayments { get; set; }
-
         public PlannedPaymentsWindow()
         {
             this.InitializeComponent();
@@ -28,6 +26,8 @@
             this.UpdatePaymentsGrid();
 
         }
+
+        public List<PlannedExpense> PlannedPayments { get; set; }
 
         private void UpdatePaymentsGrid()
         {

@@ -14,16 +14,16 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#FFFAF0" Height="50">
                 <Button Name="nbEntryButton" Content="Вхід" HorizontalAlignment="Center" Margin="30, 5, 20, 5"  Background="#FFFAF0"
-                    Style="{StaticResource NavBarButton}" Click="nbEntryButton_Click"/>
+                    Style="{StaticResource NavBarButton}" Click="NbEntryButton_Click"/>
                 <Button Name="nbMainButton" Content="Головна" Width="100"  Background="#50DAB6FC"
-                Style="{StaticResource NavBarButton}" Click="nbMainButton_Click"/>
+                Style="{StaticResource NavBarButton}" Click="NbMainButton_Click"/>
                 <Button Name="nbAnalyticsButton" Content="Аналітика" Width="100" Background="#FFFAF0" 
-             Style="{StaticResource NavBarButton}" Click="nbAnalyticsButton_Click"/>
+             Style="{StaticResource NavBarButton}" Click="NbAnalyticsButton_Click"/>
             </StackPanel>
             <Frame x:Name="NavBarFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
         <Button Name="nbSettingsButton" Background="Transparent" BorderThickness="0" Height="35" 
-                Width="35" HorizontalAlignment="Right" Margin="0,0,10,0" Click="nbSettingsButton_Click">
+                Width="35" HorizontalAlignment="Right" Margin="0,0,10,0" Click="NbSettingsButton_Click">
             <Image Source="pack://application:,,,/Pictures/settings.png" Height="35" Width="35"/>
         </Button>
 

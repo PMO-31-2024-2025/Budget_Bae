@@ -7,7 +7,7 @@
     /// </summary>
     public partial class IncomeWindow : Window
     {
-        List<string> incomeCategories = new List<string>
+        private List<string> incomeCategories = new List<string>
         {
             "З/П",
             "Стипендія",
@@ -27,11 +27,11 @@
             this.Close();
         }
 
-        private void incomeAddingIncomeSum_LostFocus(object sender, RoutedEventArgs e)
+        private void IncomeAddingIncomeSum_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            // реалізація
         }
-        private async void incomeAddingButton_Click(object sender, RoutedEventArgs e)
+        private async void IncomeAddingButton_Click(object sender, RoutedEventArgs e)
         {
             string sum = this.incomeAddingIncomeSumTextBox.Text;
             var selectedCategory = this.incomeAddingCategoryChooseCombobox.SelectedItem;
