@@ -7,9 +7,22 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using System.Runtime.CompilerServices;
 
     public class AccountService
     {
+        private readonly BudgetBaeContext context;
+
+        public AccountService(BudgetBaeContext context)
+        {
+            this.context = context;
+        }
+
+        public void AddAccount()
+        {
+            //DbHelper.db.Accounts.Add(new Account());
+        }
+
         public static List<int> GetUsersAccountsId()
         {
             return DbHelper.db.Accounts

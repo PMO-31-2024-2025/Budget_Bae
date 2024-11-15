@@ -10,12 +10,8 @@
         [Column("id")]
         [Key]
         public int Id { get; set; }
-        [Column("type")]
-        public string Type { get; set; } = null!;
         [Column("name")]
         public string Name { get; set; } = null!;
-        [Column("card_number")]
-        public string? CardNumber { get; set; }
         [Column("balance")]
         public double Balance { get; set; }
         [Column("user_id")]

@@ -87,7 +87,15 @@ namespace Presentation
                     var userService = new UserService(new DAL.Data.BudgetBaeContext());
                     userService.RegisterUser(emailInput, createPasswordInput, nameInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                    if (mainWindow != null && mainWindow.MainFrame != null)
+                    {
+                        this.navBar = mainWindow.NavBar;
+                        this.navBar.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
+                        this.navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
+                        mainWindow.MainFrame.Navigate(new MainPage());
+                    }
+                    this.navBar.nbEntryButton.Content = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Name;
                     SessionManager.SetCurrentUser(DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id);
                     this.Close();
                 }
@@ -124,11 +132,11 @@ namespace Presentation
                     User user = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput);
                     if (user == null)
                     {
-                        MessageBox.Show("Не коректна пошта");
+                        MessageBox.Show("Некоректна пошта");
                     }
                     else if (user.Password != passwordInput)
                     {
-                        MessageBox.Show("Не коректний пароль");
+                        MessageBox.Show("Некоректний пароль");
                     }
                     else
                     {
@@ -180,6 +188,38 @@ namespace Presentation
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void settingsRegistrationEmailTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.settingsRegistrationNameTextBox.Focus();
+            }
+        }
+
+        private void settingsRegistrationNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.settingsRegistrationCreatePasswordTextBox.Focus();
+            }
+        }
+
+        private void settingsRegistrationCreatePasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.settingsRegistrationConfirmPasswordTextBox.Focus();
+            }
+        }
+
+        private void settingsRegistrationConfirmPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.SettingsRegistrationButton_Click(sender, e);
+            }
         }
     }
 }
