@@ -18,14 +18,10 @@ namespace BusinessLogic.Services
             this.context = context;
         }
 
-        public void AddAccount()
-        {
-            //DbHelper.db.Accounts.Add(new Account());
-        }
 
         public static List<int> GetUsersAccountsId()
         {
-            return DbHelper.db.Accounts
+            return DbHelper.dbc.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .Select(a => a.Id)
                 .ToList();
@@ -33,17 +29,34 @@ namespace BusinessLogic.Services
 
         public static List<Account> GetUsersAccounts()
         {
-            return DbHelper.db.Accounts
+            return DbHelper.dbc.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
 
         public static string? GetAccountName(int accountId)
         {
-            return DbHelper.db.Accounts
+            return DbHelper.dbc.Accounts
                 .Where(a => a.Id == accountId)
                 .Select(a => a.Name)
                 .FirstOrDefault();
+        }
+
+        public void AddAccount(string name, double balance)
+        {
+            var currentUserAccounts = this.context.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId).ToList();
+            if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)
+            {
+#pragma warning disable CS8629 // Nullable value type may be null.
+                var account = new Account
+                {
+                    Name = name,
+                    Balance = balance,
+                    UserId = SessionManager.CurrentUserId.Value
+                };
+#pragma warning restore CS8629 // Nullable value type may be null.
+                this.context.Accounts.Add(account);
+            }
         }
     }
 }
