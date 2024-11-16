@@ -8,7 +8,7 @@ namespace BusinessLogic.Services
     using DAL.Data;
     using DAL.Models;
 
-    public class SavingService
+    public static class SavingService
     {
         public static List<Saving> GetSavings()
         {

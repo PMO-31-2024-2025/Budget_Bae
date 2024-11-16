@@ -9,10 +9,8 @@ namespace BusinessLogic.Services
     using DAL.Models;
     using System.Runtime.CompilerServices;
 
-    public class AccountService
+    public static class AccountService
     {
-        public AccountService(BudgetBaeContext context) { }
-
         public static List<int> GetUsersAccountsId()
         {
             return DbHelper.dbс.Accounts
@@ -36,7 +34,7 @@ namespace BusinessLogic.Services
                 .FirstOrDefault();
         }
 
-        public void AddAccount(string name, double balance)
+        public static async Task AddAccount(string name, double balance)
         {
             var currentUserAccounts = DbHelper.dbс.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId).ToList();
             if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)
@@ -49,8 +47,8 @@ namespace BusinessLogic.Services
                     UserId = SessionManager.CurrentUserId.Value
                 };
 #pragma warning restore CS8629 // Nullable value type may be null.
-                DbHelper.dbс.Accounts.Add(account);
-                
+                await DbHelper.dbс.Accounts.AddAsync(account);
+                await DbHelper.dbс.SaveChangesAsync();
             }
         }
     }

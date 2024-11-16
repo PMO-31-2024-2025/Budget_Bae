@@ -7,7 +7,7 @@ namespace BusinessLogic.Services
     using DAL.Data;
     using DAL.Models;
 
-    public class ExpenseService
+    public static class ExpenseService
     {
         public static List<Expense> GetExpensesByUserId()
         {

@@ -9,11 +9,9 @@ namespace BusinessLogic.Services
     using DAL.Models;
     using System.Data.Entity;
 
-    public class UserService
+    public static class UserService
     {
-        public UserService(BudgetBaeContext context) { }
-
-        public void RegisterUser(string email, string password, string name)
+        public static async Task RegisterUser(string email, string password, string name)
         {
             if (DbHelper.dbс.Users.Any(u => u.Email == email))
             {
@@ -31,7 +29,7 @@ namespace BusinessLogic.Services
             DbHelper.dbс.SaveChangesAsync();
         }
 
-        public async Task<User> AuthenticateUserAsync(string email, string password)
+        public static async Task<User> AuthenticateUserAsync(string email, string password)
         {
             var user = await DbHelper.dbс.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
@@ -46,7 +44,7 @@ namespace BusinessLogic.Services
             return user;
         }
 
-        public async Task UpdateUserAsync(User user)
+        public static async Task UpdateUserAsync(User user)
         {
             var existingUser = await DbHelper.dbс.Users.FindAsync(user.Id);
             if (existingUser != null)
@@ -63,7 +61,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public async Task DeleteUserAsync(int userId)
+        public static async Task DeleteUserAsync(int userId)
         {
             var user = await DbHelper.dbс.Users.FindAsync(userId);
             if (user != null)
@@ -77,7 +75,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public async Task<int?> AuthorizeUserAsync(string email, string password)
+        public static async Task<int?> AuthorizeUserAsync(string email, string password)
         {
             var user = await DbHelper.dbс.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);

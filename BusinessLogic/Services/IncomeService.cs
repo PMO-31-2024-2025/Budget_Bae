@@ -7,7 +7,7 @@ namespace BusinessLogic.Services
     using DAL.Data;
     using DAL.Models;
 
-    public class IncomeService
+    public static class IncomeService
     {
         public static double PrevPrevIncome()
         {

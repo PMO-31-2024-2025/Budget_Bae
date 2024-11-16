@@ -1,5 +1,6 @@
 ﻿namespace Presentation
 {
+    using BusinessLogic.Services;
     using System.Windows;
 
     /// <summary>
@@ -33,7 +34,7 @@
                 MessageBox.Show("Введіть достовірний баланс", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
+            
             MessageBox.Show("Акаунт створено успішно!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }

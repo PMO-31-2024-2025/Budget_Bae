@@ -8,7 +8,7 @@ namespace BusinessLogic.Services
     using DAL.Data;
     using DAL.Models;
 
-    public class ExpenseCategoryService
+    public static class ExpenseCategoryService
     {
         public static List<ExpenseCategory> GetCategories()
         {
