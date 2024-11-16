@@ -123,30 +123,36 @@
 
         private void SetCategories()
         {
-            // Очищуємо панель перед додаванням категорій
-            this.CategoriesPanel.Children.Clear();
+            StackPanel horizontalPanel = null;
 
-            var categories = DbHelper.dbс.ExpensesCategories
-                .Where(c => c.UserId == SessionManager.CurrentUserId)
-                .ToList();
-
-            foreach (var category in categories)
+            for (int i = 0; i < this.categories.Count; i++)
             {
+                if (i % 2 == 0)
+                {
+                    horizontalPanel = new StackPanel
+                    {
+                        Orientation = Orientation.Horizontal,
+                        Margin = new Thickness(25, i == 0 ? 5 : 10, 30, 0)
+                    };
+                    this.CategoriesPanel.Children.Add(horizontalPanel);
+                }
+
                 Button categoryButton = new Button
                 {
-                    Content = category.Name, // Відображаємо назву категорії
+                    Content = this.categories[i],
                     Width = 150,
                     Height = 40,
                     FontSize = 16,
                     Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
-                    Margin = new Thickness(5),
+                    Style = (Style)this.FindResource("CategoryButton"),
+                    Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
+                    HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
                 };
 
-                // Прив'язка події
                 categoryButton.Click += this.AddExpense_Click;
 
-                this.CategoriesPanel.Children.Add(categoryButton);
+                horizontalPanel.Children.Add(categoryButton);
             }
         }
 
