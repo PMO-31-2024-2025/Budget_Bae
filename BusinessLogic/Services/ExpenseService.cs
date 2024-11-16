@@ -13,7 +13,7 @@ namespace BusinessLogic.Services
         {
             var accountIds = AccountService.GetUsersAccountsId();
 
-            return DbHelper.db.Expenses
+            return DbHelper.dbс.Expenses
                 .Where(e => accountIds.Contains(e.AccountId))
                 .ToList();
         }
@@ -30,7 +30,7 @@ namespace BusinessLogic.Services
             var accountIds = AccountService.GetUsersAccountsId();
             var currentDate = DateTime.Now;
 
-            double total = DbHelper.db.Expenses
+            double total = DbHelper.dbс.Expenses
                 .AsEnumerable()
                 .Where(e => e.CategoryId == categoryId &&
                          accountIds.Contains(e.AccountId) &&
@@ -49,7 +49,7 @@ namespace BusinessLogic.Services
             var dateTwoMonthsAgo = currentDate.AddMonths(-2);
             var yearTwoMonthsAgo = dateTwoMonthsAgo.Year;
             var monthTwoMonthsAgo = dateTwoMonthsAgo.Month;
-            double prevPrevMonthExpense = DbHelper.db.Expenses
+            double prevPrevMonthExpense = DbHelper.dbс.Expenses
                 .AsEnumerable()
                 .Where(e => accountIds.Contains(e.AccountId) &&
                          DateTime.Parse(e.ExpenseDate).Year == yearTwoMonthsAgo &&
@@ -67,7 +67,7 @@ namespace BusinessLogic.Services
             var dateMonthAgo = currentDate.AddMonths(-1);
             var yearMonthAgo = dateMonthAgo.Year;
             var monthAgo = dateMonthAgo.Month;
-            double prevMonthExpense = DbHelper.db.Expenses
+            double prevMonthExpense = DbHelper.dbс.Expenses
                 .AsEnumerable()
                 .Where(e => accountIds.Contains(e.AccountId) &&
                          DateTime.Parse(e.ExpenseDate).Year == yearMonthAgo &&
@@ -82,7 +82,7 @@ namespace BusinessLogic.Services
             var accountIds = AccountService.GetUsersAccountsId();
 
             var currentDate = DateTime.Now;
-            double currentMonthExpense = DbHelper.db.Expenses
+            double currentMonthExpense = DbHelper.dbс.Expenses
                 .AsEnumerable()
                 .Where(e => accountIds.Contains(e.AccountId) &&
                          DateTime.Parse(e.ExpenseDate).Year == currentDate.Year &&
@@ -106,17 +106,17 @@ namespace BusinessLogic.Services
                 AccountId = accountId,
             };
 
-            DbHelper.db.Expenses.Add(expense);
-            DbHelper.db.SaveChangesAsync();
+            DbHelper.dbс.Expenses.Add(expense);
+            DbHelper.dbс.SaveChangesAsync();
         }
 
         public static void DeleteExpense(int expenseId)
         {
-            var expense = DbHelper.db.Expenses.Find(expenseId);
+            var expense = DbHelper.dbс.Expenses.Find(expenseId);
             if (expense != null)
             {
-                DbHelper.db.Remove(expense);
-                DbHelper.db.SaveChangesAsync();
+                DbHelper.dbс.Remove(expense);
+                DbHelper.dbс.SaveChangesAsync();
             }
         }
     }

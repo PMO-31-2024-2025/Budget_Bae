@@ -76,7 +76,7 @@
             if (sender is Button categoryButton)
             {
                 var categoryName = categoryButton.Content.ToString();
-                var category = DbHelper.db.ExpensesCategories
+                var category = DbHelper.dbс.ExpensesCategories
                     .FirstOrDefault(c => c.Name == categoryName && c.UserId == SessionManager.CurrentUserId);
 
                 if (category != null)
@@ -120,7 +120,7 @@
             // Очищуємо панель перед додаванням категорій
             CategoriesPanel.Children.Clear();
 
-            var categories = DbHelper.db.ExpensesCategories
+            var categories = DbHelper.dbс.ExpensesCategories
                 .Where(c => c.UserId == SessionManager.CurrentUserId)
                 .ToList();
 

@@ -2,6 +2,6 @@
 {
     public static class DbHelper
     {
-        public static BudgetBaeContext db = new BudgetBaeContext();
+        public static BudgetBaeContext dbс = new BudgetBaeContext();
     }
 }

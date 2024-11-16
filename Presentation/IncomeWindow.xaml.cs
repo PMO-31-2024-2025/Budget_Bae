@@ -66,13 +66,13 @@
                     Category = selectedCategory
                 };
 
-                DbHelper.db.Add(newIncome);
+                DbHelper.dbс.Add(newIncome);
 
                 // Оновити баланс рахунку
                 selectedAccount.Balance += (double)incomeSum;
-                DbHelper.db.Update(selectedAccount);
+                DbHelper.dbс.Update(selectedAccount);
 
-                await DbHelper.db.SaveChangesAsync();
+                await DbHelper.dbс.SaveChangesAsync();
 
                 MessageBox.Show("Поповнення успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
 

@@ -12,14 +12,14 @@ namespace BusinessLogic.Services
     {
         public static List<ExpenseCategory> GetCategories()
         {
-            return DbHelper.db.ExpensesCategories
+            return DbHelper.dbс.ExpensesCategories
                     .Where(ec => ec.UserId == SessionManager.CurrentUserId)
                     .ToList();
         }
 
         public static string? GetCategoryName(int categoryId)
         {
-            return DbHelper.db.ExpensesCategories
+            return DbHelper.dbс.ExpensesCategories
                 .Where(ec => ec.Id == categoryId)
                 .Select(ec => ec.Name)
                 .FirstOrDefault();
@@ -34,7 +34,7 @@ namespace BusinessLogic.Services
             }
             else
             {
-                var category = DbHelper.db.ExpensesCategories.FirstOrDefault(c => c.Name == categoryName);
+                var category = DbHelper.dbс.ExpensesCategories.FirstOrDefault(c => c.Name == categoryName);
                 if (category == null && SessionManager.CurrentUserId != null)
                 {
                     category = new ExpenseCategory
@@ -42,8 +42,8 @@ namespace BusinessLogic.Services
                         Name = categoryName,
                         UserId = SessionManager.CurrentUserId.Value,
                     };
-                    DbHelper.db.ExpensesCategories.Add(category);
-                    DbHelper.db.SaveChangesAsync();
+                    DbHelper.dbс.ExpensesCategories.Add(category);
+                    DbHelper.dbс.SaveChangesAsync();
                 }
                 else
                 {
@@ -54,11 +54,11 @@ namespace BusinessLogic.Services
 
         public static void DeleteExpense(int categoryId)
         {
-            var category = DbHelper.db.ExpensesCategories.Find(categoryId);
+            var category = DbHelper.dbс.ExpensesCategories.Find(categoryId);
             if (category != null && category.UserId == SessionManager.CurrentUserId)
             {
-                DbHelper.db.ExpensesCategories.Remove(category);
-                DbHelper.db.SaveChangesAsync();
+                DbHelper.dbс.ExpensesCategories.Remove(category);
+                DbHelper.dbс.SaveChangesAsync();
             }
             else
             {

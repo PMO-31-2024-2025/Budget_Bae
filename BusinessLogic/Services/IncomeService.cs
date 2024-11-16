@@ -17,7 +17,7 @@ namespace BusinessLogic.Services
             var dateTwoMonthsAgo = currentDate.AddMonths(-2);
             var yearTwoMonthsAgo = dateTwoMonthsAgo.Year;
             var monthTwoMonthsAgo = dateTwoMonthsAgo.Month;
-            double prevPrevMonthIncome = DbHelper.db.Incomes
+            double prevPrevMonthIncome = DbHelper.dbс.Incomes
                 .AsEnumerable()
                 .Where(i => accountIds.Contains(i.AccountId) &&
                          DateTime.Parse(i.IncomeDate).Year == yearTwoMonthsAgo &&
@@ -35,7 +35,7 @@ namespace BusinessLogic.Services
             var dateMonthAgo = currentDate.AddMonths(-1);
             var yearMonthAgo = dateMonthAgo.Year;
             var monthAgo = dateMonthAgo.Month;
-            double prevMonthIncome = DbHelper.db.Incomes
+            double prevMonthIncome = DbHelper.dbс.Incomes
                 .AsEnumerable()
                 .Where(i => accountIds.Contains(i.AccountId) &&
                          DateTime.Parse(i.IncomeDate).Year == yearMonthAgo &&
@@ -50,7 +50,7 @@ namespace BusinessLogic.Services
             var accountIds = AccountService.GetUsersAccountsId();
 
             var currentDate = DateTime.Now;
-            double currentMonthIncome = DbHelper.db.Incomes
+            double currentMonthIncome = DbHelper.dbс.Incomes
                 .AsEnumerable()
                 .Where(i => accountIds.Contains(i.AccountId) &&
                          DateTime.Parse(i.IncomeDate).Year == currentDate.Year &&
@@ -64,7 +64,7 @@ namespace BusinessLogic.Services
         {
             var accountIds = AccountService.GetUsersAccountsId();
 
-            return DbHelper.db.Incomes
+            return DbHelper.dbс.Incomes
                 .Where(i => accountIds.Contains(i.AccountId))
                 .ToList();
         }

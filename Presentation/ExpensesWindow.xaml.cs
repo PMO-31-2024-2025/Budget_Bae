@@ -29,13 +29,13 @@
             {
                 MessageBox.Show("Авторизуйтесь для можливості додавання витрат!");
             }
-            else if (DbHelper.db.Accounts == null || !DbHelper.db.Accounts.Any())
+            else if (DbHelper.dbс.Accounts == null || !DbHelper.dbс.Accounts.Any())
             {
                 MessageBox.Show("Спершу потрібно додати рахунки, а тоді вже витрати!");
             }
             else
             {
-                var accounts = DbHelper.db.Accounts.ToList();
+                var accounts = DbHelper.dbс.Accounts.ToList();
                 expenseAddingAccountChooseComboBox.ItemsSource = accounts;
                 expenseAddingAccountChooseComboBox.DisplayMemberPath = "Name";
             }
@@ -74,12 +74,12 @@
                     ExpenseDate = expenseDate.ToString("yyyy-MM-dd HH:mm:ss")
                 };
 
-                DbHelper.db.Add(newExpense);
+                DbHelper.dbс.Add(newExpense);
 
                 selectedAccount.Balance -= expenseSum;
-                DbHelper.db.Update(selectedAccount);
+                DbHelper.dbс.Update(selectedAccount);
 
-                await DbHelper.db.SaveChangesAsync();
+                await DbHelper.dbс.SaveChangesAsync();
 
                 MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

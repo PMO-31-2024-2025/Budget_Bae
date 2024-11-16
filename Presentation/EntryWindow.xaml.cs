@@ -95,8 +95,8 @@ namespace Presentation
                         this.navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
                         mainWindow.MainFrame.Navigate(new MainPage());
                     }
-                    this.navBar.nbEntryButton.Content = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Name;
-                    SessionManager.SetCurrentUser(DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id);
+                    this.navBar.nbEntryButton.Content = DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Name;
+                    SessionManager.SetCurrentUser(DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Id);
                     this.Close();
                 }
                 catch (Exception ex)
@@ -129,7 +129,7 @@ namespace Presentation
                 try
                 {
                     // int userId = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id;
-                    User user = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput);
+                    User user = DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput);
                     if (user == null)
                     {
                         MessageBox.Show("Некоректна пошта");
@@ -152,8 +152,8 @@ namespace Presentation
                             mainWindow.MainFrame.Navigate(new MainPage());
                         }
 
-                        this.navBar.nbEntryButton.Content = DbHelper.db.Users.First(x => x.Id == user.Id).Name;
-                        SessionManager.SetCurrentUser(DbHelper.db.Users.First(x => x.Id == user.Id).Id);
+                        this.navBar.nbEntryButton.Content = DbHelper.dbс.Users.First(x => x.Id == user.Id).Name;
+                        SessionManager.SetCurrentUser(DbHelper.dbс.Users.First(x => x.Id == user.Id).Id);
                         this.Close();
                     }
                 }
