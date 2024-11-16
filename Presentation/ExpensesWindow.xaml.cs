@@ -12,15 +12,17 @@
     {
         private int selectedCategoryId;
         private MainPage mainPage;
-        public static event Action ExpenseAdded;
 
         public ExpensesWindow(int categoryId)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.selectedCategoryId = categoryId;
-            this.mainPage = mainPage;
+
+            //this.mainPage = mainPage;
             this.FillAccountsComboboxWithAccounts();
         }
+
+        public static event Action ExpenseAdded;
 
         private void FillAccountsComboboxWithAccounts()
         {
@@ -36,8 +38,8 @@
             else
             {
                 var accounts = DbHelper.dbс.Accounts.ToList();
-                expenseAddingAccountChooseComboBox.ItemsSource = accounts;
-                expenseAddingAccountChooseComboBox.DisplayMemberPath = "Name";
+                this.expenseAddingAccountChooseComboBox.ItemsSource = accounts;
+                this.expenseAddingAccountChooseComboBox.DisplayMemberPath = "Name";
             }
         }
 
@@ -48,8 +50,8 @@
 
         private async void ExpenseAddingAddButton_Click(object sender, RoutedEventArgs e)
         {
-            string sum = expenseAddingSumTextBox.Text;
-            var selectedAccount = expenseAddingAccountChooseComboBox.SelectedItem as Account;
+            string sum = this.expenseAddingSumTextBox.Text;
+            var selectedAccount = this.expenseAddingAccountChooseComboBox.SelectedItem as Account;
             DateTime expenseDate = DateTime.Now;
 
             if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null)
@@ -70,11 +72,11 @@
                 {
                     ExpenseSum = expenseSum,
                     AccountId = selectedAccount.Id,
-                    CategoryId = selectedCategoryId,
+                    CategoryId = this.selectedCategoryId,
                     ExpenseDate = expenseDate.ToString("yyyy-MM-dd HH:mm:ss")
                 };
 
-                DbHelper.dbс.Add(newExpense);
+                DbHelper.dbс.Expenses.Add(newExpense);
 
                 selectedAccount.Balance -= expenseSum;
                 DbHelper.dbс.Update(selectedAccount);

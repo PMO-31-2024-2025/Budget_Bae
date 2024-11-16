@@ -118,7 +118,7 @@
         private void SetCategories()
         {
             // Очищуємо панель перед додаванням категорій
-            CategoriesPanel.Children.Clear();
+            this.CategoriesPanel.Children.Clear();
 
             var categories = DbHelper.dbс.ExpensesCategories
                 .Where(c => c.UserId == SessionManager.CurrentUserId)
@@ -138,9 +138,9 @@
                 };
 
                 // Прив'язка події
-                categoryButton.Click += AddExpense_Click;
+                categoryButton.Click += this.AddExpense_Click;
 
-                CategoriesPanel.Children.Add(categoryButton);
+                this.CategoriesPanel.Children.Add(categoryButton);
             }
         }
 

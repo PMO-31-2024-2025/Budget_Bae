@@ -84,8 +84,7 @@ namespace Presentation
             {
                 try
                 {
-                    var userService = new UserService(new DAL.Data.BudgetBaeContext());
-                    userService.RegisterUser(emailInput, createPasswordInput, nameInput);
+                    await UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                     if (mainWindow != null && mainWindow.MainFrame != null)

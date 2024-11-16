@@ -1,7 +1,6 @@
-﻿using DAL.Data;
-
-namespace ConsoleBudgetBae
+﻿namespace ConsoleBudgetBae
 {
+    using DAL.Data;
     public class Program
     {
         public static void Main(string[] args)
@@ -281,7 +280,6 @@ namespace ConsoleBudgetBae
             //{
             //    Console.WriteLine("Рахунків не знайдено.");
             //}
-
         }
     }
 }

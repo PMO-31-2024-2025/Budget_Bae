@@ -34,7 +34,7 @@ namespace BusinessLogic.Services
                 .FirstOrDefault();
         }
 
-        public static async Task AddAccount(string name, double balance)
+        public static async Task AddAccountAsync(string name, double balance)
         {
             var currentUserAccounts = DbHelper.dbс.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId).ToList();
             if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)

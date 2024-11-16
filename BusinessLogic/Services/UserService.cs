@@ -11,7 +11,7 @@ namespace BusinessLogic.Services
 
     public static class UserService
     {
-        public static async Task RegisterUser(string email, string password, string name)
+        public static async Task RegisterUserAsync(string email, string password, string name)
         {
             if (DbHelper.dbс.Users.Any(u => u.Email == email))
             {
@@ -26,7 +26,7 @@ namespace BusinessLogic.Services
             };
 
             DbHelper.dbс.Users.Add(user);
-            DbHelper.dbс.SaveChangesAsync();
+            await DbHelper.dbс.SaveChangesAsync();
         }
 
         public static async Task<User> AuthenticateUserAsync(string email, string password)

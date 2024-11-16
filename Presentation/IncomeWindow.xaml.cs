@@ -9,6 +9,7 @@
     /// </summary>
     public partial class IncomeWindow : Window
     {
+        private readonly Account selectedAccount;
         private List<string> incomeCategories = new List<string>
         {
             "З/П",
@@ -19,11 +20,9 @@
             "Інше"
         };
 
-        private readonly Account selectedAccount;
-
         public IncomeWindow(Account account)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.selectedAccount = account; // Прив'язуємо рахунок до об'єкта
             this.UpdateIncomeWindowComboBox();
         }
@@ -61,7 +60,7 @@
                 var newIncome = new Income
                 {
                     IncomeSum = (double)incomeSum,
-                    AccountId = selectedAccount.Id,
+                    AccountId = this.selectedAccount.Id,
                     IncomeDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     Category = selectedCategory
                 };
@@ -69,8 +68,8 @@
                 DbHelper.dbс.Add(newIncome);
 
                 // Оновити баланс рахунку
-                selectedAccount.Balance += (double)incomeSum;
-                DbHelper.dbс.Update(selectedAccount);
+                this.selectedAccount.Balance += (double)incomeSum;
+                DbHelper.dbс.Update(this.selectedAccount);
 
                 await DbHelper.dbс.SaveChangesAsync();
 
