@@ -20,6 +20,7 @@ namespace Presentation
     public partial class MainPage : Page
     {
         private List<Account> accounts = new List<Account>();
+        private List<ExpenseCategory> categories = new List<ExpenseCategory>();
 
         public MainPage()
         {
@@ -125,8 +126,65 @@ namespace Presentation
             this.AccountsPanel.Children.Add(accountsGrid);
         }
 
+        public void SetCategories()
+        {
+            this.CategoriesPanel.Children.Clear();
 
+            Grid categoriesGrid = new Grid();
+            categoriesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(82) });
+            categoriesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(82) });
+            categoriesGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(82) });
+            categoriesGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
+            categoriesGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
+            categoriesGrid.Margin = new Thickness(0, 15, 0, 15);
 
+            int rowIndex = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                Button categoryButton = new Button
+                {
+                    Content = categories[i].Name,
+                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
+                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+                    FontSize = 20,
+                    FontWeight = FontWeights.SemiBold,
+                    Style = (Style)this.FindResource("CategoryButton"),
+                };
+
+                categoryButton.Click += this.AddExpenseButton_Click;
+                Grid.SetRow(categoryButton, rowIndex);
+                if (i % 2 == 0)
+                {
+                    categoryButton.Margin = new Thickness(25, 0, 5, 0);
+                    Grid.SetColumn(categoryButton, 0);
+                }
+                else
+                {
+                    categoryButton.Margin = new Thickness(5, 0, 25, 0);
+                    Grid.SetColumn(categoryButton, 1);
+                    rowIndex++;
+                }
+                categoriesGrid.Children.Add(categoryButton);
+            }
+
+            Button button = new Button
+            {
+                Content = "ІНШЕ",
+                FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
+                Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+                FontSize = 20,
+                FontWeight = FontWeights.SemiBold,
+                Style = (Style)this.FindResource("CategoryButton"),
+                Margin = new Thickness(5, 0, 25, 0),
+            };
+            button.Click += OpenCategories_Click;
+            Grid.SetRow(button, 2);
+            Grid.SetColumn(button, 1);
+            categoriesGrid.Children.Add(button);
+
+            this.CategoriesPanel.Children.Add(categoriesGrid);
+        }
 
         public void UpdatePieChart()
         {
@@ -191,6 +249,8 @@ namespace Presentation
             this.UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
             this.accounts = AccountService.GetUsersAccounts();
             this.SetAccounts();
+            this.categories = ExpenseCategoryService.GetCategories();
+            this.SetCategories();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

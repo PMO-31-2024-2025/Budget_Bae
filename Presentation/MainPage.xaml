@@ -78,9 +78,9 @@
                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </Border>
-                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650">
-                    <StackPanel Orientation="Vertical">
-                        <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 0">
+                <Border Grid.Row="1" CornerRadius="0, 0, 40, 40" Background="#B2A7C7E7" Width="650" Height="280">
+                    <StackPanel Name="CategoriesPanel" Orientation="Vertical">
+                        <!--<Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 0">
                             <Button x:Name="c1" Style="{StaticResource CategoryButton}" Content="ЇЖА" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
                             <Button x:Name="c2" Style="{StaticResource CategoryButton}" Content="ОДЯГ" HorizontalAlignment="Right" Click="AddExpenseButton_Click"/>
                         </Grid>
@@ -91,7 +91,7 @@
                         <Grid HorizontalAlignment="Stretch" Margin="50, 20, 50, 20">
                             <Button x:Name="c5" Style="{StaticResource CategoryButton}" Content="ЗДОРОВ'Я" HorizontalAlignment="Left" Click="AddExpenseButton_Click"/>
                             <Button Style="{StaticResource CategoryButton}" Content="ІНШЕ" HorizontalAlignment="Right" Click="OpenCategories_Click"/>
-                        </Grid>
+                        </Grid> -->
                     </StackPanel>
                 </Border>
             </StackPanel>
