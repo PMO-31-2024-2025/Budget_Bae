@@ -96,6 +96,37 @@ namespace Presentation
                     }
                     this.navBar.nbEntryButton.Content = DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Name;
                     SessionManager.SetCurrentUser(DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Id);
+
+                    var category = new ExpenseCategory
+                    {
+                        Name = "Їжа",
+                        UserId = SessionManager.CurrentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(category);
+                    category = new ExpenseCategory
+                    {
+                        Name = "Одяг",
+                        UserId = SessionManager.CurrentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(category);
+                    category = new ExpenseCategory
+                    {
+                        Name = "Розваги",
+                        UserId = SessionManager.CurrentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(category);
+                    category = new ExpenseCategory
+                    {
+                        Name = "Транспорт",
+                        UserId = SessionManager.CurrentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(category);
+                    category = new ExpenseCategory
+                    {
+                        Name = "Здоров'я",
+                        UserId = SessionManager.CurrentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(category);
                     this.Close();
                 }
                 catch (Exception ex)
@@ -189,7 +220,7 @@ namespace Presentation
             Application.Current.Shutdown();
         }
 
-        private void settingsRegistrationEmailTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void SettingsRegistrationEmailTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -197,7 +228,7 @@ namespace Presentation
             }
         }
 
-        private void settingsRegistrationNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void SettingsRegistrationNameTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -205,7 +236,7 @@ namespace Presentation
             }
         }
 
-        private void settingsRegistrationCreatePasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void SettingsRegistrationCreatePasswordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -213,7 +244,7 @@ namespace Presentation
             }
         }
 
-        private void settingsRegistrationConfirmPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void SettingsRegistrationConfirmPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
