@@ -247,7 +247,7 @@ namespace Presentation
         {
             this.UpdatePieChart();
             this.UserExpenses.Text = $"{Math.Round(ExpenseService.CurrentExpense(), 2).ToString()} UAH";
-            this.accounts = AccountService.GetUsersAccounts();
+            this.accounts = AccountService.GetCurrentUserAccounts();
             this.SetAccounts();
             this.categories = ExpenseCategoryService.GetCategories();
             this.SetCategories();

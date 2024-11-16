@@ -19,7 +19,7 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
-        public static List<Account> GetUsersAccounts()
+        public static List<Account> GetCurrentUserAccounts()
         {
             return DbHelper.dbс.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)

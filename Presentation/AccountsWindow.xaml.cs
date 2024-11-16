@@ -24,7 +24,7 @@ namespace Presentation
 
             if (SessionManager.CurrentUserId != null)
             {
-                this.accounts = AccountService.GetUsersAccounts();
+                this.accounts = AccountService.GetCurrentUserAccounts();
             }
             else
             {

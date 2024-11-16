@@ -28,27 +28,22 @@ namespace BusinessLogic.Services
         public static async void AddExpenseAsync(string categoryName)
         {
             int? currUser = SessionManager.CurrentUserId;
-            if (currUser == null)
+            var currUserCategories = ExpenseCategoryService.GetCategories().Where(x => x.UserId == currUser);
+            var categoryToAdd = currUserCategories.FirstOrDefault(c => c.Name == categoryName);
+
+            if (categoryToAdd == null && SessionManager.CurrentUserId != null)
             {
-                throw new Exception("Авторизуйтесь для додавання категорії.");
+                categoryToAdd = new ExpenseCategory
+                {
+                    Name = categoryName,
+                    UserId = SessionManager.CurrentUserId.Value,
+                };
+                DbHelper.dbс.ExpensesCategories.Add(categoryToAdd);
+                DbHelper.dbс.SaveChangesAsync();
             }
             else
             {
-                var category = DbHelper.dbс.ExpensesCategories.FirstOrDefault(c => c.Name == categoryName);
-                if (category == null && SessionManager.CurrentUserId != null)
-                {
-                    category = new ExpenseCategory
-                    {
-                        Name = categoryName,
-                        UserId = SessionManager.CurrentUserId.Value,
-                    };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
-                    DbHelper.dbс.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new Exception("Категорія вже існує!");
-                }
+                throw new Exception("Категорія вже існує!");
             }
         }
 

@@ -42,6 +42,7 @@
             {
                 mainWindow.MainFrame.Navigate(new MainPage());
             }
+            this.Close();
         }
     }
 }
