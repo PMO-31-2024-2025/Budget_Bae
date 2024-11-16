@@ -11,13 +11,7 @@ namespace BusinessLogic.Services
 
     public class AccountService
     {
-        private readonly BudgetBaeContext context;
-
-        public AccountService(BudgetBaeContext context)
-        {
-            this.context = context;
-        }
-
+        public AccountService(BudgetBaeContext context) { }
 
         public static List<int> GetUsersAccountsId()
         {
@@ -44,7 +38,7 @@ namespace BusinessLogic.Services
 
         public void AddAccount(string name, double balance)
         {
-            var currentUserAccounts = this.context.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId).ToList();
+            var currentUserAccounts = DbHelper.dbс.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId).ToList();
             if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)
             {
 #pragma warning disable CS8629 // Nullable value type may be null.
@@ -55,7 +49,8 @@ namespace BusinessLogic.Services
                     UserId = SessionManager.CurrentUserId.Value
                 };
 #pragma warning restore CS8629 // Nullable value type may be null.
-                this.context.Accounts.Add(account);
+                DbHelper.dbс.Accounts.Add(account);
+                
             }
         }
     }
