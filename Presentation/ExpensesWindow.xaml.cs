@@ -41,8 +41,6 @@
             }
         }
 
-
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -84,6 +82,11 @@
                 await DbHelper.db.SaveChangesAsync();
 
                 MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new MainPage());
+                }
             }
             catch (Exception ex)
             {

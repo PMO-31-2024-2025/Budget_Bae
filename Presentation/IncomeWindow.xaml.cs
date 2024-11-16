@@ -1,5 +1,7 @@
 ﻿namespace Presentation
 {
+    using DAL.Data;
+    using DAL.Models;
     using System.Windows;
 
     /// <summary>
@@ -16,9 +18,13 @@
             "Премія",
             "Інше"
         };
-        public IncomeWindow()
+
+        private readonly Account selectedAccount;
+
+        public IncomeWindow(Account account)
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            this.selectedAccount = account; // Прив'язуємо рахунок до об'єкта
             this.UpdateIncomeWindowComboBox();
         }
 
@@ -29,31 +35,59 @@
 
         private void IncomeAddingIncomeSum_LostFocus(object sender, RoutedEventArgs e)
         {
-            // реалізація
+            // Реалізація
         }
+
         private async void IncomeAddingButton_Click(object sender, RoutedEventArgs e)
         {
             string sum = this.incomeAddingIncomeSumTextBox.Text;
-            var selectedCategory = this.incomeAddingCategoryChooseCombobox.SelectedItem;
+            string selectedCategory = this.incomeAddingCategoryChooseCombobox.SelectedItem?.ToString();
 
-            if (sum == null || selectedCategory == null)
+            if (string.IsNullOrWhiteSpace(sum) || string.IsNullOrWhiteSpace(selectedCategory))
             {
                 MessageBox.Show("Усі поля мають бути заповнені!");
+                return;
             }
-            else if (!decimal.TryParse(sum, out _))
+
+            if (!decimal.TryParse(sum, out decimal incomeSum))
             {
                 MessageBox.Show("Поле суми поповнення має містити число!");
+                return;
             }
-            else
+
+            try
             {
-                try
+                // Додати новий прибуток
+                var newIncome = new Income
                 {
-                    MessageBox.Show("Поповнення успішно!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
+                    IncomeSum = (double)incomeSum,
+                    AccountId = selectedAccount.Id,
+                    IncomeDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Category = selectedCategory
+                };
+
+                DbHelper.db.Add(newIncome);
+
+                // Оновити баланс рахунку
+                selectedAccount.Balance += (double)incomeSum;
+                DbHelper.db.Update(selectedAccount);
+
+                await DbHelper.db.SaveChangesAsync();
+
+                MessageBox.Show("Поповнення успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Перезавантажити головний інтерфейс для відображення оновленого балансу
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
                 {
-                    MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    mainWindow.MainFrame.Navigate(new MainPage());
                 }
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -48,10 +48,18 @@ namespace Presentation
 
         private void AddIncome_Click(object sender, RoutedEventArgs e)
         {
-            IncomeWindow window = new IncomeWindow();
-            this.Close();
-            window.ShowDialog();
+            if (sender is Button button && button.DataContext is Account account)
+            {
+                IncomeWindow window = new IncomeWindow(account);
+                this.Close();
+                window.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Не вдалося знайти рахунок!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void SetAccounts()
         {
@@ -67,11 +75,14 @@ namespace Presentation
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
                     Style = (Style)this.FindResource("CategoryButton"),
                     Margin = new Thickness(15, 10, 15, 10),
+                    DataContext = account 
                 };
+
                 this.AccountsPanel.Children.Add(accountButton);
                 accountButton.Click += this.AddIncome_Click;
             }
         }
+
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {

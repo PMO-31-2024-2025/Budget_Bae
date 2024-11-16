@@ -29,96 +29,64 @@ namespace Presentation
         }
 
         public void SetAccounts()
+{
+    // Очищення панелі для оновлення
+    this.AccountsPanel.Children.Clear();
+
+    // Створюємо Grid для розміщення кнопок
+    Grid accountsGrid = new Grid();
+    accountsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(160) });
+    accountsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(160) });
+    accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
+    accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
+
+    
+    for (int i = 0; i < Math.Min(this.accounts.Count, 3); i++)
+    {
+        Button accountButton = new Button
         {
-            Grid accountsGrid = new Grid();
-            accountsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(160) });
-            accountsGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(160) });
-            accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
-            accountsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(325) });
-
-            if (this.accounts.Count > 0)
+            Content = new TextBlock()
             {
-                Button accountButton1 = new Button
-                {
-                    Content = new TextBlock()
-                    {
-                        Text = $"{this.accounts[0].Name}\n{this.accounts[0].Balance} UAH",
-                        TextAlignment = TextAlignment.Center,
-                    },
-                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
-                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
-                    FontSize = 20,
-                    FontWeight = FontWeights.SemiBold,
-                    Style = (Style)this.FindResource("AccountsButton"),
-                    Margin = new Thickness(35, 20, 20, 10),
-                };
-                accountButton1.Click += this.AddIncome_Click;
-                Grid.SetRow(accountButton1, 0);
-                Grid.SetColumn(accountButton1, 0);
-                accountsGrid.Children.Add(accountButton1);
-            }
+                Text = $"{this.accounts[i].Name}\n{this.accounts[i].Balance:F2} UAH",
+                TextAlignment = TextAlignment.Center,
+            },
+            FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
+            Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+            FontSize = 20,
+            FontWeight = FontWeights.SemiBold,
+            Style = (Style)this.FindResource("AccountsButton"),
+            Margin = new Thickness(20, 20, 20, 10),
+            DataContext = this.accounts[i] 
+        };
 
-            if (this.accounts.Count > 1)
-            {
-                Button accountButton2 = new Button
-                {
-                    Content = new TextBlock()
-                    {
-                        Text = $"{this.accounts[1].Name}\n{this.accounts[1].Balance} UAH",
-                        TextAlignment = TextAlignment.Center,
-                    },
-                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
-                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
-                    FontSize = 20,
-                    FontWeight = FontWeights.SemiBold,
-                    Style = (Style)this.FindResource("AccountsButton"),
-                    Margin = new Thickness(20, 20, 35, 10),
-                };
-                accountButton2.Click += this.AddIncome_Click;
-                Grid.SetRow(accountButton2, 0);
-                Grid.SetColumn(accountButton2, 1);
-                accountsGrid.Children.Add(accountButton2);
-            }
+        accountButton.Click += this.AddIncome_Click;
 
-            if (this.accounts.Count > 2)
-            {
-                Button accountButton3 = new Button
-                {
-                    Content = new TextBlock()
-                    {
-                        Text = $"{this.accounts[2].Name}\n{this.accounts[2].Balance} UAH",
-                        TextAlignment = TextAlignment.Center,
-                    },
-                    FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
-                    Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
-                    FontSize = 20,
-                    FontWeight = FontWeights.SemiBold,
-                    Style = (Style)this.FindResource("AccountsButton"),
-                    Margin = new Thickness(35, 5, 20, 15),
-                };
-                accountButton3.Click += this.AddIncome_Click;
-                Grid.SetRow(accountButton3, 1);
-                Grid.SetColumn(accountButton3, 0);
-                accountsGrid.Children.Add(accountButton3);
-            }
+        Grid.SetRow(accountButton, i / 2);
+        Grid.SetColumn(accountButton, i % 2);
+        accountsGrid.Children.Add(accountButton);
+    }
 
-            Button moreButton = new Button
-            {
-                Content = "БІЛЬШЕ",
-                FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
-                Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
-                FontSize = 30,
-                FontWeight = FontWeights.SemiBold,
-                Style = (Style)this.FindResource("AccountsButton"),
-                Margin = new Thickness(20, 5, 35, 15),
-            };
-            moreButton.Click += this.OpenAccounts_Click;
-            Grid.SetRow(moreButton, 1);
-            Grid.SetColumn(moreButton, 1);
-            accountsGrid.Children.Add(moreButton);
+    if (this.accounts.Count > 3)
+    {
+        Button moreButton = new Button
+        {
+            Content = "БІЛЬШЕ",
+            FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
+            Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
+            FontSize = 30,
+            FontWeight = FontWeights.SemiBold,
+            Style = (Style)this.FindResource("AccountsButton"),
+            Margin = new Thickness(20, 5, 35, 15),
+        };
+        moreButton.Click += this.OpenAccounts_Click;
+        Grid.SetRow(moreButton, 1);
+        Grid.SetColumn(moreButton, 1);
+        accountsGrid.Children.Add(moreButton);
+    }
 
-            this.AccountsPanel.Children.Add(accountsGrid);
-        }
+    this.AccountsPanel.Children.Add(accountsGrid);
+}
+
 
         public void UpdatePieChart()
         {
@@ -221,9 +189,18 @@ namespace Presentation
 
         private void AddIncome_Click(object sender, RoutedEventArgs e)
         {
-            IncomeWindow window = new IncomeWindow();
-            window.ShowDialog();
+            if (sender is Button button && button.DataContext is Account account)
+            {
+                IncomeWindow window = new IncomeWindow(account);
+                window.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Не вдалося знайти рахунок!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
 
         private void OpenAccounts_Click(object sender, RoutedEventArgs e)
         {
@@ -263,12 +240,6 @@ namespace Presentation
         {
             AddAccountWindow addAccountWindow = new AddAccountWindow();
             addAccountWindow.ShowDialog();
-        }
-
-        private void AddIncome_Click_1(object sender, RoutedEventArgs e)
-        {
-            IncomeWindow incomeWindow = new IncomeWindow();
-            incomeWindow.ShowDialog();
         }
 
         private void Savings_Click(object sender, RoutedEventArgs e)
