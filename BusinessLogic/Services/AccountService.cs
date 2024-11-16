@@ -21,7 +21,7 @@ namespace BusinessLogic.Services
 
         public static List<int> GetUsersAccountsId()
         {
-            return DbHelper.dbc.Accounts
+            return DbHelper.db.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .Select(a => a.Id)
                 .ToList();
@@ -29,14 +29,14 @@ namespace BusinessLogic.Services
 
         public static List<Account> GetUsersAccounts()
         {
-            return DbHelper.dbc.Accounts
+            return DbHelper.db.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
 
         public static string? GetAccountName(int accountId)
         {
-            return DbHelper.dbc.Accounts
+            return DbHelper.db.Accounts
                 .Where(a => a.Id == accountId)
                 .Select(a => a.Name)
                 .FirstOrDefault();

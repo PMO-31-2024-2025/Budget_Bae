@@ -4,6 +4,8 @@
 namespace Presentation
 {
     using BusinessLogic.Services;
+    using BusinessLogic.Session;
+    using DAL.Data;
     using DAL.Models;
     using LiveCharts;
     using LiveCharts.Wpf;
@@ -23,6 +25,7 @@ namespace Presentation
         {
             this.InitializeComponent();
             this.Loaded += this.MainPage_Loaded;
+
         }
 
         public void SetAccounts()
@@ -191,8 +194,23 @@ namespace Presentation
 
         private void AddExpenseButton_Click(object sender, RoutedEventArgs e)
         {
-            ExpensesWindow window = new ExpensesWindow();
-            window.ShowDialog();
+            if (sender is Button categoryButton)
+            {
+                var categoryName = categoryButton.Content.ToString();
+
+                var category = DbHelper.db.ExpensesCategories
+                    .FirstOrDefault(c => c.Name == categoryName && c.UserId == SessionManager.CurrentUserId);
+
+                if (category != null)
+                {
+                    ExpensesWindow window = new ExpensesWindow(category.Id);
+                    window.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Категорія не знайдена!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void OpenCategories_Click(object sender, RoutedEventArgs e)
@@ -245,12 +263,6 @@ namespace Presentation
         {
             AddAccountWindow addAccountWindow = new AddAccountWindow();
             addAccountWindow.ShowDialog();
-        }
-
-        private void AddExpense_Click(object sender, RoutedEventArgs e)
-        {
-            ExpensesWindow expensesWindow = new ExpensesWindow();
-            expensesWindow.ShowDialog();
         }
 
         private void AddIncome_Click_1(object sender, RoutedEventArgs e)

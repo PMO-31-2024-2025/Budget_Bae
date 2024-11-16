@@ -20,6 +20,7 @@
             this.UpdatePieChart();
             this.UpdateBarChart();
             this.UpdateHistory();
+            ExpensesWindow.ExpenseAdded += UpdateHistory;
         }
 
         public void UpdateBarChart()

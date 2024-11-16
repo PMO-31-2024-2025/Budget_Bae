@@ -37,7 +37,7 @@
 
         <StackPanel Grid.Row="1" Margin="16">
             <Label x:Name="expenseAddingSumLabel" Content="Введіть суму:" Style="{StaticResource ModalWindowLabel}" Margin="30, 0, 0, 0"/>
-            <TextBox x:Name="expenseAddingSumTextBox" Style="{StaticResource ModalWindowTextBox}" TextWrapping="Wrap" Margin="0,10,0,10" LostFocus="ExpenseAddingSumTextBox_LostFocus"/>
+            <TextBox x:Name="expenseAddingSumTextBox" Style="{StaticResource ModalWindowTextBox}" TextWrapping="Wrap" Margin="0,10,0,10"/>
 
             <Label x:Name="expenseAddingAccountChooseLabel" Content="Оберіть рахунок:" Style="{StaticResource ModalWindowLabel}" Margin="30, 20, 0, 0"/>
             <ComboBox x:Name="expenseAddingAccountChooseComboBox" Style="{StaticResource ModalWindowComboBox}" Margin="0,10,0,10"/>

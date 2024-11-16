@@ -22,7 +22,7 @@
         <ContextMenu x:Key="ContextMenu">
             <MenuItem x:Name="AddCategory" Header="Додати категорію" Click="AddCategory_Click"/>
             <MenuItem x:Name="AddAccount" Header="Додати рахунок" Click="AddAccount_Click_1"/>
-            <MenuItem x:Name="AddExpense" Header="Додати витрату" Click="AddExpense_Click"/>
+            <MenuItem x:Name="AddExpense" Header="Додати витрату" Click="AddExpenseButton_Click"/>
             <MenuItem x:Name="AddIncome" Header="Додати дохід" Click="AddIncome_Click_1"/>
             <MenuItem x:Name="Savings" Header="Заощадження" Click="Savings_Click"/>
             <MenuItem x:Name="Payment" Header="Заплановані платежі" Click="Payment_Click"/>

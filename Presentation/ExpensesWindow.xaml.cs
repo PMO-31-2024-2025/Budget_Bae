@@ -2,60 +2,25 @@
 {
     using BusinessLogic.Session;
     using DAL.Data;
+    using DAL.Models;
+    using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
 
-    /// <summary>
-    /// Interaction logic for ExpensesWindow.xaml
-    /// </summary>
     public partial class ExpensesWindow : Window
     {
-        public ExpensesWindow()
+        private int selectedCategoryId;
+        private MainPage mainPage;
+        public static event Action ExpenseAdded;
+
+        public ExpensesWindow(int categoryId)
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            this.selectedCategoryId = categoryId;
+            this.mainPage = mainPage;
             this.FillAccountsComboboxWithAccounts();
         }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // реалізація
-        }
-
-        private void ExpenseAddingSumTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private async void ExpenseAddingAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            string sum = this.expenseAddingSumTextBox.Text;
-            var selectedAccount = this.expenseAddingAccountChooseComboBox.SelectedItem;
-
-            if (sum == null || selectedAccount == null)
-            {
-                MessageBox.Show("Усі поля мають бути заповнені!");
-            }
-            else if (!decimal.TryParse(sum, out _))
-            {
-                MessageBox.Show("Поле суми витрати має містити число!");
-            }
-            else
-            {
-                try
-                {
-                    MessageBox.Show("Поповнення успішно!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
-
 
         private void FillAccountsComboboxWithAccounts()
         {
@@ -70,12 +35,63 @@
             }
             else
             {
-                this.expenseAddingAccountChooseComboBox.Items.Clear();
-                foreach (var account in DbHelper.db.Accounts.ToList())
-                {
-                    this.expenseAddingAccountChooseComboBox.Items.Add(account.Name);
-                }
+                var accounts = DbHelper.db.Accounts.ToList();
+                expenseAddingAccountChooseComboBox.ItemsSource = accounts;
+                expenseAddingAccountChooseComboBox.DisplayMemberPath = "Name";
             }
         }
+
+
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private async void ExpenseAddingAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            string sum = expenseAddingSumTextBox.Text;
+            var selectedAccount = expenseAddingAccountChooseComboBox.SelectedItem as Account;
+            DateTime expenseDate = DateTime.Now;
+
+            if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null)
+            {
+                MessageBox.Show("Усі поля мають бути заповнені!");
+                return;
+            }
+
+            if (!double.TryParse(sum, out double expenseSum))
+            {
+                MessageBox.Show("Поле суми витрати має містити число!");
+                return;
+            }
+
+            try
+            {
+                var newExpense = new Expense
+                {
+                    ExpenseSum = expenseSum,
+                    AccountId = selectedAccount.Id,
+                    CategoryId = selectedCategoryId,
+                    ExpenseDate = expenseDate.ToString("yyyy-MM-dd HH:mm:ss")
+                };
+
+                DbHelper.db.Add(newExpense);
+
+                selectedAccount.Balance -= expenseSum;
+                DbHelper.db.Update(selectedAccount);
+
+                await DbHelper.db.SaveChangesAsync();
+
+                MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                mainPage.SetAccounts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
     }
 }
