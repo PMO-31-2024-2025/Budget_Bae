@@ -84,7 +84,6 @@
                 await DbHelper.db.SaveChangesAsync();
 
                 MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-                mainPage.SetAccounts();
             }
             catch (Exception ex)
             {
