@@ -25,7 +25,7 @@ namespace BusinessLogic.Services
                 .FirstOrDefault();
         }
 
-        public static void AddExpense(string categoryName)
+        public static async void AddExpenseAsync(string categoryName)
         {
             int? currUser = SessionManager.CurrentUserId;
             if (currUser == null)

@@ -24,7 +24,6 @@ namespace BusinessLogic.Services
                 Password = password,
                 Name = name,
             };
-
             DbHelper.dbс.Users.Add(user);
             await DbHelper.dbс.SaveChangesAsync();
         }

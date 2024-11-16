@@ -20,19 +20,25 @@
             this.InitializeComponent();
 
             this.categories = new List<string>();
-            if (SessionManager.CurrentUserId != null)
-            {
-                List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
+            List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
 
-                foreach (var category in fetchedCategories)
-                {
-                    this.categories.Add(category.Name);
-                }
-            }
-            else
+            foreach (var category in fetchedCategories)
             {
-                this.categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+                this.categories.Add(category.Name);
             }
+            //if (SessionManager.CurrentUserId != null)
+            //{
+                //List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
+
+                //foreach (var category in fetchedCategories)
+                //{
+                //    this.categories.Add(category.Name);
+                //}
+            //}
+            //else
+            //{
+            //    this.categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+            //}
 
             this.SetCategories();
         }

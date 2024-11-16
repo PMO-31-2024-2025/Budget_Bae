@@ -52,7 +52,7 @@
                 }
                 else
                 {
-                    ExpenseCategoryService.AddExpense(categoryInput);
+                    ExpenseCategoryService.AddExpenseAsync(categoryInput);
                     MessageBox.Show("Категорію додано успішно!");
                     this.Close();
                 }

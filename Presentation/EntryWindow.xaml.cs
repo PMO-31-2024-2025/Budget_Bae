@@ -84,8 +84,10 @@ namespace Presentation
             {
                 try
                 {
-                    await UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
+                    UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SessionManager.SetCurrentUser(DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Id);
+
                     MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                     if (mainWindow != null && mainWindow.MainFrame != null)
                     {
@@ -95,38 +97,12 @@ namespace Presentation
                         mainWindow.MainFrame.Navigate(new MainPage());
                     }
                     this.navBar.nbEntryButton.Content = DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Name;
-                    SessionManager.SetCurrentUser(DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Id);
+                    ExpenseCategoryService.AddExpenseAsync("Їжа");
+                    ExpenseCategoryService.AddExpenseAsync("Одяг");
+                    ExpenseCategoryService.AddExpenseAsync("Розваги");
+                    ExpenseCategoryService.AddExpenseAsync("Транспорт");
+                    ExpenseCategoryService.AddExpenseAsync("Здоров'я");
 
-                    var category = new ExpenseCategory
-                    {
-                        Name = "Їжа",
-                        UserId = SessionManager.CurrentUserId.Value
-                    };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
-                    category = new ExpenseCategory
-                    {
-                        Name = "Одяг",
-                        UserId = SessionManager.CurrentUserId.Value
-                    };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
-                    category = new ExpenseCategory
-                    {
-                        Name = "Розваги",
-                        UserId = SessionManager.CurrentUserId.Value
-                    };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
-                    category = new ExpenseCategory
-                    {
-                        Name = "Транспорт",
-                        UserId = SessionManager.CurrentUserId.Value
-                    };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
-                    category = new ExpenseCategory
-                    {
-                        Name = "Здоров'я",
-                        UserId = SessionManager.CurrentUserId.Value
-                    };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
                     this.Close();
                 }
                 catch (Exception ex)

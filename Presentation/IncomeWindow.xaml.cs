@@ -73,7 +73,7 @@
 
                 await DbHelper.dbс.SaveChangesAsync();
 
-                MessageBox.Show("Поповнення успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Рахунок поповнено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 // Перезавантажити головний інтерфейс для відображення оновленого балансу
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

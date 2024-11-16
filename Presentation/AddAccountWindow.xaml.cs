@@ -36,7 +36,7 @@
             }
             await AccountService.AddAccountAsync(nameInput, balance);
 
-            MessageBox.Show("Акаунт створено успішно!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Рахунок додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
             if (mainWindow != null && mainWindow.MainFrame != null)
             {
