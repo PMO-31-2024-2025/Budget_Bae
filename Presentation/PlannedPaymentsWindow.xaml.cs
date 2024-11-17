@@ -177,5 +177,29 @@
 
 
         }
+
+        private void AddPayment_Click(object sender, RoutedEventArgs e)
+        {
+            this.replenishment.Visibility = Visibility.Collapsed;
+            this.replenishmentBorder.Visibility = Visibility.Collapsed;
+            this.adding.Visibility = Visibility.Visible;
+            this.addingBorder.Visibility = Visibility.Visible;
+            this.AddPayment.Visibility = Visibility.Collapsed;
+        }
+
+        private void TopUpPayment_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void closeAddPayment_Click(object sender, RoutedEventArgs e)
+        {
+            this.adding.Visibility = Visibility.Collapsed;
+            this.addingBorder.Visibility = Visibility.Collapsed;
+            this.replenishment.Visibility = Visibility.Visible;
+            this.replenishmentBorder.Visibility = Visibility.Visible;
+            this.AddPayment.Visibility = Visibility.Visible;
+        }
+
     }
 }
