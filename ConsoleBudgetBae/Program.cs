@@ -1,6 +1,8 @@
 ﻿namespace ConsoleBudgetBae
 {
     using DAL.Data;
+    using DAL.Models;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -280,6 +282,19 @@
             //{
             //    Console.WriteLine("Рахунків не знайдено.");
             //}
+
+            //DbHelper.dbс.Add(new PlannedExpense()
+            //{
+            //    Name = "комунальні послуги",
+            //    PlannedSum = 2500.00,
+            //    NotigicationDate = 17,
+            //    UserId = 21
+            //});
+
+            //DbHelper.dbс.SaveChanges();
+
+            //int plannedExpenseCount = DbHelper.dbс.PlannedExpenses.Count();
+            //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
         }
     }
 }

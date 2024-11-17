@@ -34,5 +34,16 @@ namespace Presentation.Properties {
                 this["IsCheckedNotification"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime LastNotificationDate {
+            get {
+                return ((global::System.DateTime)(this["LastNotificationDate"]));
+            }
+            set {
+                this["LastNotificationDate"] = value;
+            }
+        }
     }
 }

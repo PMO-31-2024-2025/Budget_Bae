@@ -251,6 +251,8 @@ namespace Presentation
             this.SetAccounts();
             this.categories = ExpenseCategoryService.GetCategories();
             this.SetCategories();
+            NotificationWindow notificationWindow = new NotificationWindow();
+            notificationWindow.ShowNotification();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
