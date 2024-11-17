@@ -1,5 +1,6 @@
 ﻿namespace Presentation
 {
+    using BusinessLogic.Services;
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
@@ -27,18 +28,14 @@
         private void FillAccountsComboboxWithAccounts()
         {
             int? currUserId = SessionManager.CurrentUserId;
-            if (currUserId == null)
-            {
-                MessageBox.Show("Авторизуйтесь для можливості додавання витрат!");
-            }
-            else if (DbHelper.dbс.Accounts == null || !DbHelper.dbс.Accounts.Any())
+            var currUserAccounts = AccountService.GetCurrentUserAccounts();
+            if (currUserAccounts == null)
             {
                 MessageBox.Show("Спершу потрібно додати рахунки, а тоді вже витрати!");
             }
             else
             {
-                var accounts = DbHelper.dbс.Accounts.ToList();
-                this.expenseAddingAccountChooseComboBox.ItemsSource = accounts;
+                this.expenseAddingAccountChooseComboBox.ItemsSource = currUserAccounts.ToList();
                 this.expenseAddingAccountChooseComboBox.DisplayMemberPath = "Name";
             }
         }
