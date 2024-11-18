@@ -305,7 +305,7 @@
             }
             else if (!int.TryParse(dateText, out int date) || date < 1)
             {
-                MessageBox.Show("Кількість місяців повинна бути 1 чи більше");
+                MessageBox.Show("Кількість місяців повинна бути числом, яке рівне 1 чи більше!");
             }
             else
             {
@@ -334,7 +334,16 @@
             }
         }
 
-
+        private void CalculateMonthlyAmount(object sender, TextChangedEventArgs e)
+        {
+            if (decimal.TryParse(this.Amount_.Text, out decimal amount) &&
+                int.TryParse(this.Date.Text, out int months) &&
+                months > 0)
+            {
+                decimal amountPerMonth = amount / months;
+                this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
+            }
+        }
 
     }
 }

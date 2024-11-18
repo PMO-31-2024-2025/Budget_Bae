@@ -53,9 +53,9 @@
                     </StackPanel>
                     <TextBox x:Name="Name" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть назву" Text="{Binding ElementName=Name, Path=Tag}" GotFocus="TextBox_GotFocus" 
                              LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
-                    <TextBox x:Name="Amount_" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть суму" Text="{Binding ElementName=Amount_, Path=Tag}" GotFocus="TextBox_GotFocus" 
+                    <TextBox x:Name="Amount_" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть суму" Text="{Binding ElementName=Amount_, Path=Tag}" GotFocus="TextBox_GotFocus" TextChanged="CalculateMonthlyAmount"
                              LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
-                    <TextBox x:Name="Date" Style="{StaticResource ModalWindowTextBox}" Tag="Кількість місяців" Text="{Binding ElementName=Date, Path=Tag}" GotFocus="TextBox_GotFocus" 
+                    <TextBox x:Name="Date" Style="{StaticResource ModalWindowTextBox}" Tag="Кількість місяців" Text="{Binding ElementName=Date, Path=Tag}" GotFocus="TextBox_GotFocus" TextChanged="CalculateMonthlyAmount"
                              LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
                     <Grid>
                         <Grid.RowDefinitions>
