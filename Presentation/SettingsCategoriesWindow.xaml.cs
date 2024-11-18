@@ -77,7 +77,15 @@
             int categoryIndex = (int)deleteButton.Tag;
             if (categoryIndex >= 0 && categoryIndex < this.categories.Count)
             {
+                var currCategories = ExpenseCategoryService.GetCategories();
+                var categoryToDeleteId = currCategories.FirstOrDefault(x => x.Name == categories.ElementAt(categoryIndex)).Id;
                 this.categories.RemoveAt(categoryIndex);
+                ExpenseCategoryService.DeleteExpenseCategory(categoryToDeleteId);
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new MainPage());
+                }
                 this.UpdateCategoryGrid();
             }
         }

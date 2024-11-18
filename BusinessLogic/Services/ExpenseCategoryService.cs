@@ -47,7 +47,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public static void DeleteExpense(int categoryId)
+        public static void DeleteExpenseCategory(int categoryId)
         {
             var category = DbHelper.dbс.ExpensesCategories.Find(categoryId);
             if (category != null && category.UserId == SessionManager.CurrentUserId)
