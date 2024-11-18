@@ -32,17 +32,15 @@
 
         public void ShowNotification()
         {
-            DateTime current = DateTime.Now.Date;  // Поточна дата без часу
-            DateTime lastNotificationDate = Properties.Settings.Default.LastNotificationDate; // Остання дата показу сповіщення
+            DateTime current = DateTime.Now.Date;
+            DateTime lastNotificationDate = Properties.Settings.Default.LastNotificationDate;
             List<PlannedExpense> plannedExpenses;
             bool show = false;
 
-            // Перевіряємо, чи змінився день (якщо так, потрібно показати сповіщення)
             if (current != lastNotificationDate)
             {
-                // Оновлюємо останню дату показу сповіщення
                 Properties.Settings.Default.LastNotificationDate = current;
-                Properties.Settings.Default.Save();  // Зберігаємо зміни
+                Properties.Settings.Default.Save();
 
                 show = true;
             }
@@ -51,11 +49,10 @@
             {
                 if (SessionManager.CurrentUserId != null)
                 {
-                    // Сповіщення на основі запланованих витрат
                     plannedExpenses = PlannedExpenseService.GetPlannedExpenses();
                     foreach (var expense in plannedExpenses)
                     {
-                        if (expense.NotigicationDate == current.Day)  // Перевірка, чи треба показати сповіщення
+                        if (expense.NotigicationDate == current.Day)
                         {
                             Label notificationText = new Label
                             {
@@ -64,12 +61,11 @@
                             };
                             this.Notifications.Children.Add(notificationText);
 
-                            // Встановлюємо позицію вікна сповіщення в правий нижній кут
                             this.WindowStartupLocation = WindowStartupLocation.Manual;
                             this.Left = SystemParameters.WorkArea.Width - this.Width;
                             this.Top = SystemParameters.WorkArea.Height - this.Height;
                             this.Show();
-                            break; // Якщо знайдено хоча б одне сповіщення, припиняємо цикл
+                            break;
                         }
                     }
                 }

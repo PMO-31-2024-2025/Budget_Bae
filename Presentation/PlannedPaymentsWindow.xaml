@@ -48,7 +48,7 @@
                 <StackPanel x:Name="adding" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Створення нового платежа" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
-                        <Button x:Name="closeAddPayment" Style="{StaticResource CloseButton}" Width="20" Height="20" FontSize="12" Click="closeAddPayment_Click" HorizontalAlignment="Right" Margin="120, 5, 5, 0"/>
+                        <Button x:Name="closeAddPayment" Style="{StaticResource CloseButton}" Width="20" Height="20" FontSize="12" Click="closeAddPayment_Click" HorizontalAlignment="Right" Margin="135, 7, 5, 0"/>
                     </StackPanel>
                     <TextBox x:Name="Name" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть назву" Width="250" HorizontalAlignment="Center" Margin="10, 30, 10, 0"
                                     Text="{Binding ElementName=Name, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>

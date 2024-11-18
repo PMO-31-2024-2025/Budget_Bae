@@ -1,8 +1,6 @@
 ﻿[*.cs]
 
-# SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = none
-# StyleCop rule SA1413: Allow comma on last line of multiline initializer
 dotnet_diagnostic.SA1413.severity = none
 dotnet_diagnostic.SA1513.severity = none
 dotnet_diagnostic.SA1516.severity = none
@@ -24,3 +22,8 @@ dotnet_diagnostic.SA1307.severity = none
 dotnet_diagnostic.CS8602.severity = none
 dotnet_diagnostic.CS8618.severity = none
 dotnet_diagnostic.CS1998.severity = none
+dotnet_diagnostic.IDE0305.severity = none
+dotnet_diagnostic.IDE0060.severity = none
+dotnet_diagnostic.IDE0051.severity = none
+dotnet_diagnostic.IDE0017.severity = none
+dotnet_diagnostic.IDE0036x.severity = none
