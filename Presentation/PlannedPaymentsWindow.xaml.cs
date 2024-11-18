@@ -83,7 +83,7 @@
                     VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = new Thickness(0, 5, 15, 0),
-                    Tag = i
+                    Tag = this.PlannedPayments[i].Id
                 };
                 delete.Click += this.Delete_Click;
                 Grid.SetRow(delete, 0);
@@ -115,13 +115,38 @@
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
-            int paymentIndex = (int)deleteButton.Tag;
-            if (paymentIndex >= 0 && paymentIndex < this.PlannedPayments.Count)
+
+            if (deleteButton == null || !(deleteButton.Tag is int paymentId))
             {
-                this.PlannedPayments.RemoveAt(paymentIndex);
-                this.UpdatePaymentsGrid();
+                MessageBox.Show("Неможливо знайти платіж для видалення.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                var paymentToDelete = DbHelper.dbс.PlannedExpenses.FirstOrDefault(p => p.Id == paymentId);
+
+                if (paymentToDelete != null)
+                {
+                    DbHelper.dbс.PlannedExpenses.Remove(paymentToDelete);
+                    DbHelper.dbс.SaveChanges();
+
+                    MessageBox.Show("Платіж успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                    var newWindow = new PlannedPaymentsWindow();
+                    this.Close();
+                    newWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Платіж не знайдено.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

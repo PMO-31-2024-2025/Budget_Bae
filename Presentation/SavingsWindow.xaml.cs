@@ -86,7 +86,7 @@
                     FontSize = 12,
                     VerticalAlignment = VerticalAlignment.Top,
                     HorizontalAlignment = HorizontalAlignment.Left,
-                    Tag = i,
+                    Tag = this.Savings[i].Id,
                     Margin = new Thickness(10, 5, 10, 10)
                 };
                 delete.Click += this.Delete_Click;
@@ -116,13 +116,38 @@
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
-            int savingIndex = (int)deleteButton.Tag;
-            if (savingIndex >= 0 && savingIndex < this.Savings.Count)
+
+            if (deleteButton == null || !(deleteButton.Tag is int savingId))
             {
-                this.Savings.RemoveAt(savingIndex);
-                this.UpdateSavingsGrid();
+                MessageBox.Show("Неможливо знайти заощадження для видалення.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                var savingToDelete = DbHelper.dbс.Savings.FirstOrDefault(s => s.Id == savingId);
+
+                if (savingToDelete != null)
+                {
+                    DbHelper.dbс.Savings.Remove(savingToDelete);
+                    DbHelper.dbс.SaveChanges();
+
+                    MessageBox.Show("Заощадження успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                    var newWindow = new SavingsWindow();
+                    this.Close();
+                    newWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Заощадження не знайдено.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
