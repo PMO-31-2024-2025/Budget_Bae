@@ -127,32 +127,35 @@
 
             for (int i = 0; i < this.categories.Count; i++)
             {
-                if (i % 2 == 0)
+                if (this.categories[i] != "Заплановані платежі" && this.categories[i] != "Заощадження")
                 {
-                    horizontalPanel = new StackPanel
+                    if (i % 2 == 0)
                     {
-                        Orientation = Orientation.Horizontal,
-                        Margin = new Thickness(25, i == 0 ? 5 : 10, 30, 0)
+                        horizontalPanel = new StackPanel
+                        {
+                            Orientation = Orientation.Horizontal,
+                            Margin = new Thickness(25, i == 0 ? 5 : 10, 30, 0)
+                        };
+                        this.CategoriesPanel.Children.Add(horizontalPanel);
+                    }
+
+                    Button categoryButton = new Button
+                    {
+                        Content = this.categories[i],
+                        Width = 150,
+                        Height = 40,
+                        FontSize = 16,
+                        Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
+                        Style = (Style)this.FindResource("CategoryButton"),
+                        Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
+                        HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
                     };
-                    this.CategoriesPanel.Children.Add(horizontalPanel);
+
+                    categoryButton.Click += this.AddExpense_Click;
+
+                    horizontalPanel.Children.Add(categoryButton);
                 }
-
-                Button categoryButton = new Button
-                {
-                    Content = this.categories[i],
-                    Width = 150,
-                    Height = 40,
-                    FontSize = 16,
-                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
-                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
-                    Style = (Style)this.FindResource("CategoryButton"),
-                    Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
-                    HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
-                };
-
-                categoryButton.Click += this.AddExpense_Click;
-
-                horizontalPanel.Children.Add(categoryButton);
             }
         }
 

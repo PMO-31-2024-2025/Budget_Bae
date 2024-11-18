@@ -46,28 +46,31 @@
                 RowDefinition row = new RowDefinition();
                 this.categoryGrid.RowDefinitions.Add(row);
 
-                Label label = new Label();
-                label.Content = this.categories[i];
-                label.FontSize = 18;
-                label.Margin = new Thickness(10, 5, 5, 0);
+                if (this.categories[i] != "Заплановані платежі" && this.categories[i] != "Заощадження")
+                {
+                    Label label = new Label();
+                    label.Content = this.categories[i];
+                    label.FontSize = 18;
+                    label.Margin = new Thickness(10, 5, 5, 0);
 
-                Button deleteButton = new Button();
-                deleteButton.Content = "X";
-                deleteButton.Height = 15;
-                deleteButton.Width = 15;
-                deleteButton.Background = Brushes.Transparent;
-                deleteButton.BorderThickness = new Thickness(0);
-                deleteButton.FontSize = 15;
-                deleteButton.Tag = i; // збереження індекса категорії
-                deleteButton.Click += this.DeleteButton_Click;
+                    Button deleteButton = new Button();
+                    deleteButton.Content = "X";
+                    deleteButton.Height = 15;
+                    deleteButton.Width = 15;
+                    deleteButton.Background = Brushes.Transparent;
+                    deleteButton.BorderThickness = new Thickness(0);
+                    deleteButton.FontSize = 15;
+                    deleteButton.Tag = i; // збереження індекса категорії
+                    deleteButton.Click += this.DeleteButton_Click;
 
-                Grid.SetRow(label, i);
-                Grid.SetColumn(label, 0);
-                this.categoryGrid.Children.Add(label);
+                    Grid.SetRow(label, i);
+                    Grid.SetColumn(label, 0);
+                    this.categoryGrid.Children.Add(label);
 
-                Grid.SetRow(deleteButton, i);
-                Grid.SetColumn(deleteButton, 1);
-                this.categoryGrid.Children.Add(deleteButton);
+                    Grid.SetRow(deleteButton, i);
+                    Grid.SetColumn(deleteButton, 1);
+                    this.categoryGrid.Children.Add(deleteButton);
+                }
             }
         }
 
