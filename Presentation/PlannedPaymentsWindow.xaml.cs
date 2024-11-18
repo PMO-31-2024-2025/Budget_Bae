@@ -176,10 +176,16 @@
                 int notificationDate = int.Parse(dateText);
                 double expenseAmount = double.Parse(amountText);
                 PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
-                MessageBox.Show("Платіж створено успішно!");
+                MessageBox.Show("Платіж створено успішно!"); 
+                var newWindow = new PlannedPaymentsWindow();
+                this.Close();
+                newWindow.Show();
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new MainPage());
+                }
             }
-
-
         }
 
         private void AddPayment_Click(object sender, RoutedEventArgs e)

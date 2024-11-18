@@ -227,9 +227,14 @@
                 await DbHelper.dbс.SaveChangesAsync();
 
                 this.Savings = SavingService.GetSavings(); 
-                UpdateSavingsGrid(); 
+                UpdateSavingsGrid();
 
-                MessageBox.Show("Поповнення заощадження успішно виконано та витрату додано!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new MainPage());
+                }
+                MessageBox.Show("Поповнення заощадження успішно виконано!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -282,6 +287,25 @@
                 decimal amountPerMonth = amount / date;
                 this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
                 MessageBox.Show("Дані пройшли перевірку!");
+
+                var newSaving = new Saving
+                {
+                    TargetName = name,
+                    TargetSum = (double)amount,
+                    CurrentSum = 0, 
+                    MonthsNumber = date,
+                    UserId = SessionManager.CurrentUserId.Value 
+                };
+
+                DbHelper.dbс.Savings.Add(newSaving);
+                DbHelper.dbс.SaveChanges();
+
+                MessageBox.Show("Заощадження успішно створено!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                var newWindow = new SavingsWindow();
+                this.Close();
+                newWindow.Show();
+
             }
         }
 
