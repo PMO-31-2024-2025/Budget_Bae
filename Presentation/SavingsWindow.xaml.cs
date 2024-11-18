@@ -2,6 +2,7 @@
 {
     using BusinessLogic.Services;
     using BusinessLogic.Session;
+    using DAL.Data;
     using DAL.Models;
     using System.Windows;
     using System.Windows.Controls;
@@ -26,6 +27,7 @@
 
             this.UpdateSavingsGrid();
             this.UpdateSavingsComboBox();
+            this.UpdateAccountsComboBox();
         }
 
         public List<Saving> Savings { get; set; }
@@ -170,38 +172,91 @@
         private async void TopUpSavings_Click(object sender, RoutedEventArgs e)
         {
             string topUpAmountInput = this.TopUpAmountSavings.Text;
-            var selectedSavings = this.SavingsList.SelectedItem;
+            var selectedSavings = SavingsList.SelectedItem as Saving;
+            var selectedAccount = AccountsList.SelectedItem as Account;
+            int? currentUserId = SessionManager.CurrentUserId;
 
-            if (string.IsNullOrWhiteSpace(this.TopUpAmountSavings.Text) || selectedSavings == null)
+            if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || selectedAccount == null)
             {
-                MessageBox.Show("Усі поля мають бути заповнені!");
+                MessageBox.Show("Усі поля мають бути заповнені!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-            else if (!decimal.TryParse(topUpAmountInput, out _))
+
+            if (!decimal.TryParse(topUpAmountInput, out decimal topUpAmount))
             {
-                MessageBox.Show("Поле суми поповнення має містити число!");
+                MessageBox.Show("Поле суми поповнення має містити число!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-            else
+
+            try
             {
-                try
+                if (selectedAccount.Balance < (double)topUpAmount)
                 {
-                    MessageBox.Show("Поповнення успішно!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Недостатньо коштів на рахунку.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
-                catch (Exception ex)
+
+                selectedAccount.Balance -= (double)topUpAmount;
+                selectedSavings.CurrentSum += (double)topUpAmount;
+
+                var savingsCategory = DbHelper.dbс.ExpensesCategories
+                    .FirstOrDefault(c => c.Name == "Заощадження" && c.UserId == SessionManager.CurrentUserId);
+
+                if (savingsCategory == null)
                 {
-                    MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    savingsCategory = new ExpenseCategory
+                    {
+                        Name = "Заощадження",
+                        UserId = currentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(savingsCategory);
+                    await DbHelper.dbс.SaveChangesAsync();
                 }
+
+                var newExpense = new Expense
+                {
+                    ExpenseSum = (double)topUpAmount,
+                    AccountId = selectedAccount.Id,
+                    CategoryId = savingsCategory.Id,
+                    ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                };
+                DbHelper.dbс.Expenses.Add(newExpense);
+
+                DbHelper.dbс.Update(selectedAccount);
+                DbHelper.dbс.Update(selectedSavings);
+                await DbHelper.dbс.SaveChangesAsync();
+
+                this.Savings = SavingService.GetSavings(); 
+                UpdateSavingsGrid(); 
+
+                MessageBox.Show("Поповнення заощадження успішно виконано та витрату додано!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+
+
+
+
         private void UpdateSavingsComboBox()
         {
-            List<string> savingsName = new List<string>();
+            var savings = DbHelper.dbс.Savings
+                .Where(s => s.UserId == SessionManager.CurrentUserId)
+                .ToList();
+            SavingsList.ItemsSource = savings;
+            SavingsList.DisplayMemberPath = "TargetName"; 
+        }
 
-            foreach (var saving in this.Savings)
-            {
-                savingsName.Add(saving.TargetName);
-            }
-            this.SavingsList.ItemsSource = savingsName;
+        private void UpdateAccountsComboBox()
+        {
+            var accounts = DbHelper.dbс.Accounts
+                .Where(a => a.UserId == SessionManager.CurrentUserId)
+                .ToList();
+            AccountsList.ItemsSource = accounts;
+            AccountsList.DisplayMemberPath = "Name"; 
         }
 
         private void TopUp_Click(object sender, RoutedEventArgs e)

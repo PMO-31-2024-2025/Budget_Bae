@@ -2,6 +2,7 @@
 {
     using BusinessLogic.Services;
     using BusinessLogic.Session;
+    using DAL.Data;
     using DAL.Models;
     using System.Windows;
     using System.Windows.Controls;
@@ -23,6 +24,9 @@
             {
                 this.PlannedPayments = [];
             }
+
+
+            UpdateComboBoxes();
             this.UpdatePaymentsGrid();
 
         }
@@ -187,10 +191,68 @@
             this.AddPayment.Visibility = Visibility.Collapsed;
         }
 
-        private void TopUpPayment_Button_Click(object sender, RoutedEventArgs e)
+        private async void TopUpPayment_Button_Click(object sender, RoutedEventArgs e)
         {
+            string sum = this.TopUpAmountPayment.Text;
+            var selectedAccount = this.AccountsList.SelectedItem as Account;
+            string plannedCategoryName = "Заплановані платежі";
+            int? currentUserId = SessionManager.CurrentUserId;
 
+            if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null || currentUserId == null)
+            {
+                MessageBox.Show("Усі поля мають бути заповнені!");
+                return;
+            }
+
+            if (!double.TryParse(sum, out double paymentSum))
+            {
+                MessageBox.Show("Поле суми поповнення має містити число!");
+                return;
+            }
+
+            try
+            {
+                var category = DbHelper.dbс.ExpensesCategories
+                    .FirstOrDefault(c => c.Name == plannedCategoryName && c.UserId == currentUserId);
+
+                if (category == null)
+                {
+                    category = new ExpenseCategory
+                    {
+                        Name = plannedCategoryName,
+                        UserId = currentUserId.Value
+                    };
+                    DbHelper.dbс.ExpensesCategories.Add(category);
+                    await DbHelper.dbс.SaveChangesAsync();
+                }
+
+                var newExpense = new Expense
+                {
+                    ExpenseSum = paymentSum,
+                    AccountId = selectedAccount.Id,
+                    CategoryId = category.Id,
+                    ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                };
+
+                DbHelper.dbс.Expenses.Add(newExpense);
+
+                selectedAccount.Balance -= paymentSum;
+                DbHelper.dbс.Update(selectedAccount);
+                await DbHelper.dbс.SaveChangesAsync();
+
+                MessageBox.Show("Поповнення успішно внесено як витрату!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new MainPage());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void closeAddPayment_Click(object sender, RoutedEventArgs e)
         {
@@ -200,6 +262,18 @@
             this.replenishmentBorder.Visibility = Visibility.Visible;
             this.AddPayment.Visibility = Visibility.Visible;
         }
+
+        private void UpdateComboBoxes()
+        {
+            PaymentsList.ItemsSource = this.PlannedPayments;
+            PaymentsList.DisplayMemberPath = "Name";
+
+            var accounts = DbHelper.dbс.Accounts.Where(a => a.UserId == SessionManager.CurrentUserId).ToList();
+
+            AccountsList.ItemsSource = accounts;
+            AccountsList.DisplayMemberPath = "Name";
+        }
+
 
     }
 }
