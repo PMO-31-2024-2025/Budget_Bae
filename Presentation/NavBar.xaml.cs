@@ -1,5 +1,6 @@
 ﻿namespace Presentation
 {
+    using BusinessLogic.Session;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -34,22 +35,14 @@
 
         private void NbEntryButton_Click(object sender, RoutedEventArgs e)
         {
-            // Показуємо діалогове вікно з повідомленням та двома кнопками
-            MessageBoxResult result = MessageBox.Show("Бажаєте вийти з акаунту?", "Застереження", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            // Обробка результату
-            if (result == MessageBoxResult.Yes && this.nbEntryButton.Content.Equals("Вхід"))
+            MessageBoxResult closeTheWindow = MessageBox.Show("Бажаєте вийти з акаунту?", "Застереження!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (closeTheWindow == MessageBoxResult.Yes)
             {
+                this.nbEntryButton.Content = "Немає даних";
                 EntryWindow entryWindow = new EntryWindow();
+                SessionManager.ClearCurrentUser();
                 entryWindow.ShowDialog();
             }
-
-            // ТУТ Я НЕ ХОТІВ ВИДАЛЯТИ ЧИЙСЬ КОД ТОМУ ЗАКОМЕНТУВАВ ЙОГО
-            //if (nbEntryButton.Content != "Вхід")
-            //{
-            //    EntryWindow entryWindow = new EntryWindow();
-            //    entryWindow.ShowDialog();
-            //}
         }
 
         private void NbSettingsButton_Click(Object sender, RoutedEventArgs e)
