@@ -33,14 +33,14 @@
             <Button x:Name="AddSavings" Grid.Row="1" Grid.Column="0" Style="{StaticResource ModalWindowButton}" Width="250" Content="Створити заощадження" Click="AddSavings_Click"/>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
-        <Border x:Name="replenishmentBorder" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 30, 20, 30" Visibility="Visible">
+        <Border x:Name="replenishmentBorder" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 20, 20, 30" Visibility="Visible">
             <StackPanel x:Name="replenishment" Visibility="Visible">
                 <Label Content="Поповнення заощадження" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
                     <ComboBox x:Name="SavingsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
                     <ComboBox x:Name="AccountsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
                     <TextBox x:Name="TopUpAmountSavings" Style="{StaticResource ModalWindowTextBox}"  Tag="Сума поповнення" Text="{Binding ElementName=TopUpAmountSavings, Path=Tag}" GotFocus="TextBox_GotFocus" 
                              LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
-                    <Button x:Name="TopUpSavings_Button" Style="{StaticResource ModalWindowButton}" Content="Поповнити" Margin="0,120, 0, 30" Click="TopUpSavings_Click"/>
+                    <Button x:Name="TopUpSavings_Button" Style="{StaticResource ModalWindowButton}" Content="Поповнити" Margin="0,100, 0, 30" Click="TopUpSavings_Click"/>
             </StackPanel>
         </Border>
         </Grid>

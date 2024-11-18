@@ -191,13 +191,22 @@ namespace Presentation
             var pieSeriesCollection = new SeriesCollection();
             var legendItems = new List<dynamic>();
 
-            var seriesData = new[]
+            var seriesData = new List<dynamic>
             {
                 new { Title = "витрати цього місяця", Value = ExpenseService.CurrentExpense(), Color = "#9B70C2" },
                 new { Title = "заплановані витрати", Value = PlannedExpenseService.GetPaymentsAmount(), Color = "#999B70C2" },
                 new { Title = "в заощадження", Value = Math.Round(SavingService.GetTotalSavings(), 2), Color = "#DAB6FC" },
-                new { Title = "залишок доходу за минулий місяць", Value = IncomeService.PrevIncome() - ExpenseService.CurrentExpense(), Color = "#99DAB6FC" },
             };
+
+            if (IncomeService.PrevIncome() - ExpenseService.CurrentExpense() > 0)
+            {
+                seriesData.Add(new
+                {
+                    Title = "залишок доходу за минулий місяць",
+                    Value = IncomeService.PrevIncome() - ExpenseService.CurrentExpense(),
+                    Color = "#99DAB6FC",
+                });
+            }
 
             bool hasData = seriesData.Any(item => item.Value > 0);
 
@@ -219,7 +228,7 @@ namespace Presentation
             }
             else
             {
-                for (int i = 0; i < seriesData.Length; i++)
+                for (int i = 0; i < seriesData.Count; i++)
                 {
                     var item = seriesData[i];
 
