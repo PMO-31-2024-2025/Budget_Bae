@@ -111,6 +111,8 @@
                 (SolidColorBrush)new BrushConverter().ConvertFrom("#BDD5ED"),
             };
 
+            ScrollViewer scrollLegend = new ScrollViewer();
+
             if (SessionManager.CurrentUserId == null || ExpenseService.CurrentExpense() == 0)
             {
                 pieSeriesCollection.Add(new PieSeries
