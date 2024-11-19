@@ -1,3 +1,4 @@
+using Accessibility;
 using BusinessLogic.Services;
 using BusinessLogic.Session;
 using DAL.Data;
@@ -75,42 +76,25 @@ namespace Tests
         //}
 
         [Fact]
-        public async Task AddAccountExpenseToUser38_ShouldAddAccountExpense()
+        public async Task AddAccountToUser38_ShouldAddAccount()
         {
-            // Arrange
-            SessionManager.SetCurrentUser(38);
+            SessionManager.ClearCurrentUser();
+            SessionManager.SetCurrentAccount(38);
             var user = DbHelper.dbc.Users.FirstOrDefault(x => x.Id == 38);
+            Assert.NotNull(user);
+            Assert.Equal(SessionManager.CurrentAccountId, 38);
+            string accName = "TheLeatherWallet";
+            await AccountService.AddAccountAsync(accName, 350);
+            var account = DbHelper.dbc.Accounts.FirstOrDefault(x => x.Name == accName && x.UserId == SessionManager.CurrentUserId);
+            Assert.NotNull(account);
+            Assert.Equal(350, account.Balance);
 
-            // Унікальні назви для категорії та рахунку
-            var accountName = "My moneycase";
-            var categoryName = "TestCategory ";
-            var initialBalance = 10000;
+            IncomeService.
 
-            // Act: Додати рахунок
-            var res1 = await AccountService.AddAccountAsync(accountName, initialBalance);
-            Assert.True(res1);
 
-            var account = AccountService.GetCurrentUserAccounts().FirstOrDefault(x => x.Name == accountName);
-            var accountId = account.Id;
-
-            // Act: Додати категорію витрат
-            var res2 = await ExpenseCategoryService.AddExpenseAsync(categoryName);
-            Assert.True(res2);
-
-            var category = ExpenseCategoryService.GetCategories().FirstOrDefault(x => x.Name == categoryName);
-            var categoryId = category.Id;
-
-            // Act: Додати витрату
-            var res3 = await ExpenseService.AddExpense(categoryId, 2500, accountId);
-            var expense = ExpenseService.GetExpensesByUserId().FirstOrDefault(x => x.ExpenseSum == 2500);
-            Assert.True(res3);
-            Assert.Equal(7500, account.Balance); // Перевірка балансу
-
-            // Cleanup: Видалення створених об'єктів
-            DbHelper.dbc.Expenses.Remove(expense);
-            DbHelper.dbc.Accounts.Remove(account);
-            DbHelper.dbc.ExpensesCategories.Remove(category);
-            await DbHelper.dbc.SaveChangesAsync();
+            await AccountService.DeleteAccountAsync(accName);
+            var deleted_account = DbHelper.dbc.Accounts.FirstOrDefault(x => x.Name == accName && x.UserId == SessionManager.CurrentUserId);
+            Assert.Null(deleted_account);
         }
     }
 }

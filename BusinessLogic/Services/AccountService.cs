@@ -22,7 +22,7 @@ namespace BusinessLogic.Services
         public static List<Account> GetCurrentUserAccounts()
         {
             return DbHelper.dbc.Accounts
-                .Where(a => a.UserId == SessionManager.CurrentUserId)
+                .Where(a => a.UserId == SessionManager.CurrentUserId.Value)
                 .ToList();
         }
 
@@ -36,7 +36,7 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddAccountAsync(string name, double balance)
         {
-            var currentUserAccounts = DbHelper.dbc.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId).ToList();
+            var currentUserAccounts = DbHelper.dbc.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId);
             if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)
             {
 #pragma warning disable CS8629 // Nullable value type may be null.
@@ -47,7 +47,7 @@ namespace BusinessLogic.Services
                     UserId = SessionManager.CurrentUserId.Value
                 };
 #pragma warning restore CS8629 // Nullable value type may be null.
-                await DbHelper.dbc.Accounts.AddAsync(account);
+                DbHelper.dbc.Accounts.Add(account);
                 await DbHelper.dbc.SaveChangesAsync();
             }
             return true;
