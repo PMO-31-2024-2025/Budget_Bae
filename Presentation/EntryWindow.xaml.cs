@@ -84,7 +84,7 @@ namespace Presentation
             {
                 try
                 {
-                    UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
+                    await UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
                     SessionManager.SetCurrentUser(UserService.GetUserIdByEmail(emailInput));
 
@@ -97,11 +97,11 @@ namespace Presentation
                         mainWindow.MainFrame.Navigate(new MainPage());
                     }
                     this.navBar.nbEntryButton.Content = DbHelper.dbc.Users.FirstOrDefault(x => x.Email == emailInput).Name;
-                    ExpenseCategoryService.AddExpenseAsync("Їжа");
-                    ExpenseCategoryService.AddExpenseAsync("Одяг");
-                    ExpenseCategoryService.AddExpenseAsync("Розваги");
-                    ExpenseCategoryService.AddExpenseAsync("Транспорт");
-                    ExpenseCategoryService.AddExpenseAsync("Здоров'я");
+                    await ExpenseCategoryService.AddExpenseAsync("Їжа");
+                    await ExpenseCategoryService.AddExpenseAsync("Одяг");
+                    await ExpenseCategoryService.AddExpenseAsync("Розваги");
+                    await ExpenseCategoryService.AddExpenseAsync("Транспорт");
+                    await ExpenseCategoryService.AddExpenseAsync("Здоров'я");
 
                     this.Close();
                 }

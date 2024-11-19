@@ -144,7 +144,7 @@ namespace Presentation
             {
                 Button categoryButton = new Button
                 {
-                    Content = categories[i].Name,
+                    Content = this.categories[i].Name,
                     FontFamily = (System.Windows.Media.FontFamily)this.FindResource("CustomFont"),
                     Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F4F4F4")),
                     FontSize = 20,
@@ -178,7 +178,7 @@ namespace Presentation
                 Style = (Style)this.FindResource("CategoryButton"),
                 Margin = new Thickness(5, 0, 25, 0),
             };
-            button.Click += OpenCategories_Click;
+            button.Click += this.OpenCategories_Click;
             Grid.SetRow(button, 2);
             Grid.SetColumn(button, 1);
             categoriesGrid.Children.Add(button);

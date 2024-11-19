@@ -197,8 +197,8 @@
         private async void TopUpSavings_Click(object sender, RoutedEventArgs e)
         {
             string topUpAmountInput = this.TopUpAmountSavings.Text;
-            var selectedSavings = SavingsList.SelectedItem as Saving;
-            var selectedAccount = AccountsList.SelectedItem as Account;
+            var selectedSavings = this.SavingsList.SelectedItem as Saving;
+            var selectedAccount = this.AccountsList.SelectedItem as Account;
             int? currentUserId = SessionManager.CurrentUserId;
 
             if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || selectedAccount == null)
@@ -251,8 +251,8 @@
                 DbHelper.dbc.Update(selectedSavings);
                 await DbHelper.dbc.SaveChangesAsync();
 
-                this.Savings = SavingService.GetSavings(); 
-                UpdateSavingsGrid();
+                this.Savings = SavingService.GetSavings();
+                this.UpdateSavingsGrid();
 
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
@@ -276,8 +276,8 @@
             var savings = DbHelper.dbc.Savings
                 .Where(s => s.UserId == SessionManager.CurrentUserId)
                 .ToList();
-            SavingsList.ItemsSource = savings;
-            SavingsList.DisplayMemberPath = "TargetName"; 
+            this.SavingsList.ItemsSource = savings;
+            this.SavingsList.DisplayMemberPath = "TargetName"; 
         }
 
         private void UpdateAccountsComboBox()
@@ -285,8 +285,8 @@
             var accounts = DbHelper.dbc.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
-            AccountsList.ItemsSource = accounts;
-            AccountsList.DisplayMemberPath = "Name"; 
+            this.AccountsList.ItemsSource = accounts;
+            this.AccountsList.DisplayMemberPath = "Name"; 
         }
 
         private void TopUp_Click(object sender, RoutedEventArgs e)
@@ -319,7 +319,7 @@
                     TargetSum = (double)amount,
                     CurrentSum = 0, 
                     MonthsNumber = date,
-                    UserId = SessionManager.CurrentUserId.Value 
+                    UserId = SessionManager.CurrentUserId.Value,
                 };
 
                 DbHelper.dbc.Savings.Add(newSaving);

@@ -7,7 +7,6 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
-    using System.Runtime.CompilerServices;
 
     public static class AccountService
     {

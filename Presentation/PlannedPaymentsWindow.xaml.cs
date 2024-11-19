@@ -26,7 +26,7 @@
             }
 
 
-            UpdateComboBoxes();
+            this.UpdateComboBoxes();
             this.UpdatePaymentsGrid();
 
         }
@@ -201,7 +201,7 @@
                 int notificationDate = int.Parse(dateText);
                 double expenseAmount = double.Parse(amountText);
                 PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
-                MessageBox.Show("Платіж створено успішно!"); 
+                MessageBox.Show("Платіж створено успішно!");
                 var newWindow = new PlannedPaymentsWindow();
                 this.Close();
                 newWindow.Show();
@@ -285,7 +285,7 @@
         }
 
 
-        private void closeAddPayment_Click(object sender, RoutedEventArgs e)
+        private void CloseAddPayment_Click(object sender, RoutedEventArgs e)
         {
             this.adding.Visibility = Visibility.Collapsed;
             this.addingBorder.Visibility = Visibility.Collapsed;
@@ -296,13 +296,13 @@
 
         private void UpdateComboBoxes()
         {
-            PaymentsList.ItemsSource = this.PlannedPayments;
-            PaymentsList.DisplayMemberPath = "Name";
+            this.PaymentsList.ItemsSource = this.PlannedPayments;
+            this.PaymentsList.DisplayMemberPath = "Name";
 
             var accounts = DbHelper.dbc.Accounts.Where(a => a.UserId == SessionManager.CurrentUserId).ToList();
 
-            AccountsList.ItemsSource = accounts;
-            AccountsList.DisplayMemberPath = "Name";
+            this.AccountsList.ItemsSource = accounts;
+            this.AccountsList.DisplayMemberPath = "Name";
         }
 
 

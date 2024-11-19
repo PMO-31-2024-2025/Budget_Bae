@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
+﻿#nullable disable
 
 namespace DAL.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     /// <inheritdoc />
     public partial class DeleteCardNumberAndAccountTypeFromAccount : Migration
     {
@@ -33,7 +33,7 @@ namespace DAL.Migrations
                 table: "accounts",
                 type: "TEXT",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: String.Empty);
         }
     }
 }

@@ -75,7 +75,7 @@ namespace Presentation
                     Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
                     Style = (Style)this.FindResource("CategoryButton"),
                     Margin = new Thickness(15, 10, 15, 10),
-                    DataContext = account 
+                    DataContext = account,
                 };
 
                 this.AccountsPanel.Children.Add(accountButton);

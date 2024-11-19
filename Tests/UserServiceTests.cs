@@ -1,11 +1,10 @@
-using BusinessLogic.Services;
-using BusinessLogic.Session;
-using DAL.Data;
-using DAL.Models;
-using System.Reflection.Metadata;
-
 namespace Tests
 {
+    using BusinessLogic.Services;
+    using BusinessLogic.Session;
+    using DAL.Data;
+    using DAL.Models;
+
     public class UserServiceTests
     {
         [Fact]
