@@ -124,12 +124,12 @@
 
             try
             {
-                var paymentToDelete = DbHelper.dbс.PlannedExpenses.FirstOrDefault(p => p.Id == paymentId);
+                var paymentToDelete = DbHelper.dbc.PlannedExpenses.FirstOrDefault(p => p.Id == paymentId);
 
                 if (paymentToDelete != null)
                 {
-                    DbHelper.dbс.PlannedExpenses.Remove(paymentToDelete);
-                    DbHelper.dbс.SaveChanges();
+                    DbHelper.dbc.PlannedExpenses.Remove(paymentToDelete);
+                    DbHelper.dbc.SaveChanges();
 
                     MessageBox.Show("Платіж успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                     var newWindow = new PlannedPaymentsWindow();
@@ -243,7 +243,7 @@
 
             try
             {
-                var category = DbHelper.dbс.ExpensesCategories
+                var category = DbHelper.dbc.ExpensesCategories
                     .FirstOrDefault(c => c.Name == plannedCategoryName && c.UserId == currentUserId);
 
                 if (category == null)
@@ -253,8 +253,8 @@
                         Name = plannedCategoryName,
                         UserId = currentUserId.Value
                     };
-                    DbHelper.dbс.ExpensesCategories.Add(category);
-                    await DbHelper.dbс.SaveChangesAsync();
+                    DbHelper.dbc.ExpensesCategories.Add(category);
+                    await DbHelper.dbc.SaveChangesAsync();
                 }
 
                 var newExpense = new Expense
@@ -265,11 +265,11 @@
                     ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                 };
 
-                DbHelper.dbс.Expenses.Add(newExpense);
+                DbHelper.dbc.Expenses.Add(newExpense);
 
                 selectedAccount.Balance -= paymentSum;
-                DbHelper.dbс.Update(selectedAccount);
-                await DbHelper.dbс.SaveChangesAsync();
+                DbHelper.dbc.Update(selectedAccount);
+                await DbHelper.dbc.SaveChangesAsync();
 
                 MessageBox.Show("Поповнення успішно внесено як витрату!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -299,7 +299,7 @@
             PaymentsList.ItemsSource = this.PlannedPayments;
             PaymentsList.DisplayMemberPath = "Name";
 
-            var accounts = DbHelper.dbс.Accounts.Where(a => a.UserId == SessionManager.CurrentUserId).ToList();
+            var accounts = DbHelper.dbc.Accounts.Where(a => a.UserId == SessionManager.CurrentUserId).ToList();
 
             AccountsList.ItemsSource = accounts;
             AccountsList.DisplayMemberPath = "Name";

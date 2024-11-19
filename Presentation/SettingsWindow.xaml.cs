@@ -20,7 +20,7 @@
         public SettingsWindow()
         {
             this.InitializeComponent();
-            this.UserNameLabel.Content = DbHelper.dbс.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
+            this.UserNameLabel.Content = DbHelper.dbc.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)

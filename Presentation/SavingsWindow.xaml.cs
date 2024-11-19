@@ -125,12 +125,12 @@
 
             try
             {
-                var savingToDelete = DbHelper.dbс.Savings.FirstOrDefault(s => s.Id == savingId);
+                var savingToDelete = DbHelper.dbc.Savings.FirstOrDefault(s => s.Id == savingId);
 
                 if (savingToDelete != null)
                 {
-                    DbHelper.dbс.Savings.Remove(savingToDelete);
-                    DbHelper.dbс.SaveChanges();
+                    DbHelper.dbc.Savings.Remove(savingToDelete);
+                    DbHelper.dbc.SaveChanges();
 
                     MessageBox.Show("Заощадження успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                     var newWindow = new SavingsWindow();
@@ -224,7 +224,7 @@
                 selectedAccount.Balance -= (double)topUpAmount;
                 selectedSavings.CurrentSum += (double)topUpAmount;
 
-                var savingsCategory = DbHelper.dbс.ExpensesCategories
+                var savingsCategory = DbHelper.dbc.ExpensesCategories
                     .FirstOrDefault(c => c.Name == "Заощадження" && c.UserId == SessionManager.CurrentUserId);
 
                 if (savingsCategory == null)
@@ -234,8 +234,8 @@
                         Name = "Заощадження",
                         UserId = currentUserId.Value
                     };
-                    DbHelper.dbс.ExpensesCategories.Add(savingsCategory);
-                    await DbHelper.dbс.SaveChangesAsync();
+                    DbHelper.dbc.ExpensesCategories.Add(savingsCategory);
+                    await DbHelper.dbc.SaveChangesAsync();
                 }
 
                 var newExpense = new Expense
@@ -245,11 +245,11 @@
                     CategoryId = savingsCategory.Id,
                     ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                 };
-                DbHelper.dbс.Expenses.Add(newExpense);
+                DbHelper.dbc.Expenses.Add(newExpense);
 
-                DbHelper.dbс.Update(selectedAccount);
-                DbHelper.dbс.Update(selectedSavings);
-                await DbHelper.dbс.SaveChangesAsync();
+                DbHelper.dbc.Update(selectedAccount);
+                DbHelper.dbc.Update(selectedSavings);
+                await DbHelper.dbc.SaveChangesAsync();
 
                 this.Savings = SavingService.GetSavings(); 
                 UpdateSavingsGrid();
@@ -273,7 +273,7 @@
 
         private void UpdateSavingsComboBox()
         {
-            var savings = DbHelper.dbс.Savings
+            var savings = DbHelper.dbc.Savings
                 .Where(s => s.UserId == SessionManager.CurrentUserId)
                 .ToList();
             SavingsList.ItemsSource = savings;
@@ -282,7 +282,7 @@
 
         private void UpdateAccountsComboBox()
         {
-            var accounts = DbHelper.dbс.Accounts
+            var accounts = DbHelper.dbc.Accounts
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
             AccountsList.ItemsSource = accounts;
@@ -322,8 +322,8 @@
                     UserId = SessionManager.CurrentUserId.Value 
                 };
 
-                DbHelper.dbс.Savings.Add(newSaving);
-                DbHelper.dbс.SaveChanges();
+                DbHelper.dbc.Savings.Add(newSaving);
+                DbHelper.dbc.SaveChanges();
 
                 MessageBox.Show("Заощадження успішно створено!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
 

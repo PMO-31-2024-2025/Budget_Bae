@@ -277,7 +277,7 @@ namespace Presentation
             {
                 var categoryName = categoryButton.Content.ToString();
 
-                var category = DbHelper.dbс.ExpensesCategories
+                var category = DbHelper.dbc.ExpensesCategories
                     .FirstOrDefault(c => c.Name == categoryName && c.UserId == SessionManager.CurrentUserId);
 
                 if (category != null)

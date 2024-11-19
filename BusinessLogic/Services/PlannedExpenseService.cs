@@ -12,14 +12,14 @@ namespace BusinessLogic.Services
     {
         public static List<PlannedExpense> GetPlannedExpenses()
         {
-            return DbHelper.dbс.PlannedExpenses
+            return DbHelper.dbc.PlannedExpenses
                 .Where(p => p.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
 
         public static double GetPaymentsAmount()
         {
-            return DbHelper.dbс.PlannedExpenses
+            return DbHelper.dbc.PlannedExpenses
                 .Where(p => p.UserId == SessionManager.CurrentUserId)
                 .Sum(p => p.PlannedSum);
         }
@@ -27,11 +27,11 @@ namespace BusinessLogic.Services
         public static void AddPlannedExpense(string expenseName, int notification_date, double plannedSum)
         {
             int? currUser = SessionManager.CurrentUserId;
-            List<PlannedExpense> currUserData = DbHelper.dbс.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
+            List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
 
             if (currUser != null)
             {
-                var plannedExpense = DbHelper.dbс.PlannedExpenses.FirstOrDefault(c => c.Name == expenseName);
+                var plannedExpense = DbHelper.dbc.PlannedExpenses.FirstOrDefault(c => c.Name == expenseName);
                 if (plannedExpense == null)
                 {
                     plannedExpense = new PlannedExpense
@@ -41,8 +41,8 @@ namespace BusinessLogic.Services
                         PlannedSum = plannedSum,
                         UserId = currUser.Value,
                     };
-                    DbHelper.dbс.PlannedExpenses.Add(plannedExpense);
-                    DbHelper.dbс.SaveChangesAsync();
+                    DbHelper.dbc.PlannedExpenses.Add(plannedExpense);
+                    DbHelper.dbc.SaveChangesAsync();
                 }
                 else
                 {
@@ -60,13 +60,13 @@ namespace BusinessLogic.Services
             }
             else
             {
-                List<PlannedExpense> currUserData = DbHelper.dbс.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
+                List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
 
                 var plannedExpenseToDelete = currUserData.FirstOrDefault(x => x.Name == expenseName);
                 if (plannedExpenseToDelete != null && plannedExpenseToDelete.UserId == SessionManager.CurrentUserId)
                 {
-                    DbHelper.dbс.PlannedExpenses.Remove(plannedExpenseToDelete);
-                    DbHelper.dbс.SaveChangesAsync();
+                    DbHelper.dbc.PlannedExpenses.Remove(plannedExpenseToDelete);
+                    DbHelper.dbc.SaveChangesAsync();
                 }
             }
         }

@@ -86,7 +86,7 @@ namespace Presentation
                 {
                     UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
                     MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    SessionManager.SetCurrentUser(DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Id);
+                    SessionManager.SetCurrentUser(UserService.GetUserIdByEmail(emailInput));
 
                     MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                     if (mainWindow != null && mainWindow.MainFrame != null)
@@ -96,7 +96,7 @@ namespace Presentation
                         this.navBar.nbMainButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#50DAB6FC"));
                         mainWindow.MainFrame.Navigate(new MainPage());
                     }
-                    this.navBar.nbEntryButton.Content = DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput).Name;
+                    this.navBar.nbEntryButton.Content = DbHelper.dbc.Users.FirstOrDefault(x => x.Email == emailInput).Name;
                     ExpenseCategoryService.AddExpenseAsync("Їжа");
                     ExpenseCategoryService.AddExpenseAsync("Одяг");
                     ExpenseCategoryService.AddExpenseAsync("Розваги");
@@ -135,7 +135,7 @@ namespace Presentation
                 try
                 {
                     // int userId = DbHelper.db.Users.FirstOrDefault(x => x.Email == emailInput).Id;
-                    User user = DbHelper.dbс.Users.FirstOrDefault(x => x.Email == emailInput);
+                    User user = DbHelper.dbc.Users.FirstOrDefault(x => x.Email == emailInput);
                     if (user == null)
                     {
                         MessageBox.Show("Некоректна пошта");
@@ -158,8 +158,8 @@ namespace Presentation
                             mainWindow.MainFrame.Navigate(new MainPage());
                         }
 
-                        this.navBar.nbEntryButton.Content = DbHelper.dbс.Users.First(x => x.Id == user.Id).Name;
-                        SessionManager.SetCurrentUser(DbHelper.dbс.Users.First(x => x.Id == user.Id).Id);
+                        this.navBar.nbEntryButton.Content = DbHelper.dbc.Users.First(x => x.Id == user.Id).Name;
+                        SessionManager.SetCurrentUser(DbHelper.dbc.Users.First(x => x.Id == user.Id).Id);
                         this.Close();
                     }
                 }

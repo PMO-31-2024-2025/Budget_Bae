@@ -73,12 +73,12 @@
                     ExpenseDate = expenseDate.ToString("yyyy-MM-dd HH:mm:ss")
                 };
 
-                DbHelper.dbс.Expenses.Add(newExpense);
+                DbHelper.dbc.Expenses.Add(newExpense);
 
                 selectedAccount.Balance -= expenseSum;
-                DbHelper.dbс.Update(selectedAccount);
+                DbHelper.dbc.Update(selectedAccount);
 
-                await DbHelper.dbс.SaveChangesAsync();
+                await DbHelper.dbc.SaveChangesAsync();
 
                 MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

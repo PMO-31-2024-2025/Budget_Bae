@@ -12,14 +12,14 @@ namespace BusinessLogic.Services
     {
         public static List<Saving> GetSavings()
         {
-            return DbHelper.dbс.Savings
+            return DbHelper.dbc.Savings
                 .Where(s => s.UserId == SessionManager.CurrentUserId)
                 .ToList();
         }
 
         public static double GetTotalSavings()
         {
-            return DbHelper.dbс.Savings
+            return DbHelper.dbc.Savings
                 .Where(s => s.UserId == SessionManager.CurrentUserId)
                 .Sum(s => s.TargetSum / s.MonthsNumber);
         }

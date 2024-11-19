@@ -13,7 +13,7 @@ namespace BusinessLogic.Services
     {
         public static async Task<bool> RegisterUserAsync(string email, string password, string name)
         {
-            if (DbHelper.dbс.Users.Any(u => u.Email == email))
+            if (DbHelper.dbc.Users.Any(u => u.Email == email))
             {
                 throw new Exception("Користувач з такою електронною поштою вже існує!");
             }
@@ -24,15 +24,15 @@ namespace BusinessLogic.Services
                 Password = password,
                 Name = name,
             };
-            DbHelper.dbс.Users.Add(user);
-            await DbHelper.dbс.SaveChangesAsync();
+            DbHelper.dbc.Users.Add(user);
+            await DbHelper.dbc.SaveChangesAsync();
 
             return true;
         }
 
         public static async Task<User> AuthenticateUserAsync(string email, string password)
         {
-            var user = await DbHelper.dbс.Users
+            var user = await DbHelper.dbc.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             if (user == null)
@@ -47,14 +47,14 @@ namespace BusinessLogic.Services
 
         public static async Task UpdateUserAsync(User user)
         {
-            var existingUser = await DbHelper.dbс.Users.FindAsync(user.Id);
+            var existingUser = await DbHelper.dbc.Users.FindAsync(user.Id);
             if (existingUser != null)
             {
                 existingUser.Name = user.Name;
                 existingUser.Email = user.Email;
                 existingUser.Password = user.Password;
 
-                await DbHelper.dbс.SaveChangesAsync();
+                await DbHelper.dbc.SaveChangesAsync();
             }
             else
             {
@@ -64,11 +64,11 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteUserAsync(int userId)
         {
-            var user = await DbHelper.dbс.Users.FindAsync(userId);
+            var user = await DbHelper.dbc.Users.FindAsync(userId);
             if (user != null)
             {
-                DbHelper.dbс.Users.Remove(user);
-                await DbHelper.dbс.SaveChangesAsync();
+                DbHelper.dbc.Users.Remove(user);
+                await DbHelper.dbc.SaveChangesAsync();
             }
             else
             {
@@ -79,10 +79,16 @@ namespace BusinessLogic.Services
 
         public static async Task<int?> AuthorizeUserAsync(string email, string password)
         {
-            var user = await DbHelper.dbс.Users
+            var user = await DbHelper.dbc.Users
                 .FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             return user?.Id;
+        }
+
+        public static int GetUserIdByEmail(string email)
+        {
+            var user = DbHelper.dbc.Users.First(u => u.Email == email);
+            return user.Id;
         }
     }
 }
