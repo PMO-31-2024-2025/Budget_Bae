@@ -11,7 +11,7 @@ namespace BusinessLogic.Services
 
     public static class UserService
     {
-        public static async Task RegisterUserAsync(string email, string password, string name)
+        public static async Task<bool> RegisterUserAsync(string email, string password, string name)
         {
             if (DbHelper.dbс.Users.Any(u => u.Email == email))
             {
@@ -26,6 +26,8 @@ namespace BusinessLogic.Services
             };
             DbHelper.dbс.Users.Add(user);
             await DbHelper.dbс.SaveChangesAsync();
+
+            return true;
         }
 
         public static async Task<User> AuthenticateUserAsync(string email, string password)
@@ -60,7 +62,7 @@ namespace BusinessLogic.Services
             }
         }
 
-        public static async Task DeleteUserAsync(int userId)
+        public static async Task<bool> DeleteUserAsync(int userId)
         {
             var user = await DbHelper.dbс.Users.FindAsync(userId);
             if (user != null)
@@ -72,6 +74,7 @@ namespace BusinessLogic.Services
             {
                 throw new Exception("Користувача не знайдено.");
             }
+            return true;
         }
 
         public static async Task<int?> AuthorizeUserAsync(string email, string password)
