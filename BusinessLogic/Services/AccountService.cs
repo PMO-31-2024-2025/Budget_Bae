@@ -62,8 +62,14 @@ namespace BusinessLogic.Services
             else
             {
                 DbHelper.dbc.Accounts.Remove(account);
+                await DbHelper.dbc.SaveChangesAsync();
             }
             return true;
+        }
+
+        public static Account? GetAccountById(int accountId)
+        {
+            return DbHelper.dbc.Accounts.FirstOrDefault(x => x.Id == accountId);
         }
     }
 }

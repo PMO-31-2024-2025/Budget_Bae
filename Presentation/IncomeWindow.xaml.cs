@@ -1,5 +1,7 @@
 ﻿namespace Presentation
 {
+    using BusinessLogic.Services;
+    using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
     using System.Windows;
@@ -64,24 +66,16 @@
                     IncomeDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     Category = selectedCategory
                 };
+                SessionManager.SetCurrentAccount(selectedAccount.Id);
+                await IncomeService.AddIncomeAsync(newIncome);
 
-                DbHelper.dbc.Add(newIncome);
-
-                // Оновити баланс рахунку
-                this.selectedAccount.Balance += (double)incomeSum;
-                DbHelper.dbc.Update(this.selectedAccount);
-
-                await DbHelper.dbc.SaveChangesAsync();
-
-                //MessageBox.Show("Рахунок поповнено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                // Перезавантажити головний інтерфейс для відображення оновленого балансу
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {
                     mainWindow.MainFrame.Navigate(new MainPage());
                 }
 
+                SessionManager.ClearCurrentAccount();
                 this.Close();
             }
             catch (Exception ex)

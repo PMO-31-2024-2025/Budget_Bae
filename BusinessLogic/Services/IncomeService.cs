@@ -4,6 +4,7 @@
 
 namespace BusinessLogic.Services
 {
+    using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
 
@@ -67,6 +68,24 @@ namespace BusinessLogic.Services
             return DbHelper.dbc.Incomes
                 .Where(i => accountIds.Contains(i.AccountId))
                 .ToList();
+        }
+
+        public static async Task<bool> AddIncomeAsync(Income income)
+        {
+            DbHelper.dbc.Incomes.Add(income);
+
+            var account = AccountService.GetAccountById(SessionManager.CurrentAccountId.Value);
+            if (account == null)
+            {
+                throw new Exception("Рахунок не знайдено!");
+            }
+            else
+            {
+                account.Balance += income.IncomeSum;
+                await DbHelper.dbc.SaveChangesAsync();
+
+                return true;
+            }
         }
 
         // public static void AddIncome(string category, int sum)
