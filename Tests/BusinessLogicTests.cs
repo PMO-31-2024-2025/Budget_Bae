@@ -72,9 +72,54 @@ namespace Tests
             SessionManager.ClearCurrentAccount();
             Assert.Equal(-1, SessionManager.CurrentAccountId);
 
-            await AccountService.DeleteAccountAsync(accName);
+            await AccountService.DeleteAccountAsync(account.Id);
             var deleted_account = DbHelper.dbc.Accounts.FirstOrDefault(x => x.Name == accName && x.UserId == SessionManager.CurrentUserId);
             Assert.Null(deleted_account);
+            SessionManager.ClearCurrentUser();
+            Assert.Equal(-1, SessionManager.CurrentUserId);
+        }
+        [Fact]
+        public async Task SavingsAndPlannedExpensesTest_ShouldAddSavingsAndPlannedExpenses()
+        {
+            SessionManager.SetCurrentUser(55);
+            Assert.Equal(55, SessionManager.CurrentUserId);
+            string targetName = "Lincoln Continental MkVII";
+            int targetSum = 3000000;
+            int monthNumber = 36;
+
+            await SavingService.AddSavingAsync(targetName, targetSum, monthNumber);
+            var saving = DbHelper.dbc.Savings.FirstOrDefault(s => s.TargetName == targetName && s.UserId == SessionManager.CurrentUserId);
+            int savingId = saving.Id;
+            Assert.NotNull(saving);
+            await SavingService.DeleteSavingAsync(savingId);
+            saving = DbHelper.dbc.Savings.FirstOrDefault(s => s.Id == savingId);
+            Assert.Null(saving);
+
+            string plannedExpenseName = "Kyivstar phone services";
+            int notificationDate = 27;
+            double plannedExpenseSum = 259.49;
+
+            await PlannedExpenseService.AddPlannedExpense(plannedExpenseName, notificationDate, plannedExpenseSum);
+            var plannedExpense = DbHelper.dbc.PlannedExpenses.
+                FirstOrDefault(pe => pe.Name == plannedExpenseName && pe.UserId == SessionManager.CurrentUserId);
+            int plannedExpenseId = plannedExpense.Id;
+            Assert.NotNull(plannedExpense);
+
+            var plannedExpenses = PlannedExpenseService.GetPlannedExpenses();
+            if (plannedExpenses != null)
+            {
+                foreach (var exp in plannedExpenses)
+                {
+                    Assert.True(exp.UserId == SessionManager.CurrentUserId);
+                }
+            }
+
+            await PlannedExpenseService.DeletePlannedExpense(plannedExpenseId);
+            var deletedPlannedExpense = DbHelper.dbc.PlannedExpenses.FirstOrDefault(pe => pe.Id == plannedExpenseId);
+            Assert.Null(deletedPlannedExpense);
+
+            SessionManager.ClearCurrentUser();
+            Assert.Equal(-1, SessionManager.CurrentUserId);
         }
     }
 }

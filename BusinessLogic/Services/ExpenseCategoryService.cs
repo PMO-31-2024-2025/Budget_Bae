@@ -25,7 +25,7 @@ namespace BusinessLogic.Services
                 .FirstOrDefault();
         }
 
-        public static async Task<bool> AddExpenseAsync(string categoryName)
+        public static async Task<bool> AddExpensCategoryAsync(string categoryName)
         {
             int? currUser = SessionManager.CurrentUserId;
             var currUserCategories = ExpenseCategoryService.GetCategories().Where(x => x.UserId == currUser);
@@ -55,7 +55,7 @@ namespace BusinessLogic.Services
             if (category != null && category.UserId == SessionManager.CurrentUserId)
             {
                 DbHelper.dbc.ExpensesCategories.Remove(category);
-                DbHelper.dbc.SaveChangesAsync();
+                await DbHelper.dbc.SaveChangesAsync();
             }
             else
             {

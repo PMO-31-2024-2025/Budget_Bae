@@ -26,10 +26,10 @@ namespace BusinessLogic.Services
                 .Sum(s => s.TargetSum / s.MonthsNumber);
         }
 
-        public static async Task<bool> AddSavingAsync(string name, int sum, int monthsNumber)
+        public static async Task<bool> AddSavingAsync(string targetName, int targetSum, int monthsNumber)
         {
             var currUserSavings = DbHelper.dbc.Savings.Where(x => x.UserId == SessionManager.CurrentUserId);
-            var saving = currUserSavings.FirstOrDefault(x => x.TargetName == name);
+            var saving = currUserSavings.FirstOrDefault(x => x.TargetName == targetName);
             if (saving != null)
             {
                 throw new Exception("Заощадження із таким іменем вже існує!");
@@ -38,8 +38,8 @@ namespace BusinessLogic.Services
             {
                 saving = new Saving
                 {
-                    TargetName = name,
-                    TargetSum = sum,
+                    TargetName = targetName,
+                    TargetSum = targetSum,
                     MonthsNumber = monthsNumber,
                     UserId = SessionManager.CurrentUserId.Value,
                     CurrentSum = 0

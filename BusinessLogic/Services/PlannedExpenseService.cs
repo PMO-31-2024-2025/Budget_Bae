@@ -55,20 +55,22 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeletePlannedExpense(int expenseId)
         {
-            int? currUser = SessionManager.CurrentUserId;
-            if (currUser != null)
+            var currUserPlannedExpenses = PlannedExpenseService.GetPlannedExpenses();
+            var expenseToDelete = currUserPlannedExpenses.FirstOrDefault(pe => pe.Id == expenseId);
+            if (expenseToDelete == null)
             {
-                throw new Exception("Вам нічого видаляти.");
+                throw new Exception("Заданий запланований платіж не знайдено!");
             }
             else
             {
-                List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
+                List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.
+                    Where(p => p.UserId == SessionManager.CurrentUserId).ToList();
 
                 var plannedExpenseToDelete = currUserData.FirstOrDefault(x => x.Id == expenseId);
                 if (plannedExpenseToDelete != null && plannedExpenseToDelete.UserId == SessionManager.CurrentUserId)
                 {
                     DbHelper.dbc.PlannedExpenses.Remove(plannedExpenseToDelete);
-                    await DbHelper.dbc.SaveChangesAsync();
+                    DbHelper.dbc.SaveChanges();
                 }
             }
 

@@ -1,4 +1,7 @@
-﻿namespace ConsoleBudgetBae
+﻿using BusinessLogic.Services;
+using BusinessLogic.Session;
+
+namespace ConsoleBudgetBae
 {
     public class Program
     {

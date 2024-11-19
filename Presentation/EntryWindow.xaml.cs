@@ -97,11 +97,11 @@ namespace Presentation
                         mainWindow.MainFrame.Navigate(new MainPage());
                     }
                     this.navBar.nbEntryButton.Content = DbHelper.dbc.Users.FirstOrDefault(x => x.Email == emailInput).Name;
-                    await ExpenseCategoryService.AddExpenseAsync("Їжа");
-                    await ExpenseCategoryService.AddExpenseAsync("Одяг");
-                    await ExpenseCategoryService.AddExpenseAsync("Розваги");
-                    await ExpenseCategoryService.AddExpenseAsync("Транспорт");
-                    await ExpenseCategoryService.AddExpenseAsync("Здоров'я");
+                    await ExpenseCategoryService.AddExpensCategoryAsync("Їжа");
+                    await ExpenseCategoryService.AddExpensCategoryAsync("Одяг");
+                    await ExpenseCategoryService.AddExpensCategoryAsync("Розваги");
+                    await ExpenseCategoryService.AddExpensCategoryAsync("Транспорт");
+                    await ExpenseCategoryService.AddExpensCategoryAsync("Здоров'я");
 
                     this.Close();
                 }
