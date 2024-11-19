@@ -7,6 +7,7 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using System.Runtime.CompilerServices;
 
     public static class IncomeService
     {
@@ -72,8 +73,6 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddIncomeAsync(Income income)
         {
-            DbHelper.dbc.Incomes.Add(income);
-
             var account = AccountService.GetAccountById(SessionManager.CurrentAccountId.Value);
             if (account == null)
             {
@@ -81,6 +80,7 @@ namespace BusinessLogic.Services
             }
             else
             {
+                DbHelper.dbc.Incomes.Add(income);
                 account.Balance += income.IncomeSum;
                 await DbHelper.dbc.SaveChangesAsync();
 
@@ -88,63 +88,19 @@ namespace BusinessLogic.Services
             }
         }
 
-        // public static void AddIncome(string category, int sum)
-        // {
-        //     int? currUser = SessionManager.CurrentUserId;
-        //     if(currUser == null)
-        //     {
-        //         throw new Exception("Для додавання доходів необхідно авторизуватися.");
-        //     }
-        //     else
-        //     {
-        //         var income = new Income
-        //         {
-        //             Category = category,
-        //             IncomeDate = DateTime.Now.ToString(),
-        //             IncomeSum = sum,
-        //         };
-        //     }
-        // }
-        //
-        // public static void AddExpense(string categoryName)
-        // {
-        //     int? currUser = SessionManager.CurrentUserId;
-        //     if (currUser == null)
-        //     {
-        //         throw new Exception("Авторизуйтесь для додавання категорії.");
-        //     }
-        //     else
-        //     {
-        //         var category = DbHelper.db.ExpensesCategories.FirstOrDefault(c => c.Name == categoryName);
-        //         if (category == null)
-        //         {
-        //             category = new ExpenseCategory
-        //             {
-        //                 Name = categoryName,
-        //                 UserId = SessionManager.CurrentUserId.Value
-        //             };
-        //             DbHelper.db.ExpensesCategories.Add(category);
-        //             DbHelper.db.SaveChangesAsync();
-        //         }
-        //         else
-        //         {
-        //             throw new Exception("Категорія вже існує!");
-        //         }
-        //     }
-        // }
-        //
-        // public static void DeleteExpense(int categoryId)
-        // {
-        //     var category = DbHelper.db.ExpensesCategories.Find(categoryId);
-        //     if (category.UserId == SessionManager.CurrentUserId)
-        //     {
-        //         DbHelper.db.ExpensesCategories.Remove(category);
-        //         DbHelper.db.SaveChangesAsync();
-        //     }
-        //     else
-        //     {
-        //         throw new Exception("Такої категорії не існує!");
-        //     }
-        // }
+        public static async Task<bool> DeleteIncomeAsync(int incomeId)
+        {
+            var income = GetIncomesByUserId().FirstOrDefault(i => i.Id == incomeId);
+            if (income == null)
+            {
+                throw new Exception("Вказане надходження не знайдено!");
+            }
+            else
+            {
+                DbHelper.dbc.Incomes.Remove(income);
+                await DbHelper.dbc.SaveChangesAsync();
+            }
+            return true;
+        }
     }
 }

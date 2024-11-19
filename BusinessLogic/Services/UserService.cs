@@ -30,6 +30,21 @@ namespace BusinessLogic.Services
             return true;
         }
 
+        public static async Task<bool> DeleteUserAsync(int userId)
+        {
+            var user = await DbHelper.dbc.Users.FindAsync(userId);
+            if (user != null)
+            {
+                DbHelper.dbc.Users.Remove(user);
+                await DbHelper.dbc.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("Користувача не знайдено.");
+            }
+            return true;
+        }
+
         public static async Task<User> AuthenticateUserAsync(string email, string password)
         {
             var user = await DbHelper.dbc.Users
@@ -60,21 +75,6 @@ namespace BusinessLogic.Services
             {
                 throw new Exception("Користувача не знайдено.");
             }
-        }
-
-        public static async Task<bool> DeleteUserAsync(int userId)
-        {
-            var user = await DbHelper.dbc.Users.FindAsync(userId);
-            if (user != null)
-            {
-                DbHelper.dbc.Users.Remove(user);
-                await DbHelper.dbc.SaveChangesAsync();
-            }
-            else
-            {
-                throw new Exception("Користувача не знайдено.");
-            }
-            return true;
         }
 
         public static async Task<int?> AuthorizeUserAsync(string email, string password)

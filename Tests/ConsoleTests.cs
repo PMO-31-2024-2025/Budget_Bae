@@ -1,6 +1,6 @@
 ﻿namespace Tests
 {
-    public class ExpenseServiceTests
+    public class ConsoleTests
     {
         
     }

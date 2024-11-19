@@ -18,13 +18,6 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
-        /*public static double GetTotalExpensesByCategoryId(int categoryId)
-        {
-            return DbHelper.db.Expenses
-                .Where(e => e.CategoryId == categoryId)
-                .Sum(e => e.ExpenseSum);
-        }*/
-
         public static double GetCurrentExpensesByCategoryId(int categoryId)
         {
             var accountIds = AccountService.GetUsersAccountsId();
@@ -92,12 +85,8 @@ namespace BusinessLogic.Services
             return currentMonthExpense;
         }
 
-        public static async Task<bool> AddExpense(int categoryId, double expenseSum, int accountId)
+        public static async Task<bool> AddExpenseAsync(int categoryId, double expenseSum, int accountId)
         {
-            // if (DbHelper.db.Users.Any(u => u.Email == email))
-            // {
-            //     throw new Exception("Користувач з такою електронною поштою вже існує!");
-            // }
             var expense = new Expense
             {
                 CategoryId = categoryId,
@@ -112,7 +101,7 @@ namespace BusinessLogic.Services
             return true;
         }
 
-        public static async Task<bool> DeleteExpense(int expenseId)
+        public static async Task<bool> DeleteExpenseAsync(int expenseId)
         {
             var expense = DbHelper.dbc.Expenses.Find(expenseId);
             if (expense != null)
@@ -120,7 +109,10 @@ namespace BusinessLogic.Services
                 DbHelper.dbc.Remove(expense);
                 await DbHelper.dbc.SaveChangesAsync();
             }
-
+            else
+            {
+                throw new Exception("Не знайдено вказану витрату!");
+            }
             return true;
         }
     }

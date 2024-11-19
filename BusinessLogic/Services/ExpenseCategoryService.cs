@@ -49,7 +49,7 @@ namespace BusinessLogic.Services
             return true;
         }
 
-        public static void DeleteExpenseCategory(int categoryId)
+        public static async Task<bool> DeleteExpenseCategory(int categoryId)
         {
             var category = DbHelper.dbc.ExpensesCategories.Find(categoryId);
             if (category != null && category.UserId == SessionManager.CurrentUserId)
@@ -61,6 +61,8 @@ namespace BusinessLogic.Services
             {
                 throw new Exception("Такої категорії не існує!");
             }
+
+            return true;
         }
     }
 }

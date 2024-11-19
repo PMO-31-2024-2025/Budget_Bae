@@ -52,9 +52,9 @@ namespace BusinessLogic.Services
             return true;
         }
 
-        public static async Task<bool> DeleteAccountAsync(string accountName)
+        public static async Task<bool> DeleteAccountAsync(int accountId)
         {
-            var account = GetCurrentUserAccounts().FirstOrDefault(a => a.Name == accountName);
+            var account = GetCurrentUserAccounts().FirstOrDefault(a => a.Id == accountId);
             if (account == null)
             {
                 throw new Exception("Такого рахунку не існує!");

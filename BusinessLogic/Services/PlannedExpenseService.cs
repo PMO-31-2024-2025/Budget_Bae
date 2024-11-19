@@ -24,7 +24,7 @@ namespace BusinessLogic.Services
                 .Sum(p => p.PlannedSum);
         }
 
-        public static void AddPlannedExpense(string expenseName, int notification_date, double plannedSum)
+        public static async Task<bool> AddPlannedExpense(string expenseName, int notification_date, double plannedSum)
         {
             int? currUser = SessionManager.CurrentUserId;
             List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
@@ -42,16 +42,18 @@ namespace BusinessLogic.Services
                         UserId = currUser.Value,
                     };
                     DbHelper.dbc.PlannedExpenses.Add(plannedExpense);
-                    DbHelper.dbc.SaveChangesAsync();
+                    await DbHelper.dbc.SaveChangesAsync();
                 }
                 else
                 {
                     throw new Exception("Задана запланована витрата вже існує!");
                 }
             }
+
+            return true;
         }
 
-        public static void DeletePlannedExpense(string expenseName)
+        public static async Task<bool> DeletePlannedExpense(int expenseId)
         {
             int? currUser = SessionManager.CurrentUserId;
             if (currUser != null)
@@ -62,13 +64,15 @@ namespace BusinessLogic.Services
             {
                 List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
 
-                var plannedExpenseToDelete = currUserData.FirstOrDefault(x => x.Name == expenseName);
+                var plannedExpenseToDelete = currUserData.FirstOrDefault(x => x.Id == expenseId);
                 if (plannedExpenseToDelete != null && plannedExpenseToDelete.UserId == SessionManager.CurrentUserId)
                 {
                     DbHelper.dbc.PlannedExpenses.Remove(plannedExpenseToDelete);
-                    DbHelper.dbc.SaveChangesAsync();
+                    await DbHelper.dbc.SaveChangesAsync();
                 }
             }
+
+            return true;
         }
     }
 }
