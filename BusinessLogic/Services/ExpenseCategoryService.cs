@@ -39,7 +39,7 @@ namespace BusinessLogic.Services
                     UserId = SessionManager.CurrentUserId.Value,
                 };
                 DbHelper.dbc.ExpensesCategories.Add(categoryToAdd);
-                DbHelper.dbc.SaveChangesAsync();
+                await DbHelper.dbc.SaveChangesAsync();
             }
             else
             {

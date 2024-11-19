@@ -1,8 +1,5 @@
 ﻿namespace ConsoleBudgetBae
 {
-    using DAL.Data;
-    using DAL.Models;
-
     public class Program
     {
         public static void Main(string[] args)
@@ -242,59 +239,59 @@
             // int expenseCount = DbHelper.db.Expenses.Count();
             // Console.WriteLine($"Expenses: {expenseCount}");
 
-            //var lastExpense = DbHelper.db.Expenses
-            //.OrderByDescending(e => e.Id) 
-            //.  FirstOrDefault();
-            //Console.WriteLine($"Остання витрата:");
-            //Console.WriteLine($"Категорія ID: {lastExpense.CategoryId}");
-            //Console.WriteLine($"Сума: {lastExpense.ExpenseSum:F2}");
-            //Console.WriteLine($"Дата: {lastExpense.ExpenseDate}");
-            //Console.WriteLine($"Рахунок ID: {lastExpense.AccountId}");
-
-            //var account = DbHelper.db.Accounts.FirstOrDefault(a => a.Id == 0);
-            //if (account != null)
-            //{
-            //    Console.WriteLine("Рахунок з ID 0:");
-            //    Console.WriteLine($"Ім'я рахунку: {account.Name}");
-            //    Console.WriteLine($"Баланс: {account.Balance:F2}");
-            //    Console.WriteLine($"Користувач ID: {account.UserId}");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Рахунок з ID 0 не знайдено.");
-            //}
-
-            //var accounts = DbHelper.db.Accounts.ToList();
-            //if (accounts.Any())
-            //{
-            //    Console.WriteLine("Усі рахунки:");
-            //    foreach ( var el in accounts)
-            //    {
-            //        Console.WriteLine("-------------------------");
-            //        Console.WriteLine($"ID: {el.Id}");
-            //        Console.WriteLine($"Ім'я рахунку: {el.Name}");
-            //        Console.WriteLine($"Баланс: {el.Balance:F2}");
-            //        Console.WriteLine($"Користувач ID: {el.UserId}");
-            //    }
-            //    Console.WriteLine("-------------------------");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Рахунків не знайдено.");
-            //}
-
-            //DbHelper.dbс.Add(new PlannedExpense()
-            //{
-            //    Name = "комунальні послуги",
-            //    PlannedSum = 2500.00,
-            //    NotigicationDate = 17,
-            //    UserId = 21
-            //});
-
-            //DbHelper.dbс.SaveChanges();
-
-            //int plannedExpenseCount = DbHelper.dbс.PlannedExpenses.Count();
-            //Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
+            // var lastExpense = DbHelper.db.Expenses
+            // .OrderByDescending(e => e.Id)
+            // .  FirstOrDefault();
+            // Console.WriteLine($"Остання витрата:");
+            // Console.WriteLine($"Категорія ID: {lastExpense.CategoryId}");
+            // Console.WriteLine($"Сума: {lastExpense.ExpenseSum:F2}");
+            // Console.WriteLine($"Дата: {lastExpense.ExpenseDate}");
+            // Console.WriteLine($"Рахунок ID: {lastExpense.AccountId}");
+            //
+            // var account = DbHelper.db.Accounts.FirstOrDefault(a => a.Id == 0);
+            // if (account != null)
+            // {
+            //     Console.WriteLine("Рахунок з ID 0:");
+            //     Console.WriteLine($"Ім'я рахунку: {account.Name}");
+            //     Console.WriteLine($"Баланс: {account.Balance:F2}");
+            //     Console.WriteLine($"Користувач ID: {account.UserId}");
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Рахунок з ID 0 не знайдено.");
+            // }
+            //
+            // var accounts = DbHelper.db.Accounts.ToList();
+            // if (accounts.Any())
+            // {
+            //     Console.WriteLine("Усі рахунки:");
+            //     foreach ( var el in accounts)
+            //     {
+            //         Console.WriteLine("-------------------------");
+            //         Console.WriteLine($"ID: {el.Id}");
+            //         Console.WriteLine($"Ім'я рахунку: {el.Name}");
+            //         Console.WriteLine($"Баланс: {el.Balance:F2}");
+            //         Console.WriteLine($"Користувач ID: {el.UserId}");
+            //     }
+            //     Console.WriteLine("-------------------------");
+            // }
+            // else
+            // {
+            //     Console.WriteLine("Рахунків не знайдено.");
+            // }
+            //
+            // DbHelper.dbс.Add(new PlannedExpense()
+            // {
+            //     Name = "комунальні послуги",
+            //     PlannedSum = 2500.00,
+            //     NotigicationDate = 17,
+            //     UserId = 21
+            // });
+            //
+            // DbHelper.dbс.SaveChanges();
+            //
+            // int plannedExpenseCount = DbHelper.dbс.PlannedExpenses.Count();
+            // Console.WriteLine($"PlannedExpenses: {plannedExpenseCount}");
         }
     }
 }

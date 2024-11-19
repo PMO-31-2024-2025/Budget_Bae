@@ -1,12 +1,12 @@
 ﻿namespace Presentation
 {
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
     using BusinessLogic.Services;
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for CategoriesWindow.xaml.
@@ -26,20 +26,20 @@
             {
                 this.categories.Add(category.Name);
             }
-            //if (SessionManager.CurrentUserId != null)
-            //{
-                //List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
 
-                //foreach (var category in fetchedCategories)
-                //{
-                //    this.categories.Add(category.Name);
-                //}
-            //}
-            //else
-            //{
-            //    this.categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
-            //}
-
+            // if (SessionManager.CurrentUserId != null)
+            // {
+            //     List<ExpenseCategory> fetchedCategories = ExpenseCategoryService.GetCategories();
+            //
+            //     foreach (var category in fetchedCategories)
+            //     {
+            //         this.categories.Add(category.Name);
+            //     }
+            // }
+            // else
+            // {
+            //     this.categories = new List<string> { "Їжа", "Одяг", "Розваги", "Транспорт", "Здоров'я" };
+            // }
             this.SetCategories();
         }
 

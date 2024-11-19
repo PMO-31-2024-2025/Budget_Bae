@@ -81,7 +81,7 @@
             if (categoryIndex >= 0 && categoryIndex < this.categories.Count)
             {
                 var currCategories = ExpenseCategoryService.GetCategories();
-                var categoryToDeleteId = currCategories.FirstOrDefault(x => x.Name == categories.ElementAt(categoryIndex)).Id;
+                var categoryToDeleteId = currCategories.FirstOrDefault(x => x.Name == this.categories.ElementAt(categoryIndex)).Id;
                 this.categories.RemoveAt(categoryIndex);
                 ExpenseCategoryService.DeleteExpenseCategory(categoryToDeleteId);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

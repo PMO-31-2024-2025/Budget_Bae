@@ -41,7 +41,7 @@
             // }
         }
 
-        private void AddCategoryButton_Click(object sender, RoutedEventArgs e)
+        private async void AddCategoryButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -52,7 +52,7 @@
                 }
                 else
                 {
-                    ExpenseCategoryService.AddExpenseAsync(categoryInput);
+                    await ExpenseCategoryService.AddExpenseAsync(categoryInput);
                     MessageBox.Show("Категорію додано успішно!");
                     this.Close();
                 }
