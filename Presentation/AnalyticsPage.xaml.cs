@@ -8,6 +8,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using System.Windows.Media.Animation;
 
     /// <summary>
     /// Interaction logic for AnalyticsPage.xaml.
@@ -157,8 +158,15 @@
             this.AnalyticsLegend.ItemsSource = legendItems;
         }
 
-        private Grid AddTransaction(string category, string sum, string account)
+        private Border AddTransaction(string category, string sum, string account)
         {
+            // Головний контейнер для транзакції
+            Border elem = new Border()
+            {
+                Style = (Style)this.FindResource("HistoryElement"),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Opacity = 0,
+            };
             Grid elemGrid = new Grid()
             {
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -169,6 +177,7 @@
             elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
+            // Лейбл для категорії
             Label categoryLabel = new Label()
             {
                 Content = category,
@@ -180,6 +189,7 @@
             Grid.SetColumn(categoryLabel, 0);
             Grid.SetRowSpan(categoryLabel, 2);
 
+            // Лейбл для суми
             Label sumLabel = new Label()
             {
                 Content = sum,
@@ -190,6 +200,7 @@
             Grid.SetRow(sumLabel, 0);
             Grid.SetColumn(sumLabel, 1);
 
+            // Лейбл для акаунта
             Label accountLabel = new Label()
             {
                 Content = account,
@@ -200,12 +211,58 @@
             Grid.SetRow(accountLabel, 1);
             Grid.SetColumn(accountLabel, 1);
 
+            // Хрестик для видалення
+            Button deleteButton = new Button()
+            {
+                Content = "×",
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(7, 7, 7, 7),
+                Visibility = Visibility.Hidden, // Спочатку ховаємо
+                Background = Brushes.Transparent,
+                BorderBrush = Brushes.Transparent,
+                Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#CC000000"),
+                FontSize = 25,
+            };
+            //deleteButton.Click += DeleteTransaction_OnClick; // Обробник кліку
+            Grid.SetRow(deleteButton, 0);
+            Grid.SetColumn(deleteButton, 1);
+
+            elem.MouseEnter += (s, e) =>
+            {
+                sumLabel.Visibility = Visibility.Hidden; // Ховаємо суму
+                accountLabel.Visibility = Visibility.Hidden; // Ховаємо суму
+                deleteButton.Visibility = Visibility.Visible; // Показуємо хрестик
+            };
+
+            elem.MouseLeave += (s, e) =>
+            {
+                sumLabel.Visibility = Visibility.Visible; // Показуємо суму
+                accountLabel.Visibility = Visibility.Visible; // Показуємо суму
+                deleteButton.Visibility = Visibility.Hidden; // Ховаємо хрестик
+            };
+
+            //deleteButton.MouseEnter += (s, e) =>
+            //{
+            //    deleteButton.FontSize = 32;
+            //};
+
+            //deleteButton.MouseEnter += (s, e) =>
+            //{
+            //    deleteButton.FontSize = 25;
+            //};
+
             elemGrid.Children.Add(categoryLabel);
             elemGrid.Children.Add(sumLabel);
             elemGrid.Children.Add(accountLabel);
+            elemGrid.Children.Add(deleteButton);
 
-            return elemGrid;
+            elem.Child = elemGrid;
+
+            return elem;
         }
+
+
 
         private void UpdateHistory()
         {
@@ -230,17 +287,10 @@
                     if (transaction is Expense expense)
                     {
                         date = DateTime.Parse(expense.ExpenseDate).Date;
-                        Border elem = new Border()
-                        {
-                            Style = (Style)this.FindResource("HistoryElement"),
-                            HorizontalAlignment = HorizontalAlignment.Left,
-                        };
-
                         string category = ExpenseCategoryService.GetCategoryName(expense.CategoryId);
                         string sum = expense.ExpenseSum.ToString();
                         string account = AccountService.GetAccountName(expense.AccountId);
-                        Grid elemGrid = this.AddTransaction(category, $"- {sum}", account);
-                        elem.Child = elemGrid;
+                        Border elem = this.AddTransaction(category, $"- {sum}", account);
                         if (date > prevDate)
                         {
                             this.HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
@@ -252,16 +302,10 @@
                     else if (transaction is Income income)
                     {
                         date = DateTime.Parse(income.IncomeDate).Date;
-                        Border elem = new Border()
-                        {
-                            Style = (Style)this.FindResource("HistoryElement"),
-                            HorizontalAlignment = HorizontalAlignment.Right,
-                        };
                         string category = income.Category;
                         string sum = income.IncomeSum.ToString();
                         string account = AccountService.GetAccountName(income.AccountId);
-                        Grid elemGrid = this.AddTransaction(category, $"+ {sum}", account);
-                        elem.Child = elemGrid;
+                        Border elem = this.AddTransaction(category, $"+ {sum}", account);
                         if (date > prevDate)
                         {
                             this.HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
@@ -275,5 +319,47 @@
                 this.HistoryElements.Children.Insert(0, new Label() { Content = date.ToString("dddd, d MMMM") });
             }
         }
+
+        private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            foreach (UIElement child in HistoryElements.Children)
+            {
+                if (IsElementVisible(child) && child.Opacity == 0)
+                {
+                    AnimateElement(child);
+                }
+            }
+        }
+
+        private bool IsElementVisible(UIElement element)
+        {
+            GeneralTransform transform = element.TransformToAncestor(HistoryElements.Parent as ScrollViewer);
+            Rect elementBounds = transform.TransformBounds(new Rect(new Point(0, 0), element.RenderSize));
+
+            var scrollViewer = HistoryElements.Parent as ScrollViewer;
+            Rect viewportBounds = new Rect(
+                0,
+                -50, 
+                scrollViewer.ViewportWidth,
+                scrollViewer.ViewportHeight + 70
+            );
+
+            return viewportBounds.IntersectsWith(elementBounds);
+        }
+
+        private void AnimateElement(UIElement element)
+        {
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(1), 
+                BeginTime = TimeSpan.FromMilliseconds(200) 
+            };
+
+            element.BeginAnimation(UIElement.OpacityProperty, animation);
+        }
+
+
     }
 }
