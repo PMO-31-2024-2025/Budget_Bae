@@ -200,7 +200,7 @@
             {
                 int notificationDate = int.Parse(dateText);
                 double expenseAmount = double.Parse(amountText);
-                PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
+                _ = PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
                 MessageBox.Show("Платіж створено успішно!");
                 var newWindow = new PlannedPaymentsWindow();
                 this.Close();

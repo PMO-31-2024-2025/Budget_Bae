@@ -7,8 +7,6 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
-    using System.Data.Entity.Core.Common.CommandTrees;
-    using System.Numerics;
 
     public static class SavingService
     {
@@ -36,16 +34,20 @@ namespace BusinessLogic.Services
             }
             else
             {
-                saving = new Saving
+                if (SessionManager.CurrentUserId != null)
                 {
-                    TargetName = targetName,
-                    TargetSum = targetSum,
-                    MonthsNumber = monthsNumber,
-                    UserId = SessionManager.CurrentUserId.Value,
-                    CurrentSum = 0
-                };
-                DbHelper.dbc.Savings.Add(saving);
-                await DbHelper.dbc.SaveChangesAsync();
+                    saving = new Saving
+                    {
+                        TargetName = targetName,
+                        TargetSum = targetSum,
+                        MonthsNumber = monthsNumber,
+                        UserId = SessionManager.CurrentUserId.Value,
+                        CurrentSum = 0
+                    };
+
+                    DbHelper.dbc.Savings.Add(saving);
+                    await DbHelper.dbc.SaveChangesAsync();
+                }
             }
             return true;
         }

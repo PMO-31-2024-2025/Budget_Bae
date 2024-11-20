@@ -227,7 +227,7 @@
                 var savingsCategory = DbHelper.dbc.ExpensesCategories
                     .FirstOrDefault(c => c.Name == "Заощадження" && c.UserId == SessionManager.CurrentUserId);
 
-                if (savingsCategory == null)
+                if (savingsCategory == null && currentUserId != null)
                 {
                     savingsCategory = new ExpenseCategory
                     {
@@ -277,7 +277,7 @@
                 .Where(s => s.UserId == SessionManager.CurrentUserId)
                 .ToList();
             this.SavingsList.ItemsSource = savings;
-            this.SavingsList.DisplayMemberPath = "TargetName"; 
+            this.SavingsList.DisplayMemberPath = "TargetName";
         }
 
         private void UpdateAccountsComboBox()
@@ -286,7 +286,7 @@
                 .Where(a => a.UserId == SessionManager.CurrentUserId)
                 .ToList();
             this.AccountsList.ItemsSource = accounts;
-            this.AccountsList.DisplayMemberPath = "Name"; 
+            this.AccountsList.DisplayMemberPath = "Name";
         }
 
         private void TopUp_Click(object sender, RoutedEventArgs e)
@@ -313,17 +313,19 @@
                 this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
                 MessageBox.Show("Дані пройшли перевірку!");
 
-                var newSaving = new Saving
+                if (SessionManager.CurrentUserId != null)
                 {
-                    TargetName = name,
-                    TargetSum = (double)amount,
-                    CurrentSum = 0, 
-                    MonthsNumber = date,
-                    UserId = SessionManager.CurrentUserId.Value,
-                };
-
-                DbHelper.dbc.Savings.Add(newSaving);
-                DbHelper.dbc.SaveChanges();
+                    var newSaving = new Saving
+                    {
+                        TargetName = name,
+                        TargetSum = (double)amount,
+                        CurrentSum = 0,
+                        MonthsNumber = date,
+                        UserId = SessionManager.CurrentUserId.Value,
+                    };
+                    DbHelper.dbc.Savings.Add(newSaving);
+                    DbHelper.dbc.SaveChanges();
+                }
 
                 MessageBox.Show("Заощадження успішно створено!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
 

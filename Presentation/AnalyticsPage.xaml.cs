@@ -5,7 +5,6 @@
     using DAL.Models;
     using LiveCharts;
     using LiveCharts.Wpf;
-    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -24,7 +23,7 @@
             this.UpdateBarChart();
             this.UpdateHistory();
             ExpensesWindow.ExpenseAdded += this.UpdateHistory;
-            AnimateVisibleElements();
+            this.AnimateVisibleElements();
         }
 
         public void UpdateBarChart()
@@ -218,11 +217,11 @@
             {
                 if (type == 'e')
                 {
-                    ExpenseService.DeleteExpenseAsync(id);
+                    _ = ExpenseService.DeleteExpenseAsync(id);
                 }
                 else
                 {
-                    IncomeService.DeleteIncomeAsync(id);
+                    _ = IncomeService.DeleteIncomeAsync(id);
                 }
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
@@ -294,8 +293,6 @@
             return elem;
         }
 
-
-        
         private void UpdateHistory()
         {
             List<Expense> expenses = ExpenseService.GetExpensesByUserId();
@@ -355,17 +352,15 @@
 
         private bool IsElementVisible(UIElement element)
         {
-            GeneralTransform transform = element.TransformToAncestor(HistoryElements.Parent as ScrollViewer);
+            GeneralTransform transform = element.TransformToAncestor(this.HistoryElements.Parent as ScrollViewer);
             Rect elementBounds = transform.TransformBounds(new Rect(new Point(0, 0), element.RenderSize));
 
-            var scrollViewer = HistoryElements.Parent as ScrollViewer;
+            var scrollViewer = this.HistoryElements.Parent as ScrollViewer;
             Rect viewportBounds = new Rect(
                 0,
                 0,
                 scrollViewer.ViewportWidth,
-                scrollViewer.ViewportHeight
-            );
-
+                scrollViewer.ViewportHeight);
             return viewportBounds.IntersectsWith(elementBounds);
         }
 
@@ -373,9 +368,9 @@
         {
             DoubleAnimation animation = new DoubleAnimation
             {
-                From = 0, 
-                To = 1,   
-                Duration = TimeSpan.FromSeconds(0.5), 
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.5),
             };
 
             element.BeginAnimation(UIElement.OpacityProperty, animation);
@@ -384,16 +379,16 @@
 
         private async void AnimateVisibleElements()
         {
-            await Task.Delay(300); 
+            await Task.Delay(300);
 
-            foreach (UIElement child in HistoryElements.Children)
+            foreach (UIElement child in this.HistoryElements.Children)
             {
-                if (child.Opacity == 0 && IsElementVisible(child))
+                if (child.Opacity == 0 && this.IsElementVisible(child))
                 {
-                    AnimateElement(child);
-                    await Task.Delay(200); 
+                    this.AnimateElement(child);
+                    await Task.Delay(200);
                 }
-                else 
+                else
                 {
                     child.Opacity = 1;
                 }

@@ -1,8 +1,8 @@
-﻿using BusinessLogic.Services;
-using BusinessLogic.Session;
-
-namespace ConsoleBudgetBae
+﻿namespace ConsoleBudgetBae
 {
+    using BusinessLogic.Services;
+    using BusinessLogic.Session;
+
     public class Program
     {
         public static void Main(string[] args)
