@@ -24,6 +24,7 @@
             this.UpdateBarChart();
             this.UpdateHistory();
             ExpensesWindow.ExpenseAdded += this.UpdateHistory;
+            AnimateVisibleElements();
         }
 
         public void UpdateBarChart()
@@ -213,6 +214,22 @@
                 Content = "×",
                 Style = (Style)this.FindResource("DeleteHistoryElement"),
             };
+            deleteButton.Click += (s, e) =>
+            {
+                if (type == 'e')
+                {
+                    ExpenseService.DeleteExpenseAsync(id);
+                }
+                else
+                {
+                    IncomeService.DeleteIncomeAsync(id);
+                }
+                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                if (mainWindow != null && mainWindow.MainFrame != null)
+                {
+                    mainWindow.MainFrame.Navigate(new AnalyticsPage());
+                }
+            };
             Grid.SetRow(deleteButton, 0);
             Grid.SetColumn(deleteButton, 1);
             Grid.SetRowSpan(deleteButton, 2);
@@ -262,12 +279,10 @@
             if (type == 'e')
             {
                 elem.HorizontalAlignment = HorizontalAlignment.Left;
-                //deleteButton.Click += ExpenseService.DeleteExpense(id); треба якось видалити витрату
             }
             else
             {
                 elem.HorizontalAlignment = HorizontalAlignment.Right;
-                // треба якось видалити дохід
             }
 
             elemGrid.Children.Add(categoryLabel);
@@ -276,12 +291,11 @@
             elemGrid.Children.Add(deleteButton);
 
             elem.Child = elemGrid;
-
             return elem;
         }
 
 
-
+        
         private void UpdateHistory()
         {
             List<Expense> expenses = ExpenseService.GetExpensesByUserId();
@@ -338,16 +352,6 @@
             }
         }
 
-        private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            foreach (UIElement child in HistoryElements.Children)
-            {
-                if (IsElementVisible(child) && child.Opacity == 0)
-                {
-                    AnimateElement(child);
-                }
-            }
-        }
 
         private bool IsElementVisible(UIElement element)
         {
@@ -357,9 +361,9 @@
             var scrollViewer = HistoryElements.Parent as ScrollViewer;
             Rect viewportBounds = new Rect(
                 0,
-                -50,
+                0,
                 scrollViewer.ViewportWidth,
-                scrollViewer.ViewportHeight + 70
+                scrollViewer.ViewportHeight
             );
 
             return viewportBounds.IntersectsWith(elementBounds);
@@ -369,15 +373,31 @@
         {
             DoubleAnimation animation = new DoubleAnimation
             {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(1), 
-                BeginTime = TimeSpan.FromMilliseconds(100) 
+                From = 0, 
+                To = 1,   
+                Duration = TimeSpan.FromSeconds(0.5), 
             };
 
             element.BeginAnimation(UIElement.OpacityProperty, animation);
         }
 
 
+        private async void AnimateVisibleElements()
+        {
+            await Task.Delay(300); 
+
+            foreach (UIElement child in HistoryElements.Children)
+            {
+                if (child.Opacity == 0 && IsElementVisible(child))
+                {
+                    AnimateElement(child);
+                    await Task.Delay(200); 
+                }
+                else 
+                {
+                    child.Opacity = 1;
+                }
+            }
+        }
     }
 }
