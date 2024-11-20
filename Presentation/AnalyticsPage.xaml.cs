@@ -5,10 +5,12 @@
     using DAL.Models;
     using LiveCharts;
     using LiveCharts.Wpf;
+    using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Media.Animation;
+    using System.Windows.Media.Effects;
 
     /// <summary>
     /// Interaction logic for AnalyticsPage.xaml.
@@ -158,13 +160,11 @@
             this.AnalyticsLegend.ItemsSource = legendItems;
         }
 
-        private Border AddTransaction(string category, string sum, string account)
+        private Border AddTransaction(int id, string category, string sum, string account, char type)
         {
-            // Головний контейнер для транзакції
             Border elem = new Border()
             {
                 Style = (Style)this.FindResource("HistoryElement"),
-                HorizontalAlignment = HorizontalAlignment.Left,
                 Opacity = 0,
             };
             Grid elemGrid = new Grid()
@@ -177,7 +177,6 @@
             elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             elemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            // Лейбл для категорії
             Label categoryLabel = new Label()
             {
                 Content = category,
@@ -189,7 +188,6 @@
             Grid.SetColumn(categoryLabel, 0);
             Grid.SetRowSpan(categoryLabel, 2);
 
-            // Лейбл для суми
             Label sumLabel = new Label()
             {
                 Content = sum,
@@ -200,7 +198,6 @@
             Grid.SetRow(sumLabel, 0);
             Grid.SetColumn(sumLabel, 1);
 
-            // Лейбл для акаунта
             Label accountLabel = new Label()
             {
                 Content = account,
@@ -211,46 +208,67 @@
             Grid.SetRow(accountLabel, 1);
             Grid.SetColumn(accountLabel, 1);
 
-            // Хрестик для видалення
             Button deleteButton = new Button()
             {
                 Content = "×",
-                HorizontalAlignment = HorizontalAlignment.Right,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(7, 7, 7, 7),
-                Visibility = Visibility.Hidden, // Спочатку ховаємо
-                Background = Brushes.Transparent,
-                BorderBrush = Brushes.Transparent,
-                Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#CC000000"),
-                FontSize = 25,
+                Style = (Style)this.FindResource("DeleteHistoryElement"),
             };
-            //deleteButton.Click += DeleteTransaction_OnClick; // Обробник кліку
             Grid.SetRow(deleteButton, 0);
             Grid.SetColumn(deleteButton, 1);
+            Grid.SetRowSpan(deleteButton, 2);
 
             elem.MouseEnter += (s, e) =>
             {
-                sumLabel.Visibility = Visibility.Hidden; // Ховаємо суму
-                accountLabel.Visibility = Visibility.Hidden; // Ховаємо суму
-                deleteButton.Visibility = Visibility.Visible; // Показуємо хрестик
+                sumLabel.Visibility = Visibility.Hidden;
+                accountLabel.Visibility = Visibility.Hidden;
+                deleteButton.Visibility = Visibility.Visible;
+                elem.Width = 515;
+                elem.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#EEC8FF");
+                elem.Effect = new DropShadowEffect()
+                {
+                    Color = (Color)ColorConverter.ConvertFromString("#9B70C2"),
+                    BlurRadius = 20,
+                    ShadowDepth = 7,
+                };
             };
 
             elem.MouseLeave += (s, e) =>
             {
-                sumLabel.Visibility = Visibility.Visible; // Показуємо суму
-                accountLabel.Visibility = Visibility.Visible; // Показуємо суму
-                deleteButton.Visibility = Visibility.Hidden; // Ховаємо хрестик
+                sumLabel.Visibility = Visibility.Visible;
+                accountLabel.Visibility = Visibility.Visible;
+                deleteButton.Visibility = Visibility.Hidden;
+                elem.Width = 500;
+                elem.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#DAB6FC");
+                elem.Effect = new DropShadowEffect()
+                {
+                    Color = (Color)ColorConverter.ConvertFromString("#9B70C2"),
+                    BlurRadius = 10,
+                    ShadowDepth = 5,
+                };
             };
 
-            //deleteButton.MouseEnter += (s, e) =>
-            //{
-            //    deleteButton.FontSize = 32;
-            //};
+            deleteButton.MouseEnter += (s, e) =>
+            {
+                deleteButton.FontWeight = FontWeights.Bold;
+                deleteButton.FontSize = 30;
+            };
 
-            //deleteButton.MouseEnter += (s, e) =>
-            //{
-            //    deleteButton.FontSize = 25;
-            //};
+            deleteButton.MouseLeave += (s, e) =>
+            {
+                deleteButton.FontWeight = FontWeights.SemiBold;
+                deleteButton.FontSize = 25;
+            };
+
+            if (type == 'e')
+            {
+                elem.HorizontalAlignment = HorizontalAlignment.Left;
+                //deleteButton.Click += ExpenseService.DeleteExpense(id); треба якось видалити витрату
+            }
+            else
+            {
+                elem.HorizontalAlignment = HorizontalAlignment.Right;
+                // треба якось видалити дохід
+            }
 
             elemGrid.Children.Add(categoryLabel);
             elemGrid.Children.Add(sumLabel);
@@ -290,7 +308,7 @@
                         string category = ExpenseCategoryService.GetCategoryName(expense.CategoryId);
                         string sum = expense.ExpenseSum.ToString();
                         string account = AccountService.GetAccountName(expense.AccountId);
-                        Border elem = this.AddTransaction(category, $"- {sum}", account);
+                        Border elem = this.AddTransaction(expense.Id, category, $"- {sum}", account, 'e');
                         if (date > prevDate)
                         {
                             this.HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
@@ -305,7 +323,7 @@
                         string category = income.Category;
                         string sum = income.IncomeSum.ToString();
                         string account = AccountService.GetAccountName(income.AccountId);
-                        Border elem = this.AddTransaction(category, $"+ {sum}", account);
+                        Border elem = this.AddTransaction(income.Id, category, $"+ {sum}", account, 'i');
                         if (date > prevDate)
                         {
                             this.HistoryElements.Children.Insert(0, new Label() { Content = prevDate.ToString("dddd, d MMMM") });
@@ -339,7 +357,7 @@
             var scrollViewer = HistoryElements.Parent as ScrollViewer;
             Rect viewportBounds = new Rect(
                 0,
-                -50, 
+                -50,
                 scrollViewer.ViewportWidth,
                 scrollViewer.ViewportHeight + 70
             );
@@ -354,7 +372,7 @@
                 From = 0,
                 To = 1,
                 Duration = TimeSpan.FromSeconds(1), 
-                BeginTime = TimeSpan.FromMilliseconds(200) 
+                BeginTime = TimeSpan.FromMilliseconds(100) 
             };
 
             element.BeginAnimation(UIElement.OpacityProperty, animation);
