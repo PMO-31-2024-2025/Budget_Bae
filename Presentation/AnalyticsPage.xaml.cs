@@ -352,17 +352,27 @@
 
         private bool IsElementVisible(UIElement element)
         {
-            GeneralTransform transform = element.TransformToAncestor(this.HistoryElements.Parent as ScrollViewer);
-            Rect elementBounds = transform.TransformBounds(new Rect(new Point(0, 0), element.RenderSize));
-
             var scrollViewer = this.HistoryElements.Parent as ScrollViewer;
-            Rect viewportBounds = new Rect(
-                0,
-                0,
-                scrollViewer.ViewportWidth,
-                scrollViewer.ViewportHeight);
-            return viewportBounds.IntersectsWith(elementBounds);
+            if (scrollViewer == null) return false; 
+
+            try
+            {
+                GeneralTransform transform = element.TransformToAncestor(scrollViewer);
+                Rect elementBounds = transform.TransformBounds(new Rect(new Point(0, 0), element.RenderSize));
+                Rect viewportBounds = new Rect(
+                    0,
+                    0,
+                    scrollViewer.ViewportWidth,
+                    scrollViewer.ViewportHeight);
+
+                return viewportBounds.IntersectsWith(elementBounds);
+            }
+            catch
+            {
+                return false;
+            }
         }
+
 
         private void AnimateElement(UIElement element)
         {
