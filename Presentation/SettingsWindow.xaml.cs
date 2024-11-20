@@ -13,6 +13,7 @@
     public partial class SettingsWindow : Window
     {
         private SettingsCategoriesWindow categoriesWindow;
+        private SettingsAccountsWindow accountsWindow;
         private SettingsNotificationWindow notificationWindow;
         private SettingsSupportWindow supportWindow;
         private NavBar navBar;
@@ -98,7 +99,7 @@
                 var button = sender as Button;
                 var buttonPosition = button.PointToScreen(new Point(0, 0));
                 var buttonHeight = button.ActualHeight;
-                this.categoriesWindow.Top = buttonPosition.Y;
+                this.categoriesWindow.Top = buttonPosition.Y + 13;
                 this.categoriesWindow.Show();
             }
             else
@@ -108,6 +109,37 @@
                 this.CategoryExpanderButton.RenderTransform = rotateTransform;
                 this.CategoryExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
                 this.categoriesWindow.Close();
+            }
+        }
+
+        private void AccountExpanderButton_Click(object sender, RoutedEventArgs e)
+        {
+            double аngle = -90;
+
+            if (this.accountsWindow == null || !this.accountsWindow.IsVisible)
+            {
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                this.AccountExpanderButton.RenderTransform = rotateTransform;
+                this.AccountExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.accountsWindow = new SettingsAccountsWindow();
+                this.accountsWindow.Owner = this;
+                this.accountsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                var screenWidth = SystemParameters.PrimaryScreenWidth;
+                var windowWidth = this.accountsWindow.Width;
+                this.accountsWindow.Left = screenWidth - windowWidth;
+                var button = sender as Button;
+                var buttonPosition = button.PointToScreen(new Point(0, 0));
+                var buttonHeight = button.ActualHeight;
+                this.accountsWindow.Top = buttonPosition.Y;
+                this.accountsWindow.Show();
+            }
+            else
+            {
+                аngle = 0;
+                RotateTransform rotateTransform = new RotateTransform(аngle);
+                this.AccountExpanderButton.RenderTransform = rotateTransform;
+                this.AccountExpanderButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                this.accountsWindow.Close();
             }
         }
 
@@ -160,7 +192,7 @@
                 var button = sender as Button;
                 var buttonPosition = button.PointToScreen(new Point(0, 0));
                 var buttonHeight = button.ActualHeight;
-                this.supportWindow.Top = buttonPosition.Y - 80;
+                this.supportWindow.Top = buttonPosition.Y - 85;
                 this.supportWindow.Show();
             }
             else

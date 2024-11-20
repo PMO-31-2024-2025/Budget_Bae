@@ -40,14 +40,16 @@
         {
             this.categoryGrid.RowDefinitions.Clear();
             this.categoryGrid.Children.Clear();
+            int count = 0;
 
             for (int i = 0; i < this.categories.Count; i++)
             {
-                RowDefinition row = new RowDefinition();
-                this.categoryGrid.RowDefinitions.Add(row);
-
                 if (this.categories[i] != "Заплановані платежі" && this.categories[i] != "Заощадження")
                 {
+                    RowDefinition row = new RowDefinition();
+                    row.Height = new GridLength(35);
+                    this.categoryGrid.RowDefinitions.Add(row);
+
                     Label label = new Label();
                     label.Content = this.categories[i];
                     label.FontSize = 18;
@@ -70,8 +72,10 @@
                     Grid.SetRow(deleteButton, i);
                     Grid.SetColumn(deleteButton, 1);
                     this.categoryGrid.Children.Add(deleteButton);
+                    count++;
                 }
             }
+            this.Height = (count * 35) + 20;
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

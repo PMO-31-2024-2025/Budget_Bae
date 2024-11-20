@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -40,21 +41,24 @@
         <Button Name="CategoryExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="2" Grid.Column="0" Click="CategoryExpanderButton_Click"/>
         <Label Content="Категорії" Grid.Row="2" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
 
-        <Button Name="HistiryArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="3" Grid.Column="0" Click="HistoryArrowButton_Click"/>
-        <Label Content="Історія" Grid.Row="3" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+        <Button Name="AccountExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="3" Grid.Column="0" Click="AccountExpanderButton_Click"/>
+        <Label Content="Рахунки" Grid.Row="3" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
 
-        <Button Name="PlannedPaymentsArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="4" Grid.Column="0" Click="PlannedPaymentsButton_Click"/>
-        <Label Content="Заплановані платежі" Grid.Row="4" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+        <Button Name="HistiryArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="4" Grid.Column="0" Click="HistoryArrowButton_Click"/>
+        <Label Content="Історія" Grid.Row="4" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
 
-        <Button Name="NotificationExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="5" Grid.Column="0" Click="NotificationExpanderButton_Click"/>
-        <Label Content="Сповіщення" Grid.Row="5" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+        <Button Name="PlannedPaymentsArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="5" Grid.Column="0" Click="PlannedPaymentsButton_Click"/>
+        <Label Content="Заплановані платежі" Grid.Row="5" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
 
-        <Button Name="PrivacyPolicyArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="6" Grid.Column="0" Click="PrivacyPolicyButton_Click"/>
-        <Label Content="Політика конфіденційності" Grid.Row="6" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+        <Button Name="NotificationExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="6" Grid.Column="0" Click="NotificationExpanderButton_Click"/>
+        <Label Content="Сповіщення" Grid.Row="6" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
 
-        <Button Name="TermsOfUseArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="7" Grid.Column="0" Click="TermsOfUseButton_Click"/>
-        <Label Content="Умови використання" Grid.Row="7" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
-        <Button Name="SupportExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="8" Grid.Column="0" Click="SupportExpanderButton_Click"/>
-        <Label Content="Служба підтримки" Grid.Row="8" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+        <Button Name="PrivacyPolicyArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="7" Grid.Column="0" Click="PrivacyPolicyButton_Click"/>
+        <Label Content="Політика конфіденційності" Grid.Row="7" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+
+        <Button Name="TermsOfUseArrowButton" Style="{StaticResource ArrowButton}" Grid.Row="8" Grid.Column="0" Click="TermsOfUseButton_Click"/>
+        <Label Content="Умови використання" Grid.Row="8" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
+        <Button Name="SupportExpanderButton" Style="{StaticResource ExpanderButton}" Grid.Row="9" Grid.Column="0" Click="SupportExpanderButton_Click"/>
+        <Label Content="Служба підтримки" Grid.Row="9" Grid.Column="1" Foreground="#CC000000" FontSize="20" Margin="5, 10, 0, 10"/>
     </Grid>
 </Window>

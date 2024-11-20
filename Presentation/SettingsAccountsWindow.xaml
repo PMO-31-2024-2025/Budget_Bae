@@ -1,4 +1,4 @@
-﻿<Window x:Class="Presentation.SettingsCategoriesWindow"
+﻿<Window x:Class="Presentation.SettingsAccountsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="#FFFAF0"
-        Title="SettingsCategoriesWindow" Height="Auto" Width="400" MaxHeight="250">
+        Title="SettingsAccountsWindow" Height="Auto" Width="400" MaxHeight="250">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0">
-            <Grid x:Name="categoryGrid">
+            <Grid x:Name="accountGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="50"/>
@@ -21,6 +21,5 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </ScrollViewer>
-        
     </Grid>
 </Window>
