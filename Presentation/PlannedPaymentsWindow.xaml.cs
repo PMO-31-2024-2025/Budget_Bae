@@ -28,7 +28,7 @@
 
             this.UpdateComboBoxes();
             this.UpdatePaymentsGrid();
-
+            this.PaymentsList.SelectionChanged += PaymentsList_SelectionChanged;
         }
 
         public List<PlannedExpense> PlannedPayments { get; set; }
@@ -305,6 +305,13 @@
             this.AccountsList.DisplayMemberPath = "Name";
         }
 
+        private void PaymentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.PaymentsList.SelectedItem is PlannedExpense selectedPayment)
+            {
+                this.TopUpAmountPayment.Text = selectedPayment.PlannedSum.ToString("F2");
+            }
+        }
 
     }
 }

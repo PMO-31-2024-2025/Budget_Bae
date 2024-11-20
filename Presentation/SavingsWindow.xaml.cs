@@ -28,6 +28,7 @@
             this.UpdateSavingsGrid();
             this.UpdateSavingsComboBox();
             this.UpdateAccountsComboBox();
+            this.SavingsList.SelectionChanged += SavingsList_SelectionChanged;
         }
 
         public List<Saving> Savings { get; set; }
@@ -347,5 +348,12 @@
             }
         }
 
+        private void SavingsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.SavingsList.SelectedItem is Saving selectedSaving)
+            {
+                this.TopUpAmountSavings.Text = (selectedSaving.TargetSum / selectedSaving.MonthsNumber).ToString("F2");
+            }
+        }
     }
 }
