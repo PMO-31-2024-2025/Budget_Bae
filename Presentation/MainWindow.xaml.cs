@@ -16,6 +16,7 @@ namespace Presentation
             {
                 this.Loaded += this.MainWindow_Loaded;
             }
+            this.Closing += this.MainWindow_Closing;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -23,5 +24,11 @@ namespace Presentation
             EntryWindow entryWindow = new EntryWindow();
             entryWindow.ShowDialog();
         }
+
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
     }
 }
