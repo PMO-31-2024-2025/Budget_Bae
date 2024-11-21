@@ -48,6 +48,7 @@
                             {
                                 Content = $"Сьогодні треба внести платіж '{expense.Name}'",
                                 Margin = new Thickness(0, 5, 0, 5),
+                                FontSize = 20,
                             };
                             this.Notifications.Children.Add(notificationText);
 

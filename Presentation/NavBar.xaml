@@ -22,10 +22,6 @@
             </StackPanel>
             <Frame x:Name="NavBarFrame" NavigationUIVisibility="Hidden"/>
         </DockPanel>
-        <Button Name="nbSettingsButton" Background="Transparent" BorderThickness="0" Height="35" 
-                Width="35" HorizontalAlignment="Right" Margin="0,0,10,0" Click="NbSettingsButton_Click">
-            <Image Source="pack://application:,,,/Pictures/settings.png" Height="35" Width="35"/>
-        </Button>
-
+        <Button Name="nbSettingsButton" Style="{StaticResource NbSettingsButton}" Click="NbSettingsButton_Click"/>
     </Grid>
 </UserControl>

@@ -56,12 +56,7 @@
                     label.Margin = new Thickness(10, 5, 5, 0);
 
                     Button deleteButton = new Button();
-                    deleteButton.Content = "X";
-                    deleteButton.Height = 15;
-                    deleteButton.Width = 15;
-                    deleteButton.Background = Brushes.Transparent;
-                    deleteButton.BorderThickness = new Thickness(0);
-                    deleteButton.FontSize = 15;
+                    deleteButton.Style = (Style)FindResource("DeleteCategoryOrAccountButton");
                     deleteButton.Tag = i; // збереження індекса категорії
                     deleteButton.Click += this.DeleteButton_Click;
 

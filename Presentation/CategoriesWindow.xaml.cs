@@ -142,12 +142,7 @@
                     Button categoryButton = new Button
                     {
                         Content = this.categories[i],
-                        Width = 150,
-                        Height = 40,
-                        FontSize = 16,
-                        Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
-                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
-                        Style = (Style)this.FindResource("CategoryButton"),
+                        Style = (Style)this.FindResource("AllCaegoriesButton"),
                         Margin = new Thickness(i % 2 == 0 ? 0 : 30, 0, 0, 0),
                         HorizontalAlignment = i % 2 == 0 ? HorizontalAlignment.Left : HorizontalAlignment.Right
                     };

@@ -68,12 +68,7 @@ namespace Presentation
                 Button accountButton = new Button
                 {
                     Content = $"{account.Name}",
-                    Width = 300,
-                    Height = 40,
-                    FontSize = 16,
-                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCDAB6FC")),
-                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CC000000")),
-                    Style = (Style)this.FindResource("CategoryButton"),
+                    Style = (Style)this.FindResource("AllAccountsButton"),
                     Margin = new Thickness(15, 10, 15, 10),
                     DataContext = account,
                 };

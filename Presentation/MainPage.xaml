@@ -147,7 +147,7 @@
                 <Border.Effect>
                     <DropShadowEffect Direction="310" Color="#9B70C2" BlurRadius="15" ShadowDepth="4"/>
                 </Border.Effect>
-                <Button x:Name="SavingsButton" Content="Заощадження" Style="{StaticResource MainPageTwoButtons}" Click="SavingsButton_Click"/>
+                <Button x:Name="SavingsButton" Content="Заощадження" Style="{StaticResource MainPageTwoButtons}" Click="SavingsButton_Click" Height="60" Margin="25,0,25,0" VerticalAlignment="Top"/>
             </Border>
             <Border Grid.Row="2" Margin="20, 20, 20, 20">
                 <Border.Effect>
