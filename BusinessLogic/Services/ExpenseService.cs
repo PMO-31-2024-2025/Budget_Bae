@@ -6,9 +6,18 @@ namespace BusinessLogic.Services
 {
     using DAL.Data;
     using DAL.Models;
+    using Microsoft.Extensions.Logging;
+    using System.Xml.Linq;
 
     public static class ExpenseService
     {
+        private static ILogger logger;
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            ExpenseService.logger = logger;
+        }
+
         public static List<Expense> GetExpensesByUserId()
         {
             var accountIds = AccountService.GetUsersAccountsId();
@@ -87,6 +96,8 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddExpenseAsync(int categoryId, double expenseSum, int accountId)
         {
+            logger?.LogInformation($"Спроба внести витрату з сумою {expenseSum}.");
+
             var expense = new Expense
             {
                 CategoryId = categoryId,
@@ -97,12 +108,14 @@ namespace BusinessLogic.Services
 
             DbHelper.dbc.Expenses.Add(expense);
             await DbHelper.dbc.SaveChangesAsync();
-
+            logger?.LogInformation("Витрату внесено.");
             return true;
         }
 
         public static async Task<bool> DeleteExpenseAsync(int expenseId)
         {
+            logger?.LogInformation($"Спроба видалити витрату з ID {expenseId}.");
+
             var expense = DbHelper.dbc.Expenses.Find(expenseId);
             if (expense != null)
             {
@@ -111,8 +124,10 @@ namespace BusinessLogic.Services
             }
             else
             {
+                logger?.LogWarning("Не знайдено вказану витрату!");
                 throw new Exception("Не знайдено вказану витрату!");
             }
+            logger?.LogInformation("Витрату видалено.");
             return true;
         }
     }

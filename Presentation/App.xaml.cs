@@ -50,6 +50,16 @@
             UserService.InitializeLogger(userLogger);
             var savingsLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("SavingsService");
             SavingService.InitializeLogger(savingsLogger);
+            var accountLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("AccountService");
+            AccountService.InitializeLogger(accountLogger);
+            var expenseCategoryLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("ExpenseCategoryService");
+            ExpenseCategoryService.InitializeLogger(expenseCategoryLogger);
+            var expenseLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("ExpenseService");
+            ExpenseService.InitializeLogger(expenseLogger);
+            var incomeLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("IncomeCategoryService");
+            IncomeService.InitializeLogger(incomeLogger);
+            var plannedExpenseLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("PlannedExpenseService");
+            PlannedExpenseService.InitializeLogger(plannedExpenseLogger);
 
             // Реєструємо MainWindow у DI
             services.AddTransient<MainWindow>();

@@ -7,9 +7,17 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using Microsoft.Extensions.Logging;
 
     public static class IncomeService
     {
+        private static ILogger logger;
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            IncomeService.logger = logger;
+        }
+
         public static double PrevPrevIncome()
         {
             var accountIds = AccountService.GetUsersAccountsId();
@@ -72,9 +80,12 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddIncomeAsync(Income income)
         {
+            logger?.LogInformation($"Спроба внести дохід з ID {income.Id}.");
+
             var account = AccountService.GetAccountById(SessionManager.CurrentAccountId.Value);
             if (account == null)
             {
+                logger?.LogWarning("Рахунок не знайдено!");
                 throw new Exception("Рахунок не знайдено!");
             }
             else
@@ -82,16 +93,19 @@ namespace BusinessLogic.Services
                 DbHelper.dbc.Incomes.Add(income);
                 account.Balance += income.IncomeSum;
                 await DbHelper.dbc.SaveChangesAsync();
-
+                logger?.LogInformation("Дохід внесено.");
                 return true;
             }
         }
 
         public static async Task<bool> DeleteIncomeAsync(int incomeId)
         {
+            logger?.LogInformation($"Спроба видалити дохід з ID {incomeId}.");
+
             var income = GetIncomesByUserId().FirstOrDefault(i => i.Id == incomeId);
             if (income == null)
             {
+                logger?.LogWarning("Вказане надходження не знайдено!");
                 throw new Exception("Вказане надходження не знайдено!");
             }
             else
@@ -99,6 +113,7 @@ namespace BusinessLogic.Services
                 DbHelper.dbc.Incomes.Remove(income);
                 await DbHelper.dbc.SaveChangesAsync();
             }
+            logger?.LogInformation("Дохід видалено.");
             return true;
         }
     }

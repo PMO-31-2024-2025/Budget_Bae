@@ -7,9 +7,17 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using Microsoft.Extensions.Logging;
 
     public static class AccountService
     {
+        private static ILogger logger;
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            AccountService.logger = logger;
+        }
+
         public static List<int> GetUsersAccountsId()
         {
             return DbHelper.dbc.Accounts
@@ -35,6 +43,8 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddAccountAsync(string name, double balance)
         {
+            logger?.LogInformation($"Спроба додати рахунок {name}.");
+
             var currentUserAccounts = DbHelper.dbc.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId);
             if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)
             {
@@ -49,14 +59,18 @@ namespace BusinessLogic.Services
                 DbHelper.dbc.Accounts.Add(account);
                 await DbHelper.dbc.SaveChangesAsync();
             }
+            logger?.LogInformation("Рахунок додано.");
             return true;
         }
 
         public static async Task<bool> DeleteAccountAsync(int accountId)
         {
+            logger?.LogInformation($"Спроба видалити рахунок з ID {accountId}.");
+
             var account = GetCurrentUserAccounts().FirstOrDefault(a => a.Id == accountId);
             if (account == null)
             {
+                logger?.LogWarning("Такого рахунку не існує!");
                 throw new Exception("Такого рахунку не існує!");
             }
             else
@@ -64,6 +78,7 @@ namespace BusinessLogic.Services
                 DbHelper.dbc.Accounts.Remove(account);
                 await DbHelper.dbc.SaveChangesAsync();
             }
+            logger?.LogInformation("Рахунок видалено.");
             return true;
         }
 

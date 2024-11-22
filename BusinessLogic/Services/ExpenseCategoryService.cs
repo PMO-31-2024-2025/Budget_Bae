@@ -7,9 +7,17 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using Microsoft.Extensions.Logging;
+    using System.Xml.Linq;
 
     public static class ExpenseCategoryService
     {
+        private static ILogger logger;
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            ExpenseCategoryService.logger = logger;
+        }
         public static List<ExpenseCategory> GetCategories()
         {
             return DbHelper.dbc.ExpensesCategories
@@ -27,6 +35,8 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddExpensCategoryAsync(string categoryName)
         {
+            logger?.LogInformation($"Спроба додати категорію {categoryName}.");
+
             int? currUser = SessionManager.CurrentUserId;
             var currUserCategories = ExpenseCategoryService.GetCategories().Where(x => x.UserId == currUser);
             var categoryToAdd = currUserCategories.FirstOrDefault(c => c.Name == categoryName);
@@ -43,14 +53,17 @@ namespace BusinessLogic.Services
             }
             else
             {
+                logger?.LogWarning("Категорія вже існує!");
                 throw new Exception("Категорія вже існує!");
             }
-
+            logger?.LogInformation("Категорію додано.");
             return true;
         }
 
         public static async Task<bool> DeleteExpenseCategory(int categoryId)
         {
+            logger?.LogInformation($"Спроба видалити категорію з ID {categoryId}.");
+
             var category = DbHelper.dbc.ExpensesCategories.Find(categoryId);
             if (category != null && category.UserId == SessionManager.CurrentUserId)
             {
@@ -59,9 +72,10 @@ namespace BusinessLogic.Services
             }
             else
             {
+                logger?.LogWarning("Такої категорії не існує!");
                 throw new Exception("Такої категорії не існує!");
             }
-
+            logger?.LogInformation("Категорію видалено.");
             return true;
         }
     }

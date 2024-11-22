@@ -21,11 +21,11 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> RegisterUserAsync(string email, string password, string name)
         {
-            logger?.LogInformation("Спроба реєстрації користувача з поштою: {Email}.", email);
+            logger?.LogInformation($"Спроба реєстрації користувача з поштою: {email}.");
 
             if (DbHelper.dbc.Users.Any(u => u.Email == email))
             {
-                logger?.LogWarning($"Користувач з такою поштою вже існує!\n");
+                logger?.LogWarning("Користувач з такою поштою вже існує!");
                 throw new Exception("Користувач з такою електронною поштою вже існує!");
             }
 
@@ -38,13 +38,13 @@ namespace BusinessLogic.Services
             DbHelper.dbc.Users.Add(user);
             await DbHelper.dbc.SaveChangesAsync();
 
-            logger?.LogInformation($"Користувача успішно додано.\n");
+            logger?.LogInformation("Користувача успішно додано.");
             return true;
         }
 
         public static async Task<bool> DeleteUserAsync(int userId)
         {
-            logger?.LogInformation("Спроба видалити користувача з ID {id}.", userId);
+            logger?.LogInformation($"Спроба видалити користувача з ID {userId}.");
 
             var user = await DbHelper.dbc.Users.FindAsync(userId);
             if (user != null)
@@ -54,10 +54,10 @@ namespace BusinessLogic.Services
             }
             else
             {
-                logger?.LogWarning($"Користувача не знайдено.\n");
+                logger?.LogWarning("Користувача не знайдено.");
                 throw new Exception("Користувача не знайдено.");
             }
-            logger?.LogInformation($"Користувача видалено.\n");
+            logger?.LogInformation("Користувача видалено.");
             return true;
         }
 

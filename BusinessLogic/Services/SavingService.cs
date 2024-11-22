@@ -40,7 +40,7 @@ namespace BusinessLogic.Services
             var saving = currUserSavings.FirstOrDefault(x => x.TargetName == targetName);
             if (saving != null)
             {
-                logger?.LogWarning($"Заощадження із таким іменем вже існує!\n");
+                logger?.LogWarning("Заощадження із таким іменем вже існує!");
                 throw new Exception("Заощадження із таким іменем вже існує!");
             }
             else
@@ -60,7 +60,7 @@ namespace BusinessLogic.Services
                     await DbHelper.dbc.SaveChangesAsync();
                 }
             }
-            logger?.LogInformation($"Заощадження успішно додано.\n");
+            logger?.LogInformation("Заощадження успішно додано.");
             return true;
         }
 
@@ -72,7 +72,7 @@ namespace BusinessLogic.Services
             var saving = currentUserSavings.FirstOrDefault(s => s.Id == savingId);
             if (saving == null)
             {
-                logger?.LogWarning($"Указане заощадження не знайдено!\n");
+                logger?.LogWarning("Указане заощадження не знайдено!");
                 throw new Exception("Указане заощадження не знайдено!");
             }
             else
@@ -80,7 +80,7 @@ namespace BusinessLogic.Services
                 DbHelper.dbc.Savings.Remove(saving);
                 await DbHelper.dbc.SaveChangesAsync();
             }
-            logger?.LogInformation($"Заощадження видалено.\n");
+            logger?.LogInformation("Заощадження видалено.");
             return true;
         }
     }

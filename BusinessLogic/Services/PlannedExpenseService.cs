@@ -7,9 +7,17 @@ namespace BusinessLogic.Services
     using BusinessLogic.Session;
     using DAL.Data;
     using DAL.Models;
+    using Microsoft.Extensions.Logging;
 
     public static class PlannedExpenseService
     {
+        private static ILogger logger;
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            PlannedExpenseService.logger = logger;
+        }
+
         public static List<PlannedExpense> GetPlannedExpenses()
         {
             return DbHelper.dbc.PlannedExpenses
@@ -26,6 +34,8 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddPlannedExpense(string expenseName, int notification_date, double plannedSum)
         {
+            logger?.LogInformation($"Спроба додати запланований платіж {expenseName}.");
+
             int? currUser = SessionManager.CurrentUserId;
             List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
 
@@ -46,19 +56,23 @@ namespace BusinessLogic.Services
                 }
                 else
                 {
-                    throw new Exception("Задана запланована витрата вже існує!");
+                    logger?.LogWarning("Заданий запланований платіж вже існує!");
+                    throw new Exception("Заданий запланований платіж вже існує!");
                 }
             }
-
+            logger?.LogInformation("Запланований платіж додано.");
             return true;
         }
 
         public static async Task<bool> DeletePlannedExpense(int expenseId)
         {
+            logger?.LogInformation($"Спроба видалити запланований платіж з ID {expenseId}.");
+
             var currUserPlannedExpenses = PlannedExpenseService.GetPlannedExpenses();
             var expenseToDelete = currUserPlannedExpenses.FirstOrDefault(pe => pe.Id == expenseId);
             if (expenseToDelete == null)
             {
+                logger?.LogWarning("Заданий запланований платіж не знайдено!");
                 throw new Exception("Заданий запланований платіж не знайдено!");
             }
             else
@@ -73,7 +87,7 @@ namespace BusinessLogic.Services
                     DbHelper.dbc.SaveChanges();
                 }
             }
-
+            logger?.LogInformation("Запланований платіж видалено.");
             return true;
         }
     }
