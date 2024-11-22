@@ -46,8 +46,10 @@
             });
 
             var serviceProvider = services.BuildServiceProvider();
-            var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("UserService");
-            UserService.InitializeLogger(logger);
+            var userLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("UserService");
+            UserService.InitializeLogger(userLogger);
+            var savingsLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("SavingsService");
+            SavingService.InitializeLogger(savingsLogger);
 
             // Реєструємо MainWindow у DI
             services.AddTransient<MainWindow>();

@@ -25,7 +25,7 @@ namespace BusinessLogic.Services
 
             if (DbHelper.dbc.Users.Any(u => u.Email == email))
             {
-                logger?.LogWarning($"Користувач з такою поштою вже існує.\n");
+                logger?.LogWarning($"Користувач з такою поштою вже існує!\n");
                 throw new Exception("Користувач з такою електронною поштою вже існує!");
             }
 
