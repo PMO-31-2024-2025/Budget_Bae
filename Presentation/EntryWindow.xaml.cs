@@ -85,7 +85,6 @@ namespace Presentation
                 try
                 {
                     await UserService.RegisterUserAsync(emailInput, createPasswordInput, nameInput);
-                    MessageBox.Show("Реєстрація успішна!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
                     SessionManager.SetCurrentUser(UserService.GetUserIdByEmail(emailInput));
 
                     MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

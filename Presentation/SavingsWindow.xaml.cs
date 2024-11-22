@@ -133,7 +133,6 @@
                     DbHelper.dbc.Savings.Remove(savingToDelete);
                     DbHelper.dbc.SaveChanges();
 
-                    MessageBox.Show("Заощадження успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                     var newWindow = new SavingsWindow();
                     this.Close();
                     newWindow.Show();
@@ -260,7 +259,6 @@
                 {
                     mainWindow.MainFrame.Navigate(new MainPage());
                 }
-                MessageBox.Show("Поповнення заощадження успішно виконано!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -312,7 +310,6 @@
             {
                 decimal amountPerMonth = amount / date;
                 this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
-                MessageBox.Show("Дані пройшли перевірку!");
 
                 if (SessionManager.CurrentUserId != null)
                 {
@@ -328,7 +325,6 @@
                     DbHelper.dbc.SaveChanges();
                 }
 
-                MessageBox.Show("Заощадження успішно створено!", "Успіх!", MessageBoxButton.OK, MessageBoxImage.Information);
 
                 var newWindow = new SavingsWindow();
                 this.Close();

@@ -131,7 +131,6 @@
                     DbHelper.dbc.PlannedExpenses.Remove(paymentToDelete);
                     DbHelper.dbc.SaveChanges();
 
-                    MessageBox.Show("Платіж успішно видалено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                     var newWindow = new PlannedPaymentsWindow();
                     this.Close();
                     newWindow.Show();
@@ -201,7 +200,6 @@
                 int notificationDate = int.Parse(dateText);
                 double expenseAmount = double.Parse(amountText);
                 _ = PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
-                MessageBox.Show("Платіж створено успішно!");
                 var newWindow = new PlannedPaymentsWindow();
                 this.Close();
                 newWindow.Show();
@@ -270,8 +268,7 @@
                 selectedAccount.Balance -= paymentSum;
                 DbHelper.dbc.Update(selectedAccount);
                 await DbHelper.dbc.SaveChangesAsync();
-
-                MessageBox.Show("Поповнення успішно внесено як витрату!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {

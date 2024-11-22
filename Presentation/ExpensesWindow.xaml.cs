@@ -65,7 +65,6 @@
             try
             {
                 await ExpenseService.AddExpenseAsync(this.selectedCategoryId, expenseSum, selectedAccount.Id);
-                MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {
