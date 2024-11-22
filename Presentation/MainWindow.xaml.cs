@@ -4,10 +4,13 @@
 namespace Presentation
 {
     using BusinessLogic.Session;
+    using Microsoft.Extensions.Logging;
     using System.Windows;
 
     public partial class MainWindow : Window
     {
+        private readonly ILogger<MainWindow> logger;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -17,6 +20,12 @@ namespace Presentation
                 this.Loaded += this.MainWindow_Loaded;
             }
             this.Closing += this.MainWindow_Closing;
+        }
+
+        public MainWindow(ILogger<MainWindow> logger)
+        {
+            this.InitializeComponent();
+            this.logger = logger;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

@@ -353,7 +353,10 @@
         private bool IsElementVisible(UIElement element)
         {
             var scrollViewer = this.HistoryElements.Parent as ScrollViewer;
-            if (scrollViewer == null) return false; 
+            if (scrollViewer == null)
+            {
+                return false;
+            }
 
             try
             {

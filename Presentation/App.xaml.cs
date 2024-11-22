@@ -1,11 +1,10 @@
 ﻿namespace Presentation
 {
-    using System.Windows;
     using BusinessLogic.Services;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Serilog;
-    using Serilog.Extensions.Logging;
+    using System.Windows;
 
     /// <summary>
     /// Interaction logic for App.xaml.
@@ -18,14 +17,14 @@
         {
             var serviceCollection = new ServiceCollection();
 
-            ConfigureLogging();
-            ConfigureServices(serviceCollection);
+            this.ConfigureLogging();
+            this.ConfigureServices(serviceCollection);
 
-            ServiceProvider = serviceCollection.BuildServiceProvider();
+            this.ServiceProvider = serviceCollection.BuildServiceProvider();
 
             base.OnStartup(e);
 
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            var mainWindow = this.ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
@@ -46,9 +45,12 @@
                 builder.AddSerilog();    // Додаємо Serilog
             });
 
-            // Реєстрація інших сервісів
+            var serviceProvider = services.BuildServiceProvider();
+            var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("UserService");
+            UserService.InitializeLogger(logger);
+
+            // Реєструємо MainWindow у DI
             services.AddTransient<MainWindow>();
-            //services.AddTransient<IUserService, UserService>();
         }
     }
 }
