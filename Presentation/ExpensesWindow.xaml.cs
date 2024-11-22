@@ -64,27 +64,14 @@
 
             try
             {
-                var newExpense = new Expense
-                {
-                    ExpenseSum = expenseSum,
-                    AccountId = selectedAccount.Id,
-                    CategoryId = this.selectedCategoryId,
-                    ExpenseDate = expenseDate.ToString("yyyy-MM-dd HH:mm:ss")
-                };
-
-                DbHelper.dbc.Expenses.Add(newExpense);
-
-                selectedAccount.Balance -= expenseSum;
-                DbHelper.dbc.Update(selectedAccount);
-
-                await DbHelper.dbc.SaveChangesAsync();
-
+                await ExpenseService.AddExpenseAsync(this.selectedCategoryId, expenseSum, selectedAccount.Id);
                 MessageBox.Show("Витрату успішно додано!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {
                     mainWindow.MainFrame.Navigate(new MainPage());
                 }
+                this.Close();
             }
             catch (Exception ex)
             {

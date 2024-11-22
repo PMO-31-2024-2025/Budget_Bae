@@ -57,24 +57,13 @@
 
             try
             {
-                // Додати новий прибуток
-                var newIncome = new Income
-                {
-                    IncomeSum = (double)incomeSum,
-                    AccountId = this.selectedAccount.Id,
-                    IncomeDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    Category = selectedCategory
-                };
-                SessionManager.SetCurrentAccount(this.selectedAccount.Id);
-                await IncomeService.AddIncomeAsync(newIncome);
+                await IncomeService.AddIncomeAsync(selectedCategory, (double)incomeSum, this.selectedAccount.Id);
 
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {
                     mainWindow.MainFrame.Navigate(new MainPage());
                 }
-
-                SessionManager.ClearCurrentAccount();
                 this.Close();
             }
             catch (Exception ex)

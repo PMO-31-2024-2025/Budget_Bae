@@ -23,9 +23,6 @@
             this.ServiceProvider = serviceCollection.BuildServiceProvider();
 
             base.OnStartup(e);
-
-            var mainWindow = this.ServiceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
         }
 
         private void ConfigureLogging()

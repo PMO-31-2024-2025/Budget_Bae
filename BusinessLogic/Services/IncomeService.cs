@@ -78,25 +78,30 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
-        public static async Task<bool> AddIncomeAsync(Income income)
+        public static async Task<bool> AddIncomeAsync(string category, double incomeSum, int accountId)
         {
-            logger?.LogInformation($"Спроба внести дохід з ID {income.Id}.");
-
-            var account = AccountService.GetAccountById(SessionManager.CurrentAccountId.Value);
+            logger?.LogInformation($"Спроба внести дохід з сумою {incomeSum}.");
+            var income = new Income
+            {
+                Category = category,
+                IncomeDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                IncomeSum = incomeSum,
+                AccountId = accountId,
+            };
+            var account = DbHelper.dbc.Accounts.FirstOrDefault(a => a.Id == accountId);
             if (account == null)
             {
-                logger?.LogWarning("Рахунок не знайдено!");
                 throw new Exception("Рахунок не знайдено!");
             }
-            else
-            {
-                DbHelper.dbc.Incomes.Add(income);
-                account.Balance += income.IncomeSum;
-                await DbHelper.dbc.SaveChangesAsync();
-                logger?.LogInformation("Дохід внесено.");
-                return true;
-            }
+
+            DbHelper.dbc.Incomes.Add(income);
+            account.Balance += incomeSum;
+            await DbHelper.dbc.SaveChangesAsync();
+
+            logger?.LogInformation("Дохід внесено успішно.");
+            return true;
         }
+
 
         public static async Task<bool> DeleteIncomeAsync(int incomeId)
         {

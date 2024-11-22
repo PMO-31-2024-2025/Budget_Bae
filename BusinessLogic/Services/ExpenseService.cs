@@ -97,20 +97,29 @@ namespace BusinessLogic.Services
         public static async Task<bool> AddExpenseAsync(int categoryId, double expenseSum, int accountId)
         {
             logger?.LogInformation($"Спроба внести витрату з сумою {expenseSum}.");
-
             var expense = new Expense
             {
                 CategoryId = categoryId,
                 ExpenseSum = expenseSum,
-                ExpenseDate = DateTime.Now.ToString(),
+                ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 AccountId = accountId,
             };
 
+            var account = DbHelper.dbc.Accounts.FirstOrDefault(a => a.Id == accountId);
+            if (account == null)
+            {
+                throw new Exception("Рахунок не знайдено!");
+            }
+
+
             DbHelper.dbc.Expenses.Add(expense);
+            account.Balance -= expenseSum;
             await DbHelper.dbc.SaveChangesAsync();
-            logger?.LogInformation("Витрату внесено.");
+
+            logger?.LogInformation("Витрату внесено успішно.");
             return true;
         }
+
 
         public static async Task<bool> DeleteExpenseAsync(int expenseId)
         {
