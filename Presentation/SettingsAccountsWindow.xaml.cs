@@ -2,19 +2,10 @@
 {
     using BusinessLogic.Services;
     using DAL.Models;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Shapes;
 
     /// <summary>
     /// Interaction logic for SettingsAccountsWindow.xaml
@@ -50,7 +41,7 @@
                 label.Margin = new Thickness(10, 5, 5, 0);
 
                 Button deleteButton = new Button();
-                deleteButton.Style = (Style)FindResource("DeleteCategoryOrAccountButton");
+                deleteButton.Style = (Style)this.FindResource("DeleteCategoryOrAccountButton");
                 deleteButton.Tag = i;
                 deleteButton.Click += this.DeleteButton_Click;
 

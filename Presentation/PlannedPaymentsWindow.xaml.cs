@@ -28,7 +28,7 @@
 
             this.UpdateComboBoxes();
             this.UpdatePaymentsGrid();
-            this.PaymentsList.SelectionChanged += PaymentsList_SelectionChanged;
+            this.PaymentsList.SelectionChanged += this.PaymentsList_SelectionChanged;
         }
 
         public List<PlannedExpense> PlannedPayments { get; set; }

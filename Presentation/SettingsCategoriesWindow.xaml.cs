@@ -5,7 +5,6 @@
     using DAL.Models;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for SettingsCategoriesWindow.xaml
@@ -56,7 +55,7 @@
                     label.Margin = new Thickness(10, 5, 5, 0);
 
                     Button deleteButton = new Button();
-                    deleteButton.Style = (Style)FindResource("DeleteCategoryOrAccountButton");
+                    deleteButton.Style = (Style)this.FindResource("DeleteCategoryOrAccountButton");
                     deleteButton.Tag = i; // збереження індекса категорії
                     deleteButton.Click += this.DeleteButton_Click;
 
@@ -82,7 +81,7 @@
                 var currCategories = ExpenseCategoryService.GetCategories();
                 var categoryToDeleteId = currCategories.FirstOrDefault(x => x.Name == this.categories.ElementAt(categoryIndex)).Id;
                 this.categories.RemoveAt(categoryIndex);
-                ExpenseCategoryService.DeleteExpenseCategory(categoryToDeleteId);
+                _ = ExpenseCategoryService.DeleteExpenseCategory(categoryToDeleteId);
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {

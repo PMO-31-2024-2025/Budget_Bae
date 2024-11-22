@@ -2,7 +2,6 @@
 {
     using BusinessLogic.Services;
     using BusinessLogic.Session;
-    using DAL.Data;
     using DAL.Models;
     using System.Windows;
 
@@ -66,7 +65,7 @@
                     IncomeDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     Category = selectedCategory
                 };
-                SessionManager.SetCurrentAccount(selectedAccount.Id);
+                SessionManager.SetCurrentAccount(this.selectedAccount.Id);
                 await IncomeService.AddIncomeAsync(newIncome);
 
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;

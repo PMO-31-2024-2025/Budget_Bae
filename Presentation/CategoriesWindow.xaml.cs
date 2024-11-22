@@ -6,7 +6,6 @@
     using DAL.Models;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Media;
 
     /// <summary>
     /// Interaction logic for CategoriesWindow.xaml.

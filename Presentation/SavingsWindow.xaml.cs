@@ -28,7 +28,7 @@
             this.UpdateSavingsGrid();
             this.UpdateSavingsComboBox();
             this.UpdateAccountsComboBox();
-            this.SavingsList.SelectionChanged += SavingsList_SelectionChanged;
+            this.SavingsList.SelectionChanged += this.SavingsList_SelectionChanged;
         }
 
         public List<Saving> Savings { get; set; }
