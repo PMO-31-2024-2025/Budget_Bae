@@ -71,9 +71,17 @@
         {
             if (e.Key == System.Windows.Input.Key.Enter)
             {
-                AddCategoryButton_Click(sender, e);
+                this.AddCategoryButton_Click(sender, e);
             }
             else if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
             {
                 this.Close();
             }

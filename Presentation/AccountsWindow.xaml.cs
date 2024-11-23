@@ -139,5 +139,13 @@ namespace Presentation
                 this.SearchButton_Click(sender, e);
             }
         }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

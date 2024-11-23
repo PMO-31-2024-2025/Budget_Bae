@@ -78,6 +78,34 @@
             }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.expenseAddingSumTextBox.Focus();
+            this.expenseAddingAccountChooseComboBox.SelectedIndex = 0;
+        }
 
+        private void ExpenseAddingSumTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.expenseAddingAccountChooseComboBox.Focus();
+            }
+        }
+
+        private void ExpenseAddingAccountChooseComboBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.ExpenseAddingAddButton_Click(sender, e);
+            }
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

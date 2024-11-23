@@ -153,6 +153,27 @@
             }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.SearchTextBox.Focus();
+        }
 
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void SearchTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            // я хз, я намагався зробити пошук за допомогою натиску на ентер,
+            // але не пішло, бо форум розмінували і я пішов працювати далі
+            //if (e.Key == System.Windows.Input.Key.Enter)
+            {
+              //this.TextBox_GotFocus(sender, e);
+            }
+    }
     }
 }

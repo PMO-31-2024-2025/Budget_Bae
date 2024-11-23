@@ -9,7 +9,8 @@
         Title="AddAccountWindow" Height="450" Width="400"
         WindowStyle="None"
         Background="#FFFAF0"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
