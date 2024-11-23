@@ -8,7 +8,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="#FFFAF0"
-        Title="AccountsWindow" Height="350" Width="400">
+        Title="AccountsWindow" Height="350" Width="400"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,7 +20,7 @@
 
         <Button x:Name="Close" Grid.Row="0" Style="{StaticResource CloseButton}" Click="Close_Click" HorizontalAlignment="Right" Margin="5"/>
         <TextBox x:Name="SearchTextBox" Grid.Row="0" Style="{StaticResource ModalWindowTextBox}" HorizontalAlignment="Left" Tag="Введіть рахунок" Width="220" Margin="20, 10, 0, 10"
-          Text="{Binding ElementName=SearchTextBox, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+          Text="{Binding ElementName=SearchTextBox, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" KeyDown="SearchTextBox_KeyDown"/>
 
         <Button x:Name="SearchButton" Grid.Row="0" Content="Пошук" Margin="0, 0, 60, 0" Style="{StaticResource SearchButton}"  Click="SearchButton_Click"/>
 

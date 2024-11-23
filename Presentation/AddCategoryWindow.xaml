@@ -8,7 +8,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="#FFFAF0"
-        Title="AddCategoryWindow" Height="250" Width="350">
+        Title="AddCategoryWindow" Height="250" Width="350"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,8 +19,8 @@
         <Label Grid.Row="0" Content="Створіть власну категорію" Margin="15, 10, 10, 0" FontSize="18" Foreground="#9B70C2" Width="280" HorizontalAlignment="Left"/>
         <Border Grid.Row="2" BorderBrush="#9B70C2" BorderThickness="2" CornerRadius="15" Margin="15, 10, 15, 15" Padding="10">
             <StackPanel Orientation="Vertical">
-                <TextBox x:Name="Name" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть назву категорії" Width="280" Margin="0, 20, 0, 10"
-                          Text="{Binding ElementName=Name, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+                <TextBox x:Name="AddCategoryName" Style="{StaticResource ModalWindowTextBox}" Tag="Введіть назву категорії" Width="280" Margin="0, 20, 0, 10"
+                          Text="{Binding ElementName=Name, Path=Tag}" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" KeyDown="AddCategoryName_KeyDown"/>
                 <Button x:Name="AddCategoryButton" Style="{StaticResource ModalWindowButton}" Content="Створити" Margin="20" Click="AddCategoryButton_Click"/>
             </StackPanel>
         </Border>

@@ -20,8 +20,8 @@
 
         private async void AddAccount_Click(object sender, RoutedEventArgs e)
         {
-            string nameInput = this.Name.Text.Trim();
-            string balanceTextInput = this.Balance.Text.Trim();
+            string nameInput = this.AccountNameTextBox.Text.Trim();
+            string balanceTextInput = this.AccountBalanceTextBox.Text.Trim();
 
             if (string.IsNullOrEmpty(nameInput) || string.IsNullOrEmpty(balanceTextInput))
             {
@@ -42,6 +42,27 @@
                 mainWindow.MainFrame.Navigate(new MainPage());
             }
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.AccountNameTextBox.Focus();
+        }
+
+        private void AccountNameTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.AccountBalanceTextBox.Focus();
+            }
+        }
+
+        private void AccountBalanceTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.AddAccount_Click(sender, e);
+            }
         }
     }
 }

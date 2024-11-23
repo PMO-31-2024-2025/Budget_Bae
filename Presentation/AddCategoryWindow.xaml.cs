@@ -45,7 +45,7 @@
         {
             try
             {
-                string categoryInput = this.Name.Text;
+                string categoryInput = this.AddCategoryName.Text;
                 if (categoryInput.ToLower() == "Введіть назву категорії")
                 {
                     MessageBox.Show("Заповніть поле з назвою!");
@@ -59,6 +59,23 @@
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.AddCategoryName.Focus();
+        }
+
+        private void AddCategoryName_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                AddCategoryButton_Click(sender, e);
+            }
+            else if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
             }
         }
     }

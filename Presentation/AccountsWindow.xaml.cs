@@ -81,6 +81,9 @@ namespace Presentation
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchText = this.SearchTextBox.Text.ToLower();
+            var currUserAccounts = AccountService.GetCurrentUserAccounts();
+
+            bool isFound = true;
             foreach (UIElement element in this.AccountsPanel.Children)
             {
                 if (element is Button accountButton)
@@ -90,7 +93,15 @@ namespace Presentation
                         accountButton.BringIntoView();
                         return;
                     }
+                    else
+                    {
+                        isFound = false;
+                    }
                 }
+            }
+            if (!isFound)
+            {
+                MessageBox.Show("Задана категорія не існує!", string.Empty, MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -113,6 +124,19 @@ namespace Presentation
                 {
                     textBox.Text = textBox.Tag.ToString();
                 }
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.SearchTextBox.Focus();
+        }
+
+        private void SearchTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.SearchButton_Click(sender, e);
             }
         }
     }
