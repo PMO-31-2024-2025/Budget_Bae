@@ -21,8 +21,6 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> RegisterUserAsync(string email, string password, string name)
         {
-            logger?.LogInformation($"Спроба реєстрації користувача з поштою: {email}.");
-
             if (DbHelper.dbc.Users.Any(u => u.Email == email))
             {
                 logger?.LogWarning("Користувач з такою поштою вже існує!");
@@ -105,6 +103,11 @@ namespace BusinessLogic.Services
         {
             var user = DbHelper.dbc.Users.First(u => u.Email == email);
             return user.Id;
+        }
+
+        public static string GetUserNameById(int? id)
+        {
+            return DbHelper.dbc.Users.First(u => u.Id == id).Name;
         }
     }
 }

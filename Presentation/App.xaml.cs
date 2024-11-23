@@ -57,6 +57,12 @@
             IncomeService.InitializeLogger(incomeLogger);
             var plannedExpenseLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("PlannedExpenseService");
             PlannedExpenseService.InitializeLogger(plannedExpenseLogger);
+            var entryLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Entry");
+            EntryWindow.InitializeLogger(entryLogger);
+            var navBarLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("NavBar");
+            NavBar.InitializeLogger(navBarLogger);
+            var settingsLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Settings");
+            SettingsWindow.InitializeLogger(settingsLogger);
 
             // Реєструємо MainWindow у DI
             services.AddTransient<MainWindow>();

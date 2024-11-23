@@ -268,7 +268,6 @@
                 selectedAccount.Balance -= paymentSum;
                 DbHelper.dbc.Update(selectedAccount);
                 await DbHelper.dbc.SaveChangesAsync();
-                
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
                 {

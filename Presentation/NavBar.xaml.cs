@@ -4,17 +4,27 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using Microsoft.Extensions.Logging;
+    using BusinessLogic.Services;
 
     /// <summary>
     /// Interaction logic for NavBar.xaml
     /// </summary>
     public partial class NavBar : UserControl
     {
+        private static ILogger logger;
+
         public NavBar()
         {
             this.InitializeComponent();
 
         }
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            NavBar.logger = logger;
+        }
+
         public void NbMainButton_Click(object sender, RoutedEventArgs e)
         {
             this.nbAnalyticsButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFAF0"));
@@ -38,6 +48,7 @@
             MessageBoxResult closeTheWindow = MessageBox.Show("Бажаєте вийти з акаунту?", "Застереження!", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (closeTheWindow == MessageBoxResult.Yes)
             {
+                logger?.LogInformation($"Користувач {UserService.GetUserNameById(SessionManager.CurrentUserId)} вийшов з акаунта.");
                 this.nbEntryButton.Content = "Немає даних";
                 EntryWindow entryWindow = new EntryWindow();
                 SessionManager.ClearCurrentUser();

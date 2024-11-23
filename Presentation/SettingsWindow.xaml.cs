@@ -5,6 +5,8 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using Microsoft.Extensions.Logging;
+    using BusinessLogic.Services;
 
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
@@ -12,6 +14,7 @@
     ///
     public partial class SettingsWindow : Window
     {
+        private static ILogger logger;
         private SettingsCategoriesWindow categoriesWindow;
         private SettingsAccountsWindow accountsWindow;
         private SettingsNotificationWindow notificationWindow;
@@ -22,6 +25,11 @@
         {
             this.InitializeComponent();
             this.UserNameLabel.Content = DbHelper.dbc.Users.First(u => u.Id == SessionManager.CurrentUserId).Name;
+        }
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            SettingsWindow.logger = logger;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -218,6 +226,7 @@
             }
 
             this.navBar.nbEntryButton.Content = "Немає даних";
+            logger?.LogInformation($"Користувач {UserService.GetUserNameById(SessionManager.CurrentUserId)} вийшов з акаунта.");
             SessionManager.ClearCurrentAccount();
             this.Close();
             entryWindow.ShowDialog();
