@@ -35,8 +35,6 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddExpensCategoryAsync(string categoryName)
         {
-            logger?.LogInformation($"Спроба додати категорію {categoryName}.");
-
             int? currUser = SessionManager.CurrentUserId;
             var currUserCategories = ExpenseCategoryService.GetCategories().Where(x => x.UserId == currUser);
             var categoryToAdd = currUserCategories.FirstOrDefault(c => c.Name == categoryName);
@@ -62,7 +60,7 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteExpenseCategory(int categoryId)
         {
-            logger?.LogInformation($"Спроба видалити категорію з ID {categoryId}.");
+            logger?.LogInformation($"Спроба видалити категорію {GetCategoryName(categoryId)}.");
 
             var category = DbHelper.dbc.ExpensesCategories.Find(categoryId);
             if (category != null && category.UserId == SessionManager.CurrentUserId)

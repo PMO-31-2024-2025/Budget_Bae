@@ -7,12 +7,15 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// Interaction logic for SavingsWindow.xaml
     /// </summary>
     public partial class SavingsWindow : Window
     {
+        private static ILogger logger;
+
         public SavingsWindow()
         {
             this.InitializeComponent();
@@ -29,6 +32,11 @@
             this.UpdateSavingsComboBox();
             this.UpdateAccountsComboBox();
             this.SavingsList.SelectionChanged += this.SavingsList_SelectionChanged;
+        }
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            SavingsWindow.logger = logger;
         }
 
         public List<Saving> Savings { get; set; }
@@ -200,15 +208,18 @@
             var selectedSavings = this.SavingsList.SelectedItem as Saving;
             var selectedAccount = this.AccountsList.SelectedItem as Account;
             int? currentUserId = SessionManager.CurrentUserId;
+            logger?.LogInformation($"Спроба поповнити заощадження {selectedSavings.TargetName}.");
 
             if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || selectedAccount == null)
             {
+                logger.LogWarning("Усі поля мають бути заповнені!");
                 MessageBox.Show("Усі поля мають бути заповнені!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (!decimal.TryParse(topUpAmountInput, out decimal topUpAmount))
             {
+                logger.LogWarning("Поле суми поповнення має містити число!");
                 MessageBox.Show("Поле суми поповнення має містити число!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -217,6 +228,7 @@
             {
                 if (selectedAccount.Balance < (double)topUpAmount)
                 {
+                    logger.LogWarning("Недостатньо коштів на рахунку!");
                     MessageBox.Show("Недостатньо коштів на рахунку.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
@@ -253,6 +265,7 @@
 
                 this.Savings = SavingService.GetSavings();
                 this.UpdateSavingsGrid();
+                logger?.LogInformation("Заощадження поповнено.");
 
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
                 if (mainWindow != null && mainWindow.MainFrame != null)
@@ -262,6 +275,7 @@
             }
             catch (Exception ex)
             {
+                logger.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

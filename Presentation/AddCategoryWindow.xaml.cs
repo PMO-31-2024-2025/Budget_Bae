@@ -3,15 +3,23 @@
     using BusinessLogic.Services;
     using System.Windows;
     using System.Windows.Controls;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// Interaction logic for AddCategoryWindow.xaml.
     /// </summary>
     public partial class AddCategoryWindow : Window
     {
+        private static ILogger logger;
+
         public AddCategoryWindow()
         {
             this.InitializeComponent();
+        }
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            AddCategoryWindow.logger = logger;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -46,8 +54,10 @@
             try
             {
                 string categoryInput = this.AddCategoryName.Text;
+                logger?.LogInformation($"Спроба додати категорію {categoryInput}.");
                 if (categoryInput.ToLower() == "Введіть назву категорії")
                 {
+                    logger?.LogWarning("Незаповнене поле з назвою!");
                     MessageBox.Show("Заповніть поле з назвою!");
                 }
                 else
@@ -58,6 +68,7 @@
             }
             catch (Exception ex)
             {
+                logger?.LogWarning("Помилка!");
                 MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

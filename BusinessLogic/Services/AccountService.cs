@@ -43,8 +43,6 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> AddAccountAsync(string name, double balance)
         {
-            logger?.LogInformation($"Спроба додати рахунок {name}.");
-
             var currentUserAccounts = DbHelper.dbc.Accounts.Where(x => x.UserId == SessionManager.CurrentUserId);
             if (currentUserAccounts.FirstOrDefault(x => x.Name == name) == null)
             {
@@ -65,7 +63,7 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteAccountAsync(int accountId)
         {
-            logger?.LogInformation($"Спроба видалити рахунок з ID {accountId}.");
+            logger?.LogInformation($"Спроба видалити рахунок {GetAccountName(accountId)}.");
 
             var account = GetCurrentUserAccounts().FirstOrDefault(a => a.Id == accountId);
             if (account == null)

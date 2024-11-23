@@ -7,12 +7,15 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// Interaction logic for PlannedPaymentsWindow.xaml
     /// </summary>
     public partial class PlannedPaymentsWindow : Window
     {
+        private static ILogger logger;
+
         public PlannedPaymentsWindow()
         {
             this.InitializeComponent();
@@ -29,6 +32,11 @@
             this.UpdateComboBoxes();
             this.UpdatePaymentsGrid();
             this.PaymentsList.SelectionChanged += this.PaymentsList_SelectionChanged;
+        }
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            PlannedPaymentsWindow.logger = logger;
         }
 
         public List<PlannedExpense> PlannedPayments { get; set; }
