@@ -7,6 +7,7 @@ namespace BusinessLogic.Services
     using DAL.Data;
     using DAL.Models;
     using Microsoft.Extensions.Logging;
+    using System.Runtime.CompilerServices;
     using System.Xml.Linq;
 
     public static class ExpenseService
@@ -149,6 +150,11 @@ namespace BusinessLogic.Services
             }
             logger?.LogInformation("Витрату видалено.");
             return true;
+        }
+
+        public static Expense? GetExpenseById(int expenseId)
+        {
+            return DbHelper.dbc.Expenses.FirstOrDefault(e => e.Id == expenseId);
         }
     }
 }

@@ -129,5 +129,10 @@ namespace BusinessLogic.Services
             logger?.LogInformation("Дохід видалено.");
             return true;
         }
+
+        public static Income? GetIncomeById(int incomeId)
+        {
+            return DbHelper.dbc.Incomes.FirstOrDefault(i => i.Id == incomeId);
+        }
     }
 }

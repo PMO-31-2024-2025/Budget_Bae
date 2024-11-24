@@ -8,6 +8,7 @@ namespace BusinessLogic.Services
     using DAL.Data;
     using DAL.Models;
     using Microsoft.Extensions.Logging;
+    using System.Data.Entity;
 
     public static class AccountService
     {

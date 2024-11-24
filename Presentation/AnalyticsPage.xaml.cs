@@ -2,6 +2,7 @@
 {
     using BusinessLogic.Services;
     using BusinessLogic.Session;
+    using DAL.Data;
     using DAL.Models;
     using LiveCharts;
     using LiveCharts.Wpf;
@@ -217,10 +218,30 @@
             {
                 if (type == 'e')
                 {
+                    var expense = ExpenseService.GetExpenseById(id);
+                    int accId = expense.AccountId;
+                    try
+                    {
+                        AccountService.GetAccountById(accId).Balance += expense.ExpenseSum;
+                        DbHelper.dbc.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                    }
                     _ = ExpenseService.DeleteExpenseAsync(id);
                 }
                 else
                 {
+                    var income = IncomeService.GetIncomeById(id);
+                    int accId = income.AccountId;
+                    try
+                    {
+                        AccountService.GetAccountById(accId).Balance -= income.IncomeSum;
+                        DbHelper.dbc.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                    }
                     _ = IncomeService.DeleteIncomeAsync(id);
                 }
                 MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
