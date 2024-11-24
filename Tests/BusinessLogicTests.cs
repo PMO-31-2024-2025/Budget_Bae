@@ -63,7 +63,7 @@ namespace Tests
                 Category = "¯æà"
             };
 
-            await IncomeService.AddIncomeAsync(newIncome);
+            await IncomeService.AddIncomeAsync(newIncome.Category, newIncome.IncomeSum, newIncome.AccountId);
             var income = DbHelper.dbc.Incomes.
                 FirstOrDefault(i => i.AccountId == SessionManager.CurrentAccountId && i.Category == "¯æà");
             Assert.NotNull(income);
