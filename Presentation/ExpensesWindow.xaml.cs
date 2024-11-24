@@ -7,9 +7,11 @@
     using System;
     using System.Linq;
     using System.Windows;
+    using Microsoft.Extensions.Logging;
 
     public partial class ExpensesWindow : Window
     {
+        private static ILogger logger;
         private int selectedCategoryId;
         private MainPage mainPage;
 
@@ -23,6 +25,11 @@
         }
 
         public static event Action ExpenseAdded;
+
+        public static void InitializeLogger(ILogger logger)
+        {
+            ExpensesWindow.logger = logger;
+        }
 
         private void FillAccountsComboboxWithAccounts()
         {
@@ -49,15 +56,18 @@
             string sum = this.expenseAddingSumTextBox.Text;
             var selectedAccount = this.expenseAddingAccountChooseComboBox.SelectedItem as Account;
             DateTime expenseDate = DateTime.Now;
+            logger?.LogInformation($"Спроба додати витрату: {ExpenseCategoryService.GetCategoryName(this.selectedCategoryId)} {sum} UAH.");
 
             if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null)
             {
+                logger?.LogWarning("Усі поля мають бути заповнені!");
                 MessageBox.Show("Усі поля мають бути заповнені!");
                 return;
             }
 
             if (!double.TryParse(sum, out double expenseSum))
             {
+                logger?.LogWarning("Поле суми витрати має містити число!");
                 MessageBox.Show("Поле суми витрати має містити число!");
                 return;
             }
@@ -74,6 +84,7 @@
             }
             catch (Exception ex)
             {
+                logger?.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

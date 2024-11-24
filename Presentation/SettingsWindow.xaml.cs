@@ -1,12 +1,12 @@
 ﻿namespace Presentation
 {
+    using BusinessLogic.Services;
     using BusinessLogic.Session;
     using DAL.Data;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
     using Microsoft.Extensions.Logging;
-    using BusinessLogic.Services;
 
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml

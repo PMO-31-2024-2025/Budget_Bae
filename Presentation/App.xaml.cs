@@ -57,8 +57,12 @@
             AddCategoryWindow.InitializeLogger(addCategory);
             var expenseLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("ExpenseService");
             ExpenseService.InitializeLogger(expenseLogger);
-            var incomeLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("IncomeCategoryService");
+            var expensesWindowLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("ExpensesWindowService");
+            ExpensesWindow.InitializeLogger(expensesWindowLogger);
+            var incomeLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("IncomeService");
             IncomeService.InitializeLogger(incomeLogger);
+            var incomeWindowLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("IncomeWindowService");
+            IncomeWindow.InitializeLogger(incomeWindowLogger);
             var plannedExpenseLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("PlannedExpenseService");
             PlannedExpenseService.InitializeLogger(plannedExpenseLogger);
             var entryLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("Entry");
@@ -71,10 +75,6 @@
             SavingsWindow.InitializeLogger(savingsWindowLogger);
             var plannedPaymentsWindowLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("PlannedPaymentsWindow");
             PlannedPaymentsWindow.InitializeLogger(plannedPaymentsWindowLogger);
-
-
-            // Реєструємо MainWindow у DI
-            services.AddTransient<MainWindow>();
         }
     }
 }

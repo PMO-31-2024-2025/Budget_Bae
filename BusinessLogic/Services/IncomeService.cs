@@ -78,9 +78,18 @@ namespace BusinessLogic.Services
                 .ToList();
         }
 
+        public static double GetIncomeSum(int id)
+        {
+            return DbHelper.dbc.Incomes.First(i => i.Id == id).IncomeSum;
+        }
+
+        public static string GetIncomeCategory(int id)
+        {
+            return DbHelper.dbc.Incomes.First(i => i.Id == id).Category;
+        }
+
         public static async Task<bool> AddIncomeAsync(string category, double incomeSum, int accountId)
         {
-            logger?.LogInformation($"Спроба внести дохід з сумою {incomeSum}.");
             var income = new Income
             {
                 Category = category,
@@ -102,10 +111,9 @@ namespace BusinessLogic.Services
             return true;
         }
 
-
         public static async Task<bool> DeleteIncomeAsync(int incomeId)
         {
-            logger?.LogInformation($"Спроба видалити дохід з ID {incomeId}.");
+            logger?.LogInformation($"Спроба видалити дохід: {GetIncomeCategory(incomeId)} {GetIncomeSum(incomeId)} UAH.");
 
             var income = GetIncomesByUserId().FirstOrDefault(i => i.Id == incomeId);
             if (income == null)

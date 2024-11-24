@@ -4,12 +4,14 @@
     using BusinessLogic.Session;
     using DAL.Models;
     using System.Windows;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// Interaction logic for IncomeWindow.xaml
     /// </summary>
     public partial class IncomeWindow : Window
     {
+        private static ILogger logger;
         private readonly Account selectedAccount;
         private List<string> incomeCategories = new List<string>
         {
@@ -28,6 +30,11 @@
             this.UpdateIncomeWindowComboBox();
         }
 
+        public static void InitializeLogger(ILogger logger)
+        {
+            IncomeWindow.logger = logger;
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -42,15 +49,18 @@
         {
             string sum = this.incomeAddingIncomeSumTextBox.Text;
             string selectedCategory = this.incomeAddingCategoryChooseCombobox.SelectedItem?.ToString();
+            logger?.LogInformation($"Спроба внести дохід: {selectedCategory} {sum} UAH.");
 
             if (string.IsNullOrWhiteSpace(sum) || string.IsNullOrWhiteSpace(selectedCategory))
             {
+                logger?.LogWarning("Усі поля мають бути заповнені!");
                 MessageBox.Show("Усі поля мають бути заповнені!");
                 return;
             }
 
             if (!decimal.TryParse(sum, out decimal incomeSum))
             {
+                logger?.LogWarning("Поле суми поповнення має містити число!");
                 MessageBox.Show("Поле суми поповнення має містити число!");
                 return;
             }
@@ -68,6 +78,7 @@
             }
             catch (Exception ex)
             {
+                logger?.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

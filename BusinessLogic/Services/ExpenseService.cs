@@ -94,9 +94,19 @@ namespace BusinessLogic.Services
             return currentMonthExpense;
         }
 
+        public static double GetExpenseSum(int id)
+        {
+            return DbHelper.dbc.Expenses.First(i => i.Id == id).ExpenseSum;
+        }
+
+        public static string? GetExpenseCategory(int id)
+        {
+            int categoryId = DbHelper.dbc.Expenses.First(i => i.Id == id).CategoryId;
+            return ExpenseCategoryService.GetCategoryName(categoryId);
+        }
+
         public static async Task<bool> AddExpenseAsync(int categoryId, double expenseSum, int accountId)
         {
-            logger?.LogInformation($"Спроба внести витрату з сумою {expenseSum}.");
             var expense = new Expense
             {
                 CategoryId = categoryId,
@@ -108,6 +118,7 @@ namespace BusinessLogic.Services
             var account = DbHelper.dbc.Accounts.FirstOrDefault(a => a.Id == accountId);
             if (account == null)
             {
+                logger?.LogWarning("Рахунок не знайдено!");
                 throw new Exception("Рахунок не знайдено!");
             }
 
@@ -123,7 +134,7 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteExpenseAsync(int expenseId)
         {
-            logger?.LogInformation($"Спроба видалити витрату з ID {expenseId}.");
+            logger?.LogInformation($"Спроба видалити витрату: {GetExpenseCategory(expenseId)} {GetExpenseSum(expenseId)} UAH.");
 
             var expense = DbHelper.dbc.Expenses.Find(expenseId);
             if (expense != null)

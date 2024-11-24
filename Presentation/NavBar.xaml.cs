@@ -1,11 +1,11 @@
 ﻿namespace Presentation
 {
-    using BusinessLogic.Session;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
-    using Microsoft.Extensions.Logging;
     using BusinessLogic.Services;
+    using BusinessLogic.Session;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// Interaction logic for NavBar.xaml

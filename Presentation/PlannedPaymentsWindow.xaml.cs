@@ -34,12 +34,12 @@
             this.PaymentsList.SelectionChanged += this.PaymentsList_SelectionChanged;
         }
 
+        public List<PlannedExpense> PlannedPayments { get; set; }
+
         public static void InitializeLogger(ILogger logger)
         {
             PlannedPaymentsWindow.logger = logger;
         }
-
-        public List<PlannedExpense> PlannedPayments { get; set; }
 
         private void UpdatePaymentsGrid()
         {

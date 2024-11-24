@@ -34,12 +34,12 @@
             this.SavingsList.SelectionChanged += this.SavingsList_SelectionChanged;
         }
 
+        public List<Saving> Savings { get; set; }
+
         public static void InitializeLogger(ILogger logger)
         {
             SavingsWindow.logger = logger;
         }
-
-        public List<Saving> Savings { get; set; }
 
         private void UpdateSavingsGrid()
         {
