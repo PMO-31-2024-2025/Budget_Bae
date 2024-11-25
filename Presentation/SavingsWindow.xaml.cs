@@ -122,7 +122,7 @@
             }
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
 
@@ -134,20 +134,12 @@
 
             try
             {
-                var savingToDelete = DbHelper.dbc.Savings.FirstOrDefault(s => s.Id == savingId);
-
-                if (savingToDelete != null)
+                bool result = await SavingService.DeleteSavingAsync(savingId);
+                if (result)
                 {
-                    DbHelper.dbc.Savings.Remove(savingToDelete);
-                    DbHelper.dbc.SaveChanges();
-
                     var newWindow = new SavingsWindow();
                     this.Close();
                     newWindow.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Заощадження не знайдено.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -208,6 +200,7 @@
             var selectedSavings = this.SavingsList.SelectedItem as Saving;
             var selectedAccount = this.AccountsList.SelectedItem as Account;
             int? currentUserId = SessionManager.CurrentUserId;
+            var CategoryName = "Заощадження";
             logger?.LogInformation($"Спроба поповнити заощадження {selectedSavings.TargetName}.");
 
             if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || selectedAccount == null)
@@ -233,44 +226,36 @@
                     return;
                 }
 
-                selectedAccount.Balance -= (double)topUpAmount;
                 selectedSavings.CurrentSum += (double)topUpAmount;
 
-                var savingsCategory = DbHelper.dbc.ExpensesCategories
-                    .FirstOrDefault(c => c.Name == "Заощадження" && c.UserId == SessionManager.CurrentUserId);
+                var category = DbHelper.dbc.ExpensesCategories
+                    .FirstOrDefault(c => c.Name == CategoryName && c.UserId == currentUserId);
 
-                if (savingsCategory == null && currentUserId != null)
+                if (category == null)
                 {
-                    savingsCategory = new ExpenseCategory
+                    bool categoryAdded = await ExpenseCategoryService.AddExpensCategoryAsync(CategoryName);
+                    if (!categoryAdded)
                     {
-                        Name = "Заощадження",
-                        UserId = currentUserId.Value
-                    };
-                    DbHelper.dbc.ExpensesCategories.Add(savingsCategory);
-                    await DbHelper.dbc.SaveChangesAsync();
+                        MessageBox.Show("Не вдалося створити категорію!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    category = DbHelper.dbc.ExpensesCategories
+                        .FirstOrDefault(c => c.Name == CategoryName && c.UserId == currentUserId);
                 }
 
-                var newExpense = new Expense
-                {
-                    ExpenseSum = (double)topUpAmount,
-                    AccountId = selectedAccount.Id,
-                    CategoryId = savingsCategory.Id,
-                    ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                };
-                DbHelper.dbc.Expenses.Add(newExpense);
+                bool result = await ExpenseService.AddExpenseAsync(category.Id, (double)topUpAmount, selectedAccount.Id);
 
-                DbHelper.dbc.Update(selectedAccount);
-                DbHelper.dbc.Update(selectedSavings);
                 await DbHelper.dbc.SaveChangesAsync();
-
-                this.Savings = SavingService.GetSavings();
                 this.UpdateSavingsGrid();
                 logger?.LogInformation("Заощадження поповнено.");
-
-                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-                if (mainWindow != null && mainWindow.MainFrame != null)
+                if (result)
                 {
-                    mainWindow.MainFrame.Navigate(new MainPage());
+                    MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                    if (mainWindow != null && mainWindow.MainFrame != null)
+                    {
+                        mainWindow.MainFrame.Navigate(new MainPage());
+                    }
                 }
             }
             catch (Exception ex)
@@ -279,10 +264,6 @@
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
-
-
 
         private void UpdateSavingsComboBox()
         {
@@ -302,50 +283,49 @@
             this.AccountsList.DisplayMemberPath = "Name";
         }
 
-        private void TopUp_Click(object sender, RoutedEventArgs e)
+        private async void TopUp_Click(object sender, RoutedEventArgs e)
         {
             string name = this.Name.Text.Trim();
             string dateText = this.Date.Text.Trim();
             string amountText = this.Amount_.Text.Trim();
 
-            if (name == "Введіть назву")
+            if (string.IsNullOrWhiteSpace(name) || name == "Введіть назву")
             {
                 MessageBox.Show("Усі поля повинні бути заповненими!");
+                return;
             }
-            else if (!decimal.TryParse(amountText, out decimal amount) || amount <= 0)
+
+            if (!decimal.TryParse(amountText, out decimal amount) || amount <= 0)
             {
                 MessageBox.Show("Сума повинна бути додатнім числом!");
+                return;
             }
-            else if (!int.TryParse(dateText, out int date) || date < 1)
+
+            if (!int.TryParse(dateText, out int date) || date < 1)
             {
                 MessageBox.Show("Кількість місяців повинна бути числом, яке рівне 1 чи більше!");
+                return;
             }
-            else
+
+            decimal amountPerMonth = amount / date;
+            this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
+
+            try
             {
-                decimal amountPerMonth = amount / date;
-                this.AmountPerMonth.Text = amountPerMonth.ToString("F2");
-
-                if (SessionManager.CurrentUserId != null)
+                bool result = await SavingService.AddSavingAsync(name, (int)amount, date);
+                if (result)
                 {
-                    var newSaving = new Saving
-                    {
-                        TargetName = name,
-                        TargetSum = (double)amount,
-                        CurrentSum = 0,
-                        MonthsNumber = date,
-                        UserId = SessionManager.CurrentUserId.Value,
-                    };
-                    DbHelper.dbc.Savings.Add(newSaving);
-                    DbHelper.dbc.SaveChanges();
+                    var newWindow = new SavingsWindow();
+                    this.Close();
+                    newWindow.Show();
                 }
-
-
-                var newWindow = new SavingsWindow();
-                this.Close();
-                newWindow.Show();
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void CalculateMonthlyAmount(object sender, TextChangedEventArgs e)
         {

@@ -53,22 +53,21 @@
         {
             try
             {
-                string categoryInput = this.AddCategoryName.Text;
-                logger?.LogInformation($"Спроба додати категорію {categoryInput}.");
-                if (categoryInput.ToLower() == "Введіть назву категорії")
+                string categoryInput = this.AddCategoryName.Text?.Trim(); 
+                logger?.LogInformation($"Спроба додати категорію '{categoryInput}'.");
+
+                if (string.IsNullOrWhiteSpace(categoryInput) || categoryInput.ToLower() == "введіть назву категорії")
                 {
-                    logger?.LogWarning("Незаповнене поле з назвою!");
-                    MessageBox.Show("Заповніть поле з назвою!");
+                    MessageBox.Show("Заповніть поле з назвою правильно!");
+                    return;
                 }
-                else
-                {
-                    await ExpenseCategoryService.AddExpensCategoryAsync(categoryInput);
-                    this.Close();
-                }
+
+                await ExpenseCategoryService.AddExpensCategoryAsync(categoryInput);
+                this.Close();
             }
             catch (Exception ex)
             {
-                logger?.LogWarning("Помилка!");
+                logger?.LogWarning($"Помилка при додаванні категорії: {ex.Message}");
                 MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

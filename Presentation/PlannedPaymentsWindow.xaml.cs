@@ -18,21 +18,22 @@
 
         public PlannedPaymentsWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+
             if (SessionManager.CurrentUserId != null)
             {
                 this.PlannedPayments = PlannedExpenseService.GetPlannedExpenses();
             }
             else
             {
-                this.PlannedPayments = [];
+                this.PlannedPayments = new List<PlannedExpense>();
             }
-
 
             this.UpdateComboBoxes();
             this.UpdatePaymentsGrid();
             this.PaymentsList.SelectionChanged += this.PaymentsList_SelectionChanged;
         }
+
 
         public List<PlannedExpense> PlannedPayments { get; set; }
 
@@ -120,7 +121,7 @@
             }
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
 
@@ -132,27 +133,20 @@
 
             try
             {
-                var paymentToDelete = DbHelper.dbc.PlannedExpenses.FirstOrDefault(p => p.Id == paymentId);
-
-                if (paymentToDelete != null)
+                bool result = await PlannedExpenseService.DeletePlannedExpense(paymentId);
+                if (result)
                 {
-                    DbHelper.dbc.PlannedExpenses.Remove(paymentToDelete);
-                    DbHelper.dbc.SaveChanges();
-
                     var newWindow = new PlannedPaymentsWindow();
                     this.Close();
                     newWindow.Show();
                 }
-                else
-                {
-                    MessageBox.Show("Платіж не знайдено.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -182,7 +176,7 @@
             }
         }
 
-        private void CreatePayment_Click(object sender, RoutedEventArgs e)
+        private async void CreatePayment_Click(object sender, RoutedEventArgs e)
         {
             string name = this.Name.Text.Trim();
             string amountText = this.Amount.Text.Trim();
@@ -193,31 +187,35 @@
                 MessageBox.Show("Усі поля мають бути заповненими.");
                 return;
             }
-            else if (!decimal.TryParse(amountText, out decimal amount))
+
+            if (!decimal.TryParse(amountText, out decimal amount))
             {
-                MessageBox.Show("Сума поповнення повинна бути числом.");
+                MessageBox.Show("Сума повинна бути числом.");
                 return;
             }
-            else if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
+
+            if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
             {
                 MessageBox.Show("Число дати повинно бути від 1 до 28.");
                 return;
             }
-            else
+
+            try
             {
-                int notificationDate = int.Parse(dateText);
-                double expenseAmount = double.Parse(amountText);
-                _ = PlannedExpenseService.AddPlannedExpense(name, notificationDate, expenseAmount);
-                var newWindow = new PlannedPaymentsWindow();
-                this.Close();
-                newWindow.Show();
-                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-                if (mainWindow != null && mainWindow.MainFrame != null)
+                bool result = await PlannedExpenseService.AddPlannedExpense(name, date, (double)amount);
+                if (result)
                 {
-                    mainWindow.MainFrame.Navigate(new MainPage());
+                    var newWindow = new PlannedPaymentsWindow();
+                    this.Close();
+                    newWindow.Show();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void AddPayment_Click(object sender, RoutedEventArgs e)
         {
@@ -231,9 +229,11 @@
         private async void TopUpPayment_Button_Click(object sender, RoutedEventArgs e)
         {
             string sum = this.TopUpAmountPayment.Text;
+            var selectedPayment = this.PaymentsList.SelectedItem as PlannedExpense;
             var selectedAccount = this.AccountsList.SelectedItem as Account;
             string plannedCategoryName = "Заплановані платежі";
             int? currentUserId = SessionManager.CurrentUserId;
+            logger?.LogInformation($"Спроба поповнити запланований платіж {selectedPayment.Name}.");
 
             if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null || currentUserId == null)
             {
@@ -249,37 +249,38 @@
 
             try
             {
+                if (selectedAccount.Balance < paymentSum)
+                {
+                    logger.LogWarning("Недостатньо коштів на рахунку!");
+                    MessageBox.Show("Недостатньо коштів на рахунку.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 var category = DbHelper.dbc.ExpensesCategories
                     .FirstOrDefault(c => c.Name == plannedCategoryName && c.UserId == currentUserId);
 
                 if (category == null)
                 {
-                    category = new ExpenseCategory
+                    bool categoryAdded = await ExpenseCategoryService.AddExpensCategoryAsync(plannedCategoryName);
+                    if (!categoryAdded)
                     {
-                        Name = plannedCategoryName,
-                        UserId = currentUserId.Value
-                    };
-                    DbHelper.dbc.ExpensesCategories.Add(category);
-                    await DbHelper.dbc.SaveChangesAsync();
+                        MessageBox.Show("Не вдалося створити категорію!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    category = DbHelper.dbc.ExpensesCategories
+                        .FirstOrDefault(c => c.Name == plannedCategoryName && c.UserId == currentUserId);
                 }
 
-                var newExpense = new Expense
-                {
-                    ExpenseSum = paymentSum,
-                    AccountId = selectedAccount.Id,
-                    CategoryId = category.Id,
-                    ExpenseDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                };
+                bool result = await ExpenseService.AddExpenseAsync(category.Id, paymentSum, selectedAccount.Id);
 
-                DbHelper.dbc.Expenses.Add(newExpense);
-
-                selectedAccount.Balance -= paymentSum;
-                DbHelper.dbc.Update(selectedAccount);
-                await DbHelper.dbc.SaveChangesAsync();
-                MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-                if (mainWindow != null && mainWindow.MainFrame != null)
+                if (result)
                 {
-                    mainWindow.MainFrame.Navigate(new MainPage());
+                    MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                    if (mainWindow != null && mainWindow.MainFrame != null)
+                    {
+                        mainWindow.MainFrame.Navigate(new MainPage());
+                    }
                 }
             }
             catch (Exception ex)
@@ -287,6 +288,8 @@
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
 
 
         private void CloseAddPayment_Click(object sender, RoutedEventArgs e)
