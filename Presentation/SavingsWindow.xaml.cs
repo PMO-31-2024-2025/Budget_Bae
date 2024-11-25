@@ -354,5 +354,45 @@
                 this.TopUpAmountSavings.Text = (selectedSaving.TargetSum / selectedSaving.MonthsNumber).ToString("F2");
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.SavingsList.Focus();
+            this.SavingsList.SelectedIndex = 0;
+            this.AccountsList.SelectedIndex = 0;
+
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void SavingsList_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.AccountsList.Focus();
+            }
+        }
+
+        private void AccountsList_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.TopUpAmountSavings.Focus();
+            }
+        }
+
+        private void TopUpAmountSavings_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.TopUpSavings_Click(sender, e);
+            }
+        }
     }
 }

@@ -4,7 +4,9 @@
         Title="SettingsWindow" Width="400" 
         VerticalAlignment="Stretch"
         WindowStyle="None"
-        Background="#FFFAF0">
+        Background="#FFFAF0"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown">
 
     <Grid>
         <Grid.RowDefinitions>

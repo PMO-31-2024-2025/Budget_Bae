@@ -8,7 +8,9 @@
         WindowStyle="None"
         Background="#FFFAF0"
         WindowStartupLocation="CenterScreen"
-        Title="PlannedPaymentsWindow" Height="450" Width="800">
+        Title="PlannedPaymentsWindow" Height="450" Width="800"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown">
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -37,14 +39,14 @@
                 <StackPanel x:Name="replenishment" Visibility="Visible">
                     <Label Content="Внесення платежа" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
 
-                    <ComboBox x:Name="PaymentsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
-                    <ComboBox x:Name="AccountsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                    <ComboBox x:Name="PaymentsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" KeyDown="PaymentsList_KeyDown"/>
+                    <ComboBox x:Name="AccountsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" KeyDown="AccountsList_KeyDown"/>
                     <TextBox x:Name="TopUpAmountPayment" Style="{StaticResource ModalWindowTextBox}" Tag="Сума поповнення" 
                      Text="{Binding ElementName=TopUpAmountPayment, Path=Tag}" GotFocus="TextBox_GotFocus" 
-                     LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                     LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" KeyDown="TopUpAmountPayment_KeyDown"/>
 
-                    <Button x:Name="TopUpPayment_Button" Style="{StaticResource ModalWindowButton}" Content="Внести" 
-                    Margin="0,90, 0, 30" Click="TopUpPayment_Button_Click"/>
+                    <Button x:Name="TopUpPaymentButton" Style="{StaticResource ModalWindowButton}" Content="Внести" 
+                    Margin="0,90, 0, 30" Click="TopUpPaymentButton_Click"/>
                 </StackPanel>
             </Border>
         </Grid>

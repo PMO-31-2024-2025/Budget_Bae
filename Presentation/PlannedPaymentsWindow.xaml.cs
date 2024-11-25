@@ -18,7 +18,7 @@
 
         public PlannedPaymentsWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             if (SessionManager.CurrentUserId != null)
             {
@@ -233,7 +233,7 @@
             this.AddPayment.Visibility = Visibility.Collapsed;
         }
 
-        private async void TopUpPayment_Button_Click(object sender, RoutedEventArgs e)
+        private async void TopUpPaymentButton_Click(object sender, RoutedEventArgs e)
         {
             string sum = this.TopUpAmountPayment.Text;
             var selectedPayment = this.PaymentsList.SelectedItem as PlannedExpense;
@@ -331,5 +331,43 @@
             }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.PaymentsList.Focus();
+            this.PaymentsList.SelectedIndex = 0;
+            this.AccountsList.SelectedIndex = 0;
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void PaymentsList_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.AccountsList.Focus();
+            }
+        }
+
+        private void AccountsList_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.TopUpAmountPayment.Focus();
+            }
+        }
+
+        private void TopUpAmountPayment_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.TopUpPaymentButton_Click(sender, e);
+            }
+        }
     }
 }

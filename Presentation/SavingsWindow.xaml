@@ -8,7 +8,9 @@
         WindowStyle="None"
         Background="#FFFAF0"
         WindowStartupLocation="CenterScreen"
-        Title="SavingsWindow" Height="450" Width="800">
+        Title="SavingsWindow" Height="450" Width="800"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -36,10 +38,10 @@
         <Border x:Name="replenishmentBorder" Grid.Column="1" BorderBrush="#DAB6FC" BorderThickness="2" CornerRadius="15" Margin="20, 20, 20, 30" Visibility="Visible">
             <StackPanel x:Name="replenishment" Visibility="Visible">
                 <Label Content="Поповнення заощадження" HorizontalAlignment="Left" FontSize="12" Foreground="#9B70C2" Margin="20, 0, 0, 0"/>
-                    <ComboBox x:Name="SavingsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
-                    <ComboBox x:Name="AccountsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                    <ComboBox x:Name="SavingsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" KeyDown="SavingsList_KeyDown"/>
+                    <ComboBox x:Name="AccountsList" Style="{StaticResource ModalWindowComboBox}" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" KeyDown="AccountsList_KeyDown"/>
                     <TextBox x:Name="TopUpAmountSavings" Style="{StaticResource ModalWindowTextBox}"  Tag="Сума поповнення" Text="{Binding ElementName=TopUpAmountSavings, Path=Tag}" GotFocus="TextBox_GotFocus" 
-                             LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" />
+                             LostFocus="TextBox_LostFocus" Width="250" HorizontalAlignment="Center" Margin="10, 20, 10, 0" KeyDown="TopUpAmountSavings_KeyDown"/>
                     <Button x:Name="TopUpSavings_Button" Style="{StaticResource ModalWindowButton}" Content="Поповнити" Margin="0,100, 0, 30" Click="TopUpSavings_Click"/>
             </StackPanel>
         </Border>

@@ -168,11 +168,9 @@
 
         private void SearchTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            // я хз, я намагався зробити пошук за допомогою натиску на ентер,
-            // але не пішло, бо форум розмінували і я пішов працювати далі
-            //if (e.Key == System.Windows.Input.Key.Enter)
+            if (e.Key == System.Windows.Input.Key.Enter)
             {
-              //this.TextBox_GotFocus(sender, e);
+                this.SearchButton_Click(sender, e);
             }
     }
     }

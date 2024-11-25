@@ -231,5 +231,51 @@
             this.Close();
             entryWindow.ShowDialog();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.CategoryExpanderButton.Focus();
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+            //заготовка
+            //else if (e.Key == System.Windows.Input.Key.)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+            //else if (e.Key == System.Windows.Input.Key.Escape)
+            //{
+
+            //}
+        }
     }
 }

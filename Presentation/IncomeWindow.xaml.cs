@@ -88,5 +88,35 @@
         {
             this.incomeAddingCategoryChooseCombobox.ItemsSource = this.incomeCategories;
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.incomeAddingIncomeSumTextBox.Focus();
+            this.incomeAddingCategoryChooseCombobox.SelectedIndex = 0;
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void IncomeAddingIncomeSumTextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.incomeAddingCategoryChooseCombobox.Focus();
+            }
+        }
+
+        private void IncomeAddingCategoryChooseCombobox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                this.IncomeAddingButton_Click(sender, e);
+            }
+        }
     }
 }
