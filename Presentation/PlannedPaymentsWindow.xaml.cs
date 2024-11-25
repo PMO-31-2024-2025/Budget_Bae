@@ -124,6 +124,7 @@
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
+            logger?.LogInformation($"Спроба видалити заощадження {PlannedExpenseService.GetPlannedExpenseName(Convert.ToInt32(deleteButton.Tag))}.");
 
             if (deleteButton == null || !(deleteButton.Tag is int paymentId))
             {
@@ -143,6 +144,7 @@
             }
             catch (Exception ex)
             {
+                logger.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -181,21 +183,25 @@
             string name = this.Name.Text.Trim();
             string amountText = this.Amount.Text.Trim();
             string dateText = this.Date.Text.Trim();
+            logger?.LogInformation($"Спроба додати запланований платіж {name}.");
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(amountText) || string.IsNullOrEmpty(dateText))
             {
+                logger.LogWarning("Усі поля мають бути заповненими!");
                 MessageBox.Show("Усі поля мають бути заповненими.");
                 return;
             }
 
             if (!decimal.TryParse(amountText, out decimal amount))
             {
+                logger.LogWarning("Сума повинна бути числом!");
                 MessageBox.Show("Сума повинна бути числом.");
                 return;
             }
 
             if (!int.TryParse(dateText, out int date) || date < 1 || date > 28)
             {
+                logger.LogWarning("Число дати повинно бути від 1 до 28!");
                 MessageBox.Show("Число дати повинно бути від 1 до 28.");
                 return;
             }
@@ -212,6 +218,7 @@
             }
             catch (Exception ex)
             {
+                logger.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -237,12 +244,14 @@
 
             if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null || currentUserId == null)
             {
+                logger.LogWarning("Усі поля мають бути заповнені!");
                 MessageBox.Show("Усі поля мають бути заповнені!");
                 return;
             }
 
             if (!double.TryParse(sum, out double paymentSum))
             {
+                logger.LogWarning("Поле суми поповнення має містити число!");
                 MessageBox.Show("Поле суми поповнення має містити число!");
                 return;
             }
@@ -273,6 +282,7 @@
                 }
 
                 bool result = await ExpenseService.AddExpenseAsync(category.Id, paymentSum, selectedAccount.Id);
+                logger?.LogInformation($"Запланований платіж {selectedPayment.Name} поповнено на {sum}.");
 
                 if (result)
                 {
@@ -285,6 +295,7 @@
             }
             catch (Exception ex)
             {
+                logger?.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

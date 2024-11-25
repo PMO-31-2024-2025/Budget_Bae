@@ -32,10 +32,16 @@ namespace BusinessLogic.Services
                 .Sum(p => p.PlannedSum);
         }
 
+        public static string? GetPlannedExpenseName(int plannedExpenseId)
+        {
+            return DbHelper.dbc.PlannedExpenses
+                .Where(p => p.Id == plannedExpenseId)
+                .Select(p => p.Name)
+                .FirstOrDefault();
+        }
+
         public static async Task<bool> AddPlannedExpense(string expenseName, int notification_date, double plannedSum)
         {
-            logger?.LogInformation($"Спроба додати запланований платіж {expenseName}.");
-
             int? currUser = SessionManager.CurrentUserId;
             List<PlannedExpense> currUserData = DbHelper.dbc.PlannedExpenses.Where(p => p.UserId == currUser).ToList();
 
@@ -66,8 +72,6 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeletePlannedExpense(int expenseId)
         {
-            logger?.LogInformation($"Спроба видалити запланований платіж з ID {expenseId}.");
-
             var currUserPlannedExpenses = PlannedExpenseService.GetPlannedExpenses();
             var expenseToDelete = currUserPlannedExpenses.FirstOrDefault(pe => pe.Id == expenseId);
             if (expenseToDelete == null)
