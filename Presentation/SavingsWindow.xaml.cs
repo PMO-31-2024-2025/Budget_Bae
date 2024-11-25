@@ -125,9 +125,11 @@
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
+            logger?.LogInformation($"Спроба видалити заощадження {SavingService.GetSavingName(Convert.ToInt32(deleteButton.Tag))}.");
 
             if (deleteButton == null || !(deleteButton.Tag is int savingId))
             {
+                logger?.LogWarning("Неможливо знайти заощадження для видалення!");
                 MessageBox.Show("Неможливо знайти заощадження для видалення.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
@@ -144,6 +146,7 @@
             }
             catch (Exception ex)
             {
+                logger?.LogWarning("Помилка!");
                 MessageBox.Show($"Помилка: {ex.Message}", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -248,7 +251,7 @@
 
                 await DbHelper.dbc.SaveChangesAsync();
                 this.UpdateSavingsGrid();
-                logger?.LogInformation("Заощадження поповнено.");
+                logger?.LogInformation($"Заощадження поповнено на {topUpAmount} UAH.");
                 if (result)
                 {
                     MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
@@ -289,20 +292,25 @@
             string dateText = this.Date.Text.Trim();
             string amountText = this.Amount_.Text.Trim();
 
+            logger?.LogInformation($"Спроба створити заощадження {name}.");
+
             if (string.IsNullOrWhiteSpace(name) || name == "Введіть назву")
             {
+                logger?.LogWarning("Усі поля повинні бути заповненими!");
                 MessageBox.Show("Усі поля повинні бути заповненими!");
                 return;
             }
 
             if (!decimal.TryParse(amountText, out decimal amount) || amount <= 0)
             {
+                logger?.LogWarning("Сума повинна бути додатнім числом!");
                 MessageBox.Show("Сума повинна бути додатнім числом!");
                 return;
             }
 
             if (!int.TryParse(dateText, out int date) || date < 1)
             {
+                logger?.LogWarning("Кількість місяців повинна бути числом, яке рівне 1 чи більше!");
                 MessageBox.Show("Кількість місяців повинна бути числом, яке рівне 1 чи більше!");
                 return;
             }
@@ -322,6 +330,7 @@
             }
             catch (Exception ex)
             {
+                logger?.LogWarning("Помилка!");
                 MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

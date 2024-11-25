@@ -53,11 +53,12 @@
         {
             try
             {
-                string categoryInput = this.AddCategoryName.Text?.Trim(); 
-                logger?.LogInformation($"Спроба додати категорію '{categoryInput}'.");
+                string categoryInput = this.AddCategoryName.Text?.Trim();
+                logger?.LogInformation($"Спроба додати категорію {categoryInput}.");
 
                 if (string.IsNullOrWhiteSpace(categoryInput) || categoryInput.ToLower() == "введіть назву категорії")
                 {
+                    logger?.LogWarning("Неправильний формат назви категорії!");
                     MessageBox.Show("Заповніть поле з назвою правильно!");
                     return;
                 }
@@ -67,7 +68,7 @@
             }
             catch (Exception ex)
             {
-                logger?.LogWarning($"Помилка при додаванні категорії: {ex.Message}");
+                logger?.LogWarning($"Помилка!");
                 MessageBox.Show(ex.Message, "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

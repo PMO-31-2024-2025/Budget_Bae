@@ -32,10 +32,16 @@ namespace BusinessLogic.Services
                 .Sum(s => s.TargetSum / s.MonthsNumber);
         }
 
+        public static string? GetSavingName(int savingId)
+        {
+            return DbHelper.dbc.Savings
+                .Where(s => s.Id == savingId)
+                .Select(s => s.TargetName)
+                .FirstOrDefault();
+        }
+
         public static async Task<bool> AddSavingAsync(string targetName, int targetSum, int monthsNumber)
         {
-            logger?.LogInformation($"Спроба додати заощадження {targetName}.");
-
             var currUserSavings = DbHelper.dbc.Savings.Where(x => x.UserId == SessionManager.CurrentUserId);
             var saving = currUserSavings.FirstOrDefault(x => x.TargetName == targetName);
             if (saving != null)
@@ -66,8 +72,6 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteSavingAsync(int savingId)
         {
-            logger?.LogInformation($"Спроба видалити заощадження з ID {savingId}.");
-
             var currentUserSavings = DbHelper.dbc.Savings.Where(s => s.UserId == SessionManager.CurrentUserId.Value);
             var saving = currentUserSavings.FirstOrDefault(s => s.Id == savingId);
             if (saving == null)
