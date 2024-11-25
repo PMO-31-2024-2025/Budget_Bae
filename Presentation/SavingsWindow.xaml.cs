@@ -125,7 +125,7 @@
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
-            logger?.LogInformation($"Спроба видалити заощадження {SavingService.GetSavingName(Convert.ToInt32(deleteButton.Tag))}.");
+            logger?.LogInformation($"Спроба видалити заощадження '{SavingService.GetSavingName(Convert.ToInt32(deleteButton.Tag))}'.");
 
             if (deleteButton == null || !(deleteButton.Tag is int savingId))
             {
@@ -204,7 +204,7 @@
             var selectedAccount = this.AccountsList.SelectedItem as Account;
             int? currentUserId = SessionManager.CurrentUserId;
             var CategoryName = "Заощадження";
-            logger?.LogInformation($"Спроба поповнити заощадження {selectedSavings.TargetName}.");
+            logger?.LogInformation($"Спроба поповнити заощадження '{selectedSavings.TargetName}'.");
 
             if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || selectedAccount == null)
             {
@@ -292,7 +292,7 @@
             string dateText = this.Date.Text.Trim();
             string amountText = this.Amount_.Text.Trim();
 
-            logger?.LogInformation($"Спроба створити заощадження {name}.");
+            logger?.LogInformation($"Спроба створити заощадження '{name}'.");
 
             if (string.IsNullOrWhiteSpace(name) || name == "Введіть назву")
             {

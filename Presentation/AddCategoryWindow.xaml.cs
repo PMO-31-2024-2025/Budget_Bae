@@ -54,7 +54,7 @@
             try
             {
                 string categoryInput = this.AddCategoryName.Text?.Trim();
-                logger?.LogInformation($"Спроба додати категорію {categoryInput}.");
+                logger?.LogInformation($"Спроба додати категорію '{categoryInput}'.");
 
                 if (string.IsNullOrWhiteSpace(categoryInput) || categoryInput.ToLower() == "введіть назву категорії")
                 {

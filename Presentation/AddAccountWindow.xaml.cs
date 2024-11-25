@@ -30,7 +30,7 @@
         {
             string nameInput = this.AccountNameTextBox.Text.Trim();
             string balanceTextInput = this.AccountBalanceTextBox.Text.Trim();
-            logger?.LogInformation($"Спроба додати рахунок {nameInput}.");
+            logger?.LogInformation($"Спроба додати рахунок '{nameInput}'.");
 
             if (string.IsNullOrEmpty(nameInput) || string.IsNullOrEmpty(balanceTextInput))
             {

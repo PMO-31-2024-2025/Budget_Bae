@@ -66,7 +66,7 @@ namespace Presentation
             string nameInput = this.settingsRegistrationNameTextBox.Text;
             string createPasswordInput = this.settingsRegistrationCreatePasswordTextBox.Text;
             string confirmPasswordInput = this.settingsRegistrationConfirmPasswordTextBox.Text;
-            logger?.LogInformation($"Спроба реєстрації користувача з поштою: {emailInput}.");
+            logger?.LogInformation($"Спроба реєстрації користувача з поштою '{emailInput}'.");
 
 
             if (emailInput == string.Empty || nameInput == string.Empty || createPasswordInput == string.Empty || confirmPasswordInput == string.Empty)
@@ -130,7 +130,7 @@ namespace Presentation
         {
             string emailInput = this.settingsEntryEmailTextBox.Text.ToLower();
             string passwordInput = this.settingsEntryPasswordTextBox.Text;
-            logger?.LogInformation($"Спроба увійти в акаунт користувача з поштою {emailInput}.");
+            logger?.LogInformation($"Спроба увійти в акаунт користувача з поштою '{emailInput}'.");
 
             if (emailInput == string.Empty || passwordInput == string.Empty)
             {

@@ -124,7 +124,7 @@
         private async void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button deleteButton = sender as Button;
-            logger?.LogInformation($"Спроба видалити заощадження {PlannedExpenseService.GetPlannedExpenseName(Convert.ToInt32(deleteButton.Tag))}.");
+            logger?.LogInformation($"Спроба видалити заощадження '{PlannedExpenseService.GetPlannedExpenseName(Convert.ToInt32(deleteButton.Tag))}'.");
 
             if (deleteButton == null || !(deleteButton.Tag is int paymentId))
             {
@@ -183,7 +183,7 @@
             string name = this.Name.Text.Trim();
             string amountText = this.Amount.Text.Trim();
             string dateText = this.Date.Text.Trim();
-            logger?.LogInformation($"Спроба додати запланований платіж {name}.");
+            logger?.LogInformation($"Спроба додати запланований платіж '{name}'.");
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(amountText) || string.IsNullOrEmpty(dateText))
             {
@@ -240,7 +240,7 @@
             var selectedAccount = this.AccountsList.SelectedItem as Account;
             string plannedCategoryName = "Заплановані платежі";
             int? currentUserId = SessionManager.CurrentUserId;
-            logger?.LogInformation($"Спроба поповнити запланований платіж {selectedPayment.Name}.");
+            logger?.LogInformation($"Спроба поповнити запланований платіж '{selectedPayment.Name}'.");
 
             if (string.IsNullOrWhiteSpace(sum) || selectedAccount == null || currentUserId == null)
             {

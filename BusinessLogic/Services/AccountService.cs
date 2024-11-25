@@ -64,7 +64,7 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteAccountAsync(int accountId)
         {
-            logger?.LogInformation($"Спроба видалити рахунок {GetAccountName(accountId)}.");
+            logger?.LogInformation($"Спроба видалити рахунок '{GetAccountName(accountId)}'.");
 
             var account = GetCurrentUserAccounts().FirstOrDefault(a => a.Id == accountId);
             if (account == null)

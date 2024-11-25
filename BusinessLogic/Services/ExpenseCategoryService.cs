@@ -60,7 +60,7 @@ namespace BusinessLogic.Services
 
         public static async Task<bool> DeleteExpenseCategory(int categoryId)
         {
-            logger?.LogInformation($"Спроба видалити категорію {GetCategoryName(categoryId)}.");
+            logger?.LogInformation($"Спроба видалити категорію '{GetCategoryName(categoryId)}'.");
 
             var category = DbHelper.dbc.ExpensesCategories.Find(categoryId);
             if (category != null && category.UserId == SessionManager.CurrentUserId)
