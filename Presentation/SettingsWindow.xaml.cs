@@ -243,39 +243,6 @@
             {
                 this.Close();
             }
-            //заготовка
-            //else if (e.Key == System.Windows.Input.Key.)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
-            //else if (e.Key == System.Windows.Input.Key.Escape)
-            //{
-
-            //}
         }
     }
 }
