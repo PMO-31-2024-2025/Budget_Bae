@@ -203,7 +203,7 @@
             var selectedSavings = this.SavingsList.SelectedItem as Saving;
             var selectedAccount = this.AccountsList.SelectedItem as Account;
             int? currentUserId = SessionManager.CurrentUserId;
-            var CategoryName = "Заощадження";
+            var categoryName = "Заощадження";
             logger?.LogInformation($"Спроба поповнити заощадження '{selectedSavings.TargetName}'.");
 
             if (string.IsNullOrWhiteSpace(topUpAmountInput) || selectedSavings == null || selectedAccount == null)
@@ -232,11 +232,11 @@
                 selectedSavings.CurrentSum += (double)topUpAmount;
 
                 var category = DbHelper.dbc.ExpensesCategories
-                    .FirstOrDefault(c => c.Name == CategoryName && c.UserId == currentUserId);
+                    .FirstOrDefault(c => c.Name == categoryName && c.UserId == currentUserId);
 
                 if (category == null)
                 {
-                    bool categoryAdded = await ExpenseCategoryService.AddExpensCategoryAsync(CategoryName);
+                    bool categoryAdded = await ExpenseCategoryService.AddExpensCategoryAsync(categoryName);
                     if (!categoryAdded)
                     {
                         MessageBox.Show("Не вдалося створити категорію!", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -244,7 +244,7 @@
                     }
 
                     category = DbHelper.dbc.ExpensesCategories
-                        .FirstOrDefault(c => c.Name == CategoryName && c.UserId == currentUserId);
+                        .FirstOrDefault(c => c.Name == categoryName && c.UserId == currentUserId);
                 }
 
                 bool result = await ExpenseService.AddExpenseAsync(category.Id, (double)topUpAmount, selectedAccount.Id);
