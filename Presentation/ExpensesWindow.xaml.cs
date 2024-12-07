@@ -72,6 +72,13 @@
                 return;
             }
 
+            if (double.Parse(sum) > selectedAccount.Balance)
+            {
+                logger?.LogWarning("На обраному рахунку недостатньо коштів!");
+                MessageBox.Show("На обраному рахунку недостатньо коштів!");
+                return;
+            }
+
             try
             {
                 await ExpenseService.AddExpenseAsync(this.selectedCategoryId, expenseSum, selectedAccount.Id);
