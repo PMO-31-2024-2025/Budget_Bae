@@ -42,13 +42,15 @@
                     plannedExpenses = PlannedExpenseService.GetPlannedExpenses();
                     foreach (var expense in plannedExpenses)
                     {
-                        if (expense.NotigicationDate == current.Day)
+                       if (expense.NotigicationDate == current.Day)
                         {
-                            Label notificationText = new Label
+                            TextBlock notificationText = new TextBlock
                             {
-                                Content = $"Сьогодні треба внести платіж '{expense.Name}'",
+                                Text = $"Сьогодні треба внести платіж '{expense.Name}'",
                                 Margin = new Thickness(0, 5, 0, 5),
-                                FontSize = 20,
+                                FontSize = 15,
+                                MaxWidth = 450,
+                                TextWrapping = TextWrapping.Wrap,
                             };
                             this.Notifications.Children.Add(notificationText);
 
@@ -56,7 +58,6 @@
                             this.Left = SystemParameters.WorkArea.Width - this.Width;
                             this.Top = SystemParameters.WorkArea.Height - this.Height;
                             this.Show();
-                            break;
                         }
                     }
                 }
